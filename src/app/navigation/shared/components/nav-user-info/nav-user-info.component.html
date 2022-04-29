@@ -1,0 +1,97 @@
+<div class="user pointer" fxLayout fxLayoutGap="15px">
+  <div
+    class="user__notifications"
+    fxHide.lt-md
+    fxLayout="row"
+    fxLayoutAlign="center center">
+    <mat-icon
+      [matBadge]="notificationCount"
+      matBadgeColor="warn"
+      (click)="openNotifications()"
+      >notifications</mat-icon>
+  </div>
+  <div fxLayoutAlign="center center" class="user__avatar" (click)="userMenuOpen = !userMenuOpen">
+    <img
+      [src]="(profilePicture | sanitizeImage) || defaultPicture"
+      alt="User Picture"
+      width="35"
+      height="35"
+    />
+  </div>
+  <div fxLayout fxLayoutGap="10px">
+    <ng-container [ngSwitch]="userInfo.package.packageTypeId">
+      <ng-container *ngSwitchCase="PackageTypeIds.Premium">
+        <ng-container *ngTemplateOutlet="packageInfo"></ng-container>
+      </ng-container>
+      <ng-container *ngSwitchCase="PackageTypeIds.Standard">
+        <ng-container *ngTemplateOutlet="packageInfo"></ng-container>
+      </ng-container>
+      <ng-container *ngSwitchCase="PackageTypeIds.Essentials">
+        <ng-container *ngTemplateOutlet="packageInfo"></ng-container>
+      </ng-container>
+      <ng-container *ngSwitchCase="PackageTypeIds.Unlimited">
+        <ng-container *ngTemplateOutlet="packageInfo"></ng-container>
+      </ng-container>
+      <ng-container *ngSwitchCase="PackageTypeIds.Freemium">
+        <ng-container *ngTemplateOutlet="packageInfo"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <div class="user__info" fxLayout="column" fxLayoutGap.lt-md="10px">
+          <span class="user__info--name typography-16 typography-16--bold"
+                (click)="userMenuOpen = !userMenuOpen">
+            {{ userInfo.displayName }}
+          </span>
+          <span class="user__info--balance typography-14">
+            <span (click)="userBillingPlanDetails()">
+              Credits Balance:
+              {{ userInfo.userCredits | number: '1.0':'en-US' }}
+            </span>&nbsp;<button class="mat-button-wrapper pointer"
+                                 (click)="userBuyCredits()">
+              BUY
+            </button>
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-template #packageInfo>
+        <div class="user__info"
+             fxLayout="column"
+             fxLayoutGap.lt-md="10px"
+             fxLayoutAlign="center center">
+          <span fxLayout="row wrap"
+                fxLayoutAlign="center center"
+                (click)="userBillingPlanDetails()"
+                class="user__info--balance typography-14">
+            {{ userPackageInfo }}
+            <mat-icon class="person--icon">person</mat-icon>
+          </span>
+        </div>
+      </ng-template>
+    </ng-container>
+    <button
+      fxHide.lt-md
+      mat-icon-button
+      cdkOverlayOrigin
+      #trigger="cdkOverlayOrigin"
+      (click)="userMenuOpen = !userMenuOpen"
+    >
+      <mat-icon class="app-icon-20">keyboard_arrow_down</mat-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayPanelClass="white-overlay"
+  cdkConnectedOverlayWidth="226px"
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (detach)="userMenuOpen = false"
+  (backdropClick)="userMenuOpen = false"
+  [cdkConnectedOverlayOffsetY]="10"
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="userMenuOpen"
+>
+  <ng-content></ng-content>
+</ng-template>

@@ -1,0 +1,16 @@
+.material-icons {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.align-left {
+  margin-left: unset !important;
+}
+
+.input-container {
+  justify-content: center;
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+}

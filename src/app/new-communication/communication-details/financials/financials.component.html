@@ -1,0 +1,33 @@
+<div
+  *ngIf="!canSendNow"
+  fxLayout
+  fxLayout.lt-sm="column"
+  fxLayoutGap="10px"
+  fxLayoutAlign="start center"
+  class="payment-actions"
+>
+  <button
+    *ngIf="isOnPayAsGo"
+    mat-raised-button
+    color="primary"
+    type="button"
+    fxFlex.gt-sm="225px"
+    fxFlex.gt-xs="180px"
+    class="payment-actions__action"
+    (click)="onAddCredits()"
+  >
+    <span class="typography-12">ADD CREDITS</span>
+  </button>
+
+  <span class="typography-16" *ngIf="isOnPayAsGo && isOnFreeTrial">Or</span>
+  <button
+    *ngIf="isOnFreeTrial"
+    mat-raised-button
+    fxFlex.gt-sm="225px"
+    color="primary"
+    class="button button--lime-green payment-actions__action"
+    (click)="onUpgrade()"
+  >
+    <span class="typography-12">GO UNLIMITED & SAVE 50%</span>
+  </button>
+</div>

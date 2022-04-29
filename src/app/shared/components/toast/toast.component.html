@@ -1,0 +1,14 @@
+<div
+  class="toast"
+  (click)="dismiss()"
+  fxLayout
+  fxLayoutGap="10px"
+  fxLayoutAlign="space-between center"
+>
+  <span class="typography-16 typography-16--scale-mobile message">
+    {{ msg }}
+  </span>
+  <button mat-icon-button class="app-icon-button-20" fxFlexAlign="self-start">
+    <mat-icon class="app-icon-20">close</mat-icon>
+  </button>
+</div>

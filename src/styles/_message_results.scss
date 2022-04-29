@@ -1,0 +1,144 @@
+
+$message-results-completed-color: #4CAF50;
+$message-results-completed-color-shaded: #4caf5021;
+$message-results-cancelled-color: #F44336;
+$message-results-cancelled-color-shaded: #f4433629;
+$message-results-icon-color: #999999;
+$message-results-scheduled-color-shaded: #881ab312;
+$message-results-in-progress-icon-color: #999999;
+$message-results-in-progress-color-shaded: #ff980021;
+
+.mat-cell {
+  &.typography-18 {
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    margin: 0;
+    &--bold {
+      font-weight: 500;
+    }
+    &--accent {
+      color: $app-blue;
+    }
+    &--scale-mobile {
+      @include respond(phone) {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+mat-card {
+  &.message-result-frame {
+    border-bottom: 1px solid #E4E4E4;
+    border-radius: 0px;
+  }
+}
+
+mat-checkbox {
+  &.message-results-filter-checkbox {
+    label {
+      color: $app-black;
+      font-weight: 400;
+    }
+    &.mat-checkbox-checked {
+      .mat-checkbox-background {
+        background-color: $app-white;
+        border: 1px solid rgba(0, 0, 0, 0.54);
+      }
+      path {
+        stroke: $app-lime-green !important;
+      }
+    }
+    .mat-checkbox-frame {
+      border-width: 1px;
+      border: 1px solid rgba(0, 0, 0, 0.54);
+    }
+  }
+}
+
+mat-progress-bar {
+  &.message-results-overview-bar {
+    border-radius: 5.5px;
+    height: 8px;
+    > .mat-progress-bar-buffer {
+      background-color: #D8D8D8;
+    }
+    &.green {
+      > .mat-progress-bar-fill {
+        &::after {
+          background-color: #55B559;
+        }
+      }
+    }
+    &.blue {
+      > .mat-progress-bar-fill {
+        &::after {
+          background-color: #00CAE3;
+        }
+      }
+    }
+    &.orange {
+      > .mat-progress-bar-fill {
+        &::after {
+          background-color: #FF9E0F;
+        }
+      }
+    }
+  }
+}
+
+.message-results-status {
+  padding: 4px 39px;
+  border-radius: 16.5px;
+  >  .status-text {
+    color: $app-black;
+  }
+  &.completed {
+    color: $message-results-completed-color;
+    background: $message-results-completed-color-shaded;
+  }
+  &.cancelled {
+    color: $message-results-cancelled-color;
+    background-color: $message-results-cancelled-color-shaded;
+  }
+  &.scheduled {
+    color: $message-results-icon-color;
+    background-color: $message-results-scheduled-color-shaded;
+  }
+  &.in-progress {
+    color: $message-results-in-progress-icon-color;
+    background-color: $message-results-in-progress-color-shaded;
+  }
+}
+
+.message-results-print-status {
+  &.completed {
+    color: $message-results-completed-color;
+  }
+  &.cancelled {
+    color: $message-results-cancelled-color;
+  }
+  &.scheduled {
+    color: $message-results-icon-color;
+  }
+  &.in-progress {
+    color: $message-results-in-progress-icon-color;
+  }
+}
+
+
+.message-results-sub-header {
+  color: $app-shaded-grey;
+  > .group-name {
+    &::after {
+      content: ', ';
+    }
+    // :last-of-type {
+    //   ::after {
+    //     content: none;
+    //   }
+    // }
+  }
+}

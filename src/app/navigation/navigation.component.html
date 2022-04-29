@@ -1,0 +1,171 @@
+<ng-container *ngIf="isMobileView">
+  <ng-container *ngIf="userInfo$ | async as userInfo">
+    <app-mobile-navigation
+      [userInfo]="userInfo"
+      [opened]="mobileNavOpened"
+      (openedChange)="mobileNavOpened = $event"
+      (menuItemClicked)="onMenuItemClick($event)"
+    >
+      <div class="toolbar-mobile" fxLayout>
+        <button
+          mat-icon-button
+          class="button button--grey"
+          (click)="mobileNavOpened = true"
+        >
+          <mat-icon> menu </mat-icon>
+        </button>
+        <div
+          class="toolbar-mobile__logo-block"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <img
+            class="logo"
+            src="assets/img/CallingPostLogo.png"
+            alt="CallingPost"
+            (click)="logoClicked()"
+          />
+        </div>
+
+        <div
+          class="user__notifications"
+          fxLayout="row"
+          fxLayoutAlign=" center"
+          style="padding: 12px"
+        >
+          <mat-icon
+            [matBadge]="notificationCount"
+            (click)="openNotifications()"
+            matBadgeColor="warn"
+            class="blue-icon"
+            >notifications</mat-icon
+          >
+        </div>
+      </div>
+
+      <mat-toolbar
+        color="primary"
+        class="toolbar back"
+        [ngClass]="{
+          'toolbar-background-image--general--mobile': true,
+          'toolbar-background-image--newCommunication--mobile':
+            (currentRouteName$ | async) === 'New Communication',
+          'toolbar-background-image--groupMembers--mobile':
+            (currentRouteName$ | async) === 'Groups/Members',
+          'toolbar-background-image--communicationResult--mobile':
+            (currentRouteName$ | async) === 'Communication Results',
+          'toolbar-background-image--messageLibrary--mobile':
+            (currentRouteName$ | async) === 'Message Library'
+        }"
+      >
+        <mat-toolbar-row fxLayout class="toolbar-row">
+          <mat-icon
+            *ngIf="(currentRouteName$ | async) !== 'Dashboard'"
+            class="overlap-wrapper"
+            [hidden]="showNavigateBefore"
+            (click)="closeOnClick()"
+          >
+            navigate_before
+          </mat-icon>
+          <ng-container *ngIf="(currentRouteName$ | async) !== 'Dashboard'">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ng-container
+          >
+          <app-current-route
+            [ngClass]="{
+              'dashboard-msg': (currentRouteName$ | async) === 'Dashboard'
+            }"
+            [userInfo]="userInfo"
+            [currentRouteName]="currentRouteName$ | async"
+          ></app-current-route>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <ng-container *ngTemplateOutlet="projectedContent"></ng-container>
+    </app-mobile-navigation>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="!isMobileView">
+  <app-desktop-navigation
+    [sideNavToggle]="menuCollapsed"
+    (menuItemClicked)="onMenuItemClick($event)"
+  >
+    <mat-toolbar
+      class="toolbar toolbar-background-image"
+      color="primary"
+      [ngClass]="{
+        'toolbar-background-image--general': true,
+        'toolbar-background-image--newCommunication':
+          (currentRouteName$ | async) === 'New Communication',
+        'toolbar-background-image--groupMembers':
+          (currentRouteName$ | async) === 'Groups/Members',
+        'toolbar-background-image--communicationResult':
+          (currentRouteName$ | async) === 'Communication Results',
+        'toolbar-background-image--messageLibrary':
+          (currentRouteName$ | async) === 'Message Library'
+      }"
+    >
+      <mat-toolbar-row fxLayout class="toolbar-row-wrapper">
+        <button
+          mat-icon-button
+          class="button button--grey-rounded menu-toggle-button overlap-wrapper"
+          (click)="toggleSideNavigation()"
+        >
+          <mat-icon mat-fab>
+            {{ menuCollapsed ? 'more_vert' : 'view_list' }}
+          </mat-icon>
+        </button>
+
+        <ng-container *ngIf="userInfo$ | async as userInfo">
+          <ng-container *ngIf="{ route: currentRouteName$ | async } as data">
+            <app-current-route
+              [userInfo]="userInfo"
+              [currentRouteName]="data.route"
+            >
+            </app-current-route>
+
+            <app-nav-user-info [routeChanged]="data.route" class="user-info">
+              <div fxLayout="column" class="user-menu-item">
+                <ng-container *ngFor="let menuItem of USER_MENU_ITEMS">
+                  <ng-container
+                    *ngIf="
+                      userInfo.accountsManaged.length > 0 &&
+                        menuItem.title === switchAccount;
+                      else notManaged
+                    "
+                  >
+                    <app-menu-item
+                      id="switchAccount"
+                      #switchAccount
+                      [hidden]="menuItem.hideMenuItem"
+                      [icon]="menuItem.icon"
+                      [title]="menuItem.title"
+                      (click)="onSwichAccountDialog(userInfo)"
+                    >
+                    </app-menu-item>
+                  </ng-container>
+
+                  <ng-template #notManaged>
+                    <app-menu-item
+                      *ngIf="menuItem.title !== switchAccount"
+                      [hidden]="menuItem.hideMenuItem"
+                      [icon]="menuItem.icon"
+                      [title]="menuItem.title"
+                      [to]="menuItem.to"
+                    >
+                    </app-menu-item>
+                  </ng-template>
+                </ng-container>
+              </div>
+            </app-nav-user-info>
+          </ng-container>
+        </ng-container>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ng-container *ngTemplateOutlet="projectedContent"></ng-container>
+  </app-desktop-navigation>
+</ng-container>
+
+<ng-template #projectedContent>
+  <ng-content></ng-content>
+</ng-template>

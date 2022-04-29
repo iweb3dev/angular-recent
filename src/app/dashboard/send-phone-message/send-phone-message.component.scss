@@ -1,0 +1,56 @@
+@import '/src/styles//variables';
+
+// Card
+.card-wrapper {
+  padding: 1.5rem;
+  border-radius: 7px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  h3 {
+    display: none;
+  }
+}
+
+.message-send {
+  &.__detail {
+    text-align: end;
+    font-weight: 500;
+    margin: 0.25rem 0;
+    color: $app-black;
+  }
+}
+
+.download-guide {
+  cursor: pointer;
+  text-align: end;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: $app-blue;
+  margin: 0.25rem 0;
+  display: inline-block;
+  &:hover {
+    background-color: $app-snow;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card-wrapper {
+    padding: 0;
+    height: unset;
+    background-color: transparent;
+    box-shadow: none;
+
+    h3 {
+      display: block;
+      text-align: left;
+      margin-top: 0;
+    }
+
+    & > div {
+      padding: 1rem 2rem;
+      background-color: $app-white;
+      border-radius: 7px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+}

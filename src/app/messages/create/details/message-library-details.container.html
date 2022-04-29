@@ -1,0 +1,129 @@
+<div
+	fxLayout="column"
+	fxLayoutGap="50px"
+	class="container"
+>
+	<div fxLayout="column" fxLayoutGap="5px">
+		<span class="typography-24 typography-24--bold">
+			Create A New Message
+		</span>
+	</div>
+
+	<app-message-name
+		[messageNameData]="messageNameData$ | async"
+		[userInfo]="userInfo$ | async"
+		[messageId]="messageId$ | async"
+		disableMessageRecipients
+		markMessageNameAsTouched
+		(sendMessageValueChange)="onSendMessageFormChange($event)"
+		(emailFormatChange)="onEmailFormatChange()"
+		(voiceFormatChange)="onVoiceFormatChange()"
+		(textFormatChange)="onTextFormatChange()"
+		(messageNameFormValid)="onMessageNameValidate($event)"
+	></app-message-name>
+
+	<app-message-details
+		[userInfo]="currentUserInfo$ | async"
+		[textMessageValid]="textValid$ | async"
+		[userAcknowledgementBeforeSave]="false"
+		[voiceMessageValid]="voiceValid$ | async"
+		[emailMessageValid]="emailValid$ | async"
+		[communicationsQueue]="communicationsQueue$ | async"
+		[isShowMessageSendFrame]="isShowMessageSendFrame$ | async"
+		(communicationConfirm)="onCommunicationConfirm()"
+		(textMessagePreviewOpen)="onTextMessagePreviewOpen()"
+		(voiceMessagePreviewOpen)="onVoiceMessagePreviewOpen()"
+		(emailMessagePreviewOpen)="onEmailMessagePreviewOpen()"
+		[voiceMessagePanelOpen]="voicePanelOpen$ | async"
+		[textMessagePanelOpen]="textPanelOpen$ | async"
+		[emailMessagePanelOpen]="emailPanelOpen$ | async"
+		(voiceMessageOpen)="onVoiceMessagePanelOpen($event)"
+		(textMessageOpen)="onTextMessagePanelOpen($event)"
+		(emailMessageOpen)="onEmailMessagePanelOpen($event)"
+	>
+		<app-voice-message-container
+			ngProjectAs="voice-message"
+			[voiceMessageData]="voiceMessageData$ | async"
+			[audioRecordingUrl]="audioRecordingUrl$ | async"
+			[systemSettings]="systemSettings$ | async"
+			[messageValid]="voiceValid$ | async"
+			(voiceFormChange)="onVoiceFormChange($event)"
+			(voiceFormValid)="onVoiceFormValid($event)"
+			(saveAudioRecordingUrl)="onSetAudioRecording($event)"
+			(saveAndContinue)="onVoiceCloseAndContinue()"
+		>
+		</app-voice-message-container>
+		<app-text-message
+			ngProjectAs="text-message"
+			[textMessageData]="textMessageData$ | async"
+			[userInfo]="currentUserInfo$ | async"
+			[systemSettings]="systemSettings$ | async"
+			[messageValid]="textValid$ | async"
+			(textFormChange)="onTextFormChange($event)"
+			(textFormValid)="onTextFormValid($event)"
+			(receiveTollFreeTextNumber)="onReceiveTollFreeTextNumber($event)"
+			(saveAndContinue)="onTextCloseAndContinue()"
+		>
+		</app-text-message>
+		<app-email-message
+			ngProjectAs="email-message"
+			[emailMessageData]="emailMessageData$ | async"
+			[userId]="userId$ | async"
+			[userPackage]="userPackage$ | async"
+			[messageValid]="emailValid$ | async"
+			[exportAndPatchEditorValue]="exportAndPatchEditorValue"
+			(saveAll)="onSaveAllMessages()"
+			(emailFormChange)="onEmailFormChange($event)"
+			(emailAttachmentUpload)="onEmailAttachmentUpload($event)"
+			(emailAttachmentRemove)="onEmailAttachmentRemove($event)"
+			(emailFormValid)="onEmailFormValid($event)"
+			(saveAndContinue)="onEmailCloseAndContinue()"
+		>
+		</app-email-message>   
+	
+		<div
+			*ngIf="communicationsQueue$ | async as queue"
+			ngProjectAs="message-confirm"
+		>
+			<app-message-confirm
+				*ngIf="isShowMessageSendFrame$ | async"
+				[communicationsQueue]="queue"
+				[scheduleOptions]="scheduleOptions$ | async"
+				[userInfo]="currentUserInfo$ | async"
+				(scheduleMessage)="onMessageSchedule($event)"
+				(updateCommunicationQueue)="onCommunicationQueueUpdate()"
+			>
+			</app-message-confirm>
+		</div>
+	</app-message-details>
+
+	<button
+		mat-flat-button
+		color="primary"
+		fxFlexAlign.gt-sm="self-start"
+		[disabled]="!((emailValid$ | async) || (textValid$ | async) || (voiceValid$ | async))"
+		(click)="onSaveAndContinueMessage()"
+	>
+		Save & Continue
+	</button>
+</div>
+
+<!-- <ng-template #increasePlanSize>
+<div class="increase-size" fxLayout="column" fxLayoutGap="40px">
+	<span class="typography-18 text-center">
+		We apologize but based on your current plan size you have reached the
+		monthly send limit based on our reasonable use policy guidelines. These
+		guidelines help protect message recipients from message fatigue. You will
+		need to increase your plan size to increase your limit further. For more
+		information please give us a call at 877-665-5646.
+	</span>
+	<button
+		mat-button
+		fxFlexAlign="center"
+		color="primary"
+		(click)="openPlanDetails()"
+	>
+		INCREASE PLAN SIZE NOW
+	</button>
+</div>
+</ng-template> -->

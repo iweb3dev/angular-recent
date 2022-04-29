@@ -1,0 +1,53 @@
+@import '/src/styles/variables';
+
+.purchase-keyword {
+  max-width: 60%;
+  padding: 60px 50px;
+  @include respond(tab-port) {
+    max-width: 60%;
+  }
+  @include respond(phone) {
+    max-width: 100%;
+  }
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.form-purchase-keyword {
+  width: 100%;
+  max-width: 500px;
+}
+
+.max-width-form-control {
+  width: 100%;
+}
+
+.keyword {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $app-gray-95;
+}
+
+.payment-info {
+  &--button {
+    padding: 0;
+    width: 100%;
+    color: $app-black;
+  }
+
+  &--icon-display {
+    transform: scale(1.1);
+  }
+}
+
+
+@media screen and (max-width: $sm) {
+  .mobile-center {
+    text-align: center;
+  }
+  .purchase-keyword {
+    padding: 16px 34px;
+  }
+}

@@ -1,0 +1,42 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">Add New Payment</h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="regular-grey">close</mat-icon>
+    </button>
+  </div>
+  <app-payment
+    [creditCardForm]="creditCardForm"
+    [bankAccountForm]="bankAccountForm"
+    (activeTab)="selectedPaymentProgram = $event"
+  ></app-payment>
+  <div fxLayout fxLayoutGap="10px">
+    <button
+      mat-button
+      mat-stroked-button
+      color="primary"
+      fxFlex
+      class="button--blue-border"
+      (click)="onCloseDialog()"
+    >
+      <span class="typography-12">CANCEL</span>
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      fxFlex
+      class="button button--lime-green"
+      [disabled]="
+        paymentForm.get('creditCard').invalid &&
+        paymentForm.get('bankAccount').invalid
+      "
+      (click)="onPaymentSave()"
+    >
+      <span class="typography-12"> SAVE PAYMENT </span>
+    </button>
+  </div>
+</div>

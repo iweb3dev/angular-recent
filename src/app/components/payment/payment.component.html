@@ -1,0 +1,63 @@
+<mat-tab-group
+  *ngIf="!paymentType && paymentType !== 0"
+  mat-align-tabs="center"
+  [disablePagination]="true"
+  class="tabs"
+  (selectedIndexChange)="activeTab.emit($event)"
+>
+  <mat-tab label="Credit Card">
+    <app-credit-card
+      [creditCardForm]="creditCardForm"
+      setDefaultPaymentHidden
+    ></app-credit-card>
+  </mat-tab>
+  <mat-tab label="Bank Account">
+    <app-bank-account
+      [bankAccountForm]="bankAccountForm"
+      setDefaultPaymentHidden
+    ></app-bank-account>
+  </mat-tab>
+  <mat-tab *ngIf="paypalEnabled">
+    <ng-template mat-tab-label>
+      <img
+        src="../../../../../../../assets/img/paypal.png"
+        loading="lazy"
+        alt="Pay Pal Logo"
+      />
+    </ng-template>
+    <ng-template matTabContent>
+      <app-paypal
+        [cost]="cost"
+        (transactionComplete)="transactionComplete.emit($event)"
+      ></app-paypal>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+<div
+  *ngIf="paymentType === PaymentTypes.creditCard"
+  fxLayout="column"
+  fcLayoutGap="15px"
+>
+  <span class="typography-18 typography-18--bold typography-18--scale-mobile">
+    Credit Card
+  </span>
+  <app-credit-card
+    [creditCardForm]="creditCardForm"
+    setDefaultPaymentHidden
+  ></app-credit-card>
+</div>
+
+<div
+  *ngIf="paymentType === PaymentTypes.echeck"
+  fxLayout="column"
+  fcLayoutGap="15px"
+>
+  <span class="typography-18 typography-18--bold typography-18--scale-mobile">
+    Bank Account
+  </span>
+  <app-bank-account
+    [bankAccountForm]="bankAccountForm"
+    setDefaultPaymentHidden
+  ></app-bank-account>
+</div>

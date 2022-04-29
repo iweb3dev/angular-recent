@@ -1,0 +1,53 @@
+@import '/src/styles//variables';
+
+// Card
+.card-wrapper {
+  border-radius: 7px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.grid-main {
+  &::before {
+    content: '';
+    position: relative;
+  }
+}
+
+// Misc
+.widget-title {
+  color: black;
+  font-weight: 500;
+  margin: 0 0 0.75rem 1rem;
+}
+.mat-divider-wrapper {
+  position: relative !important;
+}
+
+// Grid List
+.content {
+  margin: 0;
+  &.__main {
+    color: $app-black;
+  }
+  &.__inner {
+    font-weight: 400;
+    color: $app-semi-grey;
+  }
+}
+.mat-icon-wrapper {
+  color: $app-denim;
+}
+.btn-widget {
+  right: 1px;
+  padding: 0;
+  min-width: 0;
+  position: absolute;
+}
+.rotate-icon {
+  transform: rotate(180deg);
+}
+.mat-grid-list-wrapper {
+  margin-top: 0.5rem;
+}
+.mat-grid-tile-wrapper {
+  background: $app-white;
+}

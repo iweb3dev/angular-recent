@@ -1,0 +1,110 @@
+<mat-expansion-panel
+  class="user-detail-section"
+  fxLayout="column"
+  [formGroup]="profileDetailForm"
+  [expanded]="true"
+>
+  <mat-expansion-panel-header collapsedHeight="59px">
+    <span class="typography-20--bold title text-rhino">Profile Details</span>
+  </mat-expansion-panel-header>
+  <div class="user-detail-frame" fxLayout="column" fxLayoutGap="60px">
+    <div fxLayout="row" fxLayoutGap="42px" fxLayout.lt-sm="column">
+      <div fxLayout="column" fxFlex="1 1 30%">
+        <label class="typography-16 text-grey user-detail-label"
+          >First Name</label
+        >
+        <mat-form-field fxLayoutGap="42px" class="user-detail-field">
+          <input
+            type="email"
+            class="typography-16"
+            matInput
+            formControlName="firstName"
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 30%">
+        <label class="typography-16 text-grey user-detail-label"
+          >Last Name</label
+        >
+        <mat-form-field
+          fxLayout="row"
+          fxLayoutGap="42px"
+          class="user-detail-field"
+          fxFlex
+        >
+          <input
+            type="email"
+            class="typography-16"
+            matInput
+            formControlName="lastName"
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 30%">
+        <label class="typography-16 text-grey user-detail-label"
+          >Organization Name</label
+        >
+        <mat-form-field
+          fxLayout="row"
+          fxLayoutGap="42px"
+          class="user-detail-field"
+          fxFlex
+        >
+          <input
+            type="email"
+            class="typography-16"
+            matInput
+            formControlName="organization"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="42px" fxLayout.lt-sm="column">
+      <div fxLayout="column" fxFlex="1 1 50%">
+        <label class="typography-16 text-grey">Organization Type</label>
+        <mat-form-field
+          fxLayout="row"
+          fxLayoutGap="42px"
+          class="user-detail-field"
+          fxFlex
+        >
+          <mat-select formControlName="organizationTypesValue">
+            <mat-option
+              class="typography-16"
+              *ngFor="let organizationType of organizationTypes$ | async"
+              [value]="organizationType.orgTypeID"
+              title="{{ organizationType.orgType }}"
+            >
+              {{ organizationType.orgType }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 50%">
+        <label class="typography-16 text-grey">Time Zone</label>
+        <mat-form-field class="half user-detail-field" fxFlex>
+          <mat-select
+            formControlName="timeZone"
+            [compareWith]="getSelectedTimezoneDisplayName"
+          >
+            <mat-option
+              class="typography-16"
+              *ngFor="let timeZone of timeZones$ | async"
+              [value]="timeZone"
+              title="{{ timeZone.displayName }}"
+            >
+              {{ timeZone.displayName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="6px">
+      <mat-error *ngIf="hasRequiredError"
+        >Please provide a value for: {{ requiredErrorFields }}.</mat-error
+      >
+    </div>
+  </div>
+</mat-expansion-panel>

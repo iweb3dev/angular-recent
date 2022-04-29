@@ -1,0 +1,164 @@
+<ng-container *ngIf="loadingProfiles$ | async; else loader">
+  <section class="purchase-keyword" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="typography-20 typography-20--bold typography-20--bolder margin-bottom--15"
+    >
+      Extend your text keyword
+    </span>
+
+    <span
+      class="typography-18 typography-18--bold margin-bottom--15"
+    >
+      This will extend your text keyword:
+      <span *ngIf="selectedKeyword$ | async as keyword">
+        {{ keyword }}</span
+      >
+    </span>
+
+    <section
+      fxLayout="column"
+      [formGroup]="form"
+      class="form form-purchase-keyword"
+    >
+      <section class="max-width-form-control margin-bottom--30" fxLayout="column" fxLayoutGap="40px">
+        <ng-container
+          *ngIf="!isKeywordFree; else freeKeywordTemplate"
+        >
+          <span class="typography-16">Cost:
+            <span class="typography-16--bold">{{ costPerKeyword | currency: 'USD' }}/month</span>
+          </span>
+      </ng-container>
+
+        <ng-template #freeKeywordTemplate>
+          <div class="typography-16">
+            Cost:
+            <span class="typography-16--bold text-strikethrough"
+              >{{ costPerKeyword | currency: 'USD' }}/month</span
+            >
+            <span class="typography-16--bold text-lime-green"
+              >FREE with your current subscription plan</span
+            >
+          </div>
+          <div>
+            <span class="typography-16 typography-16--bold text-grey"
+              >You have {{ freeKeywordsRemaining }} of
+              {{ totalFreeKeyWords }} free keywords remaining.</span
+            >
+          </div>
+          <div>
+            <span class="typography-16"> Total Due:
+              <span class="typography-16--bold">{{ '0.00' | currency: 'USD' }}/month</span>
+            </span>
+          </div>
+        </ng-template>
+      </section>
+
+      <ng-container *ngIf="!isKeywordFree">
+        <ng-container>
+          <span class="typography-18--bold"
+            >Select Term</span
+          >
+          <mat-form-field>
+            <mat-select formControlName="prepayOptionId">
+              <mat-option
+                *ngFor="let prepayOption of prepayOptions$ | async"
+                [value]="prepayOption.id"
+                (click)="onKeywordPaymentOptionChanged(prepayOption)"
+              >
+                {{ prepayOption.prepayOption }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.get('prepayOptionId').value"
+              >Please select any payment plan.</mat-error
+            >
+          </mat-form-field>
+
+          <span
+            class="typography-16 margin-bottom--30"
+            *ngIf="form.get('prepayOptionId').value"
+          >
+            Total Due Now:
+              <span class="typography-16--bold">{{ totalKeywordOptionCost | currency: 'USD' }}</span>
+          </span>
+        </ng-container>
+
+        <ng-container>
+          <span class="typography-18--bold"
+            >Payment Method</span
+          >
+          <mat-form-field >
+            <mat-select formControlName="paymentProfileID">
+              <mat-option
+                *ngFor="let paymentProfile of paymentProfiles$ | async"
+                [value]="paymentProfile.paymentProfileID"
+              >
+                {{
+                  paymentProfile?.creditCardNumber
+                    ? paymentProfile?.creditCardNumber
+                    : paymentProfile?.accountNumber
+                }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.get('paymentProfileID').value"
+              >Please select any payment method.</mat-error
+            >
+          </mat-form-field>
+        </ng-container>
+
+        <section fxLayout="column" class="margin-top-bottom--30">
+          <div fxLayout fxLayoutAlign="space-between center">
+            <button
+              mat-button
+              type="button"
+              appAddNewPayment
+              class="payment-info--button"
+              (paymentProfileData)="onNewPaymentAdd($event)"
+            >
+              <div
+                fxLayout
+                type="button"
+                fxLayoutGap="5px"
+                fxLayoutAlign="space-between center"
+              >
+                <span class="typography-18 typography-18--bold">Payment Info</span>
+                <mat-icon class="payment-info--icon-display">keyboard_arrow_down</mat-icon>
+              </div>
+            </button>
+          </div>
+        </section>
+      </ng-container>
+
+      <section
+        fxLayout="row"
+        fxLayoutGap="15px"
+        class="footer max-width-form-control"
+      >
+      <button
+        fxFlex
+        mat-raised-button
+        [routerLink]="['./keywords']"
+        class="button button-primary-inverted create"
+      >
+        Cancel
+      </button>
+
+        <button
+          fxFlex
+          mat-raised-button
+          (click)="renewKeywordOnClick()"
+          class="button button-submit create"
+        >
+          Submit
+        </button>
+      </section>
+
+      <span *ngIf="keywordRenewalDate" class="margin-top--30">
+        <b>Note: Your next payment will be due on {{ keywordRenewalDate  | date : 'fullDate' }}</b>
+      </span>
+    </section>
+  </section>
+</ng-container>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

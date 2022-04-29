@@ -1,0 +1,37 @@
+<div class="choose-number" fxLayout="column" fxLayoutGap="18px" [formGroup]="phoneNumberForm">
+  <div class="header">
+    <span class="typography-20--bold">Phone Number Verification</span>
+  </div>
+  <div class="body" fxLayout="column" fxLayoutGap="30px">
+    <span class="typography-16--bold">
+      Please enter a new phone number that you would like to verify by
+      sending a code with text or phone.
+    </span>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Phone number</mat-label>
+      <input type="text" matInput formControlName="phoneNumber"
+             placeholder="Enter phone number">
+    </mat-form-field>
+    <div fxLayout="column" fxLayoutGap="6px" *ngIf="phoneNumberControl.invalid && (phoneNumberControl.dirty || phoneNumberControl.touched)">
+      <mat-error *ngIf='phoneNumberControl.errors.required'>Please provide a phone number.</mat-error>
+      <mat-error *ngIf='phoneNumberControl.errors.pattern'>Please provide a correct phone number</mat-error>
+    </div>
+  </div>
+  <div class="footer" fxLayout="column" fxLayoutGap="15px">
+    <div fxLayout="row" fxLayoutGap="14px" fxLayout.lt-md="column">
+      <button mat-raised-button color="primary" fxFlex
+              (click)="onSetNumberAndVerificationType(verificationType.Text)"
+              [disabled]='!this.phoneNumberForm.valid'>
+        BY TEXT
+      </button>
+      <button mat-raised-button color="primary" fxFlex
+              (click)="onSetNumberAndVerificationType(verificationType.Phone)"
+              [disabled]='!this.phoneNumberForm.valid'>
+        BY PHONE
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" class="button button-primary-inverted" fxFlex (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="managers" *ngIf="hasGroupManagers$ | async; else noGroupManagers">
+  <app-has-group-managers></app-has-group-managers>
+</div>
+<ng-template #noGroupManagers>
+  <div class="managers">
+    <app-no-group-managers></app-no-group-managers>
+  </div>
+</ng-template>

@@ -1,0 +1,25 @@
+@import '../variables';
+
+.white-overlay {
+  background-color: $app-white;
+  box-shadow: -1px 1px 5px -3px rgb(0 0 0 / 75%);
+  border-radius: 5px;
+}
+
+.loader {
+  background: rgba($app-white, 0.8);
+}
+
+.light-grey-overlay {
+  background-color: $app-snow;
+  box-shadow: unset;
+  border-radius: 0;
+}
+
+.overlay-loader {
+  top: 0;
+  left: 0;
+  z-index: 100;
+  position: absolute;
+  background: rgba($app-white, 0.8);
+}

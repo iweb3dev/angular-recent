@@ -1,0 +1,59 @@
+<section id="btn-action-group" fxLayout fxLayoutAlign="space-between center">
+  <button
+    ngxPrint
+    type="button"
+    mat-raised-button
+    class="btn __print"
+    printSectionId="member-section"
+  >
+    Print
+  </button>
+  <button type="button" class="btn __close" (click)="closeOnClick()">X</button>
+</section>
+
+<section id="member-section" class="member-main-section">
+  <div fxLayout fxLayoutAlign="center">
+    <h2 class="member-title">Member List for "{{ data.groupName }}"</h2>
+  </div>
+
+  <div *ngIf="data.memberCount">
+    <h3 class="member-count">{{ data.memberCount }} Members</h3>
+  </div>
+
+  <!-- TODO: Text is commented for now, no data in API response -->
+  <ng-container *ngIf="data.memberCount; else noMembers">
+    <table class="table-wrapper">
+      <thead>
+        <tr class="table-head-row">
+          <th class="table-head">First Name</th>
+          <th class="table-head">Last Name</th>
+          <th class="table-head">Phone</th>
+          <th class="table-head">Email</th>
+          <!-- <th class="table-head">Text</th> -->
+          <th class="table-head">Active</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let member of data.members">
+          <td class="table-body-data">{{ member.firstName }}</td>
+          <td class="table-body-data">{{ member.lastName }}</td>
+          <td class="table-body-data">
+            {{ member.phoneNumber | phoneNumberFormat }}
+          </td>
+          <td class="table-body-data">{{ member.emailAddress }}</td>
+          <!-- <td class="table-body-data">{{ member.Text }}</td> -->
+          <td class="table-body-data">
+            {{ member.isActive ? 'Active' : 'Inactive' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-template #noMembers>
+    <div fxLayout fxLayoutAlign="center center">
+      <span>No members to show</span>
+    </div>
+  </ng-template>
+</section>

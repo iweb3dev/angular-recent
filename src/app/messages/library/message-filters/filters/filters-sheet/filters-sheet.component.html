@@ -1,0 +1,47 @@
+<app-bottom-sheet title="Filter Messages">
+  <ng-container body>
+    <form [formGroup]="filtersForm" fxLayout="column" fxLayoutGap="25px">
+      <div fxLayout="column">
+        <span class="typography-18 typography-18--bold">Sort</span>
+        <mat-form-field>
+          <mat-select disableRipple formControlName="dateFilter">
+            <mat-option
+              *ngFor="let option of sortOptions"
+              [value]="option.option"
+            >
+              {{ option.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <span class="typography-18 typography-18--bold">Show</span>
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-checkbox
+            class="checkbox-green"
+            formControlName="hasVoiceMessage"
+          >
+            <span class="typography-14">Voice</span>
+          </mat-checkbox>
+          <mat-checkbox class="checkbox-green" formControlName="hasTextMessage">
+            <span class="typography-14">Text</span>
+          </mat-checkbox>
+          <mat-checkbox
+            class="checkbox-green"
+            formControlName="hasEmailMessage"
+          >
+            <span class="typography-14">Email</span>
+          </mat-checkbox>
+        </div>
+      </div>
+      <button
+        class="set-button"
+        mat-flat-button
+        color="primary"
+        (click)="onFiltersApply()"
+      >
+        Set
+      </button>
+    </form>
+  </ng-container>
+</app-bottom-sheet>

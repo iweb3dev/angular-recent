@@ -1,0 +1,41 @@
+<div class="view-keyword" fxLayout="column" fxLayoutAlign="start start">
+  <span class="typography-28 typography-28--bold typography-28--bolder header">Text Message Keyword Created
+    <mat-icon class="done-color" color="primary">done</mat-icon></span>
+   <div class="form form-view-keyword" fxLayout="column" fxLayoutGap="30px">
+    <div class="max-width-form-control margin-top--30" fxLayout="column">
+
+      <div fxLayout fxLayoutAlign="space-between center">
+        <span class="typography-20--bold margin-bottom--20">You new keyword is</span>
+
+        <button
+          mat-button
+          color="primary"
+          class="margin-bottom--20"
+          type="button"
+          (click)="copyKeyword()"
+        >
+          <div
+            fxLayout
+            fxLayoutGap="5px"
+            fxLayoutAlign="start center"
+            type="button"
+          >
+            <span class="typography-16">Copy Keyword</span>
+          </div>
+        </button>
+      </div>
+      <span class="typography-20 typography-20--bold margin-bottom--20 keyword text-center">
+        {{ keyword }}
+      </span>
+      <span class="typography-16 margin-bottom--20 margin-top--30">
+        Anyone can now join your group automatically by texting your keyword
+        <span class="typography-16--bold">'{{keyword}}'</span> to our short code
+        <span class="typography-16--bold">24251</span> or your custom phone number.
+      </span>
+
+      <span class="typography-16 margin-bottom--20 margin-top--30 view-all-keywords"  [routerLink]="['/keywords']">
+       View All Keywords
+      </span>
+    </div>
+   </div>
+</div>

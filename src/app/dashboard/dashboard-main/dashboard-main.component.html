@@ -1,0 +1,69 @@
+<section class="dashboard __wrapper">
+  <app-loader *ngIf="navigation" class="dashboard __overlay"></app-loader>
+
+  <section
+    fxLayout
+    fxLayoutGap="1.5rem"
+    fxLayout.lt-md="column"
+    class="toolbar-wrapper dashboard __spacing"
+  >
+    <ng-container *ngFor="let item of toolbarItems">
+      <app-dashboard-toolbar
+        fxFlex="1 1 auto"
+        [icon]="item.icon"
+        [text]="item.text"
+        [colorScheme]="item.colorScheme"
+        (toolbarItemClicked)="toolbarOnEmit($event)"
+      ></app-dashboard-toolbar>
+    </ng-container>
+  </section>
+
+  <section
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutGap="48px"
+    class="dashboard __spacing"
+  >
+    <app-member-overview
+      fxFlex="1 1 35"
+      [userInfo]="user$ | async"
+      [overview]="accountOverview$ | async"
+      [communications]="dashboardSummary$ | async"
+    ></app-member-overview>
+
+    <app-account-overview
+      fxFlex="1 1 65"
+      [userInfo]="user$ | async"
+      [overview]="accountOverview$ | async"
+      [communications]="dashboardSummary$ | async"
+    ></app-account-overview>
+  </section>
+
+  <section fxLayout fxLayout.lt-lg="column">
+    <app-recent-message-results
+      fxFlex="1 1 37"
+      fxFlex.lt-lg="1 1 auto"
+      class="dashboard __box-spacing"
+      [lastCommunication]="lastCommunication$ | async"
+    ></app-recent-message-results>
+
+    <app-rewards-point
+      fxFlex="1 1 25"
+      fxFlex.lt-lg="1 1 auto"
+      class="dashboard __box-spacing"
+      [claimableRewards]="claimableRewards$ | async"
+      [userRewardsBalance]="userRewardsBalance$ | async"
+    ></app-rewards-point>
+
+    <div fxFlex="1 1 34" fxLayout="column" fxFlex.lt-lg="1 1 auto">
+      <app-send-phone-message
+        [callInNumber]="callInSetting$ | async"
+        [userIdNumber]="(user$ | async)?.telUserName"
+      ></app-send-phone-message>
+
+      <app-download-callingpost
+        class="dashboard __vertical-spacing"
+      ></app-download-callingpost>
+    </div>
+  </section>
+</section>

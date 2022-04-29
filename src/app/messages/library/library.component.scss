@@ -1,0 +1,50 @@
+@import '/src/styles/variables';
+
+.library {
+  padding: 50px 0;
+
+  @include respond(tab-port) {
+    padding: 30px 0;
+  }
+
+  &__controls {
+    flex: 1;
+    place-content: flex-start space-between;
+
+    @include respond(tab-port-up) {
+      flex: 0;
+      column-gap: 24px;
+    }
+  }
+
+  &__header,
+  &__actions {
+    padding: 0 0 0 80px;
+
+    @include respond(tab-port) {
+      padding: 0 15px;
+    }
+  }
+
+  &__message-list {
+    padding: 0 31px 0 80px;
+
+    @include respond(tab-port) {
+      padding: 0;
+    }
+  }
+
+  &__actions {
+    padding: 0 31px 0 80px;
+    min-height: 50px;
+
+    @include respond(tab-port) {
+      padding: 0 15px;
+    }
+  }
+}
+
+.mobile-actions-block {
+  padding: 10px 0;
+  background-color: darken($app-white, 3%);
+}

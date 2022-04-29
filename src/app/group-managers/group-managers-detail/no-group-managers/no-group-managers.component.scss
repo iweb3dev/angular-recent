@@ -1,0 +1,43 @@
+@import '/src/styles/variables';
+
+.no-group-managers {
+  max-width: 60%;
+  @include respond(tab-port) {
+    max-width: 60%;
+  }
+  @include respond(phone) {
+    max-width: 100%;
+  }
+}
+.header {
+  margin-bottom: 30px;
+}
+
+.create {
+  margin-bottom: 25px;
+  width: 14rem;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.mat-button.mat-primary {
+  padding: 2px;
+}
+
+.step-list {
+  .step {
+    .step-index {
+      background-color: $app-lime-green;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      color: white;
+    }
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .mobile-center {
+    text-align: center;
+  }
+}

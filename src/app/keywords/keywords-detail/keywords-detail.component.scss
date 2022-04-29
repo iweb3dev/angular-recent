@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+
+.keywords {
+  padding: 40px 50px;
+}
+
+
+@media screen and (max-width: $sm) {
+  .keywords {
+    padding: 16px 34px;
+  }
+}

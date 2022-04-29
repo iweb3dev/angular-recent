@@ -1,0 +1,10 @@
+@import '../../../../../styles/variables';
+
+@media screen and (max-width: $sm) {
+  .half {
+    width: 100%;
+  }
+  .profile-details {
+    width: unset;
+  }
+}

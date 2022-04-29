@@ -1,0 +1,64 @@
+<div
+  class="verify-number"
+  fxLayout="column"
+  fxLayoutGap="18px"
+  [formGroup]="verificationCodeForm"
+>
+  <div class="header">
+    <span class="typography-20--bold">Phone Number Verification</span>
+  </div>
+  <div class="body" fxLayout="column" fxLayoutGap="30px">
+    <span class="typography-16--bold"
+      >Please enter the code we just texted to:
+      {{ (verification$ | async)?.phoneNumber }}</span
+    >
+    <mat-form-field class="example-full-width">
+      <mat-label>Verification Code</mat-label>
+      <input type="text" matInput formControlName="verificationCode" />
+    </mat-form-field>
+    <div
+      fxLayout="column"
+      fxLayoutGap="6px"
+      *ngIf="
+        verificationCodeControl.invalid &&
+        (verificationCodeControl.dirty || verificationCodeControl.touched)
+      "
+    >
+      <mat-error
+        *ngIf="
+          verificationCodeControl.errors.required ||
+          verificationCodeControl.errors.pattern
+        "
+        >Verification code should be exactly 4 digits.</mat-error
+      >
+    </div>
+  </div>
+  <div
+    class="footer"
+    fxLayout="row"
+    fxLayoutGap="14px"
+    fxLayout.lt-md="column-reverse"
+  >
+    <button
+      mat-raised-button
+      color="primary"
+      class="button button-primary-inverted"
+      fxFlex
+      (click)="onCancel()"
+    >
+      CANCEL
+    </button>
+    <button
+      mat-raised-button
+      class="button button-submit"
+      fxFlex
+      (click)="onSendVerificationWithPin()"
+      type="submit"
+    >
+      SUBMIT
+    </button>
+  </div>
+</div>
+<ng-container *ngIf="isVerifing">
+  <app-loader></app-loader>
+</ng-container>

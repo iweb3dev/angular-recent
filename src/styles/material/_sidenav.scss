@@ -1,0 +1,23 @@
+@import '../variables';
+
+body {
+  mat-sidenav-content {
+    &.mat-drawer-content {
+      height: 100vh;
+      overflow: auto;
+    }
+  }
+  .main-sidenav {
+    .mat-drawer-backdrop.mat-drawer-shown {
+      background-color: transparent;
+    }
+    .mat-drawer-inner-container {
+      overflow-x: hidden;
+    }
+  }
+  .mobile-sidenav {
+    .mat-drawer-backdrop.mat-drawer-shown {
+      background-color: rgba($app-black, 0.4);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<button [disabled]="disabled" fxLayout mat-icon-button disableRipple [routerLink]="to" (click)="menuItemClick.emit()"
+        routerLinkActive="active" class="menu-item">
+  <div fxLayout fxFlex="100" fxLayoutAlign="start center">
+    <mat-icon class="app-icon-24 menu-item__icon"
+              [ngClass]="{'menu-item__icon--general': true,
+    'menu-item__icon--newCommunication': to === '/new-communication',
+    'menu-item__icon--groupMembers': to === '/groups',
+    'menu-item__icon--communicationResult': to === '/message-results',
+    'menu-item__icon--messageLibrary': to === '/messages'}">
+      {{ icon }}
+    </mat-icon>
+    <div class="typography-14 menu-item__title" *ngIf="showTitle">
+      {{ title }}
+    </div>
+  </div>
+</button>

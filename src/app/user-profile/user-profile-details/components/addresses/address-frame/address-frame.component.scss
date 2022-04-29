@@ -1,0 +1,38 @@
+@import '../../../../../../styles/variables';
+
+.user-detail-frame {
+  position: relative;
+}
+
+.sub-header {
+  color: $app-grey;
+  font-weight: 400;
+}
+
+.divider {
+  &::after {
+    content: '|';
+  }
+}
+
+.link {
+  color: $primary;
+  font-weight: 400;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.half {
+  width: 50%;
+}
+
+.relative {
+  position: relative;
+}
+
+@media screen and (max-width: $sm) {
+  .half {
+    width: unset;
+  }
+}

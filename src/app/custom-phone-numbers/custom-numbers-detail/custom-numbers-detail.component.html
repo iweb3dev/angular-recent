@@ -1,0 +1,20 @@
+<app-has-phone-numbers
+  *ngIf="hasPhoneNumber; else noPhoneNumbers"
+  [userInfo]="userInfo"
+  [allPhoneNumbers$]="phoneNumbers$"
+  [deleteSelection$]="isDeleteSelection$"
+  (receivePurchasedNumber)="onReceivePhoneNumber()"
+  (selectedPhoneNumbers)="onSelectedPhoneNumbers($event)"
+  (showDeleteSelection)="onShowDeleteSelection()"
+  (hideDeleteSelection)="onHideDeleteSelection()"
+  (deletePhoneNumberData)="onDeletePhoneNumber($event)"
+  (deleteAllSelectedPhoneNumbers)="onDeleteAllSelectedPhoneNumbers()"
+  (deletePhoneNumbers)="onDeletePhoneNumbers()"
+  (deleteSinglePN)="onDeleteSinglePhoneNumber($event)"
+></app-has-phone-numbers>
+<ng-template #noPhoneNumbers>
+  <app-no-phone-numbers
+    [userInfo]="userInfo"
+    (receivePurchasedNumber)="onReceivePhoneNumber()"
+  ></app-no-phone-numbers>
+</ng-template>

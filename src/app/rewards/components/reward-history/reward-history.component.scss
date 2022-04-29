@@ -1,0 +1,48 @@
+@import '../../../../styles/variables';
+
+.print, .view-recipients {
+  color: $app-primary;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.has-reminders {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.claimed-header {
+  padding-bottom: 20px;
+}
+
+.claimed-details {
+  margin-right: 4px;
+  color: black;
+  font-weight: 400;
+  line-height: 25px;
+  &--bold {
+    font-weight: 500;
+    line-height: 25px;
+  }
+}
+
+table {
+  width: 100%;
+  background-color: #fafafa;
+  .mat-header-cell {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #8D8D8D;
+  }
+  .description-cell {
+    font-size: 20px;
+    color: #000000;
+  }
+}
+
+mat-paginator {
+  background-color: #fafafa;
+}

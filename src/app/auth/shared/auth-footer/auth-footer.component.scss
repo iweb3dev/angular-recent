@@ -1,0 +1,95 @@
+@import '../../../../styles/variables';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+footer {
+  height: 100%;
+  max-height: 60px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.wrapper {
+  background-color: $app-white-smoke;
+  min-height: 60px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+
+.footer-container {
+  width: 95%;
+  margin: 0 70px;
+}
+
+ul {
+  & > li {
+    list-style-type: none;
+    display: inline;
+    margin-right: 15px;
+    & > a {
+      text-decoration: none;
+    }
+  }
+}
+
+@media screen and (max-width: 958px) {
+  .footer-container {
+    width: 95%;
+    &--nav {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    width: 95%;
+    &--nav {
+      margin-bottom: 15px;
+    }
+  }
+
+  ul {
+    & > li {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer-container {
+    width: 95%;
+    &--nav {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .footer-container {
+    width: 95%;
+    &--nav {
+      margin-bottom: 5px;
+    }
+  }
+
+  ul {
+    & li:nth-child(1) {
+      margin-top: 10px;
+    }
+    & > li {
+      list-style-type: none;
+      margin-right: 0px;
+      margin-bottom: 10px;
+      display: block;
+      & > a {
+        text-decoration: none;
+      }
+    }
+  }
+}

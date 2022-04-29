@@ -1,0 +1,48 @@
+<section [hidden]="!totalRecords">
+  <cdk-virtual-scroll-viewport
+    #scroller
+    itemSize="50"
+    fxLayout="column"
+    class="groups-dropdown"
+  >
+    <div
+      fxLayout
+      class="dropdown"
+      fxLayoutAlign="space-between"
+      (click)="$event.stopPropagation()"
+      *cdkVirtualFor="let group of groups"
+      [routerLink]="['/groups', 'group', group.id]"
+    >
+      <div fxLayout class="dropdown-inner">
+        <div *ngIf="editMode" fxLayout fxLayoutAlign="center center">
+          <mat-checkbox
+            name="edit"
+            class="group-selection-checkbox"
+            (click)="$event.stopPropagation()"
+            (change)="groupSelectionOnChange(group.id, $event)"
+            [checked]="group.id | selectedGroup: selectedGroups"
+          ></mat-checkbox>
+        </div>
+
+        <div
+          fxLayout="column"
+          class="dropdown__title"
+          fxLayoutAlign="space-between flex-start"
+        >
+          <span class="dropdown__group-title">{{
+            group.groupName | titlecase
+          }}</span>
+          <span class="dropdown__sub-title">
+            {{ group.memberCount }} Total Members
+          </span>
+          <span class="dropdown__sub-title">{{ group.keyword }}</span>
+        </div>
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</section>
+
+<div *ngIf="!showNoGroupMessage" class="loading-screen">
+  <span class="dark-grey">Woohoo! Clean Slate!</span>
+  <span class="dark-grey">Go ahead and add new groups!</span>
+</div>

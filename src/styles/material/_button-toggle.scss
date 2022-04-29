@@ -1,0 +1,31 @@
+@import '../variables';
+
+body {
+  .mat-button-toggle-group.message-formats {
+    border: none;
+    &.mat-button-toggle-group-appearance-standard .mat-button-toggle {
+      border-left: 1px solid $app-grey;
+    }
+    &.mat-button-toggle-group-appearance-standard
+      .mat-button-toggle.mat-button-toggle-checked
+      + .mat-button-toggle.mat-button-toggle-checked {
+      border-left: 1px solid $app-lime-green;
+    }
+    &.mat-button-toggle-group-appearance-standard {
+      .mat-button-toggle-checked {
+        background: transparent;
+        border-color: $app-lime-green;
+        border-left: 1px solid $app-lime-green;
+      }
+    }
+  }
+  .button-toggle {
+    .mat-button-toggle-checked {
+      background-color: $primary;
+      color: $app-white;
+    }
+    &--no-border {
+      border: none;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import '/src/styles/variables';
+
+.mobile-filter-top {
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid $app-white;
+}
+.group-member-filters {
+  padding: 0.5rem 2rem;
+}
+
+.btn-mobile-close {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-filter-top {
+    padding: 10px 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .other-filters {
+    margin: 0;
+  }
+
+  .btn-mobile-close {
+    right: 0;
+    top: 15px;
+    border: none;
+    outline: none;
+    display: block;
+    cursor: pointer;
+    background: none;
+    position: absolute;
+  }
+}

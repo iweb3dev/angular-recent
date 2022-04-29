@@ -1,0 +1,27 @@
+<div class="no-group-managers" fxLayout="column" fxLayoutAlign="start start">
+  <span class="typography-28 typography-28--bolder typography-28--scale-mobile header">
+    Add Group Managers
+  </span>
+  <button
+   mat-raised-button
+   class="button button-submit create"
+   fxFlex
+   routerLink="create"
+   >Invite Group Manager</button>
+  <span class="typography-20--bold margin-bottom--20">What are group managers?</span>
+  <span class="typography-16 margin-bottom--20">
+    Group managers are additional users that can use your account to manage
+    and send messages to the groups you assign them.
+  </span>
+  <span class="typography-20--bold margin-top--20 margin-bottom--20">Additional Information</span>
+  <div class="step-list" fxLayout="column" fxLayoutGap='40px'>
+    <div class="step" *ngFor='let step of steps; let i = index'
+          fxLayout="row" fxLayoutGap='15px' fxLayout.lt-md="column"  fxLayoutAlign="start center" fxLayoutAlign.lt-md="center center">
+        <span>
+          <span class="step-index" fxLayoutAlign='center center'>{{i + 1}}</span>
+        </span>
+        <span class="typography-16 mobile-center">{{step}}</span>
+    </div>
+  </div>
+
+</div>

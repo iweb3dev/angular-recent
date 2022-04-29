@@ -1,0 +1,13 @@
+<cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">
+  <div *cdkVirtualFor="let item of dataSource" class="scroll-element">
+    <div
+      *ngFor="let def of columnDefinitions"
+      class="list-row margin-bottom--10"
+    >
+      <span class="typography-15">{{ def.columnName }}</span>
+      <span class="typography-15 typography-15--bold">
+        {{ item[def.displayedColumn] }}
+      </span>
+    </div>
+  </div>
+</cdk-virtual-scroll-viewport>

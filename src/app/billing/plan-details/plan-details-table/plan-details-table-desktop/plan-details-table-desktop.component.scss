@@ -1,0 +1,86 @@
+@import '/src/styles/variables';
+
+:host {
+  width: 100%;
+}
+
+.plans-table {
+  padding: 50px 0 0 80px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 15px 0;
+  @include respond(tab-port) {
+    padding: 50px 0 0 20px;
+  }
+  @include respond(tab-land-up) {
+    width: 75%;
+  }
+}
+
+.plan-action {
+  width: 100%;
+  box-shadow: 0 1px 4px 0 rgba($app-black, 0.2);
+}
+
+.column-cell {
+  border-left: 1px solid rgba($app-black, 0.15);
+  border-right: 1px solid rgba($app-black, 0.15);
+  position: relative;
+  &--active-upgrade {
+    border-left: 1px solid $app-lime-green;
+    border-right: 1px solid $app-lime-green;
+  }
+  &--active-downgrade {
+    border-left: 1px solid $app-red;
+    border-right: 1px solid $app-red;
+  }
+}
+
+.header-cell {
+  border-left: 1px solid rgba($app-black, 0.15);
+  border-right: 1px solid rgba($app-black, 0.15);
+  border-top: 1px solid rgba($app-black, 0.15);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  position: relative;
+  &--active-upgrade {
+    border-left: 1px solid $app-lime-green;
+    border-right: 1px solid $app-lime-green;
+    border-top: 1px solid $app-lime-green;
+  }
+  &--active-downgrade {
+    border-left: 1px solid $app-red;
+    border-right: 1px solid $app-red;
+    border-top: 1px solid $app-red;
+  }
+}
+
+.bottom-cell {
+  border-left: 1px solid rgba($app-black, 0.15);
+  border-right: 1px solid rgba($app-black, 0.15);
+  border-bottom: 1px solid rgba($app-black, 0.15);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  position: relative;
+
+  &--active-upgrade {
+    border-left: 1px solid $app-lime-green;
+    border-right: 1px solid $app-lime-green;
+    border-bottom: 1px solid $app-lime-green;
+  }
+  &--active-downgrade {
+    border-left: 1px solid $app-red;
+    border-right: 1px solid $app-red;
+    border-bottom: 1px solid $app-red;
+  }
+}
+
+.cell {
+  padding: 10px;
+  margin: 0 6px;
+  min-width: 130px;
+}
+
+.first-column {
+  width: 280px;
+}

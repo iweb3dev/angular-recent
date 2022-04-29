@@ -1,0 +1,24 @@
+<ng-container *ngIf="isMobileView; else desktopView">
+  <app-plan-details-table-mobile
+    [userInfo]="userInfo"
+    [essentialPlan]="essentialPlan"
+    [standardPlan]="standardPlan"
+    [premiumPlan]="premiumPlan"
+    [contract]="contract"
+    (upgradePlan)="onPlanUpgrade($event)"
+    (downgradePlan)="onPlanDowngrade($event)"
+    (extendPlan)="onPlanExtend($event)"
+  ></app-plan-details-table-mobile>
+</ng-container>
+<ng-template #desktopView>
+  <app-plan-details-table-desktop
+    [userInfo]="userInfo"
+    [essentialPlan]="essentialPlan"
+    [standardPlan]="standardPlan"
+    [premiumPlan]="premiumPlan"
+    [contract]="contract"
+    (upgradePlan)="onPlanUpgrade($event)"
+    (downgradePlan)="onPlanDowngrade($event)"
+    (extendPlan)="onPlanExtend($event)"
+  ></app-plan-details-table-desktop>
+</ng-template>

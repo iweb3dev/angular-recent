@@ -1,0 +1,9 @@
+@import '/src/styles/variables';
+
+.container,
+.increase-size {
+  padding: 50px 25px 50px 80px;
+  @include respond(tab-port) {
+    padding: 30px 10px;
+  }
+}

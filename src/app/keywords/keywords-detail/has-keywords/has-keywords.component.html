@@ -1,0 +1,142 @@
+<div class="keywords" fxLayout="column" fxLayoutGap="0px">
+  <mat-card>
+    <span class="typography-28 typography-28--bold typography-28--bolder">
+      {{ !(showDeleteSelection$ | async) ? 'Text Message Keywords' : 'Select keywords to delete' }}
+    </span>
+  </mat-card>
+
+  <div
+  class="keywords__actions"
+  *ngIf="!(showDeleteSelection$ | async); else deleteActions"
+  >
+    <div fxLayout fxLayoutAlign="space-between center" fxLayoutAlign.lt-md="space-around center">
+        <button
+          fxHide.lt-md
+          mat-raised-button
+          class="button button--no-border button--rounded haskeywordsbutton"
+          type="button"
+          (click)="onNewKeywordCreate()"
+        >
+          <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+            <mat-icon class="haskeywordsbutton">add</mat-icon>
+            <span class="typography--14 haskeywordsbutton">Create New Keyword</span>
+          </div>
+        </button>
+
+      <div
+          fxLayout="column"
+          fxLayoutGap="5px"
+          fxLayoutAlign="start center"
+          fxHide
+          fxShow.lt-md
+        >
+          <button
+            mat-mini-fab
+            class="button button-primary-inverted button-primary-inverted--no-border fab-50 fab-50--scale-mobile"
+            color="primary"
+            (click)="onNewKeywordCreate()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+          <span class="typography-12 text-grey" fxHide.gt-xs>Add Keyword</span>
+      </div>
+      <div fxLayout fxLayoutGap="40px">
+      <span class="typography-16 typography-16--bold typography-16--accent" fxLayoutAlign="start center" color="primary" fxShow
+      fxHide.lt-md><a href="https://www.callingpost.com/Features_SMS_Text_Keywords.html" [target]="'_blank'">What are text message keywords?</a></span>
+        <app-more-actions
+        (selectDeleteKeywords)="onShowDeleteSelection()"
+        (deleteAllKeywords)="onDeleteAllKeywords()"
+        ></app-more-actions>
+      </div>
+    </div>
+  </div>
+    <app-keywords-list
+    [showDeleteSelection]="showDeleteSelection$ | async"
+    [keywords]="allKeywords$ | async"
+    (deleteKeyword)="onMessageDelete($event)"
+  ></app-keywords-list>
+</div>
+
+<ng-template #deleteActions>
+  <!--DESKTOP-->
+  <div
+    class="keywords__actions"
+    fxLayout
+    fxLayoutAlign="space-between center"
+    fxHide.lt-md
+  >
+    <button
+      mat-button
+      class="button button--no-border"
+      color="primary"
+      (click)="onSelectAllKeywordsForDelete(!allSelected)"
+    >
+      <span class="typography-16">
+        {{ allSelected ? 'Unselect All' : 'Select All' }}
+      </span>
+    </button>
+    <div fxLayout fxLayoutGap="20px">
+      <button
+        mat-button
+        class="button button-primary-inverted"
+        color="primary"
+        fxFlex="250px"
+        [disabled]="!canEnableDelete"
+        (click)="onKeywordsDelete()"
+      >
+        <span class="typography-16">Delete</span>
+      </button>
+      <button
+        mat-button
+        class="button button--no-border"
+        color="primary"
+        (click)="onKeywordDeleteSelectionHide()"
+      >
+        <span class="typography-16">Cancel</span>
+      </button>
+    </div>
+  </div>
+  <!--MOBILE-->
+  <div fxLayout="column" fxLayoutGap="20px" fxHide fxShow.lt-md>
+    <div class="keywords__actions" fxLayout fxLayoutAlign="center center">
+      <button
+        fxFlex
+        mat-button
+        class="button button-primary-inverted"
+        color="primary"
+        [disabled]="!canEnableDelete"
+        (click)="onKeywordsDelete()"
+      >
+        <span class="typography-16">Delete</span>
+      </button>
+    </div>
+    <div>
+      <mat-divider></mat-divider>
+      <div
+        fxLayout
+        fxLayoutAlign="space-between center"
+        class="mobile-actions-block"
+      >
+        <button
+          mat-button
+          class="button button--no-border"
+          color="primary"
+          (click)="onSelectAllKeywordsForDelete(!allSelected)"
+        >
+          <span class="typography-16">
+            {{ allSelected ? 'Unselect All' : 'Select All' }}
+          </span>
+        </button>
+        <button
+          mat-button
+          class="button button--no-border"
+          color="primary"
+          (click)="onKeywordDeleteSelectionHide()"
+        >
+          <span class="typography-16">Cancel</span>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</ng-template>

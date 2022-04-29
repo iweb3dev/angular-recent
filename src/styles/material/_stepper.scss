@@ -1,0 +1,11 @@
+@import '../variables';
+
+.new-message-stepper {
+  .mat-horizontal-stepper-header-container {
+    display: none;
+  }
+  .mat-horizontal-content-container {
+    overflow: hidden;
+    padding: 0;
+  }
+}

@@ -1,0 +1,30 @@
+:host {
+  .floating span {
+    opacity: 1;
+  }
+  span {
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+}
+
+mat-chip-list:focus {
+  outline: none;
+}
+
+.chip-list {
+  width: 100%;
+}
+
+.chip-item {
+  font-size: 11px;
+}
+
+.chip-input {
+  margin: 0;
+  width: 100%;
+}
+
+.custom-option {
+  width: 100%;
+}

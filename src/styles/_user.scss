@@ -1,0 +1,134 @@
+@import './variables';
+
+$app-user-input-color: #333333;
+
+mat-expansion-panel {
+  &.user-detail-section {
+    min-width: 60rem;
+    max-width: 65rem;
+  }
+  overflow-y: scroll;
+}
+
+mat-checkbox {
+  &.user-detail-checkbox {
+    label {
+      color: $app-grey;
+      font-weight: 400;
+    }
+    &.mat-checkbox-checked {
+      .mat-checkbox-background {
+        background-color: $app-white;
+        border: 1px solid rgba(0, 0, 0, 0.54);
+      }
+      path {
+        stroke: $app-primary !important;
+      }
+    }
+    .mat-checkbox-frame {
+      border-width: 1px;
+      border: 1px solid rgba(0, 0, 0, 0.54);
+    }
+  }
+}
+
+.user-detail-frame {
+    width: 55rem;
+    position: relative;
+    .sub-header {
+      color: $app-grey;
+      font-weight: 400;
+    }
+
+    .divider {
+      &::after {
+        content: '|';
+      }
+    }
+
+    .link {
+      color: $primary;
+      font-weight: 400;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+}
+
+mat-slide-toggle {
+  &.user-detail-toggle {
+    label {
+      color: $app-grey;
+      font-weight: 400;
+      font-size: 16px;
+    }
+  }
+  &.user-detail-toggle.mat-checked {
+    .mat-slide-toggle-bar {
+      background-color: #4CAF50;
+    }
+    .mat-slide-toggle-thumb {
+      background-color: #FFFFFF;
+    }
+  }
+}
+
+mat-form-field {
+  &.user-detail-field {
+    &.mat-focused {
+      mat-label {
+        color: $primary;
+      }
+      .mat-form-field-underline {
+        background-color: $primary;
+      }
+    }
+    .mat-form-field-wrapper {
+      width: 100%;
+    }
+    // .mat-form-field-should-float {
+    //   .mat-form-field-infix {
+    //     padding-top: 24px;
+    //   }
+    // }
+    .mat-form-field-infix {
+      padding-top: 1rem;
+    }
+    mat-label {
+      color: $app-grey;
+      font-weight: 400;
+    }
+    input {
+      color: $app-user-input-color;
+      font-size: 16px;
+    }
+    .mat-form-field-underline {
+      background-color: $app-light-grey;
+    }
+    .mat-select-value {
+      font-size: 16px;
+    }
+  }
+}
+
+
+
+@media screen and (max-width: $sm) {
+  .user-detail-frame {
+    width: unset;
+    .delete {
+      position: absolute;
+      top: 1.5rem;
+      right: 1rem;
+     }
+  }
+  mat-expansion-panel {
+    &.user-detail-section {
+      min-width: unset;
+      max-width: unset;
+      input {
+        max-width: 70%;
+      }
+    }
+  }
+}

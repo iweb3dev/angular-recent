@@ -1,0 +1,492 @@
+<div fxLayout="column">
+  <div class="credits-selector-block" fxLayout="column" #topScrollAnchor>
+    <div fxLayout="column" fxLayoutGap="10px" class="margin-bottom--20">
+      <span
+        class="typography-20 typography-20--scale-mobile typography-20--bold"
+      >
+        Credits
+      </span>
+      <span class="typography-16 typography-16--scale-mobile text-grey">
+        Current credits: {{ userCredits$ | async | number: '1.0':'en-US' }}
+      </span>
+    </div>
+    <div fxLayout="column">
+      <span class="typography-16 typography-16--scale-mobile">
+        Select number of credits to see price
+      </span>
+      <mat-form-field>
+        <mat-select [formControl]="creditControl">
+          <mat-option
+            *ngFor="let credit of additionalCredits$ | async"
+            [value]="credit"
+          >
+            <span class="typography-16 typography-16--scale-mobile">
+              {{ credit.creditCount | number: '1.0':'en-US' }} Credits
+            </span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-card fxLayout="column" fxLayoutGap="10px">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+        fxFlexAlign="center"
+      >
+        ${{ creditControl.value?.cost }}
+      </span>
+      <span
+        class="typography-16 typography-16--scale-mobile"
+        fxFlexAlign="center"
+      >
+        {{
+          creditControl.value?.creditCount / creditControl.value?.cost
+            | number: '2.1-1'
+        }}
+        &#162; per Credit
+      </span>
+      <button
+        mat-button
+        class="button button--lime-green"
+        type="button"
+        fxFlex
+        (click)="onCreditsSelect()"
+      >
+        Buy
+      </button>
+    </mat-card>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="features-block" fxLayout="column" fxLayoutGap="30px">
+    <div fxLayout="column" fxLayoutGap="10px" class="features-block__feature">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Top Features
+      </span>
+      <div fxLayout fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px" class="feature-block">
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Unlimited Phone Calls
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Unlimited Text Messages
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Unlimited Emails
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Record Time
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Text Message Length
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Email Messaging
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Detailed Communication Results
+            </span>
+          </div>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutGap="10px"
+          fxFlex="45"
+          fxLayoutAlign="start center"
+          class="feature-availability-block"
+        >
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <span
+              class="
+                typography-14 typography-14--bold typography-14--scale-mobile
+              "
+            >
+              120 sec. / Credit
+            </span>
+          </div>
+          <div class="feature-item">
+            <span
+              class="
+                typography-14 typography-14--bold typography-14--scale-mobile
+              "
+              >320 Chr / Credit
+            </span>
+          </div>
+          <div class="feature-item">
+            <span
+              class="
+                typography-14 typography-14--bold typography-14--scale-mobile
+              "
+            >
+              1 Credit per member
+            </span>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" class="features-block__feature">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Messaging Features
+      </span>
+      <div fxLayout fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px" class="feature-block">
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Extended Hour Messaging
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              24/7 Messaging
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Send Messages By Mobile App
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Send Messages By Telephone
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Send messages to multiple groups
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Send phone/text/emails in one message
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Reminder Messages
+            </span>
+          </div>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutGap="10px"
+          fxFlex="45"
+          fxLayoutAlign="start center"
+          class="feature-availability-block"
+        >
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" class="features-block__feature">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Phone Features
+      </span>
+      <div fxLayout fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px" class="feature-block">
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Use Your Caller Id
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Missed Phone Message Playback
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Text-To-Speech Phone Messaging (Multi-lingual Support)
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Straight to Voicemail
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Reduced Trailer
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Remove Branding on Trailer
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Live Answer Transfer
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Voice Delivery to Text & Email
+            </span>
+          </div>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutGap="10px"
+          fxFlex="45"
+          fxLayoutAlign="start center"
+          class="feature-availability-block"
+        >
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" class="features-block__feature">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Texting Features
+      </span>
+      <div fxLayout fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px" class="feature-block">
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              FREE Keyword(s)
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Additional Keyword Cost
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              SMS Surveys
+            </span>
+          </div>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutGap="10px"
+          fxFlex="45"
+          fxLayoutAlign="start center"
+          class="feature-availability-block"
+        >
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <span
+              class="
+                typography-14 typography-14--bold typography-14--scale-mobile
+              "
+            >
+              $9.99
+            </span>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" class="features-block__feature">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Email Features
+      </span>
+      <div fxLayout fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px" class="feature-block">
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Custom Email Template Builder
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Pre-built Email Templates
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Merge Tags
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Remove Email Branding
+            </span>
+          </div>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutGap="10px"
+          fxFlex="45"
+          fxLayoutAlign="start center"
+          class="feature-availability-block"
+        >
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="warn-icon app-icon-20">close</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" class="features-block__feature">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Additional Features
+      </span>
+      <div fxLayout fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px" class="feature-block">
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Rewards Program Access
+            </span>
+          </div>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutGap="10px"
+          fxFlex="45"
+          fxLayoutAlign="start center"
+          class="feature-availability-block"
+        >
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" class="features-block__feature">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Support
+      </span>
+      <div fxLayout fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px" class="feature-block">
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              Live Phone/Chat/Email/Text Support
+            </span>
+          </div>
+          <div class="feature-item">
+            <span class="typography-14 typography-14--scale-mobile">
+              24/7 Online Support
+            </span>
+          </div>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutGap="10px"
+          fxFlex="45"
+          fxLayoutAlign="start center"
+          class="feature-availability-block"
+        >
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+          <div class="feature-item">
+            <mat-icon class="done-icon app-icon-20">done</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="flexible-plans-block" fxLayout="column" fxLayoutGap="20px">
+    <span class="typography-20 typography-20--bold typography-20--scale-down">
+      Flexible plans that grow with you.
+    </span>
+    <span class="typography-16 typography-16--scale-down">
+      Send unlimited messages with
+      <span class="typography-16 typography-16--bold">Premium plan.</span>
+    </span>
+    <button
+      mat-button
+      class="button button--lime-green"
+      type="button"
+      fxFlex
+      (click)="goPremium()"
+    >
+      Upgrade to Premium & Get 50% Off
+    </button>
+  </div>
+</div>

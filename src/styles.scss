@@ -1,0 +1,69 @@
+@import 'styles/variables';
+@import 'styles/typography';
+@import 'styles/auth';
+@import 'styles/dashboard';
+@import 'styles/layout';
+@import 'styles/button';
+@import 'styles/bottom_sheet';
+@import 'styles/user';
+@import 'styles/reminders';
+@import 'styles/system';
+@import 'styles/message_results';
+@import 'styles/material/theme';
+@import 'styles/animation/clockwise-spinner';
+@import 'styles/spinners/small-spinner';
+@import 'styles/group_members';
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto;
+}
+
+.assign-textarea {
+  mat-form-field.mat-form-field .mat-form-field-flex {
+    border: 1px solid black;
+    padding: 0 10px;
+    border-radius: 4px;
+  }
+}
+
+.assign-textarea {
+  mat-form-field.mat-form-field.mat-focused .mat-form-field-underline {
+    display: none;
+  }
+}
+
+.call-forwarding-dialog .mat-dialog-container {
+  padding: 30px 40px;
+}
+
+#switchAccount {
+  mat-icon {
+    color: $app-black;
+  }
+
+  .menu-item__title {
+    color: $app-black;
+  }
+}
+
+#CellPhoneDiv {
+  background-image: url(./assets/img/cellPhone.gif);
+  background-repeat: no-repeat;
+  vertical-align: top;
+  height: 479px;
+  width: 228px;
+}

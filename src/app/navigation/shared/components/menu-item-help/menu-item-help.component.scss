@@ -1,0 +1,17 @@
+@import '/src/styles//variables';
+
+.menu-item {
+  width: 100%;
+  margin: 10px 0;
+
+  &__icon {
+    padding: 10px;
+    margin: 0 15px;
+    color: $app-pale-grey;
+  }
+
+  &__title {
+    font-weight: 400;
+    color: $app-gray-44;
+  }
+}

@@ -1,0 +1,140 @@
+<section
+  fxLayout="column"
+  class="subscribe-container"
+  fxLayoutAlign="initial center"
+>
+  <div
+    fxFlex="1 1 auto"
+    fxLayout="column"
+    class="question-container"
+    fxLayoutAlign="center center"
+  >
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      [class.logo-container]="!isSubmitted"
+    >
+      <a href="http://www.callingpost.com"
+        ><img class="logo" src="/assets/img/CallingPostLogo.png"
+      /></a>
+    </div>
+
+    <ng-container *ngIf="!isSubmitted">
+      <div class="typography-20">
+        Welcome to group: <b>{{ groupDetails?.groupName }}</b>
+      </div>
+      <span class="typography-16" style="padding-top: 15px"
+        >Please take a quick moment to finish filling out your contact
+        information.</span
+      >
+
+      <form
+        fxFill
+        fxLayout="column"
+        (ngSubmit)="onSubmit()"
+        [formGroup]="groupForm"
+        fxLayoutAlign="center center"
+      >
+        <div
+          fxLayout="column"
+          style="width: 100%"
+          fxLayoutAlign="center center"
+        >
+          <mat-form-field
+            appearance="fill"
+            class="form-field form-field--regular"
+          >
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName" />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            class="form-field form-field--regular"
+          >
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="lastName" />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            class="form-field form-field--regular"
+          >
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="email"
+              placeholder="example@callingpost.com"
+            />
+            <mat-error>Enter a valid email</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button
+            mat-flat-button
+            class="btn-submit"
+            [disabled]="!groupForm.valid"
+          >
+            Save
+          </button>
+        </div>
+
+        <div class="typography-16" style="padding-top: 15px">
+          The contact information will be saved to phone number:
+          <b>{{ groupDetails?.member?.phoneNumber }}</b>
+        </div>
+      </form>
+    </ng-container>
+
+    <ng-container *ngIf="isSubmitted && isSuccess">
+      <div fxLayout="column" style="width: 100%" fxLayoutAlign="center center">
+        <span class="typography-20 top-25"
+          >Thank you for providing your information!</span
+        >
+        <span class="typography-20 top-15"
+          >Your group leader will be thrilled!</span
+        >
+        <span class="typography-20--bold top-25"
+          >Want to check out CallingPost for your self?</span
+        >
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-flat-button class="btn-try">Try CallingPost Now!</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isSubmitted && !isSuccess">
+      <div fxLayout="column" style="width: 100%" fxLayoutAlign="center center">
+        <span class="typography-20 top-25">Something went wrong.</span>
+        <span class="typography-20 top-15">Please, try later!</span>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-flat-button class="btn-try-again">Try Again</button>
+      </div>
+    </ng-container>
+  </div>
+
+  <div
+    fxFlex="1 1 auto"
+    fxLayout="column"
+    class="footer-container"
+    fxLayoutAlign="center center"
+  >
+    <hr class="footer-line" />
+    <div fxLayout="row" fxLayoutAlign="center center" class="footer-nav">
+      <a>LEARN MORE</a>
+      <a>GET STARTED</a>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <span class="copy-text">&copy;2021. Powered by</span>
+      <a href="http://www.callingpost.com"
+        ><img class="footer-logo" src="/assets/img/CallingPostLogo.png"
+      /></a>
+    </div>
+  </div>
+</section>

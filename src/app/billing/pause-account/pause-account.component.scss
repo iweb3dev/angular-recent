@@ -1,0 +1,16 @@
+@import '/src/styles/variables';
+
+:host {
+  display: flex;
+}
+
+.pause-account {
+  padding: 50px 20px 0 80px;
+  @include respond(tab-port) {
+    padding: 30px 15px;
+  }
+}
+
+.pause-notification {
+  line-height: 26px;
+}

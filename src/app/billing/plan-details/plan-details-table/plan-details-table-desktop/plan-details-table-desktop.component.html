@@ -1,0 +1,2002 @@
+<table class="plans-table">
+  <tr>
+    <th></th>
+    <th>
+      <span class="typography-16 typography-16--bold" *ngIf="hasPremiumPlan">
+        Current Plan
+      </span>
+    </th>
+    <th>
+      <span class="typography-16 typography-16--bold" *ngIf="hasStandardPlan">
+        Current Plan
+      </span>
+    </th>
+    <th>
+      <span class="typography-16 typography-16--bold" *ngIf="hasEssentialsPlan">
+        Current Plan
+      </span>
+    </th>
+  </tr>
+  <tr>
+    <th class="cell first-column"></th>
+    <th
+      class="header-cell cell"
+      [class.header-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.header-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <span class="typography-20 typography-20--bold">Premium</span>
+    </th>
+
+    <th
+      class="header-cell cell"
+      [class.header-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.header-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <span class="typography-20 typography-20--bold">Standard</span>
+    </th>
+
+    <th
+      class="header-cell cell"
+      [class.header-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.header-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <span class="typography-20 typography-20--bold">Essentials</span>
+    </th>
+  </tr>
+  <tr>
+    <td class="cell first-column"></td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <span class="typography-16">${{ premiumPlan.cost }}</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <span class="typography-16 text-center">${{ standardPlan.cost }}</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <span class="typography-16 text-center">${{ essentialPlan.cost }}</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column"></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <button
+        mat-flat-button
+        class="button plan-action"
+        type="button"
+        [class.button--lime-green]="
+          premiumButtonLabel !== PlanDetailsActionLabels.Downgrade
+        "
+        [class.button--warn]="
+          premiumButtonLabel === PlanDetailsActionLabels.Downgrade
+        "
+        (click)="onPremiumChange()"
+      >
+        <span class="typography-15">{{ premiumButtonLabel }}</span>
+      </button>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <button
+        mat-flat-button
+        class="button plan-action"
+        type="button"
+        [class.button--lime-green]="
+          standardButtonLabel !== PlanDetailsActionLabels.Downgrade
+        "
+        [class.button--warn]="
+          standardButtonLabel === PlanDetailsActionLabels.Downgrade
+        "
+        (click)="onStandardChange()"
+      >
+        <span class="typography-15">{{ standardButtonLabel }}</span>
+      </button>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <button
+        mat-flat-button
+        class="button plan-action"
+        [class.button--lime-green]="
+          essentialsButtonLabel !== PlanDetailsActionLabels.Downgrade
+        "
+        [class.button--warn]="
+          essentialsButtonLabel === PlanDetailsActionLabels.Downgrade
+        "
+        type="button"
+        (click)="onEssentialChange()"
+      >
+        <span class="typography-15">{{ essentialsButtonLabel }}</span>
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-18 typography-18--bold">Top Features</span>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Unlimited Phone Calls</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Unlimited Text Messages</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Unlimited Emails</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Record Time</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ premiumPlan.voiceMessageLength }} seconds
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ standardPlan.voiceMessageLength }} second
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ essentialPlan.voiceMessageLength }} seconds
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Text Message Length</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ premiumPlan.smsLength }} Characters
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ standardPlan.smsLength }} Characters
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ essentialPlan.smsLength }} Characters
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Email Messaging</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        [class.done-icon]="premiumPlan.emailMessage"
+        [class.warn-icon]="!premiumPlan.emailMessage"
+      >
+        {{ premiumPlan.emailMessage ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.emailMessage"
+        [class.warn-icon]="!standardPlan.emailMessage"
+      >
+        {{ standardPlan.emailMessage ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.emailMessage"
+        [class.warn-icon]="!essentialPlan.emailMessage"
+      >
+        {{ essentialPlan.emailMessage ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Detailed Communication Results</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+  <!-------------- MESSAGING FEATURES -------------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-18 typography-18--bold">
+        Messaging Features
+      </span>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Extended Hour Messaging</span>
+    </td>
+    <!-- TODO: Extended hour messaging (premium) - Checks altered due to API limitation -->
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="!premiumPlan.afterHourMessaging"
+        [class.warn-icon]="premiumPlan.afterHourMessaging"
+      >
+        {{ !premiumPlan.afterHourMessaging ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.afterHourMessaging"
+        [class.warn-icon]="!standardPlan.afterHourMessaging"
+      >
+        {{ standardPlan.afterHourMessaging ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.afterHourMessaging"
+        [class.warn-icon]="!essentialPlan.afterHourMessaging"
+      >
+        {{ essentialPlan.afterHourMessaging ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- 24 HOUR MESSAGING ROW ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">24/7 Messaging</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.twentyFourSevenMessaging"
+        [class.warn-icon]="!premiumPlan.twentyFourSevenMessaging"
+      >
+        {{ premiumPlan.twentyFourSevenMessaging ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.twentyFourSevenMessaging"
+        [class.warn-icon]="!standardPlan.twentyFourSevenMessaging"
+      >
+        {{ standardPlan.twentyFourSevenMessaging ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.twentyFourSevenMessaging"
+        [class.warn-icon]="!essentialPlan.twentyFourSevenMessaging"
+      >
+        {{ essentialPlan.twentyFourSevenMessaging ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!------ SEND MESSAGE BY MOBILE APP ROW ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Send Messages By Mobile App</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+
+  <!------ SEND MESSAGE BY TELEHONE ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Send Messages By Telephone</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+
+  <!------ SEND MESSAGE BY MULTIPLE GROUPS ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Send messages to multiple groups</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+
+  <!------ SEND TEXT PHONE EMAIL IN ONE MESSAGE ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Send phone/text/emails in one message</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Reminder Messages---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Reminder Messages</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.reminders"
+        [class.warn-icon]="!premiumPlan.reminders"
+      >
+        {{ premiumPlan.reminders ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.reminders"
+        [class.warn-icon]="!standardPlan.reminders"
+      >
+        {{ standardPlan.reminders ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.reminders"
+        [class.warn-icon]="!essentialPlan.reminders"
+      >
+        {{ essentialPlan.reminders ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!--------------- PHONE FEATURES ------------------------------>
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-18 typography-18--bold"> Phone Features </span>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+
+  <!-------------- USE YOUR CALLER ID---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Use Your Caller Id</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.callerID"
+        [class.warn-icon]="!premiumPlan.callerID"
+      >
+        {{ premiumPlan.callerID ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.callerID"
+        [class.warn-icon]="!standardPlan.callerID"
+      >
+        {{ standardPlan.callerID ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.callerID"
+        [class.warn-icon]="!essentialPlan.callerID"
+      >
+        {{ essentialPlan.callerID ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+  <!------ MISSED PHONE MESSAGE PLAYBACK ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Missed Phone Message Playback</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Text-To-Speech Phone Messaging (Multi-lingual Support)---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">
+        Text-To-Speech Phone Messaging (Multi-lingual Support)
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.multiLanguageMessages"
+        [class.warn-icon]="!premiumPlan.multiLanguageMessages"
+      >
+        {{ premiumPlan.multiLanguageMessages ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <!-- TODO: Text-to-speech [multi-lingual] (standard and essential) -
+      Checks altered due to API limitation -->
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="!standardPlan.multiLanguageMessages"
+        [class.warn-icon]="standardPlan.multiLanguageMessages"
+      >
+        {{ !standardPlan.multiLanguageMessages ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="!essentialPlan.multiLanguageMessages"
+        [class.warn-icon]="essentialPlan.multiLanguageMessages"
+      >
+        {{ !essentialPlan.multiLanguageMessages ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Straight to Voicemail ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Straight to Voicemail </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.straightToVoicemail"
+        [class.warn-icon]="!premiumPlan.straightToVoicemail"
+      >
+        {{ premiumPlan.straightToVoicemail ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.straightToVoicemail"
+        [class.warn-icon]="!standardPlan.straightToVoicemail"
+      >
+        {{ standardPlan.straightToVoicemail ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.straightToVoicemail"
+        [class.warn-icon]="!essentialPlan.straightToVoicemail"
+      >
+        {{ essentialPlan.straightToVoicemail ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Reduced Trailer ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Reduced Trailer </span>
+    </td>
+    <!-- TODO: Reduced trailer (premium) - Checks altered due to API limitations -->
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="!premiumPlan.reducedTrailer"
+        [class.warn-icon]="premiumPlan.reducedTrailer"
+      >
+        {{ !premiumPlan.reducedTrailer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.reducedTrailer"
+        [class.warn-icon]="!standardPlan.reducedTrailer"
+      >
+        {{ standardPlan.reducedTrailer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.reducedTrailer"
+        [class.warn-icon]="!essentialPlan.reducedTrailer"
+      >
+        {{ essentialPlan.reducedTrailer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Remove Branding on Trailer  ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Remove Branding on Trailer </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.noTrailer"
+        [class.warn-icon]="!premiumPlan.noTrailer"
+      >
+        {{ premiumPlan.noTrailer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.noTrailer"
+        [class.warn-icon]="!standardPlan.noTrailer"
+      >
+        {{ standardPlan.noTrailer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.noTrailer"
+        [class.warn-icon]="!essentialPlan.noTrailer"
+      >
+        {{ essentialPlan.noTrailer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Live Answer Transfer   ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Live Answer Transfer </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.liveAnswerTransfer"
+        [class.warn-icon]="!premiumPlan.liveAnswerTransfer"
+      >
+        {{ premiumPlan.liveAnswerTransfer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.liveAnswerTransfer"
+        [class.warn-icon]="!standardPlan.liveAnswerTransfer"
+      >
+        {{ standardPlan.liveAnswerTransfer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.liveAnswerTransfer"
+        [class.warn-icon]="!essentialPlan.liveAnswerTransfer"
+      >
+        {{ essentialPlan.liveAnswerTransfer ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Voice Delivery to Text & Email   ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Voice Delivery to Text & Email </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.sendRecordingAsTextEmail"
+        [class.warn-icon]="!premiumPlan.sendRecordingAsTextEmail"
+      >
+        {{ premiumPlan.sendRecordingAsTextEmail ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.sendRecordingAsTextEmail"
+        [class.warn-icon]="!standardPlan.sendRecordingAsTextEmail"
+      >
+        {{ standardPlan.sendRecordingAsTextEmail ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.sendRecordingAsTextEmail"
+        [class.warn-icon]="!essentialPlan.sendRecordingAsTextEmail"
+      >
+        {{ essentialPlan.sendRecordingAsTextEmail ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- TEXTING FEATURES -------------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-18 typography-18--bold"> Texting Features </span>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+
+  <!-------------- FREE Keyword(s)    ---------------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">FREE Keyword(s)</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ premiumPlan.keywords }}
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ standardPlan.keywords }}
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <span class="typography-14 text-black">
+        {{ essentialPlan.keywords }}
+      </span>
+    </td>
+  </tr>
+
+  <!-------------- Additional Keyword Cost    ---------------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Additional Keyword Cost</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <span class="typography-14 text-black">
+        ${{ premiumPlan.additionalKeywordCost }}
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <span class="typography-14 text-black">
+        ${{ standardPlan.additionalKeywordCost }}
+      </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <span class="typography-14 text-black">
+        ${{ essentialPlan.additionalKeywordCost }}
+      </span>
+    </td>
+  </tr>
+
+  <!-------------- SMS Surveys   ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> SMS Surveys </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.twoWayTextSurveys"
+        [class.warn-icon]="!premiumPlan.twoWayTextSurveys"
+      >
+        {{ premiumPlan.twoWayTextSurveys ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.twoWayTextSurveys"
+        [class.warn-icon]="!standardPlan.twoWayTextSurveys"
+      >
+        {{ standardPlan.twoWayTextSurveys ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <!-- TODO: SMS surveys (essential) - Checks altered due to API limitation -->
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="!essentialPlan.twoWayTextSurveys"
+        [class.warn-icon]="essentialPlan.twoWayTextSurveys"
+      >
+        {{ !essentialPlan.twoWayTextSurveys ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- EMAIL FEATURES -------------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-18 typography-18--bold"> Email Features </span>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+
+  <!-------------- Custom Email Template Builder   ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Custom Email Template Builder </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.emailTemplates"
+        [class.warn-icon]="!premiumPlan.emailTemplates"
+      >
+        {{ premiumPlan.emailTemplates ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.emailTemplates"
+        [class.warn-icon]="!standardPlan.emailTemplates"
+      >
+        {{ standardPlan.emailTemplates ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.emailTemplates"
+        [class.warn-icon]="!essentialPlan.emailTemplates"
+      >
+        {{ essentialPlan.emailTemplates ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!------ Pre-built Email Templates ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Pre-built Email Templates</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Merge Tags   ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Merge Tags </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.emailMergeTags"
+        [class.warn-icon]="!premiumPlan.emailMergeTags"
+      >
+        {{ premiumPlan.emailMergeTags ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.emailMergeTags"
+        [class.warn-icon]="!standardPlan.emailMergeTags"
+      >
+        {{ standardPlan.emailMergeTags ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.emailMergeTags"
+        [class.warn-icon]="!essentialPlan.emailMergeTags"
+      >
+        {{ essentialPlan.emailMergeTags ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Remove Email Branding   ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Remove Email Branding </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon"> done </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="warn-icon"> close </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="warn-icon"> close </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- ADDITIONAL FEATURES -------------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-18 typography-18--bold">
+        Additional Features
+      </span>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+
+  <!-------------- Rewards Program Access ---------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16"> Rewards Program Access </span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="premiumPlan.rewardProgramAccess"
+        [class.warn-icon]="!premiumPlan.rewardProgramAccess"
+      >
+        {{ premiumPlan.rewardProgramAccess ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="standardPlan.rewardProgramAccess"
+        [class.warn-icon]="!standardPlan.rewardProgramAccess"
+      >
+        {{ standardPlan.rewardProgramAccess ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon
+        class="done-icon"
+        [class.done-icon]="essentialPlan.rewardProgramAccess"
+        [class.warn-icon]="!essentialPlan.rewardProgramAccess"
+      >
+        {{ essentialPlan.rewardProgramAccess ? 'done' : 'close' }}
+      </mat-icon>
+    </td>
+  </tr>
+
+  <!-------------- Support -------------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-18 typography-18--bold"> Support </span>
+    </td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+
+  <!------ Live Phone/Chat/Email/Text Support ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">Live Phone/Chat/Email/Text Support</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+
+  <!------ 24/7 Online Support ----------------->
+  <tr>
+    <td class="cell first-column">
+      <span class="typography-16">24/7 Online Support</span>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.column-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.column-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+    <td
+      class="text-center column-cell cell"
+      [class.column-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.column-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    >
+      <mat-icon class="done-icon">done</mat-icon>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell first-column"></td>
+    <td
+      class="cell bottom-cell"
+      [class.bottom-cell--active-upgrade]="
+        hasPremiumPlan && !shouldDowngradePremium
+      "
+      [class.bottom-cell--active-downgrade]="
+        hasPremiumPlan && shouldDowngradePremium
+      "
+    ></td>
+    <td
+      class="cell bottom-cell"
+      [class.bottom-cell--active-upgrade]="
+        hasStandardPlan && !shouldDowngradeStandard
+      "
+      [class.bottom-cell--active-downgrade]="
+        hasStandardPlan && shouldDowngradeStandard
+      "
+    ></td>
+    <td
+      class="cell bottom-cell"
+      [class.bottom-cell--active-upgrade]="
+        hasEssentialsPlan && !shouldDownGradeEssentials
+      "
+      [class.bottom-cell--active-downgrade]="
+        hasEssentialsPlan && shouldDownGradeEssentials
+      "
+    ></td>
+  </tr>
+</table>

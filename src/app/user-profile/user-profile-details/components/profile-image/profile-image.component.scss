@@ -1,0 +1,55 @@
+@import '/src/styles/variables';
+
+.user-image {
+  top: -3rem;
+  position: relative;
+  padding-left: 4rem;
+  display: inline-flex;
+}
+
+.user__avatar-wrapper {
+  img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 94.5px;
+  }
+}
+
+.btn-edit {
+  color: $app-white;
+}
+
+.img-upload-container {
+  bottom: 30px;
+  display: table;
+  align-self: center;
+  position: relative;
+  .img-upload {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .user-image {
+    display: flex;
+    padding-left: unset;
+    justify-content: center;
+  }
+
+  .img-upload-container {
+    top: 10%;
+    right: 0px;
+    bottom: unset;
+    align-self: unset;
+    position: absolute;
+  }
+
+  .user__avatar-wrapper {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}

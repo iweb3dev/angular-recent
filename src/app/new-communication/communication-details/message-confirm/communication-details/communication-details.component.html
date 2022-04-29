@@ -1,0 +1,56 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold typography-20--scale-mobile">
+      Required Credits Details
+    </h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="regular-grey">close</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column" fxLayoutGap="30px">
+    <div fxLayout fxLayoutAlign="space-between center">
+      <span class="typography-16 typography-16--bold">
+        Total Credits Required
+      </span>
+      <span class="typography-18 typography-18--bold">
+        {{ data.neededBalance }} Credits
+      </span>
+    </div>
+
+    <div fxLayout fxLayoutAlign="space-between center">
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-icon color="primary" class="app-icon-30"> phone_in_talk </mat-icon>
+        <span class="typography-16 typography-16--bold"> Phone messages </span>
+      </div>
+      <span class="typography-18 typography-18--bold">
+        {{ data.phonesToChangeFor }} Credits
+      </span>
+    </div>
+
+    <div fxLayout fxLayoutAlign="space-between center">
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-icon color="primary" class="app-icon-30">textsms</mat-icon>
+        <span class="typography-16 typography-16--bold"> Text messages </span>
+      </div>
+      <span class="typography-18 typography-18--bold">
+        {{ data.textsToChargeFor }} Credits
+      </span>
+    </div>
+
+    <div fxLayout fxLayoutAlign="space-between center">
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-icon color="primary" class="app-icon-30">
+          <span class="material-icons-outlined"> email </span>
+        </mat-icon>
+        <span class="typography-16 typography-16--bold"> Email messages </span>
+      </div>
+      <span class="typography-18 typography-18--bold">
+        {{ data.emailsToChargeFor }} Credits
+      </span>
+    </div>
+  </div>
+</div>

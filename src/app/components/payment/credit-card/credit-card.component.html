@@ -1,0 +1,121 @@
+<form
+  [formGroup]="creditCardForm"
+  fxLayout="column"
+  fxLayoutGap="15px"
+  class="payment-form"
+>
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>
+        <span class="typography-16 text-grey typography-16--scale-mobile">
+          Card number
+        </span>
+      </mat-label>
+      <input matInput type="text" formControlName="creditCardNumber" />
+      <mat-error>*Invalid card number</mat-error>
+    </mat-form-field>
+    <div fxLayout fxLayoutGap="15px">
+      <mat-form-field fxFlex="calc(50% - 15px)">
+        <mat-label>
+          <span class="typography-16 text-grey typography-16--scale-mobile">
+            MM/YY
+          </span>
+        </mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [min]="today"
+          formControlName="expirationNotice"
+        />
+        <mat-error
+          *ngIf="
+            creditCardForm.get('expirationNotice').errors?.matDatepickerMin
+          "
+        >
+          *Please, use valid future MM/YY
+        </mat-error>
+        <mat-error
+          *ngIf="
+            creditCardForm.get('expirationNotice').errors?.matDatepickerParse
+          "
+        >
+          *Invalid date. Format: MM/YY
+        </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker
+          #picker
+          startView="multi-year"
+          (yearSelected)="chosenYearHandler($event)"
+          (monthSelected)="chosenMonthHandler($event, picker)"
+        ></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field fxFlex="calc(50% - 15px)">
+        <mat-label>
+          <span class="typography-16 text-grey typography-16--scale-mobile">
+            CVV
+          </span>
+        </mat-label>
+        <input matInput type="text" formControlName="cardCode" />
+        <mat-error>*Invalid CVV</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-label>
+        <span class="typography-16 text-grey typography-16--scale-mobile">
+          Email address
+        </span>
+      </mat-label>
+      <input matInput type="email" formControlName="emailAddress" />
+      <mat-error>*Invalid email address</mat-error>
+    </mat-form-field>
+    <ng-container *ngIf="creditCardForm.get('isPrimary')">
+      <mat-checkbox formControlName="isPrimary">
+        Set as default payment method
+      </mat-checkbox>
+    </ng-container>
+  </div>
+
+  <div fxLayout="column">
+    <span class="typography-14 typography-14--bold">Billing info</span>
+    <mat-form-field>
+      <mat-label>
+        <span class="typography-16 text-grey typography-16--scale-mobile">
+          Address
+        </span>
+      </mat-label>
+      <input matInput type="text" formControlName="address1" />
+      <mat-error>*Address required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>
+        <span class="typography-16 text-grey typography-16--scale-mobile">
+          ZIP Code
+        </span>
+      </mat-label>
+      <input matInput type="text" formControlName="zip" />
+      <mat-error>*Zip code required</mat-error>
+    </mat-form-field>
+    <div fxLayout fxLayoutGap="15px">
+      <mat-form-field fxFlex class="form-field--no-infix">
+        <mat-label>
+          <span class="typography-16 text-grey typography-16--scale-mobile">
+            City
+          </span>
+        </mat-label>
+        <input matInput type="text" formControlName="city" />
+        <mat-error>*City required</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex class="form-field--no-infix">
+        <mat-label>
+          <span class="typography-16 text-grey typography-16--scale-mobile">
+            State
+          </span>
+        </mat-label>
+        <input matInput type="text" formControlName="state" />
+        <mat-error>*State required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

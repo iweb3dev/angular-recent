@@ -1,0 +1,174 @@
+@import './variables';
+
+$dashboard-font-color: #3c4858;
+$dashboard-link-color: #2f7ae2;
+$dashboard-table-header-color: #adadad;
+$dashboard-recent-communications-color: #fe9f1a;
+$dashboard-recent-groups-color: #e02b6b;
+$dashboard-recent-results-color: #8b42aa;
+$dashboard-update-news-color: #01bcd4;
+$dashboard-manage-groups-color: #ec407a;
+$dashboard-send-message-color: #66bb6a;
+$dashboard-work-with-messages-color: #ffa726;
+$dashboard-toolbar-frame-sub-title-color: #999999;
+
+.dashboard {
+  .mat-card {
+    color: $dashboard-font-color;
+  }
+}
+
+.dashboard-widget {
+  height: 16rem;
+  .material-icons {
+    position: absolute;
+    left: 0.5rem;
+    font-size: 1rem;
+  }
+  .detail {
+    display: flex;
+    margin-top: 2rem;
+    .view-all {
+      margin-left: auto;
+      color: $dashboard-link-color;
+      &:hover {
+        cursor: pointer;
+      }
+      &.messages {
+        &::after {
+          content: ' RESULTS';
+        }
+      }
+      &.groups {
+        &::after {
+          content: ' GROUPS';
+        }
+      }
+    }
+  }
+  .body {
+    table {
+      width: 100%;
+      th {
+        color: $dashboard-table-header-color;
+        font-weight: 400;
+      }
+
+      td {
+        color: $dashboard-font-color;
+        font-weight: 400;
+        &.edit-label {
+          text-align: right;
+          padding: 0 !important;
+          margin-left: auto;
+          color: $dashboard-link-color;
+          margin-top: 1rem;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.recent-communications {
+  & .border {
+    border: 1px solid $dashboard-recent-communications-color;
+  }
+  & .font-color {
+    color: $dashboard-recent-communications-color;
+  }
+}
+
+.recent-groups {
+  & .border {
+    border: 1px solid $dashboard-recent-groups-color;
+  }
+  & .font-color {
+    color: $dashboard-recent-groups-color;
+  }
+}
+
+.recent-results {
+  & .border {
+    border: 1px solid $dashboard-recent-results-color;
+  }
+  & .font-color {
+    color: $dashboard-recent-results-color;
+  }
+}
+
+.update-news {
+  & .border {
+    border: 1px solid $dashboard-update-news-color;
+  }
+  & .font-color {
+    color: $dashboard-update-news-color;
+  }
+}
+
+.send-message {
+  & .background-color {
+    background: $dashboard-send-message-color;
+  }
+}
+
+.manage-groups {
+  & .background-color {
+    background: $dashboard-manage-groups-color;
+  }
+}
+
+.message-results {
+  & .background-color {
+    background: $dashboard-recent-results-color;
+  }
+}
+
+.work-with-messages {
+  & .background-color {
+    background: $dashboard-work-with-messages-color;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .dashboard-toolbar {
+    flex-direction: column;
+  }
+  .dashboard-row {
+    .small {
+      width: 100% !important;
+    }
+    flex-direction: column;
+    mat-card {
+      &.dashboard-widget {
+        .header {
+          .header-title {
+            left: 0;
+            right: 0;
+            width: auto !important;
+          }
+        }
+        .detail {
+          .view-all {
+            &.messages {
+              &::after {
+                content: '';
+              }
+            }
+            &.groups {
+              &::after {
+                content: '';
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

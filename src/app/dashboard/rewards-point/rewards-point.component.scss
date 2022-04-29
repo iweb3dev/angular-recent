@@ -1,0 +1,99 @@
+@import '/src/styles//variables';
+
+// Wrappers
+.card-wrapper {
+  height: 27rem;
+  border-radius: 7px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  h3 {
+    display: none;
+  }
+}
+.chart-wrapper {
+  max-width: 100%;
+  position: relative;
+}
+
+.reward {
+  &.__header {
+    margin: 1rem 0;
+    font-weight: 500;
+    color: $app-black;
+  }
+}
+.next-reward {
+  text-align: center;
+}
+.btn-earn-reward {
+  margin: 1rem;
+  min-width: 0;
+  padding: 0 2rem;
+  font-weight: 400;
+  color: $app-white;
+  border-radius: 2rem;
+  background-color: $app-denim;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+
+.view-earn-reward {
+  cursor: pointer;
+  padding: 1rem 0;
+  font-weight: 500;
+  color: $app-blue;
+  font-size: 0.9rem;
+  display: inline-block;
+
+  &:hover {
+    background-color: $app-snow;
+  }
+}
+
+.gauge-chart {
+  &.__start {
+    bottom: 2rem;
+    left: 0.25rem;
+    position: absolute;
+  }
+  &.__end {
+    bottom: 2rem;
+    right: -0.5rem;
+    position: absolute;
+  }
+}
+
+.primary-chart {
+  z-index: 999;
+}
+.secondary-chart {
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+@media screen and (max-width: 768px) {
+  .card-wrapper {
+    padding: 0;
+    height: unset;
+    background-color: transparent;
+    box-shadow: none;
+
+    h3 {
+      display: block;
+      text-align: left;
+      margin-top: 0;
+    }
+
+    & > div {
+      background-color: $app-white;
+      border-radius: 7px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+  .chart-wrapper {
+    padding: 1rem 0;
+  }
+  .secondary-chart {
+    top: 1rem;
+  }
+}

@@ -1,0 +1,145 @@
+<div class="library" fxLayout="column" fxLayoutGap="30px">
+  <h1
+    class="typography-28 typography-28--bold typography-28--scale-mobile library__header"
+  >
+    All Messages ({{ messagesNumber }})
+  </h1>
+  <div
+    class="library__actions"
+    *ngIf="!showDeleteSelection; else deleteActions"
+  >
+    <div fxLayout fxLayoutAlign="space-between center">
+      <button
+        fxHide.lt-md
+        type="button"
+        mat-raised-button
+        style="padding-right: 3rem"
+        (click)="onNewMessageCreate()"
+        class="button button--no-border button--rounded"
+      >
+        <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+          <mat-icon>add</mat-icon>
+          <span class="typography--16">Create New Message</span>
+        </div>
+      </button>
+
+      <div
+        fxLayout
+        fxLayoutGap="1rem"
+        style="width: 100%"
+        fxLayoutAlign="end"
+        fxLayoutAlign.lt-md="space-between end"
+      >
+        <div
+          fxHide
+          fxShow.lt-md
+          fxLayout="column"
+          fxLayoutGap="5px"
+          fxLayoutAlign="start center"
+        >
+          <button
+            mat-mini-fab
+            color="primary"
+            (click)="onNewMessageCreate()"
+            class="button button-primary-inverted button-primary-inverted--no-border fab-50 fab-50--scale-mobile"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+          <span class="typography-12 text-grey" fxHide.gt-xs>New Message</span>
+        </div>
+        <app-search
+          [isMobileView]="isMobileView"
+          [formControl]="searchMessagesControl"
+        ></app-search>
+        <ng-content select="message-list-actions"></ng-content>
+      </div>
+    </div>
+  </div>
+  <div class="library__message-list">
+    <ng-content select="message-list"></ng-content>
+  </div>
+</div>
+
+<ng-template #deleteActions>
+  <!--DESKTOP-->
+  <div
+    fxLayout
+    fxHide.lt-md
+    class="library__actions"
+    fxLayoutAlign="space-between center"
+  >
+    <button
+      mat-button
+      color="primary"
+      class="button button--no-border"
+      (click)="selectAllMessages.emit({ shouldSelect: !allSelected })"
+    >
+      <span class="typography-16">
+        {{ allSelected ? 'Unselect All' : 'Select All' }}
+      </span>
+    </button>
+    <div fxLayout fxLayoutGap="20px">
+      <button
+        mat-button
+        fxFlex="250px"
+        color="primary"
+        (click)="onMessagesDelete()"
+        [disabled]="!canEnableDelete"
+        class="button button-primary-inverted"
+      >
+        <span class="typography-16">Delete</span>
+      </button>
+      <button
+        mat-button
+        color="primary"
+        class="button button--no-border"
+        (click)="messageDeleteSelectionHide.emit()"
+      >
+        <span class="typography-16">Cancel</span>
+      </button>
+    </div>
+  </div>
+  <!--MOBILE-->
+  <div fxLayout="column" fxLayoutGap="20px" fxHide fxShow.lt-md>
+    <div class="library__actions" fxLayout fxLayoutAlign="center center">
+      <button
+        fxFlex
+        mat-button
+        color="primary"
+        (click)="onMessagesDelete()"
+        [disabled]="!canEnableDelete"
+        class="button button-primary-inverted"
+      >
+        <span class="typography-16">Delete</span>
+      </button>
+    </div>
+    <div>
+      <mat-divider></mat-divider>
+      <div
+        fxLayout
+        class="mobile-actions-block"
+        fxLayoutAlign="space-between center"
+      >
+        <button
+          mat-button
+          color="primary"
+          class="button button--no-border"
+          (click)="selectAllMessages.emit({ shouldSelect: !allSelected })"
+        >
+          <span class="typography-16">
+            {{ allSelected ? 'Unselect All' : 'Select All' }}
+          </span>
+        </button>
+        <button
+          mat-button
+          color="primary"
+          class="button button--no-border"
+          (click)="messageDeleteSelectionHide.emit()"
+        >
+          <span class="typography-16">Cancel</span>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</ng-template>

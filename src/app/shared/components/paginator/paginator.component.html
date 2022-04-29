@@ -1,0 +1,62 @@
+<div fxLayout fxLayoutGap="10px" fxLayoutAlign="start center">
+  <button
+    *ngIf="pages"
+    mat-flat-button
+    class="button button--no-border button--transparent"
+    type="button"
+    [disabled]="pages < 2"
+    (click)="stepBack()"
+  >
+    <span class="typography-12 text-grey">PREVIOUS</span>
+  </button>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutGap.lt-sm="7px">
+    <ng-container *ngFor="let page of pagination">
+      <ng-container [ngSwitch]="page">
+        <button
+          *ngSwitchCase="PaginatorButtons.Increment"
+          mat-icon-button
+          disableRipple
+          fxFlexAlign="flex-end"
+          class="app-icon-button-20"
+          type="button"
+          [disabled]="pages < 2"
+          (click)="onIncrement()"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <button
+          *ngSwitchCase="PaginatorButtons.Decrement"
+          mat-icon-button
+          disableRipple
+          fxFlexAlign="flex-end"
+          class="app-icon-button-20"
+          type="button"
+          [disabled]="pages < 2"
+          (click)="onDecrement()"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <button
+          *ngSwitchDefault
+          mat-mini-fab
+          class="paginator"
+          [disabled]="pages < 2"
+          [class.paginator--active]="activePage === page"
+          (click)="this.activePage = $any(page)"
+        >
+          {{ $any(page) + 1 }}
+        </button>
+      </ng-container>
+    </ng-container>
+  </div>
+  <button
+    *ngIf="pages"
+    mat-flat-button
+    class="button button--no-border button--transparent"
+    type="button"
+    [disabled]="pages < 2"
+    (click)="stepForward()"
+  >
+    <span class="typography-12 text-grey">NEXT</span>
+  </button>
+</div>

@@ -1,0 +1,38 @@
+@import '/src/styles/variables';
+
+.feature-table {
+  border-collapse: collapse;
+}
+
+.plans-row {
+  padding: 0 15px;
+  margin-bottom: 35px;
+}
+
+.plans-block {
+  box-shadow: 0 0 6px 0 rgb(0 0 0 / 15%);
+  border: 0;
+  border-radius: 5px;
+  padding: 17px 0;
+}
+
+.feature-block {
+  padding: 20px 15px;
+  background-color: $app-white;
+}
+
+.cell {
+  padding: 7px 0;
+  &--highlighted {
+    background-color: darken($app-snow, 0.5%);
+  }
+}
+
+.first-column {
+  width: 110px;
+}
+
+.header-row {
+  border-bottom: 1px solid $app-light-grey;
+  border-spacing: 0;
+}

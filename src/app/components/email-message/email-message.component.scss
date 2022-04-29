@@ -1,0 +1,13 @@
+@import '/src/styles/variables';
+
+.template-predefines {
+  &__predifine {
+    border: 1px solid $app-black;
+    margin-bottom: 15px;
+    cursor: pointer;
+  }
+}
+
+.email-editor-wrapper {
+  overflow-y: auto;
+}

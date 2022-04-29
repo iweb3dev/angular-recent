@@ -1,0 +1,29 @@
+<mat-card>
+  <div class="recover-container">
+    <form
+        fxLayout="column"
+        [formGroup]="recoverForm"
+      >
+      <div fxLayout="column">
+        <div class="title-container">
+          <img mat-card-image src="../../../assets/img/logo.png" width="265">
+          <div class="recovery-title typography-24--light-bold">
+            <span>Recover User ID</span>
+          </div>
+        </div>
+        <div class="max-width-form-control user-form-container" fxLayoutGap="20px" fxLayout="column">
+          <span class="typography-16--light-bold">Enter Email Associated with your Account</span>
+          <mat-form-field class="form-field form-field--regular" floatLabel="never">
+            <input type="text" matInput formControlName="email" placeholder="Email Address">
+            <mat-error>Please enter your email address</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="buttons" fxLayout="column" fxLayoutGap="20px" fxLayoutGap.lt-md="10px">
+        <button mat-raised-button color="primary" fxFlex (click)="onSave()" [disabled]="!recoverForm.valid">Submit</button>
+        <button type="button" mat-raised-button color="primary" class="button button-primary-inverted" fxFlex (click)="navigateToLogin()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</mat-card>

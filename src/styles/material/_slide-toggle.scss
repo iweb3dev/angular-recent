@@ -1,0 +1,14 @@
+@import '../variables';
+
+body {
+  .slide-toggle {
+    &--green {
+      &.mat-checked .mat-slide-toggle-bar {
+        background-color: $app-lime-green;
+      }
+      &.mat-checked .mat-slide-toggle-thumb {
+        background-color: $app-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+@import '../variables';
+
+.menu-item {
+  .mat-button-focus-overlay {
+    opacity: 0;
+    transition: unset;
+    display: none;
+  }
+}
+
+body {
+  .mat-icon-button {
+    &.app-icon-button-20 {
+      font-size: 20px;
+      line-height: 20px;
+      width: 20px;
+      height: 20px;
+      &--scale-mobile {
+        @include respond(phone) {
+          font-size: 15px;
+          line-height: 15px;
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+  }
+  .mat-mini-fab {
+    &.fab-50 {
+      width: 50px;
+      height: 50px;
+      &--scale-mobile {
+        @include respond(phone) {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+    &.paginator {
+      width: 27px;
+      height: 27px;
+      line-height: 30px;
+      background-color: transparent;
+      color: $app-grey;
+      box-shadow: unset;
+      font-weight: 300;
+      &--active {
+        background-color: $app-primary;
+        box-shadow: 0 1px 5px 0 rgba(159, 39, 176, 0.12),
+          0 3px 1px -2px rgba(159, 39, 176, 0.2),
+          0 2px 4px 0 rgba(159, 39, 176, 0.14);
+        color: $app-white;
+      }
+      .mat-button-wrapper {
+        padding: 0px 0;
+        display: inline-block;
+        line-height: 12px;
+      }
+    }
+  }
+}
+
+body {
+  .button {
+    &--rounded {
+      border-radius: 20px;
+    }
+    &.button--grey {
+      color: $app-grey;
+    }
+    &--transparent {
+      background-color: transparent;
+      &.mat-button-base.mat-button-disabled {
+        background-color: transparent;
+      }
+    }
+    &.button--grey-rounded {
+      color: $app-grey;
+      background-color: $app-white;
+      box-shadow: 0 1px 5px 0 rgba($app-grey, 0.12),
+        0 3px 1px 0 rgba($app-grey, 0.2), 0 2px 4px 0 rgba($app-grey, 0.14);
+    }
+    &.button--no-border {
+      border: none;
+      color: $primary;
+      font-weight: 300;
+      .mat-button-focus-overlay {
+        opacity: 0;
+        transition: unset;
+        display: none;
+      }
+    }
+    &.button--no-side-padding {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    &.button--blue-border {
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+      &.mat-stroked-button {
+        border-color: $primary;
+      }
+    }
+    &.button-primary-inverted {
+      color: $primary !important;
+      background-color: $app-white !important;
+      border: 1px solid $primary !important;
+      &--no-border {
+        border: none !important;
+      }
+    }
+    &.button-submit {
+      background-color: $app-lime-green;
+      color: $app-white;
+    }
+    &.button--lime-green {
+      @include confirm-button($app-lime-green);
+    }
+    &.button--blue {
+      @include confirm-button($app-blue);
+    }
+    &.button--warn {
+      @include confirm-button($app-red);
+    }
+  }
+}
+
+body {
+  .btn-create-group {
+    .mat-button-wrapper {
+      padding: 0;
+    }
+  }
+}

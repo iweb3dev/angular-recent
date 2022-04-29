@@ -1,0 +1,89 @@
+<div class="assign-keyword" fxLayout="column" fxLayoutAlign="start start">
+  <span class="typography-28 typography-28--bold typography-28--bolder header"
+    >Assign Keyword To A Group</span
+  >
+  <div
+    class="form form-assign-keyword"
+    fxLayout="column"
+    fxLayoutGap="50px"
+    [formGroup]="form"
+  >
+    <div class="max-width-form-control" fxLayout="column">
+      <span class="typography-24--bold margin-bottom--10"
+        >Assign Keyword To A Group</span
+      >
+      <span class="typography-16 margin-bottom--10"
+        >A Keyword can only be assigned to one group</span
+      >
+      <span class="typography-20 typography-20--bold margin-top--30 keyword">
+        {{ keyword }}
+      </span>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Select a group</mat-label>
+      <mat-select formControlName="groupId">
+        <mat-option *ngFor="let group of groups" [value]="group.id">
+          {{ group.groupName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!form.get('groupId').value"
+        >Please select a group.</mat-error
+      >
+    </mat-form-field>
+
+    <div class="max-width-form-control assign-textarea" fxLayout="column">
+      <span class="typography-20--bold margin-bottom--10"
+        >Create custom welcome message</span
+      >
+      <mat-form-field>
+        <textarea
+          matInput
+          rows="4"
+          cols="50"
+          maxlength="75"
+          formControlName="description"
+        >
+        </textarea>
+        <mat-error *ngIf="!form.get('description').value"
+          >Please provide a custom welcome message</mat-error
+        >
+        <mat-error
+          *ngIf="
+            form.get('description').touched &&
+            form.get('description').value &&
+            form.get('description').errors?.maxlength
+          "
+          >Your message is greater than 75 characters.</mat-error
+        >
+      </mat-form-field>
+      <span class="typography-16" style="margin-bottom: 20px">
+        Total characters: {{ form.get('description')?.value?.length }} / 75
+      </span>
+    </div>
+    <div
+      class="footer max-width-form-control"
+      fxLayout="row"
+      fxLayoutGap="15px"
+    >
+      <button
+        mat-raised-button
+        class="button button-submit create"
+        fxFlex
+        (click)="onSaveKeywordAssignment()"
+      >
+        {{
+          !isEditMode ? 'Save Keyword Assignment' : 'Update Keyword Assignment'
+        }}
+      </button>
+      <button
+        mat-raised-button
+        class="button button-primary-inverted create"
+        fxFlex
+        [routerLink]="['./keywords/create']"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

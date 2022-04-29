@@ -1,0 +1,57 @@
+// Action Buttons
+.user-action {
+  border-radius: 0%;
+}
+.mobile-btn {
+  display: block;
+  &._save {
+    width: 100%;
+    color: #fff;
+    margin-top: 20px;
+    text-align: center;
+    background: #2f7ae2;
+  }
+  &._clear {
+    width: 100%;
+    color: #2f7ae2;
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid #2f7ae2;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-btn {
+    display: block;
+    &._save {
+      width: 100%;
+      color: #fff;
+      margin-top: 20px;
+      text-align: center;
+      background: #2f7ae2;
+    }
+    &._clear {
+      width: 100%;
+      color: #2f7ae2;
+      margin-top: 20px;
+      text-align: center;
+      border: 1px solid #2f7ae2;
+    }
+  }
+
+  .full-screen {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+  }
+  .user-action {
+    margin-top: 25%;
+  }
+  .group-name {
+    margin-top: 15%;
+  }
+  .flex-section {
+    display: flex;
+  }
+}

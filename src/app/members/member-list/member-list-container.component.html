@@ -1,0 +1,206 @@
+<section *ngIf="membersWithStats" [style.margin-top.rem]="1.5">
+  <app-member-stats-header
+    [totalMembers]="membersWithStats.totalRecords"
+    [activePhones]="membersWithStats.totalActivePhoneNumbers"
+    [activeEmails]="membersWithStats.totalActiveEmailAddresses"
+  ></app-member-stats-header>
+</section>
+
+<form>
+  <section
+    class="btn-nav"
+    *ngIf="!isEditMode; else editMembers"
+    [class.mobile-search]="mobileView && showSearchInput"
+  >
+    <div class="btn-nav__left-inner">
+      <div class="search-inner">
+        <ng-template
+          *ngIf="mobileView"
+          [ngTemplateOutlet]="searchActionButton"
+        ></ng-template>
+        <mat-form-field class="search" *ngIf="showSearchInput">
+          <input
+            matInput
+            #searchInput
+            name="Search members"
+            [formControl]="searchMember"
+            placeholder="Search members"
+          />
+          <button
+            matSuffix
+            mat-button
+            type="button"
+            aria-label="clear"
+            class="btn-search-close"
+            (click)="searchMember.patchValue('')"
+          >
+            X
+          </button>
+        </mat-form-field>
+        <ng-template
+          *ngIf="!mobileView"
+          [ngTemplateOutlet]="searchActionButton"
+        ></ng-template>
+
+        <button
+          *ngIf="mobileView && showSearchInput"
+          matSuffix
+          mat-button
+          class="btn-close-search"
+          aria-label="close-search"
+          (click)="searchOnClick()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div class="mobile-inner" *ngIf="!mobileView || !showSearchInput">
+        <button
+          mat-mini-fab
+          type="button"
+          mat-icon-button
+          class="btn--white"
+          aria-label="Filters Menu"
+          [matMenuTriggerFor]="filtersMenu"
+          #filterMenuTrigger="matMenuTrigger"
+        >
+          <mat-icon color="primary">tune</mat-icon>
+        </button>
+        <span class="btn-title">Filters</span>
+      </div>
+      <mat-menu #filtersMenu="matMenu">
+        <app-group-member-filters
+          [mobileView]="mobileView"
+          [sortFilter]="sortFilter"
+          [filterValue]="sortFilterValue"
+          (closeModal)="closeFilterModalOnEmit()"
+          (sortChanged)="sortChangedOnEmit($event)"
+        ></app-group-member-filters>
+      </mat-menu>
+
+      <div *ngIf="!mobileView || !showSearchInput" class="mobile-inner">
+        <button
+          mat-mini-fab
+          type="button"
+          mat-icon-button
+          class="btn--white"
+          aria-label="More Menu"
+          [matMenuTriggerFor]="moreMenu"
+        >
+          <mat-icon color="primary">more_horiz</mat-icon>
+        </button>
+        <span class="btn-title">More</span>
+        <mat-menu #moreMenu="matMenu">
+          <button
+            type="button"
+            mat-menu-item
+            class="btn-menu __plain"
+            (click)="isEditMode = !isEditMode"
+          >
+            <span>Select Member(s) to Delete</span>
+          </button>
+          <button
+            type="button"
+            mat-menu-item
+            class="btn-menu __warn"
+            (click)="deleteAllOnClick()"
+          >
+            <span>Delete All Members</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #editMembers>
+    <section class="btn-edit-group">
+      <div
+        class="edit-group-sub-inner btn-select-all"
+        [ngClass]="mobileView ? 'mobile-field-order' : ''"
+      >
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="selectAllOnClick()"
+          [ngClass]="mobileView ? 'mobile-select-edit' : ''"
+        >
+          {{ isSelected ? 'Deselect All' : 'Select All' }}
+        </button>
+      </div>
+      <div>
+        <button
+          type="button"
+          mat-raised-button
+          (click)="deleteOnClick()"
+          class="btn-delete _border"
+        >
+          Delete
+        </button>
+      </div>
+      <mat-divider *ngIf="mobileView"></mat-divider>
+      <div class="edit-group-sub-inner">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="cancelOnClick()"
+          [ngClass]="mobileView ? 'mobile-cancel-edit' : ''"
+        >
+          Cancel
+        </button>
+      </div>
+    </section>
+  </ng-template>
+</form>
+
+<section>
+  <app-member-list-mobile
+    *ngIf="mobileView; else desktopView"
+    [members]="members"
+    [editMode]="isEditMode"
+    [searchFilter]="searchFilter"
+    [totalRecords]="totalRecords"
+    [searchInput]="searchMember.value"
+    [selectedMembers]="selectedMembers"
+    (memberUpdated)="memberUpdateOnEmit()"
+    (memberSelection)="memberSelectOnEmit($event)"
+    [sortExpression]="filterForm.get('sort').value"
+    (membersListUpdate)="membersListUpdateOnEmit($event)"
+  ></app-member-list-mobile>
+
+  <ng-template #desktopView>
+    <app-member-list-desktop
+      [members]="members"
+      [editMode]="isEditMode"
+      [searchFilter]="searchFilter"
+      [totalRecords]="totalRecords"
+      [searchInput]="searchMember.value"
+      [selectedMembers]="selectedMembers"
+      (memberUpdated)="memberUpdateOnEmit()"
+      (sortChanged)="sortChangedOnEmit($event)"
+      (memberSelection)="memberSelectOnEmit($event)"
+      [sortExpression]="filterForm.get('sort').value"
+      (membersListUpdate)="membersListUpdateOnEmit($event)"
+    ></app-member-list-desktop>
+  </ng-template>
+
+  <app-loader *ngIf="listLoading" class="overlay-loader"></app-loader>
+</section>
+
+<ng-template #searchActionButton>
+  <div class="mobile-inner" [class.mobile-search-input]="showSearchInput">
+    <button
+      mat-mini-fab
+      type="button"
+      class="btn--white"
+      aria-label="search"
+      (click)="searchOnClick()"
+    >
+      <mat-icon class="mat-icon-search">search</mat-icon>
+    </button>
+    <span *ngIf="!mobileView || !showSearchInput" class="btn-title"
+      >Search</span
+    >
+  </div></ng-template
+>

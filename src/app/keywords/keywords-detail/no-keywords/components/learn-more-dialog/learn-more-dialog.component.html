@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>How do text message keywords work?</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="step-list" fxLayout="column" fxLayoutGap='40px'>
+    <div class="step" *ngFor='let step of steps; let i = index'
+         fxLayout="row" fxLayoutGap='15px' fxLayout.lt-md="column"  fxLayoutAlign="start center" fxLayoutAlign.lt-md="center center">
+        <span>
+          <span class="step-index" fxLayoutAlign='center center'>{{i + 1}}</span>
+        </span>
+        <span class="typography-16 mobile-center">{{step}}</span>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

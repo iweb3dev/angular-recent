@@ -1,0 +1,49 @@
+<mat-card class="card-wrapper">
+  <h3 class="widget-title">{{ title }}</h3>
+  <mat-divider class="mat-divider-wrapper"></mat-divider>
+  <mat-grid-list
+    rowHeight="80px"
+    [cols]="gridColums"
+    class="mat-grid-list-wrapper"
+  >
+    <mat-grid-tile class="mat-grid-tile-wrapper" *ngFor="let item of widgetItems">
+      <div
+        fxLayout
+        class="grid-main"
+        fxLayoutGap="1rem"
+        fxLayoutAlign="center center"
+      >
+        <div fxLayout="column" fxLayoutGap=".5rem">
+          <div fxLayout fxLayoutGap=".75rem" fxLayoutAlign="initial center">
+            <mat-icon
+              class="mat-icon-wrapper"
+              [class.rotate-icon]="item.rotateIcon"
+              >{{ item.icon }}</mat-icon
+            >
+            <h3 class="content __main">
+              {{ item.primaryText | number: '1.0':'en-US' }}
+            </h3>
+          </div>
+
+          <div fxLayout fxLayoutAlign="space-between center">
+            <h4 class="content __inner">{{ item.secondaryText }}</h4>
+
+            <!--"add credits" button temporarily unavailable-->
+            <!--<button
+              mat-button
+              type="button"
+              color="primary"
+              class="btn-widget"
+              *ngIf="item.button"
+              (click)="tileButtonOnClick(item.button)"
+            >
+              <mat-icon>{{ item.buttonIcon }}</mat-icon>
+              {{ item.button }}
+            </button>-->
+
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

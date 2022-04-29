@@ -1,0 +1,20 @@
+<ng-container *ngIf="(loadingProfiles$ | async); else loader">
+  <app-billing-details>
+    <app-my-plan
+      ngProjectAs="my-plan"
+      [userInfo]="userInfo$ | async"
+    ></app-my-plan>
+    <app-billing-info
+      ngProjectAs="billing-info"
+      [paymentProfiles]="paymentProfiles$ | async"
+      [userInfo]="userInfo$ | async"
+      (createNewPaymentProfile)="onPaymentProfileCreate($event)"
+      (deleteProfile)="onProfileDelete($event)"
+      (paymentUpdate)="onPaymentUpdate($event)"
+    ></app-billing-info>
+  </app-billing-details>
+</ng-container>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

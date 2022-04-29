@@ -1,0 +1,34 @@
+<div class="schedule-reminder-date" fxLayout="column" fxLayoutGap="35px" cdk-scrollable>
+  <div class="header" fxLayout fxLayoutAlign="space-between center">
+    <span class="typography-20--bold">Schedule Reminder</span>
+    <span class="material-icons close" (click)="onClose()"> close </span>
+  </div>
+
+  <div class="content" fxLayout="column" fxLayoutAlign="center start" fxFill>
+    <app-date-time-picker
+      fxFill
+      (valueChange)="onSetValue($event)"
+    ></app-date-time-picker>
+    <span *ngIf="noValueError" class="mat-error">Please select a date.</span>
+  </div>
+
+  <div class="footer" fxLayout fxLayoutGap="6px">
+    <button
+      fxFlex
+      color="primary"
+      mat-raised-button
+      (click)="onClose()"
+      class="button button-primary-inverted"
+    >
+      CANCEL
+    </button>
+    <button
+      fxFlex
+      mat-raised-button
+      (click)="onConfirm()"
+      class="button button--lime-green"
+    >
+      UPDATE SCHEDULE
+    </button>
+  </div>
+</div>

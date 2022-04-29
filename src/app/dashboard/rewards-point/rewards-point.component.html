@@ -1,0 +1,43 @@
+<section *ngIf="userRewardsBalance && claimableRewards">
+  <mat-card class="card-wrapper">
+    <app-section-title [title]="'Rewards&#174; Point'"></app-section-title>
+    <h3>Rewards&#174; Point</h3>
+
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h4 class="reward __header">Next rewards</h4>
+      <span class="next-reward">{{ nextReward | titlecase }}</span>
+
+      <div class="chart-wrapper">
+        <ngx-gauge
+          [type]="gaugeType"
+          [max]="totalPoints"
+          [label]="gaugeLabel"
+          class="primary-chart"
+          [min]="gaugeInitialValue"
+          [thick]="primaryChartThickness"
+          [foregroundColor]="primaryChartColors.foreground"
+          [backgroundColor]="primaryChartColors.background"
+          [value]="userRewardsBalance.remainingRewardBalance"
+        >
+        </ngx-gauge>
+        <ngx-gauge
+          [type]="gaugeType"
+          [max]="totalPoints"
+          class="secondary-chart"
+          [min]="gaugeInitialValue"
+          [thick]="secondaryChartThickness"
+          [foregroundColor]="secondaryChartColors.foreground"
+          [backgroundColor]="secondaryChartColors.background"
+          [value]="userRewardsBalance.remainingRewardBalance"
+        >
+        </ngx-gauge>
+        <!-- <span class="gauge-chart __start">{{ gaugeInitialValue }}</span> -->
+        <!-- <span class="gauge-chart __end">{{ totalPoints }}</span> -->
+      </div>
+
+      <span class="view-earn-reward" (click)="viewEarnRewardOnClick()"
+        >View/Earn Reward</span
+      >
+    </div>
+  </mat-card>
+</section>

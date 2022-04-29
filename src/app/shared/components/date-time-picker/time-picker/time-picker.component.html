@@ -1,0 +1,57 @@
+<form [formGroup]="timeForm" fxLayout>
+  <div fxLayout="column" fxLayoutAlign="center center" class="picker-actions--spacing">
+    <button mat-icon-button tabindex="-1" (click)="onHoursIncrement()">
+      <mat-icon>expand_less</mat-icon>
+    </button>
+    <div fxLayout>
+      <input
+        [max]="maxHours"
+        (input)="onHoursChange($event)"
+        (keypress)="onInputKeypress($event)"
+        (keydown)="onHoursKeyDown($event)"
+        (wheel)="onHoursMouseWheel($event)"
+        min="0"
+        class="time-input"
+        formControlName="hours"
+      />
+    </div>
+    <button mat-icon-button tabindex="-1" (click)="onHoursDecrement()">
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" class="picker-actions--spacing">
+    <button mat-icon-button tabindex="-1" (click)="onMinutesIncrement()">
+      <mat-icon>expand_less</mat-icon>
+    </button>
+    <div fxLayout>
+      <input
+        [max]="maxMinutes"
+        (input)="onMinutesChange($event)"
+        (keypress)="onInputKeypress($event)"
+        (keydown)="onMinutesKeydown($event)"
+        (wheel)="onMinutesMouseWheel($event)"
+        min="0"
+        class="time-input"
+        formControlName="minutes"
+      />
+    </div>
+    <button mat-icon-button tabindex="-1" (click)="onMinutesDecrement()">
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
+
+  <mat-button-toggle-group
+    fxFlexAlign="center"
+    formControlName="meridiem"
+    class="button-toggle button-toggle--no-border picker-actions--spacing"
+  >
+    <mat-button-toggle [value]="Meridiem.AM">
+      <span class="typography-14">AM</span>
+    </mat-button-toggle>
+
+    <mat-button-toggle [value]="Meridiem.PM">
+      <span class="typography-14">PM</span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</form>

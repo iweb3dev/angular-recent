@@ -1,0 +1,26 @@
+<app-message-name
+  hideUsePrevious
+  disableMessageRecipients
+  [verifyGroups]="false"
+  [messageNameData]="messageNameData$ | async"
+  [userInfo]="userInfo$ | async"
+  (sendMessageValueChange)="onSendMessageFormChange($event)"
+  (proceedToDetails)="onProceedToDetails()"
+  (emailFormatChange)="onEmailFormatChange()"
+  (voiceFormatChange)="onVoiceFormatChange()"
+  (textFormatChange)="onTextFormatChange()"
+>
+  <button
+    class="button button--no-border button--no-side-padding"
+    color="primary"
+    type="button"
+    mat-button
+    fxFlexAlign="baseline"
+    (click)="backToMessageLibrary()"
+  >
+    <div fxLayout fxLayoutAlign="start center" fxLayoutGap="5px">
+      <mat-icon class="app-icon-20">arrow_back</mat-icon>
+      <span class="typography-14">Back To Message Library</span>
+    </div>
+  </button>
+</app-message-name>

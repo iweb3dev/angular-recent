@@ -1,0 +1,9 @@
+@import '/src/styles/variables';
+
+.payment-actions {
+  &__action {
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
+}

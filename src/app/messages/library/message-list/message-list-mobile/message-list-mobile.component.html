@@ -1,0 +1,61 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let message of messages">
+    <mat-expansion-panel-header class="message-list-header">
+      <mat-panel-description>
+        <ng-container *ngIf="showDeleteSelection">
+          <mat-checkbox class="checkbox-green checkbox-margin"
+                        [checked]="message.flaggedForDelete"
+                        (change)="onMessageDeleteClick(message, $event)"
+                        (click)="$event.stopPropagation()">
+          </mat-checkbox>
+        </ng-container>
+
+        <div class="message-wrapper">
+          <div class="message-padding">
+            <h1 fxFlexAlign="center"
+                class="typography-20 typography-20--bold typography-20--scale-mobile text-black">
+              {{ message.notificationName }}
+            </h1>
+          </div>
+
+          <div *ngIf="message.modifiedByDateTime"
+               fxLayout
+               fxLayoutGap="5px"
+               class="text-black">
+            <span class="typography-16"> Last Edited Date: </span>
+            <span class="typography-16">
+              {{
+                message?.modifiedByDateTime
+                  | convertTimeToTimeZone
+                  | date: 'MM/dd/yyyy h:mm a'
+                  | addTimeZoneAbbr
+              }}
+            </span>
+          </div>
+
+          <div *ngIf="message.dateLastSent"
+               fxLayout
+               fxLayoutGap="5px"
+               class="text-black">
+            <span class="typography-16"> Last Sent Date: </span>
+            <span class="typography-16">
+              {{
+                message?.dateLastSent
+                  | date: 'MM/dd/yyyy h:mm a'
+                  | addTimeZoneAbbr
+              }}
+            </span>
+          </div>
+
+          <div *ngIf="message">
+            <app-message-preview [message]="message"
+                                 hideMessageActions></app-message-preview>
+          </div>
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-message-actions [message]="message"
+                         (messageSend)="messageSend.emit($event)"
+                         (deleteMessage)="deleteSingleMessage.emit($event)"></app-message-actions>
+  </mat-expansion-panel>
+</mat-accordion>

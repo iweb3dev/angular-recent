@@ -1,0 +1,83 @@
+@import '/src/styles//variables';
+
+.header-wrapper {
+  position: relative;
+}
+.add-members {
+  padding: 30px 70px;
+  border-bottom: 20px solid $app-snow;
+  &__inner {
+    margin-top: 10px;
+  }
+  &__number {
+    padding-top: 5px;
+    .number {
+      width: 100%;
+      margin-left: 15px;
+      max-width: 100px !important;
+    }
+  }
+}
+.add-members-manually {
+  margin: 0;
+}
+.add-members-user {
+  padding: 30px 70px;
+  background: $app-white;
+  border-bottom: 20px solid $app-snow;
+  &__inner {
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .inner__left {
+    width: 100%;
+    max-width: 300px;
+  }
+  .inner__right {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+.btn-add-members-section {
+  padding: 15px 20px;
+}
+.btn-add-members {
+  width: 300px;
+  &._add {
+    color: $app-blue;
+  }
+}
+.btn-save-members {
+  width: 13rem;
+  &._save {
+    margin: 0;
+    top: -6px;
+    right: -30px;
+    color: $app-white;
+    position: absolute;
+    background-color: $app-blue;
+  }
+}
+
+@media screen and (max-width: 758px) {
+  .add-members {
+    padding: 40px 20px 10px 20px;
+  }
+  .add-members-user {
+    padding: 50px 20px;
+  }
+  .add-members-manually {
+    font-size: 1.25rem;
+  }
+  .btn-add-members {
+    text-align: left;
+    padding-bottom: 20px;
+  }
+  .btn-save-members {
+    &._save {
+      right: 0;
+      width: 5rem;
+    }
+  }
+}

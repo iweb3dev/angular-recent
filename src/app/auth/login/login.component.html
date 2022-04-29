@@ -1,0 +1,153 @@
+<mat-card
+  [ngClass]="{ 'invalid-credential': hasInvalidCredentialsError }"
+  [class.mat-card-social]="isNewSocialSignup$ | async"
+>
+  <div class="login-container">
+    <form fxLayout="column" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="column">
+        <div class="title-container">
+          <img mat-card-image src="../../../assets/img/CallingPostLogo.png" width="265" />
+          <div class="auth-title typography-24--light-bold">
+            <span>Communication that matters</span>
+          </div>
+        </div>
+
+        <div
+          *ngIf="isNewSocialSignup$ | async"
+          class="social-login-card-wrapper"
+        >
+          <app-social-login-card
+            [provider]="socialProvider"
+          ></app-social-login-card>
+        </div>
+
+        <div
+          class="max-width-form-control user-form-container"
+          fxLayout="column"
+        >
+          <span class="typography-20--light-bold"
+            >User ID<mat-icon class="help-icon">help_outline</mat-icon></span
+          >
+          <mat-form-field
+            class="form-field form-field--regular"
+            floatLabel="never"
+          >
+            <input
+              type="text"
+              matInput
+              formControlName="login"
+              placeholder="Type your user ID"
+            />
+            <mat-error>Please enter user ID</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div
+          class="max-width-form-control user-form-container"
+          fxLayout="column"
+        >
+          <span class="typography-20--light-bold"
+            >PIN / Password<mat-icon class="help-icon"
+              >help_outline</mat-icon
+            ></span
+          >
+          <mat-form-field
+            class="form-field form-field--regular"
+            floatLabel="never"
+          >
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              placeholder="Type your password"
+            />
+            <mat-error>Please enter password</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="alert-danger" *ngIf="hasInvalidCredentialsError">
+          <i
+            >We were not able to log you in to new CallingPost. Reason: Invalid
+            UserName And/Or Password. Please try again. If you have a Classic
+            account click
+            <a href="https://www.callingpost.org/login/">here</a> or please call
+            us at 877-665-5646.</i
+          >
+        </div>
+      </div>
+
+      <button
+        mat-raised-button
+        class="button button--lime-green btn login-button-border-radius"
+        [disabled]="!loginForm.valid"
+      >
+        <span class="typography-16 typography-16--bold">{{ isLoggingIn ? 'Logging in' : ' Login' }}</span>
+      </button>
+
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center none"
+        class="recovery-container"
+      >
+        <a
+          class="recover-link typography-16--light-bold"
+          routerLink="/recover-user-id"
+          routerLinkActive="router-link-active"
+          >Forgot User ID?</a
+        >
+        <span class="divider">|</span>
+        <a
+          class="recover-link typography-16--light-bold"
+          routerLink="/recover-user-password"
+          routerLinkActive="router-link-active"
+          >Forgot Password?</a
+        >
+      </div>
+
+      <div class="recovery-container">
+        <div class="line"></div>
+        <div style="display: inline-block">Or</div>
+        <div class="line"></div>
+      </div>
+
+      <div fxLayout="column">
+        <div class="login-button-container">
+          <button
+            type="button"
+            mat-raised-button
+            (click)="loginViaGoogleOnClick()"
+            class="typography-15 button btn-google"
+          >
+            <mat-icon
+              style="width: 24px; height: 24px"
+              svgIcon="logo"
+            ></mat-icon>
+            <span class="typography-15">Sign In with Google</span>
+          </button>
+        </div>
+        <div class="login-button-container">
+          <button
+            type="button"
+            mat-raised-button
+            (click)="loginViaFacebookOnClick()"
+            class="typography-15 button btn-facebook"
+          >
+            <mat-icon>facebook</mat-icon>
+            <span class="typography-15">Sign In with Facebook</span>
+          </button>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center none" class="no-account-yet">
+        <span class="typography-15--light-bold">New to CallingPost? </span>
+        <a
+          class="recover-link typography-15--light-bold"
+          style="margin-left: 5px"
+          routerLink="/register"
+          routerLinkActive="router-link-active"
+          >Create a FREE Account</a
+        >
+      </div>
+    </form>
+  </div>
+</mat-card>

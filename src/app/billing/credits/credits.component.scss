@@ -1,0 +1,52 @@
+@import '/src/styles/variables';
+
+.credits-selector-block,
+.flexible-plans-block {
+  padding: 50px 20px 100px 80px;
+  @include respond(tab-port) {
+    padding: 20px 15px;
+  }
+}
+
+.features-block {
+  padding: 50px 20px 100px 80px;
+  @include respond(tab-port) {
+    padding: 20px 15px 0;
+  }
+}
+
+.features-block {
+  background-color: $app-white;
+}
+
+.feature-block,
+.feature-availability-block {
+  padding: 25px 0;
+}
+
+.feature-availability-block {
+  background-color: darken($app-snow, 0.5%);
+}
+
+.feature-item {
+  display: flex;
+  height: 30px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.features-block__feature {
+  @include respond(tab-port-up) {
+    max-width: 80%;
+  }
+}
+
+.credits-selector-block,
+.flexible-plans-block {
+  @include respond(tab-land-up) {
+    max-width: 50%;
+  }
+  @include respond(tab-port-up) {
+    max-width: 60%;
+  }
+}

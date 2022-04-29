@@ -1,0 +1,147 @@
+@import '/src/styles//variables';
+
+.groups-member-wrapper {
+  padding: 50px 100px;
+}
+.groups-member {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 768px;
+  align-items: center;
+  padding-bottom: 25px;
+  justify-content: space-between;
+}
+.groups-member-title {
+  padding: 25px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.groups-member-inner {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 609px;
+  justify-content: space-between;
+}
+.example-full-width {
+  width: 100%;
+  max-width: 280px;
+}
+.groups-member-btn-inner {
+  width: 100%;
+  display: flex;
+  max-width: 600px;
+  padding: 25px 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn-title {
+  margin-right: 15px;
+}
+.btn-title-active-member {
+  font-weight: bold;
+  margin-right: 15px;
+}
+.member-address {
+  max-width: none;
+}
+.groups-member-btn {
+  width: 100%;
+  margin-right: 50px;
+  &._blue {
+    width: 250px;
+    color: $app-white;
+    background-color: $app-blue;
+  }
+  &._border {
+    width: 250px;
+    color: $app-blue;
+    border: 1px solid $app-blue;
+  }
+}
+
+// Member groups
+.member-groups-wrapper {
+  gap: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.btn-remove-padding {
+  padding: 0;
+  min-width: 0;
+}
+.member-group-name {
+  font-weight: 400;
+  color: $app-blue;
+}
+
+.img-upload-container {
+  display: table;
+  height: 124px;
+  .img-upload {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.groups-member-image {
+  gap: 2em;
+  width: 100%;
+  display: flex;
+  max-width: 450px;
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+  padding-bottom: 25px;
+}
+.member-image {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.member-name {
+  font-weight: normal;
+  margin-bottom: auto;
+}
+.remove-padding-btn {
+  padding: 0px;
+}
+.blocked-member {
+  gap: .25rem;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .groups-member-wrapper {
+    padding: 15px 20px;
+  }
+  .groups-member-btn {
+    width: 100%;
+    margin: 10px;
+    &._blue {
+      width: 100%;
+      color: $app-white;
+      background-color: $app-blue;
+    }
+    &._border {
+      width: 100%;
+      margin: 10px;
+      color: $app-blue;
+      border: 1px solid $app-blue;
+    }
+  }
+  .delete-member {
+    display: flex;
+    justify-content: center;
+  }
+  .groups-member-btn-inner {
+    margin: auto;
+    padding-bottom: 0px;
+  }
+  .change-order-secondary-btn {
+    order: 2;
+  }
+}

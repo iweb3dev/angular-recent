@@ -1,0 +1,22 @@
+<div class="user-image" fxLayoutGap.gt-sm="15px" *ngIf="user">
+  <div class="user__avatar-wrapper">
+    <img
+      alt="User Picture"
+      [src]="(profilePicture | sanitizeImage) || defaultPicture"
+    />
+  </div>
+  <div class="img-upload-container">
+    <div class="img-upload">
+      <input
+        #file
+        hidden
+        type="file"
+        accept="image/*"
+        (change)="onImageChange($event)"
+      />
+      <button mat-button class="typography-14 btn-edit" (click)="file.click()">
+        Edit Photo
+      </button>
+    </div>
+  </div>
+</div>

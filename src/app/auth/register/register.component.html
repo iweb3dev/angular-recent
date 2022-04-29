@@ -1,0 +1,243 @@
+<mat-card [ngClass]="{ 'invalid-credential': hasInvalidCredentialsError }">
+  <div class="register-container">
+    <div fxLayout="column">
+      <div class="logo-block">
+        <img mat-card-image src="../../../assets/img/logo.png" width="265" />
+      </div>
+      <div
+        fxLayout
+        fxLayout.xs="column-reverse"
+        fxLayout.sm="column-reverse"
+        fxLayoutAlign="space-around"
+      >
+        <div
+          fxFlex
+          fxFlexAlign.xs="center"
+          fxFlexAlign.sm="center"
+          fxLayout="column"
+          fxLayoutAlign="space-between"
+          class="text-container"
+        >
+          <div fxLayout fxLayoutGap="10px">
+            <mat-icon>insights</mat-icon>
+            <div fxLayout="column wrap">
+              <span class="typography-20--light-bold">
+                Why do you need my phone?
+              </span>
+              <div class="typography-15--light-bold text-grey">
+                <span>
+                  Your phone number will become your new User ID. Use it when
+                  you log in online or via phone.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div fxLayout fxLayoutGap="10px">
+            <mat-icon>code</mat-icon>
+            <div fxLayout="column wrap">
+              <span class="typography-20--light-bold"
+                >Do you sell my info?</span
+              >
+
+              <div class="typography-15--light-bold text-grey">
+                <span>
+                  Never! Both your info as well as your contacts info is never
+                  sold or shared.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div fxLayout fxLayoutGap="10px">
+            <mat-icon>people_alt</mat-icon>
+            <div fxLayout="column wrap">
+              <span class="typography-20--light-bold">What's a PIN?</span>
+              <div class="typography-15--light-bold text-grey">
+                <span>
+                  A PIN is a 6 digit password used to login from the web, your
+                  mobile device or our call-in system
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form
+          fxFlex
+          fxLayout="column"
+          [formGroup]="registerForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div fxLayout="column">
+            <div
+              fxFlexAlign="start"
+              fxFlexAlign.sm="center"
+              fxFlexAlign.xs="center"
+            >
+              <span class="auth-title typography-24--light-bold">
+                Register new account
+              </span>
+            </div>
+            <div
+              class="max-width-form-control user-form-container"
+              fxLayout
+              fxLayoutGap="10px"
+            >
+              <mat-icon fxFlexAlign="center">lens</mat-icon>
+              <mat-form-field
+                class="
+                  form-field form-field--regular form-field--green-underline
+                "
+                floatLabel="never"
+                fxFlex
+              >
+                <input
+                  type="text"
+                  matInput
+                  formControlName="firstName"
+                  placeholder="First Name..."
+                />
+                <mat-error>Please enter a First Name</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div
+              class="max-width-form-control user-form-container"
+              fxLayout
+              fxLayoutGap="10px"
+            >
+              <mat-icon fxFlexAlign="center">phone_iphone</mat-icon>
+              <mat-form-field
+                class="
+                  form-field form-field--regular form-field--green-underline
+                "
+                floatLabel="never"
+                fxFlex
+              >
+                <input
+                  type="text"
+                  appNumbersOnly
+                  matInput
+                  formControlName="userPhoneNumber"
+                  placeholder="Phone"
+                />
+                <mat-error
+                  *ngIf="registerForm.get('userPhoneNumber').errors?.required"
+                >
+                  Phone number must be a valid 10-digit US Phone Number and
+                  cannot start with 0 or 1.
+                </mat-error>
+                <mat-error
+                  *ngIf="registerForm.get('userPhoneNumber').errors?.pattern"
+                >
+                  Entered
+                  {{
+                    registerForm.get('userPhoneNumber').errors.minlength
+                      .actualLength
+                  }}
+                  symbols. It should be 10 digit and cannot start with 0 or 1.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div
+              class="max-width-form-control user-form-container"
+              fxLayout
+              fxLayoutGap="10px"
+            >
+              <mat-icon fxFlexAlign="center">email</mat-icon>
+              <mat-form-field
+                class="
+                  form-field form-field--regular form-field--green-underline
+                "
+                floatLabel="never"
+                fxFlex
+              >
+                <input
+                  type="email"
+                  matInput
+                  formControlName="emailAddress"
+                  placeholder="Email..."
+                />
+                <mat-error>Please enter a valid Email</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div
+              class="max-width-form-control user-form-container"
+              fxLayout
+              fxLayoutGap="10px"
+            >
+              <mat-icon fxFlexAlign="center">business</mat-icon>
+              <mat-form-field
+                appearance="outline"
+                class="form-field--green-underline"
+                fxFlex
+              >
+                <mat-label>Organization Type</mat-label>
+                <mat-select formControlName="organizationTypesValue">
+                  <mat-option value="" disabled selected
+                    >Select an option</mat-option
+                  >
+                  <mat-option
+                  *ngFor="let organizationType of organizationTypes$ | async"
+                  [value]="organizationType.orgTypeID"
+                  title="{{ organizationType.orgType }}"
+                >
+                  {{ organizationType.orgType }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Please select any organization type</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div
+              class="max-width-form-control user-form-container"
+              fxLayout
+              fxLayoutGap="10px"
+            >
+              <mat-icon fxFlexAlign="center">lock</mat-icon>
+              <mat-form-field
+                class="
+                  form-field form-field--regular form-field--green-underline
+                "
+                floatLabel="never"
+                fxFlex
+              >
+                <input
+                  type="text"
+                  appNumbersOnly
+                  matInput
+                  formControlName="password"
+                  placeholder="PIN"
+                />
+                <mat-error>Please enter a 6-digit password</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="alert-danger" *ngIf="hasError">
+              {{ apiError }}
+            </div>
+
+            <div fxLayout="column" fxLayoutGap="20px">
+              <mat-checkbox formControlName="agreeCheck">
+                I agree to the terms and conditions
+              </mat-checkbox>
+
+              <button
+                class="auth-button auth-button--green"
+                type="submit"
+                fxLayout
+                fxFlexAlign="center"
+                [disabled]="shouldDisableSubmit"
+              >
+                <span>GET STARTED</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</mat-card>
+<app-auth-footer></app-auth-footer>

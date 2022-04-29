@@ -1,0 +1,174 @@
+<app-mobile-header
+  (closed)="closedOnClick()"
+  [headerTitle]="'Add Members to Group'"
+></app-mobile-header>
+
+<section class="add-existing-header">
+  <h2 class="add-existing-sub-header">Add From Existing Members</h2>
+  <button
+    mat-button
+    type="button"
+    color="primary"
+    *ngIf="!mobileView"
+    class="btn-mobile _add-selected"
+    (click)="addExistingMembersOnClick()"
+    [class.btn-disable]="!selectedMembers.length"
+  >
+    Add Selected Members to Group
+  </button>
+</section>
+
+<form>
+  <div class="btn-nav">
+    <div class="btn-nav__left-inner">
+      <div class="edit-group-sub-inner btn-select-all">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          [disabled]="!totalRecords"
+          (click)="selectAllOnClick()"
+        >
+          {{ isSelected ? 'Deselect All' : 'Select All' }}
+        </button>
+
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          *ngIf="mobileView"
+          (click)="closedOnClick()"
+        >
+          Cancel
+        </button>
+      </div>
+
+      <div
+        class="btn-filter"
+        [class.mobile-search]="mobileView && showSearchInput"
+      >
+        <div class="search-inner">
+          <mat-form-field class="search" *ngIf="showSearchInput">
+            <input
+              matInput
+              #searchInput
+              name="Search members"
+              [formControl]="searchMember"
+              placeholder="Search members"
+            />
+            <button
+              matSuffix
+              mat-button
+              type="button"
+              aria-label="clear"
+              class="btn-search-close"
+              (click)="searchMember.patchValue('')"
+            >
+              X
+            </button>
+          </mat-form-field>
+          <div class="mobile-inner">
+            <button
+              mat-mini-fab
+              type="button"
+              aria-label=""
+              class="btn--white"
+              (click)="searchOnClick()"
+            >
+              <mat-icon class="mat-icon-search">search</mat-icon>
+            </button>
+            <span *ngIf="!mobileView || !showSearchInput" class="btn-title"
+              >Search</span
+            >
+          </div>
+        </div>
+        <button
+          *ngIf="mobileView && showSearchInput"
+          matSuffix
+          mat-button
+          class="btn-close"
+          aria-label="close"
+          (click)="searchOnClick()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <div class="mobile-inner" *ngIf="!mobileView || !showSearchInput">
+          <button
+            mat-mini-fab
+            type="button"
+            mat-icon-button
+            class="btn--white"
+            aria-label="Filters Menu"
+            [matMenuTriggerFor]="filtersMenu"
+            #filterMenuTrigger="matMenuTrigger"
+          >
+            <mat-icon color="primary">tune</mat-icon>
+          </button>
+          <span class="btn-title">Filters</span>
+        </div>
+      </div>
+      <mat-menu #filtersMenu="matMenu">
+        <app-group-member-filters
+          [mobileView]="mobileView"
+          [sortFilter]="sortFilter"
+          [filterValue]="sortFilterValue"
+          (closeModal)="closeFilterModalOnEmit()"
+          (sortChanged)="sortChangedOnEmit($event)"
+        ></app-group-member-filters>
+      </mat-menu>
+    </div>
+  </div>
+</form>
+
+<section>
+  <app-group-member-add-existing-mobile
+    *ngIf="mobileView; else desktopView"
+    [editMode]="true"
+    [groupId]="groupId"
+    [members]="members"
+    [searchFilter]="searchFilter"
+    [totalRecords]="totalRecords"
+    [searchInput]="searchMember.value"
+    [selectedMembers]="selectedMembers"
+    (memberSelection)="memberSelectOnEmit($event)"
+    [sortExpression]="filterForm.get('sort').value"
+    (membersListUpdate)="membersListUpdateOnEmit($event)"
+  >
+  </app-group-member-add-existing-mobile>
+
+  <ng-template #desktopView>
+    <app-group-member-add-existing-desktop
+      [editMode]="true"
+      [groupId]="groupId"
+      [members]="members"
+      [hideUserActions]="true"
+      [searchFilter]="searchFilter"
+      [totalRecords]="totalRecords"
+      [searchInput]="searchMember.value"
+      [selectedMembers]="selectedMembers"
+      (sortChanged)="sortChangedOnEmit($event)"
+      (memberSelection)="memberSelectOnEmit($event)"
+      [sortExpression]="filterForm.get('sort').value"
+      (membersListUpdate)="membersListUpdateOnEmit($event)"
+    ></app-group-member-add-existing-desktop>
+  </ng-template>
+
+  <app-loader *ngIf="listLoading" class="overlay-loader"></app-loader>
+</section>
+
+<section class="mobile-actions">
+  <button
+    mat-button
+    type="button"
+    class="btn-mobile _add-selected"
+    (click)="addExistingMembersOnClick()"
+    [class.btn-disable]="!selectedMembers.length"
+  >
+    Add Selected Members to Group
+  </button>
+
+  <button mat-button type="button" color="primary" (click)="closedOnClick()">
+    Cancel
+  </button>
+</section>

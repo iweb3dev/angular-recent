@@ -1,0 +1,51 @@
+@import '/src/styles/variables';
+
+:host {
+  position: relative;
+}
+
+.purchase-history-table {
+  width: 100%;
+  background-color: $app-snow;
+}
+
+.table-container {
+  height: 450px;
+  overflow: auto;
+  position: relative;
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 110;
+}
+
+.mat-cell {
+  width: 33%;
+}
+
+.mat-cell.mat-column-invoiceNumber {
+  padding-right: 25px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $app-light-grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $app-dark-grey;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $app-dark-grey;
+}

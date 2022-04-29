@@ -1,0 +1,13 @@
+<app-custom-numbers-detail
+  [userInfo]="userInfo$ | async"
+  [phoneNumbers$]="allPhoneNumbers$"
+  [hasPhoneNumber]="hasPhoneNumbers$ | async"
+  [isDeleteSelection$]="showDeleteSelection$"
+  (selectAllPhoneNumbers)="onSelectedAllPhoneNumbersForDelete($event)"
+  (showDeleteSelection)="onShowDeleteSelection()"
+  (hideDeleteSelection)="onHideDeleteSelection()"
+  (deletePhoneNumber)="onDeletePhoneNumbers($event)"
+  (deleteSelectedPhoneNumbers)="onDeleteSelectedPhoneNumbers()"
+  (deleteAllPhoneNumbers)="onDeleteAllPhoneNumbers()"
+  (deleteSinglePhoneNumber)="onDeleteSinglePhoneNumber($event)"
+></app-custom-numbers-detail>

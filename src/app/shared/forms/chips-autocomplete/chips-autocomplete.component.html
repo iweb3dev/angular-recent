@@ -1,0 +1,51 @@
+<mat-chip-list #chipList fxLayout="column" class="chip-list">
+  <mat-chip
+    *ngFor="let item of value"
+    class="chip-item"
+    selectable="true"
+    removable="true"
+    (removed)="onRemove(item.id)"
+  >
+    {{ item.value }}
+    <mat-icon matChipRemove>cancel</mat-icon>
+  </mat-chip>
+</mat-chip-list>
+
+<input
+  #autocompleteInput
+  matInput
+  type="text"
+  class="chip-input"
+  (blur)="onBlur()"
+  [formControl]="autocompleteControl"
+  [matChipInputFor]="chipList"
+  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+  [matChipInputAddOnBlur]="true"
+  (matChipInputTokenEnd)="!auto.isOpen && onAdd($event)"
+  [matAutocomplete]="auto"
+  #trigger="matAutocompleteTrigger"
+/>
+
+<mat-autocomplete
+  #auto="matAutocomplete"
+  panelWidth="400px"
+  (optionSelected)="onSelect($event)"
+>
+  <mat-option
+    *ngFor="let option of autocompleteOptions$ | async"
+    [value]="option.value"
+  >
+    {{ option.value }}
+  </mat-option>
+  <mat-divider></mat-divider>
+  <button
+    *ngIf="customOption"
+    mat-button
+    (click)="customOptionClick.emit()"
+    class="button button--no-border custom-option"
+    fxFlex
+    type="button"
+  >
+    {{ customOption }}
+  </button>
+</mat-autocomplete>

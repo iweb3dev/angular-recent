@@ -1,0 +1,97 @@
+.recover-container {
+  padding: 5rem;
+  max-width: 30rem;
+}
+
+.recovery-title {
+  margin-bottom: 50px;
+}
+
+.header {
+  margin-bottom: 10px;
+}
+
+.logo {
+  width: 170px;
+}
+
+.mat-toolbar-row {
+  height: 100px;
+}
+
+.toolbar-title {
+  font-size: 16px;
+  padding-left: 40px;
+}
+
+.buttons {
+  margin-top: 30px;
+}
+
+.title-container {
+  text-align: center;
+}
+
+.mat-card {
+  height: 845px;
+  width: 500px;
+  margin-top: 50px;
+}
+
+.mat-card-image {
+  width: 265px;
+}
+
+@media screen and (max-width: 768px) {
+  .recovery-title {
+    margin-bottom: 20px;
+  }
+  .mat-card {
+    height: 845px;
+    width: 400px;
+    margin-top: 50px;
+  }
+  .recover-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .mat-card {
+    padding: 0px;
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+  }
+  .recovery-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  .user-form-container {
+    font-size: 16px !important;
+  }
+  .recover-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .no-account-yet {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .recover-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .recover-container {
+    padding-top: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}

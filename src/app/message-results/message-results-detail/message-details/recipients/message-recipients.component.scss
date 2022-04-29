@@ -1,0 +1,45 @@
+.header {
+  border-bottom: 1px solid #D2D2D2;
+  padding: 15px 25px;
+  background-color: whitesmoke;
+}
+
+.recipient {
+  padding: 15px 20px;
+  border-bottom: 1px solid #D2D2D2;
+}
+
+.sub-title {
+  color: #606060;
+}
+
+table {
+  width: 100%;
+  background-color: #fafafa;
+}
+
+.header-desktop {
+  background-color: #fafafa;
+}
+
+.material-icons, .back {
+  color: #2f7ae2;
+}
+
+.back {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.answering-machine {
+  color: #999999;
+}
+
+.opened {
+  color: #4CAF50;
+}
+
+.undelivered {
+  color: #F44336;
+}

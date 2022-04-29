@@ -1,0 +1,31 @@
+<div class="notifications" fxLayout="column" fxLayoutGap="30px">
+  <h1
+    class="typography-28 typography-28--bold typography-28--scale-mobile library__header"
+  >
+    Notifications
+  </h1>
+  <table mat-table #table [dataSource]="allNotifications" class="notification-table">
+    <ng-container matColumnDef="notification">
+      <th mat-header-cell *matHeaderCellDef>Notification</th>
+      <td mat-cell *matCellDef="let element" class="typography-16" [ngStyle]="{'font-weight': !element.viewed ? 'bold' : 'normal'}"> {{element.notification}} </td>
+    </ng-container>
+    <ng-container matColumnDef="insertedDateTime">
+      <th mat-header-cell *matHeaderCellDef>Created</th>
+      <td mat-cell *matCellDef="let element" class="typography-16"> {{element.insertedDateTime | date:'MM/dd/YYYY'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="notificationLookupID">
+      <th mat-header-cell *matHeaderCellDef>Command</th>
+      <td mat-cell *matCellDef="let element" class="typography-16">
+        <div [ngSwitch]="element.notificationLookupID">
+          <a *ngSwitchCase="6" class="command-link" [routerLink]="['/groups/group', element.groupID]" routerLinkActive="router-link-active">View Results</a>
+          <a *ngSwitchCase="11" class="command-link" [routerLink]="['/groups/group', element.groupID]" routerLinkActive="router-link-active">View group details</a>
+          <a *ngSwitchCase="26" class="command-link" routerLink="/schedule-message/new-message/name" routerLinkActive="router-link-active">Send message</a>
+          <div *ngSwitchDefault>None</div>
+        </div>
+      </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

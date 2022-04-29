@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="column" fxLayoutGap="10px">
+    <span class="typography-20" class="text-center">{{ data.title }}</span>
+    <mat-divider></mat-divider>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <span class="typography-16" class="text-center">{{ data.message }}</span>
+    <mat-divider></mat-divider>
+  </div>
+  <button mat-flat-button color="primary" (click)="onCloseSnackbar()">
+    <span class="typography-12">OK</span>
+  </button>
+</div>

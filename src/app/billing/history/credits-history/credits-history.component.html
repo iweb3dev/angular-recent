@@ -1,0 +1,21 @@
+<div class="table-container">
+  <ng-container *ngIf="dataSource$ | async as dataSource; else loading">
+    <app-virtual-table
+      *ngIf="!isMobileView; else mobileList"
+      [dataSource]="dataSource"
+      [columnDefinitions]="COLUMN_DEFINITIONS"
+      (sortChanged)="sortData($event)"
+    ></app-virtual-table>
+
+    <ng-template #mobileList>
+      <app-virtual-list
+        [dataSource]="dataSource"
+        [columnDefinitions]="COLUMN_DEFINITIONS"
+      ></app-virtual-list>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader class="loader"></app-loader>
+  </ng-template>
+</div>

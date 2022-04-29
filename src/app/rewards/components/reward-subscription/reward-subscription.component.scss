@@ -1,0 +1,27 @@
+@import '../../../../styles/variables';
+
+.reward-container {
+  padding: 50px 70px;
+}
+
+.login-button {
+  border-radius: 7px;
+  padding: 10px 70px;
+  margin: 5px 0;
+}
+
+.hr-line {
+  width: 200px;
+  height: 1px;
+  margin: 15px 20px;
+  background-color: $app-rhino;
+}
+
+.text-reward {
+  text-align: center;
+  max-width: 300px;
+}
+
+.title-reward {
+  text-align: center;
+}

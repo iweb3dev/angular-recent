@@ -1,0 +1,41 @@
+@import '/src/styles/variables';
+
+:host {
+  display: flex;
+  width: 100%;
+}
+
+.details-header {
+  padding: 50px 20px 0 80px;
+  @include respond(tab-port) {
+    padding: 30px 15px 0 15px;
+  }
+}
+
+.credits-pricing {
+  padding: 50px 20px 80px 80px;
+  &__description-block {
+    max-width: 600px;
+  }
+  &__action-button {
+    width: 340px;
+  }
+  @include respond(tab-port) {
+    padding: 30px 15px 40px 15px;
+  }
+  @include respond(phone) {
+    &__action-button,
+    &__description-block {
+      width: 100%;
+    }
+  }
+}
+
+.plans-title {
+  @include respond(tab-port) {
+    font-size: 20px;
+  }
+  @include respond(phone) {
+    font-size: 18px;
+  }
+}

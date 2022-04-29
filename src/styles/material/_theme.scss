@@ -1,0 +1,43 @@
+@use '~@angular/material' as mat;
+@import '../variables';
+@import './button';
+@import './sidenav';
+@import './icon';
+@import './stepper';
+@import './form-field';
+@import './button-toggle';
+@import './expansion-panel';
+@import './dialog';
+@import './progress-bar';
+@import './slider';
+@import './bottom-sheet';
+@import './slide-toggle';
+@import './overlay';
+@import './snackbar';
+@import './tabs';
+@import './calendar';
+@import './select';
+@import './toolbar';
+@import './checkbox';
+@import './grid-list';
+
+
+$app-typography: mat.define-typography-config(
+  $font-family: 'Roboto',
+);
+
+@include mat.core($app-typography);
+
+$app-primary: mat.define-palette($app-primary-palette);
+$app-accent: mat.define-palette($app-accent-palette);
+$app-warn: mat.define-palette(mat.$red-palette);
+
+$app-theme: mat.define-light-theme($app-primary, $app-accent, $app-warn);
+$app-theme: map_merge(
+  $app-theme,
+  (
+    background: $app-background,
+  )
+);
+
+@include mat.all-component-themes($app-theme);

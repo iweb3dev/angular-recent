@@ -1,0 +1,28 @@
+<div
+  class="setting"
+  fxLayout="row"
+  fxLayoutGap="15px"
+  [fxLayout.lt-md]="fxLayout_lt_md"
+>
+  <div fxLayoutAlign="start center" fxLayoutGap="6px">
+    <span class="typography-16">
+      {{ setting }}
+    </span>
+    <span
+      class="material-icons font-color"
+      *ngIf="promptconfig.show"
+      [matTooltip]="(helpTopicById$ | async)?.detail"
+      #tooltip="matTooltip"
+      (click)="tooltip.toggle()"
+    >
+      help_outline
+    </span>
+  </div>
+  <div
+    [class.align-left]="fxLayout_lt_md === 'column'"
+    #inputContainer
+    class="input-container"
+  >
+    <ng-content></ng-content>
+  </div>
+</div>

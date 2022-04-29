@@ -1,0 +1,30 @@
+<section
+  *ngIf="socialUser$ | async as user"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <header class="account-connected-header">
+    <h1>Accounts Connected</h1>
+  </header>
+
+  <p class="text-center">
+    Your <b>{{ user.provider | titlecase }}</b> account
+    <b>{{ user.email }}</b> has been successfully connected to your CallingPost
+    account
+    <b>{{  (user$ | async)?.telUserName | phoneNumberFormat }}</b>
+  </p>
+
+  <button
+    class="btn-close-dialog"
+    mat-button
+    type="button"
+    (click)="closeOnClick()"
+  >
+    CLOSE AND CONTINUE
+  </button>
+
+  <p class="text-center">
+    You are now able to quickly log into CallingPost using your
+    {{ user.provider | titlecase }} account!
+  </p>
+</section>

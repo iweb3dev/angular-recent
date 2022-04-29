@@ -1,0 +1,91 @@
+<div class="history" fxLayout="column">
+  <div
+    class="margin-bottom--20 header-block"
+    fxLayout
+    fxLayout.lt-md="column"
+    fxLayoutAlign.gt-sm="space-between center"
+  >
+    <div fxLayout fxLayoutAlign="space-between center">
+      <h1 class="typography-20 typography-20--bold typography-20--scale-mobile">
+        View History
+      </h1>
+      <button
+        *ngIf="!isCreditsHistoryView"
+        mat-flat-button
+        fxHide
+        fxShow.lt-sm
+        class="button button--no-border button--transparent"
+        (click)="downloadAll()"
+      >
+        Download All
+      </button>
+    </div>
+    <div fxLayout fxLayoutAlign="start center" fxLayoutGap="20px">
+      <app-search-expanded
+        fxFlex.lt-sm
+        label="Search history"
+        [formControl]="control"
+      ></app-search-expanded>
+      <button
+        *ngIf="!isCreditsHistoryView"
+        mat-flat-button
+        fxHide.lt-sm
+        class="button button--no-border button--transparent"
+        (click)="downloadAll()"
+      >
+        Download All
+      </button>
+    </div>
+  </div>
+
+  <button
+    class="button button--no-border button--no-side-padding margin-bottom--10"
+    color="primary"
+    type="button"
+    mat-button
+    fxFlexAlign="baseline"
+    (click)="backToBilling()"
+  >
+    <div fxLayout fxLayoutAlign="start center" fxLayoutGap="5px">
+      <mat-icon class="app-icon-20">arrow_back</mat-icon>
+      <span class="typography-14">Back To Billing Info</span>
+    </div>
+  </button>
+
+  <nav mat-tab-nav-bar class="margin-bottom--10">
+    <a
+      mat-tab-link
+      routerLink="purchases"
+      routerLinkActive
+      #rla="routerLinkActive"
+      [active]="rla.isActive"
+    >
+      <span
+        class="typography-16 typography-16--bold typography-16--scale-mobile"
+      >
+        Purchase History
+      </span>
+    </a>
+    <ng-container *ngIf="userPackage$ | async as package">
+      <a
+        *ngIf="
+          package === PackageTypeIds.PayAsYouGo ||
+          package === PackageTypeIds.MonthlyCredits
+        "
+        mat-tab-link
+        routerLinkActive
+        routerLink="credits"
+        #rla="routerLinkActive"
+        [active]="rla.isActive"
+      >
+        <span
+          class="typography-16 typography-16--bold typography-16--scale-mobile"
+        >
+          Credits Usage History
+        </span>
+      </a>
+    </ng-container>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

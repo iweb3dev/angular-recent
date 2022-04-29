@@ -1,0 +1,63 @@
+<mat-expansion-panel (opened)="showProgressBar()">
+  <mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutGap="15px">
+      <span class="material-icons font-color"> mail_outline </span>
+      <span class="typography-20--bold">Communication Settings</span>
+    </div>
+  </mat-expansion-panel-header>
+
+  <div fxLayout="column" fxLayoutGap="10px" *ngIf="this.settings$ | async as tSettings">
+    <app-system-setting-frame
+    fxLayout_lt_md="column"
+    [setting]="tSettings.validatedPhone.settingName + '.'">
+      <mat-form-field class="form-field-control">
+        <mat-select [ngModel]="tSettings.validatedPhone.setting?.settingValue || ''"
+        (selectionChange)="onUpdateSetting(tSettings.validatedPhone.setting, $event.value)">
+          <ng-container *ngFor="let phone of allPhoneNumbers$ | async">
+            <mat-option class="typography-14"
+            [value]="phone.phoneNumber" title="{{ phone.phoneNumber }}" *ngIf="phone.isValidated">
+              {{ phone.phoneNumber }}
+            </mat-option>
+          </ng-container>
+          <mat-option [value]="defaultPhoneOption" class="typography-14">
+            {{ defaultPhoneOption }}
+          </mat-option>
+          <mat-option value="" class="typography-14 add-phone-option" disabled (click)="onAddPhoneNumber()">
+            Add Phone Number...
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </app-system-setting-frame>
+
+    <app-system-setting-frame [setting]="tSettings.customPhone.settingName"
+    fxLayout_lt_md="column">
+      <mat-form-field class="form-field-control">
+        <mat-select [ngModel]="tSettings.customPhone.setting?.settingValue || ''"
+        (selectionChange)="onUpdateSetting(tSettings.customPhone.setting, $event.value)"
+        >
+          <mat-option *ngFor='let boughtPhoneNumber of allBoughtPhoneNumbers$ | async'  class="typography-14"
+          [value]="boughtPhoneNumber.phoneNumber"  title="{{ boughtPhoneNumber.phoneNumber }}">
+            {{ boughtPhoneNumber.phoneNumber }}
+          </mat-option>
+          <mat-option [value]="defaultSelectedPhoneOption" class="typography-14">
+            {{ defaultSelectedPhoneOption }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </app-system-setting-frame>
+
+    <app-system-setting-frame style="padding-top: 15px;" [setting]="tSettings.timeZone.settingName + '.'"
+    [promptconfig]="{
+      show: true,
+      helpTopicId: '4'
+    }"
+    >
+      <mat-checkbox class="form-field-control system-settings-checkbox typography-14"
+      [ngModel]="parseBool(tSettings.timeZone.setting?.settingValue)"
+      (change)="onUpdateSetting(tSettings.timeZone.setting, $event.checked)"></mat-checkbox>
+    </app-system-setting-frame>
+  </div>
+  <mat-progress-bar mode="determinate"
+  *ngIf='this.progressBarVisable'
+  [value]="this.progressValue"></mat-progress-bar>
+</mat-expansion-panel>

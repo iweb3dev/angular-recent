@@ -1,0 +1,42 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold typography-20--scale-mobile">
+      Add Promo Code
+    </h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="regular-grey">close</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>Enter Promo Code</mat-label>
+      <input
+        cdkFocusInitial
+        type="text"
+        matInput
+        [formControl]="promoControl"
+      />
+    </mat-form-field>
+  </div>
+
+  <div fxLayout fxLayoutGap="10px">
+    <button
+      mat-button
+      mat-stroked-button
+      color="primary"
+      fxFlex
+      class="button--blue-border"
+      (click)="onCloseDialog()"
+    >
+      <span class="typography-12">CANCEL</span>
+    </button>
+    <button mat-flat-button color="primary" fxFlex (click)="onAdd()">
+      <span class="typography-12">ADD</span>
+    </button>
+  </div>
+</div>

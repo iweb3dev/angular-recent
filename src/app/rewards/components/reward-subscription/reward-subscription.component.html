@@ -1,0 +1,24 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="reward-container">
+  <div fxLayout>
+    <hr class="hr-line">
+    <div class="title-reward typography-28 typography-28--light-bold text-rhino">CALLINGPOST REWARDS</div>
+    <hr class="hr-line">
+  </div>
+  <div class="text-reward text-rhino typography-14 typography-14--light-bold">Earn rewards for sending messages, sharing
+    CallingPost with other and more! Enroll
+    below to start earning!</div>
+  <div class="picture-reward">
+    <img mat-card-image src="/assets/img/rewardswelcome.png" width="265" alt="Welcome to Reward Page"/>
+  </div>
+  <div class="bottom-text-reward text-rhino typography-14 typography-14--light-bold">Thanks for your loyal support</div>
+  <div fxLayoutGap.gt-xs="20px" fxLayout.lt-sm="column" fxLayoutAlign="center center">
+    <button mat-raised-button class="button button--blue btn login-button" (click)="learnMoreClicked()">
+      <span class="typography-16 typography-16--bold">LEARN MORE</span>
+    </button>
+    <button mat-raised-button class="button button--lime-green btn login-button" (click)="enrollUserIntoRewardsProgram()">
+      <span class="typography-16 typography-16--bold">ENROLL NOW!</span>
+    </button>
+  </div>
+  <div class="text-italic text-rhino typography-14 typography-14--light-bold">*By joining the reward
+    problem I accept the <a href="https://www.callingpost.com/rewards.html" target="_blank" class="text-decoration-none">terms of use</a>.</div>
+</div>

@@ -1,0 +1,157 @@
+@import '../../../styles/_variables.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: url('/assets/img/Login-background.svg');
+  background-repeat: no-repeat;
+  background-color: #F9FAFC;
+  background-size: cover;
+  position: relative;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.payment-method {
+  margin: 50px 0px 0px 0px;
+  padding: 40px 40px 40px 40px;
+  background-color: $app-white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+.container {
+  margin: 0 auto;
+}
+
+.logo {
+  margin-bottom: 30px;
+  margin: 0 auto;
+  max-width: 265px;
+}
+.widget {
+  border: 0;
+  &-capterra {
+    padding-top: 27%;
+    &-null {
+      padding-top: 0;
+    }
+  }
+}
+
+.form-row-left_board {
+  background-color: $app-solitude;
+  padding: 20px 40px 20px 40px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+
+.form-row-left_board-fee_price-number {
+  padding-right: 10px;
+}
+.hr-line {
+  width: 100%;
+  height: 2px;
+  border-radius: 20%;
+  background-color: $app-shaded-grey;
+}
+
+.payment-form {
+  background-color: $app-solitude;
+  padding: 60px 20px 20px 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+
+@media screen and (max-width: 958px) {
+  .payment-method {
+    margin-top: 40px;
+    padding: 40px 40px 40px 40px;
+  }
+
+  .widget {
+    &-capterra {
+      padding-top: 0;
+      width: 90%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .payment-method {
+    margin-top: 30px;
+    margin: 10px 10px 10px 10px;
+    padding: 20px 20px 20px 20px;
+    min-width: 95%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .payment-form {
+    margin: 5px;
+    padding: 20px 15px 15px 15px;
+  }
+  .widget-width {
+    max-width: 80%;
+  }
+
+  .widget {
+    &-capterra {
+      padding-top: 0;
+      width: 80%;
+    }
+  }
+
+  .select-contact {
+    padding: 10px;
+  }
+
+  .form-column-right {
+    width: 90%;
+  }
+
+  .payment-method {
+    max-width: 425px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .payment-form {
+    margin: 5px;
+    padding: 40px 5px 40px 5px;
+  }
+  .widget-width {
+    max-width: 80%;
+  }
+
+  .widget {
+    width: 90%;
+  }
+  .select-contact {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .payment-method {
+    max-width: 365px;
+  }
+  .widget-width {
+    max-width: 100%;
+  }
+  .form-column-right {
+    width: 355px;
+  }
+}

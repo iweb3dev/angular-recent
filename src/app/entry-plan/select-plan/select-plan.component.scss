@@ -1,0 +1,160 @@
+@import '../../../styles/_variables.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: url('/assets/img/Login-background.svg');
+  background-repeat: no-repeat;
+  background-color: #F9FAFC;
+  background-size: cover;
+  position: relative;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.pick-plan-form {
+  margin: 50px 0px 0px 0px;
+  padding: 40px 50px 40px 50px;
+  background-color: $app-white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+.container {
+  max-width: 770px;
+  margin: 0 auto;
+}
+
+.list {
+  &--style {
+    list-style-type: none;
+    display: inline;
+    padding: 10px;
+  }
+  &--hr {
+    width: 90%;
+    height: 2px;
+    border-radius: 10px;
+    border: none;
+    &--white {
+      background-color: $app-white;
+    }
+    &--grey {
+      background-color: $app-grey;
+    }
+  }
+}
+
+.title-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.left-board {
+  margin: 20px;
+  width: 365px;
+  background-color: $app-dark-cerulean;
+  border-radius: 5px;
+  color: $app-white;
+  &-title {
+    padding: 30px 0 10px 0;
+  }
+  &-price {
+    padding: 10px 0;
+  }
+  &-list {
+    padding: 10px 0;
+  }
+  &-button {
+    padding: 30px 0 10px 0;
+    margin-bottom: 15px;
+  }
+}
+.right-board {
+  margin: 20px;
+  width: 365px;
+  background-color: $app-white-smoke;
+  border-radius: 5px;
+  &-title {
+    padding: 30px 0 0 0;
+  }
+  &-list {
+    padding: 10px 40px;
+  }
+  &-price {
+    padding: 10px 10px;
+  }
+  &-button {
+    padding: 30px 0 10px 0;
+    margin-bottom: 15px;
+    &--style {
+      background: $app-dark-cerulean;
+      box-shadow: 12px 12px 20px 0px rgb(1 96 231 / 30%);
+    }
+  }
+}
+
+.board-price-size {
+  font-size: 48px;
+}
+
+.left-board-hint {
+  text-align: center;
+  max-width: 340px;
+  margin-left: 15px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .mat-card {
+    width: 80%;
+    margin-top: 50px;
+  }
+  .left-board {
+    width: 70vw;
+  }
+  .right-board {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .pick-plan-form {
+    padding: 0px;
+    margin: 10px;
+    width: 100vw;
+  }
+  .left-board {
+    width: 90vw;
+  }
+  .right-board {
+    width: 90vw;
+  }
+  .title-container {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .img-container {
+    margin-top: 10px;
+  }
+  .title-container {
+    margin-bottom: 10px;
+  }
+  .left-board {
+    margin: 2px;
+  }
+  .right-board {
+    margin: 2px;
+  }
+}

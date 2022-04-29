@@ -1,0 +1,115 @@
+<app-mobile-header
+  (closed)="cancelOnClick()"
+  [headerTitle]="'Add Members to Group'"
+></app-mobile-header>
+
+<form [formGroup]="addMemberForm">
+  <section class="add-members">
+    <div class="header-wrapper">
+      <h2 class="add-members-manually">Add members manually</h2>
+      <button
+        type="button"
+        mat-raised-button
+        (click)="saveMembersOnClick()"
+        class="btn-save-members _save"
+      >
+        Save
+      </button>
+    </div>
+    <div
+      fxLayout="column"
+      class="add-members__inner"
+      fxLayoutAlign="center baseline"
+    >
+      <span
+        >To: <b>{{ groupWithStats?.groupDetails?.group?.groupName }}</b></span
+      >
+
+      <div class="add-members__number">
+        <span>Number of members to add:</span>
+        <mat-form-field class="number">
+          <mat-select
+            [value]="defaultMembersLimit"
+            (selectionChange)="memberToBeAddedOnChange($event.value)"
+          >
+            <mat-option *ngFor="let item of membersAddOption" [value]="item">{{
+              item
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
+
+  <section
+    fxLayout="column"
+    formArrayName="members"
+    class="add-members-user"
+    *ngFor="
+      let member of addMemberForm.get('members')['controls'];
+      let i = index
+    "
+  >
+    <div>
+      <b>{{ i + 1 }}</b>
+    </div>
+
+    <div
+      fxLayout="row wrap"
+      [formGroupName]="i"
+      fxLayoutAlign="space-between"
+      class="add-members-user__inner"
+    >
+      <div fxLayout="column" class="inner__left">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="First Name"
+            formControlName="firstName"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Last Name" formControlName="lastName" />
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="column" class="inner__right">
+        <mat-form-field>
+          <input
+            matInput
+            maxlength="10"
+            appNumbersOnly
+            placeholder="Phone Number"
+            formControlName="phoneNumber"
+          />
+          <mat-error
+            *ngIf="
+              addMemberForm.hasError('minlength', ['members', i, 'phoneNumber'])
+            "
+            >Invalid phone number</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-error
+            *ngIf="addMemberForm.hasError('email', ['members', i, 'email'])"
+            >Invalid email</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
+
+  <section class="btn-add-members-section">
+    <button
+      mat-button
+      type="button"
+      class="btn-add-members _add"
+      (click)="addAnotherMemberOnClick()"
+    >
+      <mat-icon color="primary">add</mat-icon>Add another member
+    </button>
+  </section>
+</form>

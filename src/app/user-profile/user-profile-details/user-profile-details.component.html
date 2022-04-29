@@ -1,0 +1,12 @@
+<app-profile-image style="margin-bottom: 0px;"></app-profile-image>
+<div class="profile-details" fxLayout="column" fxLayoutGap="30px" [formGroup]="userProfileForm">
+  <span class="profile-name typography-20--bold text-black">{{user?.displayName}}</span>
+  <app-profile-details formControlName="profileDetail" (isValid)='detailsIsValid = $event'></app-profile-details>
+  <app-phone-numbers [onSave]="save" (isValid)='phoneIsValid = $event'></app-phone-numbers>
+  <app-email-addresses [onSave]="save" (isValid)='emailIsValid = $event'></app-email-addresses>
+  <app-addresses [onSave]="save" (isValid)='addressIsValid = $event'></app-addresses>
+  <div class="buttons" fxLayout="row" fxLayout.lt-md="column-reverse" fxLayoutGap="30px" fxLayoutGap.lt-md="10px">
+    <button mat-raised-button color="primary" class="button button-primary-inverted" fxFlex>Cancel</button>
+    <button mat-raised-button color="primary" fxFlex (click)="onSave()" [disabled]="!formIsValid">Save</button>
+  </div>
+</div>

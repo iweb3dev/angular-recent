@@ -1,0 +1,31 @@
+@import '../../../../styles/variables';
+
+.sticky-header {
+  position: sticky;
+  background: $app-white;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.header {
+  padding: 11px;
+  .material-icons {
+    position: absolute;
+    right: 11px;
+    font-size: 18px;
+    color: $app-grey;
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.left {
+      left: 11px;
+      right: unset;
+    }
+  }
+}
+
+.bottom-sheet-body {
+  padding: 1rem;
+}

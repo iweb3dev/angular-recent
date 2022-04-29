@@ -1,0 +1,90 @@
+// Header
+.main-header {
+  color: white;
+  background-color: #428bca;
+}
+
+.header-title {
+  font-weight: 500;
+}
+
+// Buttons
+.btn {
+  width: 15rem;
+  &.__close {
+    width: 0;
+    margin: 0 0.5rem;
+    box-shadow: none;
+    background: transparent;
+    &:hover {
+      color: #f5f5f5;
+    }
+  }
+  &.__confirm {
+    color: #fff;
+    text-align: center;
+    margin-right: 2rem;
+    background: #2f7ae2;
+  }
+  &.__cancel {
+    color: #2f7ae2;
+    text-align: center;
+    border: 1px solid #2f7ae2;
+  }
+  &.__download {
+    width: 20rem;
+    color: #fff;
+    margin: 0 1rem;
+    text-align: center;
+    background: #2f7ae2;
+  }
+}
+
+// User Action
+.user-action {
+  margin: 1.5rem 0;
+}
+
+// Caution
+.caution-section {
+  padding: 1rem 5rem;
+  background-color: #f9e491;
+}
+
+.caution-note {
+  span {
+    font-weight: 500;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  // User Action
+  .user-action {
+    padding: 0 1rem;
+  }
+  .action-buttons {
+    gap: 1rem;
+    display: flex;
+    margin-right: 0;
+
+    flex-direction: column;
+  }
+
+  // Caution
+  .caution-section {
+    padding: 1rem 1rem;
+  }
+
+  // Buttons
+  .btn {
+    &.__close {
+      margin: 0;
+    }
+    &.__confirm {
+      margin-right: 0;
+    }
+    &.__download {
+      width: 15rem;
+    }
+  }
+}

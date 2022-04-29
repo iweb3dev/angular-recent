@@ -1,0 +1,21 @@
+<mat-expansion-panel class="user-detail-section" fxLayout="column" [formGroup]="phoneNumbersForm">
+    <mat-expansion-panel-header collapsedHeight="59px">
+      <span class="typography-20--bold text-rhino">Phone Number(s)</span>
+    </mat-expansion-panel-header>
+  <div>
+    <app-phone-frame *ngFor="let phoneNumber of phoneNumbers"
+    formControlName="{{phoneNumber.key}}" (delete)="onDeleteNumber(phoneNumber)" (isValid)='getChildValidity($event)'></app-phone-frame >
+    <div fxLayout="column" fxLayoutGap="6px">
+      <mat-error *ngIf='!hasPrimarySelected'>Please select a primary phone number.</mat-error>
+      <mat-error *ngIf='hasNoPhoneNumberError'>Please provide at least one phone number.</mat-error>
+    </div>
+  </div>
+
+
+  <div fxLayout="row" fxLayoutGap="14px" class="link" fxLayoutAlign="start center" (click)="onAddPhoneNumber()">
+    <span class="material-icons">
+      add
+    </span>
+    <span class="typography-16">Add Phone</span>
+  </div>
+</mat-expansion-panel>

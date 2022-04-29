@@ -1,0 +1,66 @@
+<section fxLayout>
+  <ng-template
+    *ngIf="!mobileView"
+    [ngTemplateOutlet]="searchControlField"
+  ></ng-template>
+  <div
+    fxLayout="column"
+    class="btn-search-wrapper"
+    fxLayoutAlign="center center"
+  >
+    <button
+      mat-mini-fab
+      type="button"
+      aria-label="search"
+      (click)="searchOnClick()"
+      class="btn-search btn-white"
+      [class.btn-search-margin]="mobileView && showSearchInput"
+    >
+      <mat-icon class="mat-icon-search">search</mat-icon>
+    </button>
+    <span
+      class="field-title"
+      *ngIf="!mobileView || (mobileView && !showSearchInput)"
+      >Search</span
+    >
+  </div>
+
+  <ng-template
+    *ngIf="mobileView"
+    [ngTemplateOutlet]="searchControlField"
+  ></ng-template>
+  <button
+    matSuffix
+    mat-button
+    class="btn-close-search"
+    aria-label="close-search"
+    (click)="searchOnClick()"
+    *ngIf="mobileView && showSearchInput"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</section>
+
+<ng-template #searchControlField>
+  <div *ngIf="showSearchInput">
+    <mat-form-field>
+      <input
+        matInput
+        #searchControl
+        name="search"
+        [formControl]="searchInput"
+        [placeholder]="inputPlaceHolder"
+      />
+      <button
+        matSuffix
+        mat-button
+        type="button"
+        aria-label="clear"
+        class="btn-search-close"
+        (click)="searchInput.patchValue('')"
+      >
+        X
+      </button>
+    </mat-form-field>
+  </div>
+</ng-template>

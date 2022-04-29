@@ -1,0 +1,116 @@
+<mat-icon class="close-menu-icon" *ngIf="opened" (click)="opened = false"> close </mat-icon>
+<mat-sidenav-container autosize class="mobile-sidenav">
+  <mat-sidenav class="custom-sidenav"
+               mode="over"
+               fixedInViewport="true"
+               fixedTopGap="true"
+               fixedBottomGap="true"
+               [opened]="opened"
+               (openedChange)="openedChange.emit($event)">
+    <div class="sidenav-content" fxLayout="column">
+      <div class="sidenav-content__logo-block">
+        <img class="logo" src="assets/img/logo.png" alt="CallingPost" (click)="logoClicked()" />
+      </div>
+      <mat-divider class="header-divider"></mat-divider>
+
+      <ng-container *ngFor="let menuItem of MENU_ITEMS_TOP">
+        <app-menu-item [hidden]="menuItem.hideMenuItem"
+                       [icon]="menuItem.icon"
+                       [title]="menuItem.title"
+                       [to]="menuItem.to"
+                       (menuItemClick)="onMenuItemClick(menuItem)"></app-menu-item>
+      </ng-container>
+      <mat-divider class="header-divider"></mat-divider>
+
+      <div class="sidenav-wrapper">
+        <div>
+          <mat-expansion-panel class="expansion-panel-plain">
+            <mat-expansion-panel-header>
+              <app-nav-user-info mobileView class="user-info"></app-nav-user-info>
+            </mat-expansion-panel-header>
+            <div fxLayout="column" class="user-menu-item">
+              <ng-container *ngFor="let menuItem of USER_MENU_ITEMS_M">
+                <app-menu-item [hidden]="menuItem.hideMenuItem"
+                               [icon]="menuItem.icon"
+                               [title]="menuItem.title"
+                               [to]="menuItem.to"
+                               (menuItemClick)="onMenuItemClick(menuItem)">
+                </app-menu-item>
+              </ng-container>
+            </div>
+          </mat-expansion-panel>
+          <mat-divider class="header-divider"></mat-divider>
+          <ng-container *ngFor="let menuItem of MENU_ITEMS_MIDDLE">
+            <app-menu-item [hidden]="menuItem.hideMenuItem"
+                           [icon]="menuItem.icon"
+                           [title]="menuItem.title"
+                           [to]="menuItem.to"
+                           (menuItemClick)="onMenuItemClick(menuItem)"></app-menu-item>
+          </ng-container>
+          <mat-divider class="header-divider"></mat-divider>
+          <ng-container *ngFor="let menuItem of MENU_ITEMS_INFO">
+            <app-menu-item [hidden]="menuItem.hideMenuItem"
+                           [icon]="menuItem.icon"
+                           [title]="menuItem.title"
+                           [to]="menuItem.to"
+                           (menuItemClick)="onMenuItemClick(menuItem)"></app-menu-item>
+          </ng-container>
+          <ng-container *ngFor="let menuItem of MENU_ITEMS_HELP">
+            <app-menu-item-help [hidden]="menuItem.hideMenuItem"
+                                [icon]="menuItem.icon"
+                                [title]="menuItem.title"
+                                (click)="helpCenterItemClicked()">
+            </app-menu-item-help>
+          </ng-container>
+          <ng-container *ngFor="let menuItem of MENU_ITEMS_BOTTOM">
+            <app-menu-item [hidden]="menuItem.hideMenuItem"
+                           [icon]="menuItem.icon"
+                           [title]="menuItem.title"
+                           [to]="menuItem.to"
+                           (menuItemClick)="onMenuItemClick(menuItem)"></app-menu-item>
+          </ng-container>
+          <mat-divider class="header-divider"></mat-divider>
+        </div>
+
+        <ng-container>
+          <div>
+            <div class="footer" fxLayout="column wrap">
+              <div fxLayout="column" class="cpcFooter">
+                <p (click)="termsOfService()">TERMS OF SERVICE</p>
+              </div>
+
+              <div fxLayout="column" class="cpcFooter">
+                <p (click)="privacyPolicy()">PRIVACY POLICY</p>
+              </div>
+
+              <div fxLayout="column" class="cpcFooter">
+                <p (click)="feedBack()">FEEDBACK</p>
+              </div>
+
+              <div fxLayout="column" fxLocation="left" class="cpcCopyRight">
+                <p>&copy;<app-current-year></app-current-year> CallingPost Communications Inc.</p>
+              </div>
+            </div>
+
+            <div *ngIf="(currentRouteName$ | async) !== 'Groups/Members'" fxLayout="column" class="cpcFooter" fxLayoutAlign="left">
+              <div class="trustpilot-widget"
+                   data-locale="en-US"
+                   data-template-id="5419b6ffb0d04a076446a9af"
+                   data-businessunit-id="5d37320fec30d000019dfd5b"
+                   data-style-height="24px"
+                   data-style-width="100%"
+                   data-theme="light"
+                   id="trustbox">
+                <a href="https://www.trustpilot.com/review/callingpost.com" target="_blank" rel="noopener"> Trustpilot </a>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

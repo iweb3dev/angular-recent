@@ -1,0 +1,81 @@
+@import '/src/styles/variables';
+
+// Main
+.section-main {
+  padding: 0 1rem;
+}
+.member-list-mobile-scroll {
+  height: calc(100vh - 300px);
+}
+.member-edit-wrapper {
+  padding: 1rem 0.5rem 0 0;
+}
+.edit-main-wrapper {
+  cursor: pointer;
+  &:focus:hover {
+    background-color: $app-white-smoke;
+  }
+}
+.disable-element {
+  pointer-events: none;
+}
+
+// Buttons
+.btn {
+  &.__delete {
+    padding: 0;
+    min-width: 0;
+  }
+}
+
+// Misc
+.hide-section {
+  visibility: hidden;
+}
+
+// Profile
+.member-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.member-primary-info {
+  padding: 0.5rem 0;
+}
+.member-phone {
+  font-weight: 600;
+  padding-bottom: 1rem;
+}
+.member-secondary-info {
+  padding-bottom: 0.5rem;
+}
+.member-contact-info {
+  min-width: 35%;
+  max-width: 85%;
+  padding-top: 0.5rem;
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.member-name {
+  min-width: 35%;
+  max-width: 80%;
+  overflow: hidden;
+  padding: 0 0.5rem;
+  white-space: nowrap;
+  color: $app-mat-blue;
+  text-overflow: ellipsis;
+  &:focus:hover {
+    background-color: $app-white-smoke;
+  }
+}
+
+// Status
+.availability-status {
+  padding: 0.5rem 0 0 0.5rem;
+}
+.inactive-member {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}

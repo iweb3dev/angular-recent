@@ -1,0 +1,130 @@
+.logo {
+  max-width: 250px;
+}
+
+form {
+  padding: 50px 70px 0px 70px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: #ffffff;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0%;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-subscript-wrapper {
+  padding: 0%;
+}
+
+.btn-submit {
+  color: #FFF;
+  background-color: #1bbc5b;
+  border-color: #1bbc5b;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.44;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.subscribe-container {
+  background: #f8f8f8;
+}
+
+.question-container {
+  box-shadow: 0px 3px 15px -3px;
+  background: #ffffff;
+  border-radius: 4px;
+  width: 650px;
+  padding: 30px 0px;
+}
+
+.bottom-container {
+  box-shadow: 0px 3px 15px -3px #039be5;
+  background: #039be5;
+  border-radius: 4px;
+  width: 650px;
+  .info-text {
+    color: #ffffff;
+    font-size: 16px;
+    padding-top: 30px;
+    padding-bottom: 22px;
+  }
+  .btn-start {
+    border-color: #ffffff;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.44;
+    margin-top: 20px;
+    text-transform: uppercase;
+    color: #039be5;
+    margin-bottom: 16px;
+    border-radius: 4px;
+  }
+}
+
+.success {
+  padding-top: 0px;
+  .success-message {
+    background: #4CAF50;
+    box-shadow: 2px 2px 12px -8px #000000;
+    margin-bottom: 34px;
+    padding: 16px 0px;
+    width: 100%;
+    .icon-white {
+      color: #ffffff;
+      width: 30px;
+      font-size: 40px;
+    }
+    .success-text {
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+  }
+  .text-thank {
+    text-transform: uppercase;
+    font-weight: 500;
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 499px) {
+  .subscribe-container {
+    padding: 10px;
+  }
+
+  .question-container {
+    width: 100%;
+    padding: 30px 10px;
+    box-shadow: 0px 3px 9px -3px;
+    text-align: center;
+  }
+
+  form {
+    padding: 50px 20px 0px 20px;
+  }
+}

@@ -1,0 +1,57 @@
+@import '/src/styles//variables';
+
+// Card
+.card-wrapper {
+  padding: 1.5rem;
+  border-radius: 7px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  h3 {
+    display: none;
+  }
+}
+
+.download-callingpost {
+  margin-top: 1rem;
+}
+
+.btn-download {
+  color: $app-white;
+  padding: 1rem 4rem;
+  background-color: $app-denim;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+
+.learn-more {
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: $app-cyan-light-shade;
+}
+
+.pwa-installed {
+  cursor: not-allowed;
+  background-color: $app-grey;
+}
+
+@media screen and (max-width: 768px) {
+  .card-wrapper {
+    padding: 0;
+    height: unset;
+    background-color: transparent;
+    box-shadow: none;
+
+    h3 {
+      display: block;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    & > section {
+      padding: 2rem 2rem;
+      background-color: $app-white;
+      border-radius: 7px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+}

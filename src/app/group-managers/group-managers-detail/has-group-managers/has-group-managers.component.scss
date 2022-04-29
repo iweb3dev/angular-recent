@@ -1,0 +1,25 @@
+@import '/src/styles/variables';
+
+.has-group-managers {
+  max-width: 60%;
+  @include respond(tab-port) {
+    max-width: 60%;
+  }
+  @include respond(phone) {
+    max-width: 100%;
+  }
+}
+.header {
+  margin-bottom: 30px;
+}
+
+.create {
+  margin-bottom: 25px;
+  width: 14rem;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.mat-button.mat-primary {
+  padding: 2px;
+}

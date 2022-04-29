@@ -1,0 +1,6 @@
+<app-has-keywords *ngIf="hasKeywords$ | async; else noKeywords"></app-has-keywords>
+<ng-template #noKeywords>
+  <div class="keywords">
+    <app-no-keywords></app-no-keywords>
+  </div>
+</ng-template>

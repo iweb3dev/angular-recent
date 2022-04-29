@@ -1,0 +1,31 @@
+<div class="add-member-modal">
+  <div class="modal-title"><span>How do you want to add members?</span></div>
+
+  <div class="modal-item" mat-dialog-close="add-manually">
+    <mat-icon class="mat-modal-icon">person_add</mat-icon
+    ><span>Add Members Manually</span>
+  </div>
+
+  <div class="modal-item" mat-dialog-close="import">
+    <mat-icon class="mat-modal-icon">library_books</mat-icon
+    ><span>Upload File With Member Names</span>
+  </div>
+
+  <div
+    class="modal-item"
+    *ngIf="data.addExistingMembers"
+    mat-dialog-close="add-existing"
+  >
+    <mat-icon class="mat-modal-icon">account_circle</mat-icon
+    ><span>Add From Existing Members</span>
+  </div>
+
+  <div class="modal-item" mat-dialog-close="keyword">
+    <mat-icon class="mat-modal-icon">vpn_key</mat-icon
+    ><span>Add Members Via Keyword</span>
+  </div>
+
+  <div class="btn" mat-dialog-close>
+    <button class="_cancel">Cancel</button>
+  </div>
+</div>

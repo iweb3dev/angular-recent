@@ -1,0 +1,83 @@
+@import '/src/styles//variables';
+@import '/src/styles//typography';
+@import '/src/styles//material/toolbar';
+
+.toolbar {
+  height: 62px;
+  min-height: 62px;
+  box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.3);
+
+  @include respond(phone) {
+    min-height: 38px;
+
+    &-dashboard--mobile {
+      .toolbar-row span{
+        text-align: left;
+      }
+    }
+  }
+}
+
+.toolbar-row-wrapper {
+  height: 100%;
+}
+
+.overlap-wrapper {
+  z-index: 99;
+}
+
+.toolbar-mobile {
+  background-color: $app-white;
+  padding: 1px 8px;
+  padding-left: 0px;
+  box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.3);
+  &__logo-block {
+    margin: auto;
+  }
+}
+
+.logo {
+  max-width: 145px;
+}
+
+.user-info {
+  margin-left: auto;
+}
+
+.menu-toggle-button {
+  margin-right: 20px;
+}
+
+.switch-account {
+  .menu-item.active {
+    .menu-item__icon {
+      color: $app-black !important;
+    }
+
+    .menu-item__title {
+      color: $app-black !important;
+    }
+  }
+}
+
+.blue-icon {
+  color: #2f7ae2;
+}
+
+@media (max-width: 959px) {
+  .toolbar {
+    padding-left: 5px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 499px) {
+  app-current-route {
+    width: 70%;
+    text-align: center;
+
+    &.dashboard-msg {
+      text-align: left;
+    }
+  }
+}

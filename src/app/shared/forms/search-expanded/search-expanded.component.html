@@ -1,0 +1,22 @@
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex>
+    <mat-label class="text-grey typography-14">{{ label }}</mat-label>
+    <input
+      matInput
+      #input
+      [formControl]="searchControl"
+      (input)="onValueChange($event)"
+    />
+  </mat-form-field>
+  <button
+    mat-mini-fab
+    matSuffix
+    class="
+      button button-primary-inverted button-primary-inverted--no-border
+      fab-50--scale-mobile
+    "
+    (click)="focusSearchField()"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+</div>

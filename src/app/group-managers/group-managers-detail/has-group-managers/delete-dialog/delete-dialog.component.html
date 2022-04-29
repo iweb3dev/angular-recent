@@ -1,0 +1,18 @@
+<span mat-dialog-title class="typography-18 typography-18--bold typography-18--scale-mobile">
+  Remove this Group Manager
+</span>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="margin-top--30 margin-bottom--20">
+  <span class="typography-14 typography-14--scale-mobile">
+    Are you sure you want to remove
+    <span class="typography-14--bold typography-14--scale-mobile">
+      Tommy Ridgeway
+    </span>
+      as a Group Manager?
+  </span>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button cdkFocusInitial class="button button-submit create" (click)="onConfirmClick()">Confirm</button>
+</div>

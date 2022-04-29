@@ -1,0 +1,100 @@
+<app-mobile-header
+  [showBackButton]="true"
+  (goBack)="goBackOnEmit()"
+  (closed)="cancelOnClick()"
+  [headerTitle]="'Import Members'"
+></app-mobile-header>
+
+<form
+  fxLayout="column"
+  class="preview-members-wrapper"
+  [formGroup]="membersPreviewForm"
+>
+  <section fxLayout="column">
+    <div fxLayout fxLayoutAlign="space-between baseline">
+      <h2 class="column-header">Select Column Headers & Import</h2>
+    </div>
+    <div>
+      <p>
+        Before importing please ensure the column headers below correctly match
+        your data. If not, please click on the drop down to select the correct
+        header title.
+      </p>
+      <p>
+        Imports can take up to an hour. You will receive an email notice once
+        complete.
+      </p>
+    </div>
+    <div>
+      <mat-checkbox
+        name="firstRowHeader"
+        formControlName="firstRowHeader"
+        class="first-row-header typography-14"
+        (change)="firstRowHeaderOnSelect($event)"
+        >My first row is header information</mat-checkbox
+      >
+    </div>
+  </section>
+
+  <section
+    *ngIf="membersPreviewDetails"
+    fxLayout="column wrap"
+    class="member-details-preview"
+  >
+    <ul
+      class="member-preview-list"
+      formArrayName="memberHeaders"
+      *ngFor="
+        let header of membersPreviewForm.get('memberHeaders')['controls'];
+        let colIndex = index
+      "
+    >
+      <li [formGroupName]="colIndex">
+        <mat-form-field class="member-preview-header-select">
+          <mat-select
+            formControlName="fieldId"
+            (selectionChange)="headerOptionOnChange(colIndex)"
+          >
+            <mat-option
+              [value]="field.fieldId"
+              *ngFor="let field of importMappingFields"
+              >{{ field.fieldName | titlecase }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <span
+          *ngIf="
+            membersPreviewDetails &&
+            membersPreviewDetails[colIndex] &&
+            membersPreviewDetails[colIndex][colIndex]
+          "
+          ><span class="member-preview-details-top">EXAMPLES: </span>
+          <span class="member-preview-details-inner">{{
+            colIndex | memberPreviewMobileFilter: membersPreviewDetails
+          }}</span></span
+        >
+      </li>
+    </ul>
+  </section>
+
+  <section fxLayout="column" fxLayoutGap="1em" class="mobile-btn-user-actions">
+    <button
+      type="button"
+      mat-raised-button
+      class="btn __import"
+      (click)="importOnClick()"
+    >
+      Import
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      class="btn __cancel"
+      (click)="cancelOnClick()"
+    >
+      Cancel
+    </button>
+  </section>
+</form>

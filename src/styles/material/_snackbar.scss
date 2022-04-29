@@ -1,0 +1,17 @@
+@import '../variables';
+
+body {
+  .error {
+    background: $app-cinnabar;
+    height: min-content;
+  }
+
+  .success {
+    background: $app-lime-green;
+    height: min-content;
+  }
+  .validator-notification {
+    background-color: $app-white;
+    color: $app-black;
+  }
+}

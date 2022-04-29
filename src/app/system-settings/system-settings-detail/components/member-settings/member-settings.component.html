@@ -1,0 +1,40 @@
+<mat-expansion-panel (opened)="showProgressBar()">
+  <mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutGap="15px">
+      <span class="material-icons font-color"> group </span>
+      <span class="typography-20--bold">Member Settings</span>
+    </div>
+  </mat-expansion-panel-header>
+  <div
+    fxLayout="column"
+    fxLayoutGap="20px"
+    *ngIf="this.settings$ | async as tSettings"
+  >
+    <app-system-setting-frame
+      [setting]="tSettings.deleteMember.settingName + '.'"
+      [promptconfig]="{
+        show: true,
+        helpTopicId: '37'
+      }"
+    >
+      <mat-checkbox
+        class="form-field-control system-settings-checkbox typography-14"
+        [ngModel]="parseBool(tSettings.deleteMember.setting?.settingValue)"
+        (change)="onUpdateSetting(tSettings.deleteMember.setting, $event)"
+      ></mat-checkbox>
+    </app-system-setting-frame>
+
+    <app-system-setting-frame [setting]="tSettings.groupPicture.settingName">
+      <mat-checkbox
+        class="form-field-control system-settings-checkbox typography-14"
+        [ngModel]="parseBool(tSettings.groupPicture.setting?.settingValue)"
+        (change)="onUpdateSetting(tSettings.groupPicture.setting, $event)"
+      ></mat-checkbox>
+    </app-system-setting-frame>
+  </div>
+  <mat-progress-bar
+    mode="determinate"
+    *ngIf="this.progressBarVisable"
+    [value]="this.progressValue"
+  ></mat-progress-bar>
+</mat-expansion-panel>

@@ -1,0 +1,36 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">Schedule Reactivation</h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="regular-grey">close</mat-icon>
+    </button>
+  </div>
+
+  <app-date-time-picker hideTimePicker [formControl]="date">
+  </app-date-time-picker>
+
+  <div fxLayout fxLayoutGap="10px">
+    <button
+      mat-button
+      mat-stroked-button
+      color="primary"
+      fxFlex
+      class="button--blue-border"
+      (click)="onCloseDialog()"
+    >
+      <span class="typography-12">CANCEL</span>
+    </button>
+    <button
+      mat-flat-button
+      class="button button--lime-green"
+      fxFlex
+      (click)="updateSchedule()"
+    >
+      <span class="typography-12">UPDATE SCHEDULE</span>
+    </button>
+  </div>
+</div>

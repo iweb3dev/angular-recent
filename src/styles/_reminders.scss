@@ -1,0 +1,53 @@
+.schedule-reminder-date {
+  .calendar {
+    min-height: unset !important;
+  }
+}
+
+.reminders {
+  button {
+    &.mat-raised-button {
+      font-size: 12px;
+      font-weight: 300;
+    }
+  }
+
+  .sort {
+    .mat-select-min-line {
+      margin-left: 2.5rem;
+    }
+  }
+}
+
+.schedule-reminder {
+  .reminder-date {
+    .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+      background-color:rgba(0, 0, 0, 0.42);
+      background-image: unset;
+    }
+    .mat-form-field-flex {
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .mat-checkbox-disabled.mat-checkbox-checked .mat-checkbox-background {
+    background-color: #2196f3;
+  }
+  .mat-checkbox-disabled .mat-checkbox-label {
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+
+@media screen and (max-width: $sm) {
+  .create {
+    .mat-button-wrapper {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      display: block;
+      overflow: hidden;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<section *ngIf="callInNumber || userIdNumber">
+  <mat-card class="card-wrapper">
+    <app-section-title
+      [title]="'Want to use the call in system to send a message?'"
+    ></app-section-title>
+    <h3>Want to use the call in system to send a message?</h3>
+
+    <div fxLayout fxLayoutGap=".75rem" fxLayout.lt-md="column">
+      <div
+        fxLayout="column"
+        fxFlex.gt-md="1 1 70%"
+        fxLayoutAlign="space-around"
+      >
+        <div fxLayout fxLayoutAlign="space-between center">
+          <span>Dial</span>
+          <h4 class="message-send __detail">{{ callInNumber }}</h4>
+        </div>
+
+        <div fxLayout fxLayoutAlign="space-between center">
+          <span>then enter</span>
+          <h4 class="message-send __detail">{{ userIdNumber }}</h4>
+        </div>
+
+        <div fxLayout fxLayoutAlign="space-between center">
+          <span>followed by your PIN</span>
+          <h4 class="message-send __detail">(same as web login)</h4>
+        </div>
+      </div>
+
+      <div
+        fxLayout
+        fxFlex.gt-md="1 1 30%"
+        fxLayoutAlign="flex-end flex-end"
+        fxLayoutAlign.lt-md="center center"
+      >
+        <span class="download-guide" (click)="downloadGuideOnClick()"
+          >Download Guide
+        </span>
+      </div>
+    </div>
+  </mat-card>
+</section>

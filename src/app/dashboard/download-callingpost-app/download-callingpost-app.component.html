@@ -1,0 +1,56 @@
+<ng-container>
+  <mat-card class="card-wrapper">
+    <app-section-title
+      [title]="
+        isIOS && isSafari
+          ? 'How to install'
+          : 'Have a mobile device? <br/> Download our App!'
+      "
+    ></app-section-title>
+    <h3 *ngIf="isIOS && isSafari">How to install</h3>
+
+    <h3 *ngIf="!isIOS && !isSafari">
+      Have a mobile device? <br />
+      Download our App!
+    </h3>
+
+    <section
+      fxLayout="column"
+      fxLayoutGap="1rem"
+      class="download-callingpost"
+      fxLayoutAlign="center center"
+    >
+      <button
+        *ngIf="!isSafari"
+        mat-button
+        type="button"
+        class="btn-download"
+        (click)="btnDownloadOnClick()"
+        [class.pwa-installed]="disablePWAOption"
+      >
+        {{
+          isUnsecureOrDevMode || isIOS
+            ? 'CallingPost App Unavailable'
+            : disablePWAOption
+            ? 'CallingPost App Installed'
+            : 'Download CallingPost App'
+        }}
+      </button>
+
+      <a
+        *ngIf="isIOS && isSafari"
+        target="blank"
+        class="learn-more"
+        href="https://pwa-for-wp.com/docs/article/how-to-add-add-to-homescreen-in-safari-of-iphone-ios-amp-compatible-solution/"
+      >
+        App Install Guide
+      </a>
+      <a
+        target="blank"
+        class="learn-more"
+        href="https://www.callingpost.com/callingpost_mobile_app"
+        >Learn More About CallingPost App</a
+      >
+    </section>
+  </mat-card>
+</ng-container>

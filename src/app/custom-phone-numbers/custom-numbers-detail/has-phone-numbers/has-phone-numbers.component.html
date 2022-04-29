@@ -1,0 +1,176 @@
+<div class="custom-phone-numbers" fxLayout="column" fxLayoutGap="30px">
+  <span
+    class="
+      typography-28 typography-28--bolder typography-28--scale-mobile
+      header
+      custom-phone-numbers__header
+    "
+  >
+    All Custom Phone Numbers
+
+    <button mat-button color="primary">
+      <!-- Learn More -->
+      <a
+        href="http://help.callingpost.com/en/?q=Custom+phone+number"
+        target="_blank"
+        >Learn More</a
+      >
+    </button>
+  </span>
+  <div
+    class="custom-phone-numbers__actions"
+    *ngIf="!(deleteSelection$ | async); else deleteActions"
+  >
+    <div
+      fxLayout
+      fxLayoutAlign="space-between center"
+      fxLayoutAlign.lt-md="space-around center"
+    >
+      <button
+        fxHide.lt-md
+        mat-raised-button
+        class="button button--no-border button--rounded"
+        type="button"
+        appPurchasePhoneNumbers
+        [userInfo]="userInfo"
+        (purchasedNumber)="receivePurchasedNumber.emit($event)"
+      >
+        <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+          <mat-icon>add</mat-icon>
+          <span class="typography--16">Add New Phone Number</span>
+        </div>
+      </button>
+      <div
+        fxLayout="column"
+        fxLayoutGap="5px"
+        fxLayoutAlign="start center"
+        fxHide
+        fxShow.lt-md
+      >
+        <button
+          mat-mini-fab
+          color="primary"
+          class="
+            button button-primary-inverted button-primary-inverted--no-border
+            fab-50 fab-50--scale-mobile
+          "
+          type="button"
+          appPurchasePhoneNumbers
+          [userInfo]="userInfo"
+          (purchasedNumber)="receivePurchasedNumber.emit($event)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <span class="typography-12 text-grey" fxHide.gt-xs>Add Number</span>
+      </div>
+      <div fxLayout fxLayoutGap.gt-md="30px">
+        <!-- <app-search
+          [isMobileView]="isMobileView"
+        ></app-search> -->
+        <app-more-actions
+          fxShow
+          fxHide.lt-md
+          (selectDeletePhoneNumbers)="onShowDeleteSelection()"
+          (deleteAllPhoneNumbers)="onDeleteAllPhoneNumbers()"
+        ></app-more-actions>
+      </div>
+      <div fxlayout fxHide fxShow.lt-md>
+        <app-more-actions
+          (selectDeletePhoneNumbers)="onShowDeleteSelection()"
+          (deleteAllPhoneNumbers)="onDeleteAllPhoneNumbers()"
+        ></app-more-actions>
+      </div>
+    </div>
+  </div>
+  <app-phone-numbers-list
+    [showDeleteSelection$]="deleteSelection$"
+    [phoneNumbers$]="allPhoneNumbers$"
+    [userInfo]="userInfo"
+    (deletePhoneNumber)="onDeletePhoneNumbers($event)"
+    (deleteSinglePhoneNumber)="onDeleteSinglePN($event)"
+  ></app-phone-numbers-list>
+</div>
+
+<ng-template #deleteActions>
+  <!--DESKTOP-->
+  <div
+    class="custom-phone-numbers__actions"
+    fxLayout
+    fxLayoutAlign="space-between center"
+    fxHide.lt-md
+  >
+    <button
+      mat-button
+      class="button button--no-border"
+      color="primary"
+      (click)="onSelectAllPhoneNumbersForDelete(!allSelected)"
+    >
+      <span class="typography-16">
+        {{ allSelected ? 'Unselect All' : 'Select All' }}
+      </span>
+    </button>
+    <div fxLayout fxLayoutGap="20px">
+      <button
+        mat-button
+        class="button button-primary-inverted"
+        color="primary"
+        fxFlex="250px"
+        [disabled]="!canEnableDelete"
+        (click)="onPhoneNumbersDelete()"
+      >
+        <span class="typography-16">Delete</span>
+      </button>
+      <button
+        mat-button
+        class="button button--no-border"
+        color="primary"
+        (click)="onPhoneNumbersDeleteSelectionHide()"
+      >
+        <span class="typography-16">Cancel</span>
+      </button>
+    </div>
+  </div>
+  <!--MOBILE-->
+  <div fxLayout="column" fxLayoutGap="20px" fxHide fxShow.lt-md>
+    <div class="keywords__actions" fxLayout fxLayoutAlign="center center">
+      <button
+        fxFlex
+        mat-button
+        class="button button-primary-inverted"
+        color="primary"
+        [disabled]="!canEnableDelete"
+        (click)="onPhoneNumbersDelete()"
+      >
+        <span class="typography-16">Delete</span>
+      </button>
+    </div>
+    <div>
+      <mat-divider></mat-divider>
+      <div
+        fxLayout
+        fxLayoutAlign="space-between center"
+        class="mobile-actions-block"
+      >
+        <button
+          mat-button
+          class="button button--no-border"
+          color="primary"
+          (click)="onSelectAllPhoneNumbersForDelete(!allSelected)"
+        >
+          <span class="typography-16">
+            {{ allSelected ? 'Unselect All' : 'Select All' }}
+          </span>
+        </button>
+        <button
+          mat-button
+          class="button button--no-border"
+          color="primary"
+          (click)="onPhoneNumbersDeleteSelectionHide()"
+        >
+          <span class="typography-16">Cancel</span>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</ng-template>

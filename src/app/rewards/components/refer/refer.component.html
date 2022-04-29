@@ -1,0 +1,34 @@
+<div class="my-rewards-container" fxLayout="column" fxLayoutGap="75px">
+  <div (click)="onNavigateBack()" class="print" fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
+    <span class="material-icons">
+      chevron_left
+    </span>
+    <span>Back to rewards</span>
+  </div>
+  <div class="header" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <span class="material-icons-outlined email-icon">email</span>
+      <span class="typography-28 typography-28--bold text-black">Send Referral Email</span>
+    </div>
+  </div>
+  <div fxLayout fxLayout.lt-sm="column" fxLayoutGap.lt-sm="30px" fxLayoutAlign="center start" >
+    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="email-body-container">
+      <span class="typography-18--bold text-subtitle">Your Referral Email(s)</span>
+      <span class="typography-16--bold text-label">Enter up to 10 emails and separate them with commas.</span>
+      <div fxLayout="column" [formGroup]="emailMessageForm">
+        <textarea rows="7" cols="100" formControlName="emailBody" class="email-body">
+        </textarea>
+      </div>
+      <div class="btn-container">
+        <span></span>
+        <button mat-button class="button button--lime-green" type="button" fxFlex (click)="onSendReferralEmail()">
+          Send Referral Email
+        </button>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start start" fxFlex class="email-example">
+      <span class="typography-16 text-grey ">Email Example</span>
+      <img src="assets/img/Referral Email Design.png" class="referral-email" alt="">
+    </div>
+  </div>
+</div>

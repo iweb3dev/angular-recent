@@ -1,0 +1,83 @@
+<div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start center">
+  <button
+    mat-mini-fab
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+    class="button button-primary-inverted button-primary-inverted--no-border fab-50 fab-50--scale-mobile"
+    (click)="openSearchField()"
+    [disabled]="disabled"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+  <span class="typography-12 text-grey" fxHide.gt-xs>Search</span>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayBackdropClass="transparent"
+  [cdkConnectedOverlayHasBackdrop]="isMobileView"
+  [cdkConnectedOverlayPanelClass]="isMobileView ? 'light-grey-overlay' : ''"
+  [cdkConnectedOverlayWidth]="isMobileView ? '380px' : '280px'"
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayPositions]="positions"
+  (backdropClick)="isOpen = false"
+>
+  <div
+    fxFlex
+    fxLayout
+    fxLayoutAlign="flex-end center"
+    *ngIf="!isMobileView; else mobileView"
+  >
+    <mat-form-field fxFlex fxFlex.md="65" fxFlex.sm="75" fxFlexAlign="end">
+      <mat-label class="typography-14 text-grey">Search messages</mat-label>
+      <input
+        matInput
+        #desktopInput
+        autocomplete="off"
+        [formControl]="searchControl"
+        (input)="onSearchChange($event)"
+      />
+    </mat-form-field>
+  </div>
+
+  <ng-template #mobileView>
+    <div
+      class="mobile-control-view"
+      fxLayout
+      fxFlex
+      fxLayoutAlign="start center"
+      fxLayoutGap="15px"
+    >
+      <div
+        fxFlex
+        fxLayoutAlign="start center"
+        cdkTrapFocus
+        cdkTrapFocusAutoCapture
+      >
+        <mat-form-field fxFlex *ngIf="isMobileView">
+          <mat-label class="typography-14 text-grey">Search messages</mat-label>
+          <input
+            matInput
+            cdkFocusInitial
+            autocomplete="off"
+            [formControl]="searchControl"
+            #mobileInput
+            (input)="onSearchChange($event)"
+          />
+        </mat-form-field>
+        <button
+          matSuffix
+          mat-mini-fab
+          class="button button-primary-inverted button-primary-inverted--no-border fab-50 fab-50--scale-mobile"
+          (click)="focusInputElement()"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+      <button mat-icon-button (click)="onCloseMobileSearch()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </ng-template>
+</ng-template>

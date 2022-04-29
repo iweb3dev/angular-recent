@@ -1,0 +1,14 @@
+<app-bottom-sheet
+  [class.no-padding]="showRecipients$ | async"
+  [title]="(showRecipients$ | async) ? 'Recipients' : 'Voice results'"
+  [showAnotherComponent]="showRecipients$ | async"
+  (closeAnotherComponent)="onCloseRecipients()"
+>
+  <app-message-recipients
+    body
+    *ngIf="showRecipients$ | async; else details"
+  ></app-message-recipients>
+  <ng-template #details>
+    <app-message-details body></app-message-details>
+  </ng-template>
+</app-bottom-sheet>

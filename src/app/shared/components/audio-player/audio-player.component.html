@@ -1,0 +1,55 @@
+<ng-container *ngIf="{ data: sourceData$ | async } as sourceData">
+  <mat-card class="player" fxLayout="column">
+    <span class="typography-14 typography-14--scale-mobile">
+      {{ label }}
+    </span>
+    <mat-slider
+      [value]="sourceData.data?.currentTime"
+      [max]="sourceData.data?.duration"
+      [disabled]="(sourceData.data?.currentTime === 0 && paused) || !hasSource"
+      (change)="onCurrentTimeChange($event)"
+      step="0.5"
+      min="0"
+      class="player-slider"
+    ></mat-slider>
+    <div fxLayout fxLayoutAlign="space-between">
+      <span class="typography-14 typography-14--scale-mobile">
+        {{ sourceData.data?.formattedCurrentTime || '00:00' }}
+      </span>
+      <span class="typography-14 typography-14--scale-mobile">
+        {{ sourceData.data?.formattedDuration || '00:00' }}
+      </span>
+    </div>
+    <div class="voice-control-bar" fxLayout>
+      <button
+        mat-icon-button
+        color="primary"
+        type="button"
+        (click)="onPlay()"
+        *ngIf="paused"
+      >
+        <mat-icon>play_arrow</mat-icon>
+        <span>Listen</span>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        type="button"
+        (click)="onPause()"
+        *ngIf="!paused"
+      >
+        <mat-icon>pause</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        type="button"
+        *ngIf="sourceData.data?.currentTime > 0 || !paused"
+        (click)="onStop()"
+      >
+        <mat-icon>stop</mat-icon>
+      </button>
+      <ng-content></ng-content>
+    </div>
+  </mat-card>
+</ng-container>

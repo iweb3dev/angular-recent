@@ -1,0 +1,546 @@
+<div
+  class="message-detail-overview"
+  *ngIf="messageResult$ | async as messageResult"
+  fxLayout="column"
+  fxLayoutGap="40px"
+>
+  <div
+    (click)="onNavigateBack()"
+    class="print"
+    fxLayout
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+    *ngIf="!isMobileView"
+  >
+    <span class="material-icons"> chevron_left </span>
+    <span >Back to communication results</span>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="18px">
+    <div fxLayout fxLayoutAlign="space-between start">
+      <div
+        fxLayout
+        fxLayout.lt-md="column"
+        fxLayoutGap="10px"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.lt-md="start start"
+      >
+        <span class="typography-18--bold">
+          {{ messageResult.notificationName }}
+        </span>
+        <div
+          class="message-results-status"
+          [ngClass]="communicationClass"
+          fxLayout
+          fxLayoutAlign="center center"
+          fxLayoutGap="16px"
+        >
+          <span class="typography-16--bold status-text">
+            {{ communicationStatus }}
+          </span>
+          <span class="material-icons">
+            {{ statusIcon }}
+          </span>
+        </div>
+        <div *ngIf="messages">
+          <app-message-preview
+            [message]="messages"
+            hideMessageActions
+          ></app-message-preview>
+        </div>
+      </div>
+      <span class="typography-16 print" (click)="printExport()">Print</span>
+    </div>
+    <div
+      class="message-results-sub-header typography-14"
+      fxLayout="row wrap"
+      fxLayout.lt-md="column"
+      fxLayoutGap.lt-md="8px"
+      fxLayoutGap="65px"
+    >
+      <span>
+        {{ messageResult.startDateTime | date: 'MM/dd/yy' }} at
+        {{ messageResult.startDateTime | date: 'h:mm a' | addTimeZoneAbbr }}
+      </span>
+      <div>
+        <span class="group-name" *ngFor="let group of messageResult.groupNames">
+          {{ group }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="18px">
+    <span fxFlex class="typography-16--bold message-detail-header"
+      >Message details</span
+    >
+    <div
+      class="content"
+      *ngIf="deliveryStatistics$ | async as deliveryStatistics"
+      fxLayout="column"
+      fxLayoutGap="25px"
+    >
+      <div
+        class="delivery-statistics"
+        fxLayout="column"
+        fxLayoutAlign="center stretch"
+        fxLayoutGap="25px"
+      >
+        <!-- Phone -->
+        <div fxLayout="column" fxLayoutGap="30px" fxFlex class="result-frame">
+          <div
+            fxLayout
+            fxLayoutGap="40px"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.lt-md="space-between center"
+          >
+            <div
+              fxLayout
+              fxLayoutGap="10px"
+              fxLayoutAlign="start center"
+              class="fixed-width-dekstop"
+            >
+              <span class="material-icons delivery-icon" color="primary">
+                phone_in_talk
+              </span>
+              <span class="typography-18 typography-18--bold">Voice</span>
+            </div>
+            <span
+              class="view-recipients"
+              (click)="onViewMessageRecipients(endPointTypes.phone)"
+              >View recipients</span
+            >
+          </div>
+          <div fxLayout="column" fxLayoutGap="20px">
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Live answer:
+                <b>
+                  {{
+                    calculatePercentage(liveAnswers, phoneRecipients)
+                      | number: '1.1-2'
+                  }}%</b
+                ></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar green"
+                mode="determinate"
+                [value]="calculatePercentage(liveAnswers, phoneRecipients)"
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ liveAnswers }}/{{ phoneRecipients }} recipients</span
+              >
+            </div>
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Answering machine:
+                <b>
+                  {{
+                    calculatePercentage(answeringMachines, phoneRecipients)
+                      | number: '1.1-2'
+                  }}%
+                </b></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar blue"
+                mode="determinate"
+                [value]="
+                  calculatePercentage(answeringMachines, phoneRecipients)
+                "
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ answeringMachines }}/{{ phoneRecipients }} recipients</span
+              >
+            </div>
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Undelivered:
+                <b>
+                  {{
+                    calculatePercentage(undeliveredPhones, phoneRecipients)
+                      | number: '1.1-2'
+                  }}%
+                </b></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar orange"
+                mode="determinate"
+                [value]="
+                  calculatePercentage(undeliveredPhones, phoneRecipients)
+                "
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ undeliveredPhones }}/{{ phoneRecipients }} recipients</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div fxLayout="column" fxLayoutGap="30px" fxFlex class="result-frame">
+          <div
+            fxLayout
+            fxLayoutGap="40px"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.lt-md="space-between center"
+          >
+            <div
+              fxLayout
+              fxLayoutGap="10px"
+              fxLayoutAlign="start center"
+              class="fixed-width-dekstop"
+            >
+              <span class="material-icons delivery-icon" color="primary">
+                sms
+              </span>
+              <span class="typography-18 typography-18--bold">Text</span>
+            </div>
+            <span
+              class="view-recipients"
+              (click)="onViewMessageRecipients(endPointTypes.sms)"
+              >View recipients</span
+            >
+          </div>
+          <div fxLayout="column" fxLayoutGap="20px">
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Delivered:
+                <b>
+                  {{
+                    calculatePercentage(deliveredTexts, textRecipients)
+                      | number: '1.1-2'
+                  }}%
+                </b></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar green"
+                mode="determinate"
+                [value]="calculatePercentage(deliveredTexts, textRecipients)"
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ deliveredTexts }}/{{ textRecipients }} recipients</span
+              >
+            </div>
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Undelivered:
+                <b>
+                  {{
+                    calculatePercentage(undeliveredTexts, textRecipients)
+                      | number: '1.1-2'
+                  }}%
+                </b></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar blue"
+                mode="determinate"
+                [value]="calculatePercentage(undeliveredTexts, textRecipients)"
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ undeliveredTexts }}/{{ textRecipients }} recipients</span
+              >
+            </div>
+          </div>
+
+          <!-- Polling -->
+          <div
+            class="polling"
+            fxLayout="column"
+            fxLayoutGap="30px"
+            fxFlex
+            *ngIf="textRecipients > 0"
+          >
+            <div
+              fxLayout
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.lt-md="space-between center"
+            >
+              <div fxLayout fxLayoutGap="10px" fxLayoutAlign="start center">
+                <span class="typography-18 typography-18--bold"
+                  >Polling results</span
+                >
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="20px">
+              <div
+                class="relative-container"
+                fxLayout
+                fxLayout.lt-md="column"
+                fxLayoutAlign.lt-md="center start"
+                fxLayoutGap.lt-md="10px"
+                fxLayoutGap="40px"
+                fxLayoutAlign="start center"
+              >
+                <span class="typography-16--bold fixed-width-dekstop"
+                  >Yes:
+                  <b>
+                    {{
+                      calculatePercentage(pollingResultYes, textRecipients)
+                        | number: '1.1-2'
+                    }}%
+                  </b></span
+                >
+                <mat-progress-bar
+                  class="message-results-overview-bar orange"
+                  mode="determinate"
+                  [value]="
+                    calculatePercentage(pollingResultYes, textRecipients)
+                  "
+                ></mat-progress-bar>
+                <span class="fixed-width-dekstop pos-absolute-mobile"
+                  >{{ pollingResultYes }}/{{ textRecipients }} recipients</span
+                >
+              </div>
+              <div
+                class="relative-container"
+                fxLayout
+                fxLayout.lt-md="column"
+                fxLayoutAlign.lt-md="center start"
+                fxLayoutGap.lt-md="10px"
+                fxLayoutGap="40px"
+                fxLayoutAlign="start center"
+              >
+                <span class="typography-16--bold fixed-width-dekstop"
+                  >No:
+                  <b>
+                    {{
+                      calculatePercentage(pollingResultNo, textRecipients)
+                        | number: '1.1-2'
+                    }}%
+                  </b></span
+                >
+                <mat-progress-bar
+                  class="message-results-overview-bar blue"
+                  mode="determinate"
+                  [value]="calculatePercentage(pollingResultNo, textRecipients)"
+                ></mat-progress-bar>
+                <span class="fixed-width-dekstop pos-absolute-mobile"
+                  >{{ pollingResultNo }}/{{ textRecipients }} recipients</span
+                >
+              </div>
+              <div
+                class="relative-container"
+                fxLayout
+                fxLayout.lt-md="column"
+                fxLayoutAlign.lt-md="center start"
+                fxLayoutGap.lt-md="10px"
+                fxLayoutGap="40px"
+                fxLayoutAlign="start center"
+              >
+                <span class="typography-16--bold fixed-width-dekstop"
+                  >Maybe:
+                  <b>
+                    {{
+                      calculatePercentage(pollingResultMaybe, textRecipients)
+                        | number: '1.1-2'
+                    }}%
+                  </b></span
+                >
+                <mat-progress-bar
+                  class="message-results-overview-bar blue"
+                  mode="determinate"
+                  [value]="
+                    calculatePercentage(pollingResultMaybe, textRecipients)
+                  "
+                ></mat-progress-bar>
+                <span class="fixed-width-dekstop pos-absolute-mobile"
+                  >{{ pollingResultMaybe }}/{{
+                    textRecipients
+                  }}
+                  recipients</span
+                >
+              </div>
+              <div
+                class="relative-container"
+                fxLayout
+                fxLayout.lt-md="column"
+                fxLayoutAlign.lt-md="center start"
+                fxLayoutGap.lt-md="10px"
+                fxLayoutGap="40px"
+                fxLayoutAlign="start center"
+              >
+                <span class="typography-16--bold fixed-width-dekstop"
+                  >No Response:
+                  <b>
+                    {{
+                      calculatePercentage(pollingResultNoResponse, textRecipients)
+                        | number: '1.1-2'
+                    }}%
+                  </b></span
+                >
+                <mat-progress-bar
+                  class="message-results-overview-bar orange"
+                  mode="determinate"
+                  [value]="
+                    calculatePercentage(pollingResultNoResponse, textRecipients)
+                  "
+                ></mat-progress-bar>
+                <span class="fixed-width-dekstop pos-absolute-mobile"
+                  >{{ pollingResultNoResponse }}/{{ textRecipients }} recipients
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div fxLayout="column" fxLayoutGap="30px" fxFlex class="result-frame">
+          <div
+            fxLayout
+            fxLayoutGap="40px"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.lt-md="space-between center"
+          >
+            <div
+              fxLayout
+              fxLayoutGap="10px"
+              fxLayoutAlign="start center"
+              class="fixed-width-dekstop"
+            >
+              <span class="material-icons delivery-icon" color="primary">
+                mail_outline
+              </span>
+              <span class="typography-18 typography-18--bold">Email</span>
+            </div>
+            <span
+              class="view-recipients"
+              (click)="onViewMessageRecipients(endPointTypes.email)"
+              >View recipients</span
+            >
+          </div>
+          <div fxLayout="column" fxLayoutGap="20px">
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Open Rate:
+                <b>
+                  {{
+                    calculatePercentage(openedEmails, emailRecipients)
+                      | number: '1.1-2'
+                  }}%
+                </b></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar green"
+                mode="determinate"
+                [value]="calculatePercentage(openedEmails, emailRecipients)"
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ openedEmails }}/{{ emailRecipients }} recipients</span
+              >
+            </div>
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Click Rate:
+                <b>
+                  {{
+                    calculatePercentage(clickedEmails, emailRecipients)
+                      | number: '1.1-2'
+                  }}%
+                </b></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar blue"
+                mode="determinate"
+                [value]="calculatePercentage(clickedEmails, emailRecipients)"
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ clickedEmails }}/{{ emailRecipients }} recipients</span
+              >
+            </div>
+            <div
+              class="relative-container"
+              fxLayout
+              fxLayout.lt-md="column"
+              fxLayoutAlign.lt-md="center start"
+              fxLayoutGap.lt-md="10px"
+              fxLayoutGap="40px"
+              fxLayoutAlign="start center"
+            >
+              <span class="typography-16--bold fixed-width-dekstop"
+                >Undelivered:
+                <b>
+                  {{
+                    calculatePercentage(undeliveredEmails, emailRecipients)
+                      | number: '1.1-2'
+                  }}%
+                </b></span
+              >
+              <mat-progress-bar
+                class="message-results-overview-bar orange"
+                mode="determinate"
+                [value]="
+                  calculatePercentage(undeliveredEmails, emailRecipients)
+                "
+              ></mat-progress-bar>
+              <span class="fixed-width-dekstop pos-absolute-mobile"
+                >{{ undeliveredEmails }}/{{ emailRecipients }} recipients</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isPrinting">
+    <app-print-export
+      [message]="messageResult"
+      (printingDone)="isPrinting = !isPrinting"
+    ></app-print-export>
+  </div>
+</div>

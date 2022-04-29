@@ -1,0 +1,215 @@
+@import '/src/styles//variables';
+
+.groups-wrapper {
+  width: 100%;
+}
+
+// Menu Mavigation
+.nav-btn {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 40px 30px 20px 40px;
+  justify-content: space-between;
+  &__left-inner {
+    gap: 2em;
+    display: flex;
+    margin-left: auto;
+    justify-content: space-between;
+    &._groups {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+.mobile-inner {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.btn-title {
+  display: block;
+  margin-top: 10px;
+  color: $app-semi-grey;
+}
+.btn-new-group {
+  display: none;
+}
+.btn-edit-group {
+  gap: 1em;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  padding: 20px 40px 16px 40px;
+}
+.search-inner {
+  position: relative;
+}
+.search {
+  position: absolute;
+  right: 40px;
+}
+
+// Buttons
+.btn-create-group {
+  width: 200px;
+  text-align: center;
+  border-radius: 25px;
+  background: $app-blue;
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
+    0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+  span {
+    font-weight: 400;
+    color: $app-white;
+    margin-left: 10px;
+  }
+}
+
+.btn-delete {
+  width: 100px;
+  color: $app-blue;
+  text-align: center;
+  &._border {
+    border: 1px solid $app-blue;
+  }
+}
+.btn-search {
+  background-color: $app-white;
+}
+.btn-more {
+  background-color: $app-white;
+}
+.btn-select-all {
+  margin-right: auto;
+}
+.btn-tune {
+  background-color: $app-white;
+}
+
+// Icons
+.mat-icon-search {
+  color: $app-blue;
+}
+
+.icon-grey {
+  color: $app-normal-grey;
+}
+.edit-group-menu {
+  margin: 0;
+  top: 25px;
+  width: 250px;
+  right: -30px;
+  padding: 10px;
+  position: absolute;
+  border-radius: 5px;
+  background: $app-white;
+  border: solid 1px $app-bright-silver;
+}
+
+// Filter Popup
+.btn-menu {
+  color: $app-red;
+  text-align: center;
+}
+.btn-menu-plain {
+  font-weight: 500;
+  text-align: center;
+  border-bottom-style: inset;
+}
+
+// Miscellaneous
+.loading-screen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 330px);
+}
+.edit-group-sub-inner {
+  display: flex;
+  justify-content: space-between;
+}
+.dark-grey {
+  color: $app-normal-grey;
+}
+.divider {
+  margin: 0;
+  display: block;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(0, 0, 0, 0.12);
+}
+
+@media screen and (max-width: 768px) {
+  .popup {
+    top: 65px;
+    right: 65px;
+    max-width: 250px;
+  }
+  .btn-edit-group {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+  }
+  .edit-group-sub-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-btn {
+    padding: 20px 20px;
+    &__left-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .btn-title {
+    margin-top: 20px;
+  }
+  .btn-new-group {
+    display: block;
+    margin-top: 20px;
+    color: $app-semi-grey;
+  }
+  .btn-create-group {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      display: none;
+    }
+  }
+  .btn-delete {
+    width: 100%;
+    color: $app-blue;
+    text-align: center;
+  }
+
+  // Edit Groups
+  .mobile-search {
+    display: flex;
+    padding: 20px 60px;
+  }
+  .mobile-field-order {
+    order: 1;
+  }
+  .mobile-cancel-edit {
+    top: 80px;
+    right: 40px;
+    position: absolute;
+  }
+  .mobile-select-edit {
+    top: 80px;
+    left: 40px;
+    position: absolute;
+  }
+  .btn-close {
+    right: 7px;
+    top: 22px;
+    padding: 0px;
+    min-width: 0px;
+    position: absolute;
+    color: $app-dark-gray;
+  }
+}

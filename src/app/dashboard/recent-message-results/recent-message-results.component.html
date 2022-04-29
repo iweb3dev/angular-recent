@@ -1,0 +1,69 @@
+<ng-container *ngIf="communication">
+  <mat-card class="card-wrapper">
+    <app-section-title
+      [title]="'My most recent Message Results'"
+    ></app-section-title>
+    <h3>My most recent Message Results</h3>
+
+    <section
+      fxLayout
+      fxLayoutGap="2rem"
+      fxLayout.lt-md="column"
+      fxLayoutGap.lt-md="1rem"
+    >
+      <div
+        fxFlex="1 1 auto"
+        fxLayout="column"
+        class="message-details"
+        fxLayoutGap.lt-md="1rem"
+        fxLayoutAlign.lt-md="space-around"
+      >
+        <section class="section-space --mobile">
+          <div>
+            <h4 class="message __header">Date</h4>
+            <h3 class="message __header-info">
+              {{ communication.statusDateTime | date: 'shortDate' }}
+            </h3>
+          </div>
+
+          <div>
+            <h4 class="message __header">Name</h4>
+            <h3 class="message __header-info text-overflow">
+              {{ communication.notificationName | titlecase }}
+            </h3>
+          </div>
+        </section>
+
+        <section class="section-space --mobile">
+          <div>
+            <h4 class="message __header">Sent To</h4>
+            <h3 class="message __header-info text-overflow">
+              {{ communication.groupNames | communicationGroupFilter }}
+            </h3>
+          </div>
+
+          <div>
+            <h4 class="message __header">Status</h4>
+            <h3 class="message __header-info">
+              {{ communication.notificationStatus | communicationStatusFilter }}
+            </h3>
+          </div>
+        </section>
+      </div>
+
+      <div fxFlex="1 1 auto" class="chart-wrapper">
+        <canvas
+          baseChart
+          [data]="chartData"
+          [colors]="chartColors"
+          [legend]="chartLegend"
+          [labels]="chartLabels"
+          [chartType]="chartType"
+          [options]="chartOptions"
+          style="min-width: 100px; min-height: 298px"
+        >
+        </canvas>
+      </div>
+    </section>
+  </mat-card>
+</ng-container>

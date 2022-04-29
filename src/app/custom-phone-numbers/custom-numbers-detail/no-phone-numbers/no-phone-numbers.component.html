@@ -1,0 +1,23 @@
+<div class="custom-phone-numbers" fxLayoutAlign="center start" fxLayout>
+  <div
+    class="content"
+    fxLayout="column"
+    fxLayoutGap="40px"
+    fxLayoutAlign="start center"
+  >
+    <span class="typography-20 typography-20--bold">My Custom Numbers</span>
+    <span class="typography-16--bold"
+      >Custom phone numbers are an easy way for your members to recognize that
+      your are sending them text messages!</span
+    >
+    <button
+      mat-raised-button
+      class="typography-14 button button--lime-green"
+      appPurchasePhoneNumbers
+      [userInfo]="userInfo"
+      (purchasedNumber)="receivePurchasedNumber.emit($event)"
+    >
+      CREATE MY FIRST CUSTOM PHONE NUMBER
+    </button>
+  </div>
+</div>

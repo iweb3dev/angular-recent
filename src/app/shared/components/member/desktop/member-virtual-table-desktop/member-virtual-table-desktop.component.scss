@@ -1,0 +1,101 @@
+@import '/src/styles/variables';
+
+// Table
+.member-desktop-wrapper {
+  border-radius: 1rem;
+  margin: 1rem 1rem 1rem 2rem;
+  overflow: auto;
+}
+.virtual-table {
+  width: 100%;
+  overflow: auto;
+  max-width: 100%;
+  background-color: $app-white;
+}
+.group-member-scroll-view {
+  border-radius: 7px;
+  background-color: $app-white;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+}
+.table-header {
+  font-weight: 600;
+  color: $app-black;
+  font-size: 0.9rem;
+}
+.table-data {
+  color: $app-black;
+}
+.table-row {
+  &:hover {
+    cursor: pointer;
+    background-color: $app-white-smoke;
+  }
+}
+.inactive-member {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}
+.member-item-edit {
+  padding-left: 0.5rem;
+}
+
+// Misc
+.hide-section {
+  display: none;
+}
+
+// Profile
+.member-image-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.member-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.member-name {
+  cursor: pointer;
+  color: $app-mat-blue;
+  &:hover {
+    background-color: $app-white-smoke;
+  }
+}
+
+// Buttons
+.delete-member {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  .action-focus {
+    &:hover {
+      background-color: $app-white-smoke;
+    }
+  }
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $app-light-grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $app-dark-grey;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $app-dark-grey;
+}
+
+cdk-virtual-scroll-viewport {
+  overflow: visible;
+  contain: inherit;
+}

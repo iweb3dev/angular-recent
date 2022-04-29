@@ -1,0 +1,25 @@
+<div class="organization-name-modal ">
+  <div fxLayout="column" fxLayoutAlign="start">
+    <div class="header">
+      <span class="typography-14">
+        Enter the name of your organization:
+      </span>
+      <span class="typography-14">
+        (example: First Baptist Church)
+      </span>
+    </div>
+    <div>
+      <mat-form-field class="input-full-width" appearance="fill">
+        <mat-label>Organization Name</mat-label>
+        <input matInput placeholder="Organization Name" [(ngModel)]="organizationName" />
+      </mat-form-field>
+    </div>
+    <div class="buttons" fxLayout="row" fxLayoutGap="20px" fxLayoutGap.lt-md="10px" fxLayoutAlign="end">
+      <button mat-raised-button color="primary" fxFlex class="primary-button mat-raised-button" (click)="onCancel()" >Cancel</button>
+      <button type="button"
+      class="button button-primary-inverted mat-raised-button"
+      fxFlex
+      [disabled]="!organizationName" (click)="onSave()">Save</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div fxLayout="row" fxLayoutAlign="center center" style="height: 100%;">
+  <div fxFlex="50" fxLayout="column" class="left-container" fxFill>
+    <a href="http://www.callingpost.com"><img class="logo" src="/assets/img/CallingPostLogo.png"></a>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center start" fxFlex="50" class="right-container">
+    <span class="survey-title">CallingPost Survey</span>
+    <div fxLayout="row" fxLayoutAlign="start none" class="question-container">
+      <div class="typography-20"><span class="typography-20--bold">Q. </span> From: David This text is to confirm that you received an acceptance letter via email (please check your spam)</div>
+    </div>
+    <label id="response-radio-group-label">Select your answer below:</label>
+    <mat-radio-group
+      aria-labelledby="response-radio-group-label"
+      class="response-radio-group"
+      [(ngModel)]="selectedResponse">
+      <mat-radio-button class="response-radio-button" *ngFor="let response of responses" [value]="response">
+        {{response.response}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div fxLayout="row" fxLayoutAlign="center center" fxFill>
+      <button mat-flat-button class="btn-submit" (click)="submitResponse()">Submit Answer</button>
+    </div>
+  </div>
+</div>

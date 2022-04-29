@@ -1,0 +1,24 @@
+.header {
+  margin-bottom: 30px;
+}
+
+.create {
+  margin-bottom: 50px;
+  width: 15rem;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.schedule-icon {
+  margin-bottom: 40px;
+  height: 95px;
+  display: flex;
+  color: #C0C0C0;
+  :first-child {
+    font-size: 70px;
+  }
+  :last-child {
+    font-size: 50px;
+    margin-top: auto;
+  }
+}

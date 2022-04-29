@@ -1,0 +1,45 @@
+@import './variables';
+
+mat-bottom-sheet-container{
+  height: 100vh;
+  max-height: unset !important;
+  &.bottom-sheet-container {
+    padding: 0;
+  }
+  &.mat-bottom-sheet-container {
+    padding: 0;
+  }
+}
+
+app-bottom-sheet {
+  &.no-padding {
+    .bottom-sheet-body {
+      padding: 0;
+    }
+  }
+}
+
+//Show fullscreen on desktop for now aswell till we have desktop mockups
+.bottom-sheet-backdrop ~ .cdk-global-overlay-wrapper > .cdk-overlay-pane {
+  height: 100%;
+  width: 100%;
+  mat-bottom-sheet-container{
+    &.bottom-sheet-container {
+      max-height: 100%;
+      width: 100%;
+      max-width: unset;
+      margin-left: auto;
+    }
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .bottom-sheet-backdrop ~ .cdk-global-overlay-wrapper > .cdk-overlay-pane {
+    height: 100%;
+    mat-bottom-sheet-container{
+      &.bottom-sheet-container {
+        max-height: 100%;
+      }
+    }
+  }
+}

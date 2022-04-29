@@ -1,0 +1,185 @@
+<div class="my-plan" fxLayout="column" fxLayoutGap="25px">
+  <h1 class="typography-28 typography-28--bold typography-28--scale-mobile">
+    Plan Details
+  </h1>
+  <mat-card *ngIf="userInfo">
+    <div fxLayout="column" fxLayoutGap="30px">
+      <div fxLayout fxLayoutAlign="space-between center">
+        <div fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon class="app-icon-30">card_giftcard</mat-icon>
+          <span
+            class="typography-20 typography-20--bold typography-20--scale-mobile"
+          >
+            {{ userInfo.package.packageName }} Member Plan
+          </span>
+        </div>
+        <ng-container
+          *ngIf="
+            userInfo.userSubscription.downgradeOnNextChargeDate;
+            else changePlanBtn
+          "
+        >
+          <button
+            type="button"
+            mat-flat-button
+            color="warn"
+            class="plan-action-button"
+            fxHide.lt-md
+            (click)="onDowngradeCancel()"
+            [disabled]="isCancellingDowngrade"
+          >
+            Cancel Downgrade
+          </button>
+        </ng-container>
+        <ng-template #changePlanBtn>
+          <button
+            mat-flat-button
+            color="primary"
+            class="plan-action-button"
+            fxHide.lt-md
+            (click)="onPlanChange()"
+          >
+            <span class="typography-12">CHANGE PLAN</span>
+          </button>
+        </ng-template>
+      </div>
+
+      <div
+        fxLayout
+        fxLayoutGap.gt-xs="80px"
+        fxLayoutGap.lt-sm="10px"
+        fxLayout.lt-sm="column"
+      >
+        <div fxLayout="column" fxLayoutGap="10px">
+          <div fxLayout fxLayoutGap="5px">
+            <span class="typography-16 typography-16--bold">Price:</span>
+            <span class="typography-16 typography-16--light-bold">
+              ${{ userInfo.package.cost }}/month
+            </span>
+          </div>
+
+          <div fxLayout fxLayoutGap="5px">
+            <span class="typography-16 typography-16--bold">
+              Auto renew on:
+            </span>
+            <span class="typography-16 typography-16--light-bold">
+              {{ userInfo.userSubscription.packageEndDate | date: 'shortDate' }}
+            </span>
+          </div>
+
+          <div fxLayout fxLayoutGap="5px" *ngIf="isOnPlan">
+            <span class="typography-16 typography-16--bold">
+              Unique Contact(s) Allowed:
+            </span>
+            <span class="typography-16 typography-16--light-bold">
+              {{ userInfo.package.memberCount | number: '1.0':'en-US' }}
+            </span>
+          </div>
+
+          <div fxLayout fxLayoutGap="5px">
+            <span class="typography-16 typography-16--bold">Record Time:</span>
+            <span
+              class="typography-16 typography-16--light-bold"
+              *ngIf="!isOnPlan"
+            >
+              {{ userInfo.package.voiceMessageLength }} Seconds per Credit (max
+              120 seconds)
+            </span>
+            <span
+              class="typography-16 typography-16--light-bold"
+              *ngIf="isOnPlan"
+            >
+              {{ userInfo.package.voiceMessageLength }} Seconds per Message
+            </span>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <div
+            fxLayout
+            fxLayoutGap="5px"
+            *ngIf="
+              userInfo.package.packageTypeId === packageTypeIds.MonthlyCredits
+            "
+          >
+            <span class="typography-16 typography-16--bold">
+              {{ userInfo.package.monthlyCredits }}
+            </span>
+            <span class="typography-16 typography-16--bold">
+              Monthly Credits
+            </span>
+          </div>
+
+          <div fxLayout fxLayoutGap="5px">
+            <span class="typography-16 typography-16--bold">
+              Max characters per text message:
+            </span>
+            <span class="typography-16 typography-16--light-bold">
+              {{ userInfo.package.smsLength }}
+            </span>
+          </div>
+
+          <div fxLayout fxLayoutGap="5px">
+            <span class="typography-16 typography-16--bold">
+              Keywords (included with plan):
+            </span>
+            <span class="typography-16 typography-16--light-bold">
+              {{ userInfo.package.keywords }}
+            </span>
+          </div>
+
+          <div fxLayout fxLayoutGap="5px" *ngIf="isOnPlan">
+            <span class="typography-16 typography-16--bold">
+              Monthly unique contact(s):
+            </span>
+            <span class="typography-16 typography-16--light-bold">
+              {{ userInfo.userMemberPhoneCount | number: '1.0':'en-US' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <span class="typography-16 typography-16--light-bold">
+        You can add
+        <span class="typography-16 typography-16--bold">
+          {{
+            userInfo.package.memberCount - userInfo.userMemberPhoneCount
+              | number: '1.0':'en-US'
+          }}
+        </span>
+        more unique contact(s) to your current plan before having to upgrade.
+      </span>
+      <ng-container
+        *ngIf="
+          userInfo.userSubscription.downgradeOnNextChargeDate;
+          else changePlanBtnMobile
+        "
+      >
+        <button
+          type="button"
+          mat-flat-button
+          color="warn"
+          fxHide.gt-sm
+          fxShow
+          (click)="onDowngradeCancel()"
+          [disabled]="isCancellingDowngrade"
+        >
+          Cancel Downgrade
+        </button>
+      </ng-container>
+      <ng-template #changePlanBtnMobile>
+        <button
+          type="button"
+          mat-flat-button
+          color="primary"
+          fxHide.gt-sm
+          fxShow
+          class="plan-action-button"
+          (click)="onPlanChange()"
+        >
+          <span class="typography-12">CHANGE PLAN</span>
+        </button>
+      </ng-template>
+    </div>
+  </mat-card>
+</div>

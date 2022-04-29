@@ -1,0 +1,223 @@
+<div class="plan-extend" fxLayout="column">
+  <div class="plan-extend__header" fxLayout="column" fxLayoutGap="20px">
+    <h1 class="typography-28 typography-28--bold">Extend Your Plan</h1>
+    <span class="typography-20 typography-20--scale-mobile">
+      This will extend
+      <span class="typography-20--bold">
+        {{ extendData.packageFeatures.packageName }} Member plan
+      </span>
+    </span>
+  </div>
+
+  <form
+    *ngIf="{ data: paymentProfiles$ | async } as profiles"
+    class="extend-form"
+    fxLayout="column"
+    fxLayoutGap="45px"
+  >
+    <div fxLayout="column">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Select Term
+      </span>
+      <mat-form-field class="extend-control">
+        <mat-select
+          [formControl]="termControl"
+          (selectionChange)="onTermChange($event)"
+        >
+          <mat-option
+            *ngFor="let option of extendData.prepayOptions"
+            [value]="option"
+          >
+            {{ option.displayString }} - {{ option.discount }}% Discount
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span
+        class="typography-16 typography-16--scale-mobile"
+        *ngIf="!isYearTermOrLonger"
+      >
+        <span class="typography-16 typography-16--bold">Save up to 20%</span>
+        when you buy 2 years in advance!
+      </span>
+    </div>
+
+    <div fxLayout="column" *ngIf="is1MonthTermSelected">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Promo Code
+      </span>
+      <div fxLayout fxLayoutGap="20px" fxLayoutAlign="start baseline">
+        <mat-form-field class="extend-control">
+          <input matInput placeholder="Optional" [formControl]="promoCode" />
+        </mat-form-field>
+        <button
+          type="button"
+          mat-flat-button
+          class="button button-primary-inverted"
+          [disabled]="promoCode.invalid"
+          (click)="onPromoCodeApply()"
+        >
+          Apply Promo Code
+        </button>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout fxLayoutGap="35px">
+        <span
+          class="typography-20 typography-20--bold typography-20--scale-mobile"
+          fxFlexAlign="center"
+        >
+          Payment Method
+        </span>
+        <button
+          mat-flat-button
+          type="button"
+          fxLayoutGap="20px"
+          class="button button--no-border button--transparent"
+          appAddNewPayment
+          (paymentProfileData)="addNewPayment($event)"
+        >
+          Add payment method
+        </button>
+      </div>
+      <mat-form-field class="extend-control">
+        <mat-select [formControl]="paymentControl">
+          <mat-option *ngIf="!profiles.data.length" disabled>
+            No payment profiles.
+          </mat-option>
+          <ng-container *ngIf="profiles.data.length">
+            <mat-option *ngFor="let profile of profiles.data" [value]="profile">
+              {{
+                profile.creditCardNumber
+                  ? profile.creditCardNumber
+                  : profile.accountNumber
+              }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <ng-container *ngIf="{ data: selectedPackageData$ | async } as extend">
+      <div
+        *ngIf="profiles.data.length; else purchaseDetails"
+        fxLayout="column"
+        fxLayoutGap="30px"
+      >
+        <div fxLayout="column" fxLayoutGap="20px">
+          <div
+            fxLayout
+            fxLayoutGap="10px"
+            class="typography-20 typography-20--scale-mobile"
+          >
+            <span fxFlex="250px" fxFlex.xs="220px">
+              Cost of this Extension:
+            </span>
+            <span
+              class="
+                typography-20 typography-20--bold typography-20--scale-mobile
+              "
+            >
+              &nbsp;${{ extend.data?.priceBeforeDiscount | number: '1.2-2' }}
+            </span>
+          </div>
+          <div
+            *ngIf="extend.data?.promotionSavings"
+            fxLayout
+            fxLayoutGap="10px"
+            class="typography-20 typography-20--scale-mobile"
+          >
+            <span fxFlex="250px" fxFlex.xs="220px">
+              Your extended plan savings:
+            </span>
+            <span class="text-lime-green typography-20--bold">
+              &nbsp;${{ extend.data.promotionSavings | number: '1.2-2' }}
+            </span>
+          </div>
+          <div
+            *ngIf="extend.data?.rewardMoneyUsed"
+            fxLayout
+            fxLayoutGap="10px"
+            class="typography-20 typography-20--scale-mobile"
+          >
+            <span fxFlex="250px" fxFlex.xs="220px"> CallingPost Rewards: </span>
+            <span class="text-lime-green typography-20--bold">
+              -${{ extend.data?.rewardMoneyUsed | number: '1.2-2' }}
+            </span>
+          </div>
+          <div
+            fxLayout
+            fxLayoutGap="20px"
+            fxLayoutAlign="start center"
+            class="typography-20 typography-20--scale-mobile"
+          >
+            <span fxFlex="250px" fxFlex.xs="220px"> Amount Due: </span>
+            <div
+              fxLayout
+              fxLayout.xs="column"
+              fxLayoutGap="7px"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.xs="start"
+            >
+              <span class="typography-20--bold">
+                ${{ extend.data?.amountDueNow | number: '1.2-2' }}
+              </span>
+              <span class="typography-16 typography-16--scale-mobile text-grey">
+                (if paid now)
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        fxLayout
+        fxLayout.lt-sm="column-reverse"
+        fxLayoutGap="20px"
+        class="actions"
+      >
+        <button
+          fxFlex
+          type="button"
+          mat-flat-button
+          class="button button-primary-inverted"
+          (click)="cancelExtend()"
+        >
+          Cancel
+        </button>
+        <button
+          fxFlex
+          type="button"
+          mat-flat-button
+          class="button button--lime-green"
+          (click)="submitExtend()"
+          [disabled]="paymentControl.invalid"
+        >
+          Submit
+        </button>
+      </div>
+
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+      >
+        Note: Your next payment will be due on
+        {{ extend.data?.nextBillDate | date: 'fullDate' }}
+      </span>
+    </ng-container>
+  </form>
+</div>
+
+<ng-template #purchaseDetails>
+  <span
+    class="
+      text-danger
+      typography-18 typography-18--bold typography-18--scale-mobile
+    "
+  >
+    Please, add payment method.
+  </span>
+</ng-template>

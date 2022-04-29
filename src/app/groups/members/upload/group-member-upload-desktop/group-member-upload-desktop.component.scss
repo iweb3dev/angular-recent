@@ -1,0 +1,53 @@
+@import '/src/styles/variables';
+
+.preview-members-wrapper {
+  padding: 30px 15px 5px 30px;
+  background-color: $app-white;
+  background-clip: content-box;
+}
+.column-header {
+  margin-bottom: 0;
+}
+.main-heading {
+  background-color: $app-snow;
+}
+.first-row-header {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+// Table
+.member-details-preview {
+  overflow-y: auto;
+}
+.cdk-viewport {
+  height: calc(100vh - 343px);
+}
+.member-preview-table {
+  border-collapse: collapse;
+}
+.members-preview-header-row {
+  border-bottom: 10px solid $app-snow;
+}
+.members-preview-header {
+  padding-right: 5px;
+}
+.member-preview-body-row {
+  border-bottom: 10px solid $app-snow;
+}
+.member-preview-body-data {
+  padding: 10px 0;
+}
+
+// Buttons
+.btn {
+  font-weight: 100;
+  &.__import-main {
+    padding: 0 10%;
+    color: $app-white;
+    background: $app-blue;
+  }
+}
+.mobile-btn-user-actions {
+  margin: 5% 0 5% 0;
+}

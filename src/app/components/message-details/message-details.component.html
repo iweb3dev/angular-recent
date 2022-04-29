@@ -1,0 +1,309 @@
+<div
+  fxLayout="column"
+  fxLayoutGap="30px"
+  fxLayoutGap.xs="15px"
+  class="message-details"
+>
+  <div class="title-wrapper">
+    <span class="typography-20 typography-20--bold">
+      2) Edit desired message type(s)
+    </span>
+
+    <div *ngIf="showLoadPrevMsg" fxLayout fxLayoutAlign="start center">
+      <span class="typography-14">Or,</span>
+      <button
+        type="button"
+        mat-stroked-button
+        style="padding-left: 0.25rem"
+        (click)="previousMessageOpen.emit()"
+        class="typography-14 button button--no-border"
+      >
+        use previous message
+      </button>
+    </div>
+  </div>
+
+  <div class="message-expansion-details" fxLayout="column" fxLayoutGap="30px">
+    <mat-accordion>
+      <mat-expansion-panel
+        class="expansion-panel"
+        hideToggle
+        [class.expansion-panel--valid]="voiceMessageValid"
+        [expanded]="voiceMessagePanelOpen"
+        (opened)="voiceMessageOpen.emit(true)"
+        (closed)="voiceMessageOpen.emit(false)"
+      >
+        <mat-expansion-panel-header
+          [class.expansion-panel-active--background]="voiceMessageValid"
+        >
+          <mat-panel-title
+            fxLayout
+            fxLayoutGap="20px"
+            fxLayoutGap.xs="10px"
+            fxFlex="225px"
+            fxFlex.xs="200px"
+            fxLayoutAlign="start center"
+          >
+            <mat-icon
+              fontSet="material-icons-outlined"
+              class="app-icon-30 action-icon"
+              [class.action-icon--invalid]="!voiceMessageValid"
+            >
+              phone_in_talk
+            </mat-icon>
+            <span
+              class="typography-20 typography-20--bold typography-20--scale-mobile action-text"
+              [class.action-text--invalid]="!voiceMessageValid"
+              fxFlex="150px"
+              fxFlex.xs="130px"
+            >
+              Voice Message
+            </span>
+            <mat-icon class="done-icon app-icon-20" *ngIf="voiceMessageValid">
+              done
+            </mat-icon>
+          </mat-panel-title>
+          <mat-panel-description fxFlex="85" fxLayoutAlign="end center">
+            <div fxLayout fxLayoutAlign="end center">
+              <span
+                class="typography-16 typography-16--scale-mobile edit-below-button"
+                *ngIf="voiceMessagePanelOpen && !voiceMessageValid"
+              >
+                Edit Below
+              </span>
+              <div
+                class="edit-actions"
+                fxLayout
+                fxLayoutAlign="flex-end center"
+              >
+                <button
+                  mat-button
+                  class="button button--no-border edit-actions__details"
+                  (click)="onVoiceDetailsClick($event)"
+                  *ngIf="voiceMessageValid && !voiceMessagePanelOpen"
+                >
+                  <span
+                    class="typography-16 typography-16--accent typography-16--scale-mobile"
+                  >
+                    Details
+                  </span>
+                </button>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  class="button-border"
+                  *ngIf="!voiceMessagePanelOpen"
+                >
+                  <span class="typography-16 typography-16--scale-mobile">
+                    {{ !voiceMessageValid ? 'Create' : 'Edit' }}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-content select="voice-message"></ng-content>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+        class="expansion-panel"
+        hideToggle
+        [class.expansion-panel--valid]="textMessageValid"
+        [expanded]="textMessagePanelOpen"
+        (opened)="textMessageOpen.emit(true)"
+        (closed)="textMessageOpen.emit(false)"
+      >
+        <mat-expansion-panel-header
+          [class.expansion-panel-active--background]="textMessageValid"
+        >
+          <mat-panel-title
+            fxLayout
+            fxLayoutGap="20px"
+            fxLayoutGap.xs="10px"
+            fxFlex="225px"
+            fxFlex.xs="200px"
+            fxLayoutAlign="start center"
+          >
+            <mat-icon
+              fontSet="material-icons-outlined"
+              class="app-icon-30 action-icon"
+              [class.action-icon--invalid]="!textMessageValid"
+              >sms</mat-icon
+            >
+            <span
+              class="typography-20 typography-20--bold typography-20--scale-mobile action-text"
+              [class.action-text--invalid]="!textMessageValid"
+              fxFlex="150px"
+              fxFlex.xs="130px"
+            >
+              Text Message
+            </span>
+            <mat-icon class="done-icon app-icon-20" *ngIf="textMessageValid">
+              done
+            </mat-icon>
+          </mat-panel-title>
+          <mat-panel-description fxFlex="85" fxLayoutAlign="end center">
+            <diV fxLayout fxLayoutAlign="end center">
+              <span
+                class="typography-16 typography-16--scale-mobile edit-below-button"
+                *ngIf="textMessagePanelOpen && !textMessageValid"
+              >
+                Edit Below
+              </span>
+
+              <div class="edit-actions" fxLayout>
+                <button
+                  mat-button
+                  class="button button--no-border edit-actions__details"
+                  *ngIf="textMessageValid && !textMessagePanelOpen"
+                  (click)="onTextDetailsClick($event)"
+                >
+                  <span
+                    class="typography-16 typography-16--accent typography-16--scale-mobile"
+                  >
+                    Details
+                  </span>
+                </button>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  class="button-border"
+                  *ngIf="!textMessagePanelOpen"
+                >
+                  <span class="typography-16 typography-16--scale-mobile">
+                    {{ !textMessageValid ? 'Create' : 'Edit' }}
+                  </span>
+                </button>
+              </div>
+            </diV>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-content select="text-message"></ng-content>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+        class="expansion-panel"
+        hideToggle
+        [class.expansion-panel--valid]="emailMessageValid"
+        [expanded]="emailMessagePanelOpen"
+        (opened)="emailMessageOpen.emit(true)"
+        (closed)="emailMessageOpen.emit(false)"
+      >
+        <mat-expansion-panel-header
+          [class.expansion-panel-active--background]="emailMessageValid"
+        >
+          <mat-panel-title
+            fxLayout
+            fxLayoutGap="20px"
+            fxLayoutGap.xs="10px"
+            fxFlex="225px"
+            fxFlex.xs="200px"
+            fxLayoutAlign="start center"
+          >
+            <mat-icon
+              fontSet="material-icons-outlined"
+              class="app-icon-30 action-icon"
+              [class.action-icon--invalid]="!emailMessageValid"
+              [class.expansion-panel-active--common]="emailMessageValid"
+            >
+              mail
+            </mat-icon>
+            <span
+              class="typography-20 typography-20--bold typography-20--scale-mobile action-text"
+              [class.action-text--invalid]="!emailMessageValid"
+              fxFlex="150px"
+              fxFlex.xs="130px"
+            >
+              Email Message
+            </span>
+            <mat-icon class="done-icon app-icon-20" *ngIf="emailMessageValid">
+              done
+            </mat-icon>
+          </mat-panel-title>
+          <mat-panel-description
+            fxFlex="85"
+            fxLayout
+            fxLayoutAlign="end center"
+          >
+            <div fxLayout fxLayoutAlign="end center">
+              <div
+                class="typography-16 typography-16--scale-mobile edit-below-button"
+                *ngIf="emailMessagePanelOpen && !emailMessageValid"
+              >
+                Edit Below
+              </div>
+              <div class="edit-actions" fxLayout>
+                <button
+                  mat-button
+                  class="button button--no-border edit-actions__details"
+                  *ngIf="emailMessageValid && !emailMessagePanelOpen"
+                  (click)="onEmailDetailsClick($event)"
+                >
+                  <span
+                    class="typography-16 typography-16--accent typography-16--scale-mobile"
+                  >
+                    Details
+                  </span>
+                </button>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  class="button-border"
+                  *ngIf="!emailMessagePanelOpen"
+                >
+                  <span class="typography-16 typography-16--scale-mobile">
+                    {{ !emailMessageValid ? 'Create' : 'Edit' }}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-content select="email-message"></ng-content>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <ng-content select="message-confirm"></ng-content>
+
+    <div
+      fxLayout
+      fxLayoutGap="10px"
+      fxLayout.lt-sm="column"
+      fxLayoutGap.lt-sm="30px"
+      class="details-actions"
+      fxLayoutAlign="center"
+    >
+      <button
+        *ngIf="allowSendMessage && userAcknowledgementBeforeSave"
+        mat-raised-button
+        color="primary"
+        class="button button--lime-green"
+        fxFlex="300px"
+        fxFlex.lt-sm="100"
+        (click)="onSubmitNewMessage()"
+        [disabled]="!(messageNameValid$ | async)"
+        
+      >
+        SEND NOW
+      </button>
+
+      <ng-content select="message-financials"></ng-content>
+    </div>
+
+    <div
+      fxLayout
+      fxLayoutGap="10px"
+      *ngIf="allowSendMessage && userAcknowledgementBeforeSave"
+    >
+      <mat-checkbox [formControl]="legalTerms"></mat-checkbox>
+      <span>
+        I acknowledge that I have received this notice. I have acquired
+        expressed consent from the following phone numbers and email addresses
+        to communicate with them. I also agree to the following: Responsible Use
+        & Terms and Conditions The Telephony Consumer Protection Act (TCPA)
+        and/or Cellular Telecommunications Industry Association (CTIA) protects
+        consumers as well as businesses. Using CallingPost's services in any
+        manner contrary to the TCPA and/or CTIA may result in immediate
+        termination of service.
+      </span>
+    </div>
+  </div>
+</div>

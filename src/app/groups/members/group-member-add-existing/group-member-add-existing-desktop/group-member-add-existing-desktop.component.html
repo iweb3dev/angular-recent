@@ -1,0 +1,16 @@
+<app-member-virtual-table-desktop
+  [members]="members"
+  [editMode]="editMode"
+  [scrollFilter]="searchFilter"
+  [totalRecords]="totalRecords"
+  [sortExpression]="sortExpression"
+  [hideUserActions]="hideUserActions"
+  [selectedMembers]="selectedMembers"
+  [tableHeight]="tableHeight.AddExisting"
+  (sortChanged)="sortChangeOnEmit($event)"
+  (nextMembers)="nextMembersOnEmit($event)"
+  (memberSelection)="memberSelectOnEmit($event)"
+></app-member-virtual-table-desktop>
+
+<app-no-member [hidden]="showNoMemberMessage"></app-no-member>
+<app-loader *ngIf="scrollLoading" class="overlay-loader"></app-loader>

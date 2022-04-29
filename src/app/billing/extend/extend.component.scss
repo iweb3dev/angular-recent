@@ -1,0 +1,30 @@
+@import '/src/styles/variables';
+
+.plan-extend {
+  &__header {
+    background-color: $app-solitude;
+    padding: 25px 20px 40px 80px;
+    @include respond(tab-port) {
+      padding: 30px 15px;
+    }
+  }
+}
+
+.extend-form {
+  padding: 50px 20px 100px 80px;
+  @include respond(tab-port) {
+    padding: 30px 15px;
+  }
+}
+
+.actions {
+  @include respond(tab-port-up) {
+    max-width: 60%;
+  }
+}
+
+.extend-control {
+  @include respond(tab-port-up) {
+    max-width: 45%;
+  }
+}

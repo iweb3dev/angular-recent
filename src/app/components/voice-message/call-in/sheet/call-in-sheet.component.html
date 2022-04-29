@@ -1,0 +1,147 @@
+<div
+  fxLayout="column"
+  fxLayoutGap="26px"
+  *ngIf="{ status: callMeRecordingStatus$ | async } as data"
+  [appCloseBottomSheetOnEmit]="
+    data.status === CallMeRecordingStatuses.FinishedNoRecording ||
+    data.status === CallMeRecordingStatuses.RecordingComplete
+  "
+>
+  <div class="bottom-sheet-prinary__header">
+    <h3 fxFlex="100" class="typography-16 typography-16--bold title">
+      Record your voice message
+    </h3>
+    <div fxLayout>
+      <button mat-icon-button (click)="onClose(data.status)">
+        <mat-icon class="blue-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div
+    class="bottom-sheet-prinary__body"
+    fxFlex
+    fxLayout="column"
+    fxLayoutGap="40px"
+    fxLayoutAlign="space-between"
+  >
+    <ng-container [ngSwitch]="data.status">
+      <ng-container *ngSwitchCase="CallMeRecordingStatuses.Initial">
+        <p class="typography-16 typography-16--bold">
+          Enter your phone number below and our automated voice message recorder
+          will call you.
+        </p>
+
+        <p class="typography-16 typography-16--bold">
+          Speak clearly & with volume so we can record your voice accurately.
+          Press # when you are finished recording
+        </p>
+
+        <form
+          [formGroup]="phoneRecordForm"
+          fxLayout="column"
+          fxLayoutGap="30px"
+        >
+          <mat-form-field fxFlex appearance="outline">
+            <mat-label>Enter your phone number</mat-label>
+            <input type="text" matInput formControlName="phoneNumber" />
+            <mat-error>*Invalid phone number</mat-error>
+          </mat-form-field>
+
+          <div fxLayout fxLayoutAlign="space-between">
+            <span class="typography-16 typography-16--bold">Extension</span>
+            <mat-slide-toggle
+              formControlName="hasExtension"
+              class="slide-toggle slide-toggle--green"
+            ></mat-slide-toggle>
+          </div>
+
+          <mat-form-field fxFlex *ngIf="extensionEnabled" appearance="outline">
+            <mat-label>Enter extension number</mat-label>
+            <input type="text" matInput formControlName="extension" />
+            <mat-error>*Invalid extension</mat-error>
+          </mat-form-field>
+        </form>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="CallMeRecordingStatuses.Started">
+        <ng-container *ngTemplateOutlet="callingNow"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="CallMeRecordingStatuses.PlacingCall">
+        <ng-container *ngTemplateOutlet="callingNow"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="CallMeRecordingStatuses.CallAnswered">
+        <ng-container *ngTemplateOutlet="callAnswered"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="CallMeRecordingStatuses.RecordingMessage">
+        <ng-container *ngTemplateOutlet="recordingNow"></ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="CallMeRecordingStatuses.ReviewingMessage">
+        <ng-container *ngTemplateOutlet="reviewing"></ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div
+    class="bottom-sheet-prinary__actions"
+    fxLayout="column"
+    fxLayoutGap="10px"
+  >
+    <div fxLayoutGap="10px" fxLayout="column">
+      <button
+        *ngIf="data.status === CallMeRecordingStatuses.Initial"
+        mat-flat-button
+        color="primary"
+        fxFlex
+        [disabled]="phoneRecordForm.invalid"
+        (click)="onCallMe()"
+      >
+        Call & Record
+      </button>
+      <button mat-button color="primary" fxFlex (click)="onClose(data.status)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #callingNow>
+  <div fxLayout="column" fxLayoutGap="30px">
+    <p class="typography-16 typography-16--bold">Calling you now...</p>
+    <p class="typography-14 typography-14--bold">
+      Follow The Audio Prompts Completely to Successfully Record your Voice
+      Message
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #callAnswered>
+  <div fxLayout="column" fxLayoutGap="30px">
+    <p class="typography-16 typography-16--bold">Call answered...</p>
+  </div>
+</ng-template>
+
+<ng-template #recordingNow>
+  <div fxLayout="column" fxLayoutGap="30px">
+    <p class="typography-16 typography-16--bold">
+      Begin recording after the Beep...
+    </p>
+    <p class="typography-14 typography-14--bold">
+      Speak clearly & with volume so we can record your voice accurately
+    </p>
+    <p class="typography-14 typography-14--bold">
+      When finished, press (#) and await further instructions.
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #reviewing>
+  <div fxLayout="column" fxLayoutGap="30px">
+    <p class="typography-16 typography-16--bold">Reviewing your message...</p>
+    <p class="typography-14 typography-14--bold">
+      Follow the instructions to review your voice message
+    </p>
+  </div>
+</ng-template>

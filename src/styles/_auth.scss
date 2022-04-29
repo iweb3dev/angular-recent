@@ -1,0 +1,206 @@
+// ------- auth color vars ------ //
+
+$app-auth-light-grey: #e6e6e6;
+$app-auth-pale-grey: #606060;
+$app-auth-grey: #999;
+$app-auth-font: #7e7e7e;
+$app-auth-grey-dark: #555;
+$app-auth-white: #fff;
+$app-auth-selection: #1abc9c;
+$app-auth-button-blue: #0160e7;
+$app-auth-red: #ff0000;
+$app-dark-red: #a94442;
+$app-auth-bright-red: #fe4c1c;
+$app-light-red: #f2dede;
+$app-pale-red: #ebccd1;
+$app-title-color: #444;
+
+input {
+  &.auth-control {
+    color: $app-auth-font;
+    font-family: 'Red Hat Display', sans-serif;
+    box-sizing: border-box;
+    &--plain {
+      border: 1px solid $app-auth-light-grey;
+      border-radius: 0;
+      padding: 9px 20px;
+      font-size: 14px;
+      transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+      &:active,
+      &:focus {
+        border-color: $app-auth-grey;
+        outline: none;
+      }
+      &::selection {
+        color: $app-auth-white;
+        background: $app-auth-selection;
+      }
+      &::-moz-selection {
+        color: $app-auth-white;
+        background: $app-auth-selection;
+      }
+    }
+    &--rounded {
+      font-size: 16px;
+      border: 1px solid $app-auth-light-grey;
+      border-radius: 23px;
+      padding: 9px 20px;
+      &:active,
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+label {
+  &.auth-label {
+    font-family: 'Red Hat Display', sans-serif;
+    display: inline-block;
+    cursor: pointer;
+    &--prominent {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $app-auth-grey-dark;
+    }
+    &--plain {
+      font-size: 18px;
+      color: $app-auth-pale-grey;
+    }
+  }
+}
+
+select {
+  &.auth-select {
+    border: 1px solid $app-auth-light-grey;
+    height: 50px;
+    border-radius: 95px;
+    color: $app-auth-pale-grey;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 16px;
+    line-height: 1.875;
+    font-weight: 400;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+button {
+  &.auth-button {
+    font-size: 16px;
+    padding: 16px 28px 16px 28px;
+    line-height: 1;
+    display: inline-block;
+    margin: 0;
+    text-decoration: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-weight: bold;
+    letter-spacing: 0;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    outline: 0;
+    box-sizing: border-box;
+    color: $app-auth-white;
+    position: relative;
+    font-family: 'Red Hat Display', sans-serif;
+    overflow: hidden;
+    border-radius: 25px;
+    transition: all 0.2s ease-out;
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      transition: all 0.5s;
+      opacity: 1;
+      transform: translate(-105%, 0);
+      background-color: rgba($app-auth-white, 0.8);
+    }
+    &:hover:before {
+      opacity: 0;
+      transform: translate(0, 0);
+    }
+    &--blue {
+      background: $app-auth-button-blue;
+      box-shadow: 12px 12px 20px 0px rgb(1 96 231 / 30%);
+    }
+    &--red {
+      background: $app-auth-bright-red;
+      box-shadow: 8px 8px 18px 0px rgb(254 76 28 / 30%);
+    }
+    &--green {
+      background: $app-lime-green;
+    }
+    &--white {
+      background: $app-auth-white;
+      box-shadow: 12px 12px 20px 0px rgb(1 96 231 / 30%);
+      color: #066091;
+    }
+    &--arrow-icon-button {
+      .material-icons {
+        width: 38px;
+        height: 38px;
+        background-color: $app-auth-white;
+        color: $app-auth-bright-red;
+        border-radius: 50%;
+        position: absolute;
+        right: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &:disabled {
+      background-color: $app-auth-pale-grey;
+      cursor: not-allowed;
+      &:hover,
+      &:focus {
+        background: $app-auth-pale-grey;
+        &:before,
+        &:after {
+          content: none;
+        }
+      }
+    }
+  }
+}
+
+.invalid-message {
+  color: $app-auth-red;
+  font-size: 1em;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+.auth-title {
+  &--prominent {
+    font-size: 23px;
+    line-height: 44px;
+    font-weight: 400;
+    cursor: pointer;
+    color: $app-title-color;
+    font-family: 'Red Hat Display', sans-serif;
+  }
+}
+
+.alert-danger {
+  background-color: $app-light-red;
+  color: $app-dark-red;
+  padding: 15px;
+  border: 1px solid $app-pale-red;
+  font-size: 16px;
+  text-align: center;
+  font-family: 'Red Hat Display', sans-serif;
+}

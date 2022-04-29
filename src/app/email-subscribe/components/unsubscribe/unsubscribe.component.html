@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="space-evenly center" fxFill class="subscribe-container">
+  <div fxLayout="column" fxLayoutAlign="center center" class="question-container" *ngIf="!isSubmitted">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <a href="http://www.callingpost.com"><img class="logo" src="/assets/img/CallingPostLogo.png"></a>
+    </div>
+    <span class="question-text">Would you like to unsubscribe from all CallingPost emails?</span>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-flat-button class="btn-submit" (click)="unsubscribeFromEmails()">Yes, Unsubscribe</button>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="question-container success" *ngIf="isSuccess">
+    <div fxLayout="column" fxLayoutAlign="center center" class="success-message">
+      <span class="material-icons-outlined icon-white">check_circle</span>
+      <span class="typography-20 success-text">success</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 20px;">
+      <a href="http://www.callingpost.com"><img class="logo" src="/assets/img/CallingPostLogo.png"></a>
+    </div>
+    <span class="typography-16" style="font-weight: 500; padding-bottom: 16px;">
+      You have been unsubscribed from CallingPost emails.
+    </span>
+    <span class="typography-16">We're sad to see you go! If you have any questions please</span>
+    <div class="typography-16">give us call at <b>877.665.5646</b></div>
+  </div>
+</div>

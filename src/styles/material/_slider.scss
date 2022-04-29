@@ -1,0 +1,10 @@
+@import '../variables';
+
+body {
+  .player-slider {
+    .mat-slider-thumb,
+    .mat-slider-track-fill {
+      background-color: $app-black;
+    }
+  }
+}

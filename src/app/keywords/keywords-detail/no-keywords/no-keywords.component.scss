@@ -1,0 +1,42 @@
+@import '/src/styles/variables';
+
+.no-keywords {
+  max-width: 60%;
+  @include respond(tab-port) {
+    max-width: 60%;
+  }
+  @include respond(phone) {
+    max-width: 100%;
+  }
+}
+.header {
+  margin-bottom: 30px;
+}
+
+.create {
+  margin-bottom: 25px;
+  width: 14rem;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.btn-cancel {
+  border: 1px solid blue;
+  color: blue;
+}
+
+.videoWrapper {
+  margin: 40px 0px;
+}
+
+.mat-button.mat-primary {
+  padding: 2px;
+}
+
+.example {
+  padding-left: 20px;
+
+  p {
+    margin-top: 0;
+  }
+}

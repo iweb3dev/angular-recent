@@ -1,0 +1,20 @@
+<div class="no-reminders" fxLayout="column" fxLayoutAlign="start center">
+    <span class="typography-28--bold header">Reminders for consistant messages.</span>
+    <button mat-raised-button class="typography-12 button button--lime-green create"  [routerLink]="['./schedule', '-1']" >
+      <span class="material-icons">
+      add
+      </span>
+      CREATE NEW REMINDER</button>
+      <div class="schedule-icon">
+        <span class="material-icons">
+          date_range
+          </span>
+          <span class="material-icons">
+            schedule
+            </span>
+      </div>
+      <div class="steps" fxLayoutGap="30px" fxLayout="column" fxLayoutAlign="start center">
+        <span class="typography-20--bold">How Auto Reminder Calls Work?</span>
+        <app-step-list [steps]='steps'></app-step-list>
+      </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="login-modal">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="header">
+      <span class="typography-18--bold">Login to</span>
+    </div>
+    <div class="buttons" fxLayout="column" fxLayoutGap="20px" fxLayoutGap.lt-md="10px">
+      <button mat-raised-button color="primary" fxFlex class="primary-button mat-raised-button" (click)="onMyPersonalAccount()">
+        My Personal Account
+      </button>
+
+      <span class="typography-15 text-divider">Or, a Shared Account</span>
+
+      <div class="shared-buttons">
+        <button
+          *ngFor="let account of data.accounts; let index = index"
+          type="button"
+          mat-raised-button
+          color="primary"
+          class="button button-primary-inverted mat-raised-button"
+          fxFlex
+          (click)="onSharedAccount(index)"
+        >
+          {{ account?.organizationName }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

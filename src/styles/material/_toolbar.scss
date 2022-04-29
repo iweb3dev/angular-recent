@@ -1,0 +1,114 @@
+@mixin loadMobile-general-Picture {
+  background-image: url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Top-Layer-385x38/Bar-TopLayer-Mobile-385x38.svg),
+    url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Bottom-Layer-959x38/Bar-Bottom-959x38-General.svg);
+}
+
+@mixin loadMobil-newCommunication-Picture {
+  background-image: url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Top-Layer-385x38/Bar-TopLayer-Mobile-385x38.svg),
+    url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Bottom-Layer-959x38/Bar-Bottom-959x38-Send.svg);
+}
+
+@mixin loadMobile-groupMembers-Picture {
+  background-image: url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Top-Layer-385x38/Bar-TopLayer-Mobile-385x38.svg),
+    url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Bottom-Layer-959x38/Bar-Bottom-959x38-GroupMembers.svg);
+}
+
+@mixin loadMobile-communicationResult-Picture {
+  background-image: url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Top-Layer-385x38/Bar-TopLayer-Mobile-385x38.svg),
+    url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Bottom-Layer-959x38/Bar-Bottom-959x38-CommunResult.svg);
+}
+
+@mixin loadMobile-messageLibrary-Picture {
+  background-image: url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Top-Layer-385x38/Bar-TopLayer-Mobile-385x38.svg),
+    url(/assets/img/Top-Dashboard-Bar/Mobile-TopBars/Bar-Bottom-Layer-959x38/Bar-Bottom-959x38-MessageLibrary.svg);
+}
+
+@mixin toolbar-background-setting {
+  background-position: left, center;
+  background-repeat: no-repeat, repeat;
+  background-size: auto, cover;
+}
+
+.toolbar-background-image {
+  &--general {
+    background-image: url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Top-Layer-490x62-SVG/Bar-Waves-490x62-Desktop.svg),
+      url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Bottom-Layer-1636x62-SVG/Bar-Bottom-1636x62-General.svg);
+    @include toolbar-background-setting;
+  }
+  &--newCommunication {
+    background-image: url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Top-Layer-490x62-SVG/Bar-Waves-490x62-Desktop.svg),
+      url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Bottom-Layer-1636x62-SVG/Bar-Bottom-1636x62-Send.svg);
+    @include toolbar-background-setting;
+  }
+  &--groupMembers {
+    background-image: url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Top-Layer-490x62-SVG/Bar-Waves-490x62-Desktop.svg),
+      url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Bottom-Layer-1636x62-SVG/Bar-Bottom-1636x62-GroupMembers.svg);
+    @include toolbar-background-setting;
+  }
+  &--communicationResult {
+    background-image: url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Top-Layer-490x62-SVG/Bar-Waves-490x62-Desktop.svg),
+      url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Bottom-Layer-1636x62-SVG/Bar-Bottom-1636x62-CommunResult.svg);
+    @include toolbar-background-setting;
+  }
+  &--messageLibrary {
+    background-image: url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Top-Layer-490x62-SVG/Bar-Waves-490x62-Desktop.svg),
+      url(/assets/img/Top-Dashboard-Bar/Desktop-TopBars/Bar-Bottom-Layer-1636x62-SVG/Bar-Bottom-1636x62-MessageLibrary.svg);
+    @include toolbar-background-setting;
+  }
+
+  @media (max-width: 375px) {
+    &--general--mobile {
+      @include loadMobile-general-Picture;
+      @include toolbar-background-setting;
+      background-size: cover, cover;
+    }
+    &--newCommunication--mobile {
+      @include loadMobil-newCommunication-Picture;
+      @include toolbar-background-setting;
+      background-size: cover, cover;
+    }
+    &--groupMembers--mobile {
+      @include loadMobile-groupMembers-Picture;
+      @include toolbar-background-setting;
+      background-size: cover, cover;
+    }
+    &--communicationResult--mobile {
+      @include loadMobile-communicationResult-Picture;
+      @include toolbar-background-setting;
+      background-size: cover, cover;
+    }
+    &--messageLibrary--mobile {
+      @include loadMobile-messageLibrary-Picture;
+      @include toolbar-background-setting;
+      background-size: cover, cover;
+    }
+  }
+
+  @media (min-width: 376px) and (max-width: 959px) {
+    &--general--mobile {
+      @include loadMobile-general-Picture;
+      @include toolbar-background-setting;
+    }
+    &--newCommunication--mobile {
+      @include loadMobil-newCommunication-Picture;
+      @include toolbar-background-setting;
+    }
+    &--groupMembers--mobile {
+      @include loadMobile-groupMembers-Picture;
+      @include toolbar-background-setting;
+    }
+    &--communicationResult--mobile {
+      @include loadMobile-communicationResult-Picture;
+      @include toolbar-background-setting;
+    }
+    &--messageLibrary--mobile {
+      @include loadMobile-messageLibrary-Picture;
+      @include toolbar-background-setting;
+    }
+  }
+}
+
+mat-toolbar {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}

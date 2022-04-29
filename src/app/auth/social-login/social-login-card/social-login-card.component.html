@@ -1,0 +1,26 @@
+<mat-card class="social-login-card">
+  <div
+    fxLayout
+    fxLayoutGap="1rem"
+    class="social-header-wrapper"
+    fxLayoutAlign="initial center"
+  >
+    <mat-icon class="steel-blue">link</mat-icon>
+    <h3 class="social-header steel-blue">
+      New {{ provider | titlecase }} Account
+    </h3>
+  </div>
+
+  <div fxLayout fxLayoutGap="1rem" fxLayoutAlign="initial baseline">
+    <strong class="social-sub-header"
+      ><em class="steel-blue">Almost done!</em></strong
+    >
+    <p class="steel-blue">
+      Login below to link your
+      <strong>{{ provider | titlecase }}</strong> account to your CallingPost
+      account.
+    </p>
+  </div>
+</mat-card>
+
+<mat-divider class="divider-wrapper"></mat-divider>

@@ -1,0 +1,104 @@
+<div class="has-group-managers" fxLayout="column" fxLayoutAlign="start start">
+  <button mat-raised-button class="button button-submit create" fxFlex routerLink="create">Invite Group Manager</button>
+  <span class="typography-24 typography-24--bolder typography-24--scale-mobile header margin-top--20">
+    Pending Group Managers
+  </span>
+
+  <div *ngFor="let groupManager of (groupManagers$ | async)" class="margin-top--10">
+    <ng-container *ngIf="groupManager.id == 0">
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <span class="typography-24 typography-24--scale-mobile">
+          {{ groupManager?.firstName +' '+ groupManager?.lastName }}
+        </span>
+
+        <span class="typography-16 typography-16--bold typography-16--scale-mobile">
+          Groups Managed:
+          <ng-container *ngIf="groupManager.allowAccessToAllGroups; else notAllowGroups">
+            <span class="typography-16 typography-16--scale-mobile">
+              {{
+                'All Groups'
+              }}
+            </span>
+          </ng-container>
+          <ng-template #notAllowGroups>
+            <span class="typography-16 typography-16--scale-mobile" *ngFor="let group of groupManager.groups">
+              {{
+                group.groupName +' '+
+                (groupManager.groups[groupManager.groups.length - 1].id == group.id ? '' : '-' )
+              }}
+            </span>
+          </ng-template>
+        </span>
+
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="margin-top--10">
+
+        <span class="typography-16 typography-16--bold typography-16--scale-mobile">
+          Invited Email Address
+          <span class="typography-16 typography-16--scale-mobile">
+            {{groupManager?.webUserName}}
+          </span>
+        </span>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="margin-top--10">
+
+        <button mat-flat-button (click)="openDeleteDialog(groupManager.subAccountUserID)">Cancel</button>
+        <button mat-flat-button disabled>Pending...</button>
+
+      </div>
+    </ng-container>
+  </div>
+
+  <span class="typography-24 typography-24--bolder typography-24--scale-mobile header margin-top--20">
+    Current Group Managers
+  </span>
+  <div *ngFor="let groupManager of (groupManagers$ | async)" class="margin-top--10">
+    <ng-container *ngIf="groupManager.id != 0" class="margin-top--20">
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <span class="typography-24 typography-24--scale-mobile">
+          {{ groupManager?.firstName +' '+ groupManager?.lastName }}
+        </span>
+
+        <span class="typography-16 typography-16--bold typography-16--scale-mobile">
+          Groups Managed:
+          <ng-container *ngIf="groupManager.allowAccessToAllGroups; else lessGroups">
+            <span class="typography-16 typography-16--scale-mobile">
+              {{
+                'All Groups'
+              }}
+            </span>
+          </ng-container>
+          <ng-template #lessGroups>
+            <span class="typography-16 typography-16--scale-mobile" *ngFor="let group of groupManager.groups">
+              {{
+                group.groupName +' '+
+                (groupManager.groups[groupManager.groups.length - 1].id == group.id ? '' : '-' )
+              }}
+            </span>
+          </ng-template>
+        </span>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="margin-top--10">
+
+        <span class="typography-16 typography-16--bold typography-16--scale-mobile">
+          User ID:
+          <span class="typography-16 typography-16--scale-mobile">
+            {{groupManager?.webUserName}}
+          </span>
+        </span>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="margin-top--10">
+        <button mat-flat-button color="warn" (click)="openDeleteDialog(groupManager.subAccountUserID)">Remove</button>
+        <button mat-flat-button [routerLink]="[groupManager.id, 'edit']">Edit</button>
+      </div>
+    </ng-container>
+  </div>
+
+</div>
+

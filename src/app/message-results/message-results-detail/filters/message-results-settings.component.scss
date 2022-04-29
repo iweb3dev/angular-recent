@@ -1,0 +1,20 @@
+.capitilize {
+  text-transform: capitalize;
+}
+
+.status-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-radio-button {
+  margin: 5px;
+  padding-bottom: 5px;
+}
+
+::ng-deep .mat-radio-label-content {
+  line-height: 24px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}

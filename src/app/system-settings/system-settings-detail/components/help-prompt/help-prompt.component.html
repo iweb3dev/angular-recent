@@ -1,0 +1,55 @@
+<mat-expansion-panel (opened)="showProgressBar()">
+  <mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutGap="15px">
+      <span class="material-icons font-color"> help_outline </span>
+      <span class="typography-20--bold">Help Prompts</span>
+    </div>
+  </mat-expansion-panel-header>
+
+  <div fxLayout="column" fxLayoutGap="10px" *ngIf="this.settings$ | async as tSettings">
+    <app-system-setting-frame hidden [setting]="tSettings.loginInstruction.settingName + '.'"
+    >
+      <mat-checkbox fxFlex class="system-settings-checkbox typography-14"
+      [ngModel]="parseBool(tSettings.loginInstruction.setting?.settingValue)"
+      (change)="onUpdateSetting(tSettings.loginInstruction.setting, $event)"></mat-checkbox>
+    </app-system-setting-frame>
+
+    <!--<app-system-setting-frame [setting]="tSettings.pbxWizard.settingName + '.'"
+    >
+      <mat-checkbox class="form-field-control system-settings-checkbox typography-14"
+      [ngModel]="parseBool(tSettings.pbxWizard.setting?.settingValue)"
+      (change)="onUpdateSetting(tSettings.pbxWizard.setting, $event)"></mat-checkbox>
+    </app-system-setting-frame>-->
+
+    <app-system-setting-frame hidden [setting]="tSettings.loginVideo.settingName + '.'"
+    >
+      <mat-checkbox class="form-field-control system-settings-checkbox typography-14"
+      [ngModel]="parseBool(tSettings.loginVideo.setting?.settingValue)"
+      (change)="onUpdateSetting(tSettings.loginVideo.setting, $event)"></mat-checkbox>
+    </app-system-setting-frame>
+
+    <app-system-setting-frame hidden [setting]="tSettings.communicationOptions.settingName + '.'"
+    >
+      <mat-checkbox class="form-field-control system-settings-checkbox typography-14"
+      [ngModel]="parseBool(tSettings.communicationOptions.setting?.settingValue)"
+      (change)="onUpdateSetting(tSettings.communicationOptions.setting, $event)"></mat-checkbox>
+    </app-system-setting-frame>
+
+   <app-system-setting-frame hidden [setting]="tSettings.importVideo.settingName + '.'"
+    >
+      <mat-checkbox class="form-field-control system-settings-checkbox typography-14"
+      [ngModel]="parseBool(tSettings.importVideo.setting?.settingValue)"
+      (change)="onUpdateSetting(tSettings.importVideo.setting, $event)"></mat-checkbox>
+    </app-system-setting-frame>
+
+    <app-system-setting-frame hidden [setting]="tSettings.smsVideo.settingName + '.'"
+    >
+      <mat-checkbox class="form-field-control system-settings-checkbox typography-14"
+      [ngModel]="parseBool(tSettings.smsVideo.setting?.settingValue)"
+      (change)="onUpdateSetting(tSettings.smsVideo.setting, $event)"></mat-checkbox>
+    </app-system-setting-frame>
+  </div>
+  <mat-progress-bar mode="determinate"
+  *ngIf='this.progressBarVisable'
+  [value]="this.progressValue"></mat-progress-bar>
+</mat-expansion-panel>

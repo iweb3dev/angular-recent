@@ -1,0 +1,46 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">Message Created</h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="regular-grey">close</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="20px">
+    <span class="typography-18">
+      Congratulations! Your message has been created and saved to your message
+      library!
+    </span>
+    <span class="typography-18">
+      Would you like to send or schedule your message now?
+    </span>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout fxLayoutGap="10px">
+      <button
+        mat-button
+        mat-stroked-button
+        color="primary"
+        fxFlex
+        class="button--blue-border"
+        (click)="onCloseDialog()"
+      >
+        NO
+      </button>
+      <button
+        cdkFocusInitial
+        mat-flat-button
+        color="primary"
+        fxFlex
+        (click)="createCommunication()"
+      >
+        YES
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<app-mobile-header
+  (closed)="cancelOnClick()"
+  [headerTitle]="'Create New Group'"
+></app-mobile-header>
+
+<section class="groups-create-wrapper">
+  <div class="groups-create">
+    <h2 fxHide.lt-md class="groups-create__title">Create New Group</h2>
+    <div class="group-name">
+      <h3 class="group-create-sub-header">Name your Group</h3>
+      <mat-form-field class="name-full-width">
+        <input
+          matInput
+          name="name"
+          placeholder="Name"
+          appAlphaNumericOnly
+          [formControl]="groupName"
+        />
+      </mat-form-field>
+    </div>
+
+    <div
+      fxLayoutGap="1rem"
+      fxLayout="row wrap"
+      class="groups-create-btn"
+      *ngIf="groups$ | async as groups"
+      fxLayoutAlign.lt-md="center baseline"
+      fxLayoutAlign="space-between baseline"
+    >
+      <button
+        mat-raised-button
+        class="btn _create"
+        *ngIf="
+          !isFromNewCommunication ||
+          (isFromNewCommunication && groups.totalRecords > 0)
+        "
+        (click)="createGroupOnClick()"
+      >
+        Create Group & Add Members Later
+      </button>
+
+      <button
+        class="btn _add"
+        mat-raised-button
+        fxFlexOrder.lt-md="-1"
+        (click)="addMembersOnClick()"
+      >
+        <mat-icon class="mat-icon-add">person_add</mat-icon> Add Members to Your
+        Group
+      </button>
+
+      <button
+        mat-button
+        type="button"
+        color="primary"
+        class="btn _cancel"
+        (click)="cancelOnClick()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</section>

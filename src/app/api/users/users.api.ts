@@ -1,0 +1,72 @@
+import { environment } from '../../../environments/environment';
+export const ALLOW_ANONYMOUS = `${environment.api.base}`;
+
+export const USER_ENDPOINT = '/api/users';
+export const USER_SETTINGS_ENDPOINT = `/api/usersettings`;
+export const UPDATE_USER_PROFILE = (userId: number) => `${USER_ENDPOINT}/${userId}`;
+export const GET_USER_PROFILE_DATETIME = `${USER_ENDPOINT}/profiledatetime`;
+export const GET_USER_ACCOUNT_STATISTICS = `${USER_ENDPOINT}/quickviewstats`;
+export const SAVE_USER_PROFILE = (userId: number) => `${USER_ENDPOINT}/${userId}/complete`;
+export const SHARE_CALLINGPOST = (userId: number) => `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/${userId}/referrals`;
+export const PUBLIC_SHARE_CALLINGPOST = (webUserName: string) => `${USER_ENDPOINT}/referrals/${webUserName}`;
+export const UPDATE_TRIAL_ACCOUNT_STATUS = (userId: number) => `${USER_ENDPOINT}/${userId}/trialstatus`;
+export const GET_USER_BY_USERNAME = (userLogin: string) => `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/${userLogin}`;
+export const CHECK_ACCOUNT_VERIFICATION = `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/account/verification`;
+export const RESEND_ACCOUNT_VERIFICATION = `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/account/verification/email`;
+export const GET_ACCOUNT_OWNER_BY_REQUESTID = (requestId: number) => `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/requestid/${requestId}`;
+export const GET_USER_BY_EMAILADDRESS = (emailAddress: string) => `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/info?emailAddress=${emailAddress}`;
+export const USER_ADDRESSES_ENDPOINT = `${USER_ENDPOINT}/addresses`;
+export const UPDATE_USER_ADDRESS = (addressId: number) => `${USER_ADDRESSES_ENDPOINT}/${addressId}`;
+export const DELETE_USER_ADDRESS = (addressId: number) => `${USER_ADDRESSES_ENDPOINT}/${addressId}`;
+export const SEND_CONTACT_US_EMAIL = `${USER_ENDPOINT}/contactUs`;
+export const USER_EMAIL_ENDPOINT = `${USER_ENDPOINT}/emailAddresses`;
+export const GET_USER_SPECIFIC_EMAIL_ADDRESS = (emailId: number) => `${USER_EMAIL_ENDPOINT}/${emailId}`;
+export const DELETE_USER_EMAIL = (emailId: number) => `${USER_EMAIL_ENDPOINT}/${emailId}`;
+export const UPDATE_USER_EMAIL = (emailId: number) => `${USER_EMAIL_ENDPOINT}/${emailId}`;
+export const USER_PHONE_ENDPOINT = `${USER_ENDPOINT}/phoneNumbers`;
+export const DELETE_USER_PHONE = (phoneId: number) => `${USER_PHONE_ENDPOINT}/${phoneId}`;
+export const GET_USER_PHONENUMBER = (phoneId: number) => `${USER_PHONE_ENDPOINT}/${phoneId}`;
+export const UPDATE_USER_PHONENUMBER = (phoneId: number) => `${USER_PHONE_ENDPOINT}/${phoneId}`;
+export const UPDATE_USER_PHONENUMBER_VALIDATE = (phoneId: number, firstValidation: boolean) =>
+  `${USER_PHONE_ENDPOINT}/${phoneId}?firstValidation=${firstValidation}`;
+export const INSERT_USER_PHONENUMBER = (userId: number) => `${ALLOW_ANONYMOUS}${USER_PHONE_ENDPOINT}/na/${userId}`;
+export const GET_PHONENUMBERS_PURCHASED = `${USER_PHONE_ENDPOINT}/purchased`;
+export const CHECK_PHONENUMBER_AVAILABLE = `${ALLOW_ANONYMOUS}${USER_PHONE_ENDPOINT}/trialavailable`;
+export const VALIDATE_PHONE_NUMBER = `${ALLOW_ANONYMOUS}${USER_PHONE_ENDPOINT}/validate`;
+export const VERIFY_PHONENUMBER = `${USER_PHONE_ENDPOINT}/verification`;
+export const VERIFY_PHONENUMBER_ANONYMOUS = `${ALLOW_ANONYMOUS}${USER_PHONE_ENDPOINT}/verification`;
+export const VERIFY_PHONENUMBER_PIN = (pin: number) => `${VERIFY_PHONENUMBER}/?pin=${pin}`;
+export const GET_PHONENUMBER_VERIFICATION_STATUS = (verificationId: number) => `${VERIFY_PHONENUMBER_ANONYMOUS}/${verificationId}`;
+export const VERIFY_SMS_PIN_VALID_NO_PIN = (userId: number) => `${VERIFY_PHONENUMBER_ANONYMOUS}/sms?userId=${userId}`;
+export const VERIFY_SMS_PIN_VALID_WITH_PIN = (userId: number, pin: number) => `${VERIFY_PHONENUMBER_ANONYMOUS}/sms?userId=${userId}&pin=${pin}`;
+export const VERIFY_PHONE_VENDOR = `${VERIFY_PHONENUMBER_ANONYMOUS}/vendor`;
+export const VERIFY_VENDOR_PIN = (phoneNumber: string, countryCode: number, pin: number, userId: number) =>
+  `/api/users/phoneNumbers/verification/vendor?phoneNumber=${phoneNumber}&countryCode=${countryCode}&pin=${pin}&userId=${userId}`;
+export const GET_CALLFORWARD_PHONENUMBER = (phoneNumberForwarded: string) =>
+  `${ALLOW_ANONYMOUS}/api/users/phoneNumber/callForward?phoneNumberForwarded=${phoneNumberForwarded}`;
+export const UPDATE_CALLFORWARD_PHONENUMBER = (boughtPhoneNumberId: number, phoneNumberForwarded: string) =>
+    `/api/users/phoneNumber/callForward?boughtPhoneNumberId=${boughtPhoneNumberId}&phoneNumberForwarded=${phoneNumberForwarded}`;
+export const UPDATE_USER_ADDITIONAL_ORG_INFO = `${USER_ENDPOINT}/additionalOrganizationInformation`;
+export const GET_USER_SURVEY_STATUS = `${USER_ENDPOINT}/surveyStatus`;
+export const SAVE_USER_SURVEY = `${USER_ENDPOINT}/submitSurvey`;
+export const GET_USERNAME_BY_EMAILADDRESS = `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/getUsername`;
+export const GET_HAS_SEEN_GUIDE = (guideId: number) => `${USER_ENDPOINT}/guide/${guideId}`;
+export const SAVE_HAS_SEEN_GUIDE = (guideId: number) => `${USER_ENDPOINT}/guide/${guideId}`;
+export const GET_USER_SYSTEM_SETTINGS = `${USER_SETTINGS_ENDPOINT}`;
+export const SAVE_USER_SYSTEM_SETTINGS = `${USER_SETTINGS_ENDPOINT}`;
+export const GET_USER_SYSTEM_SETTING_VALUE = (settingId: number) => `${USER_SETTINGS_ENDPOINT}/${settingId}`;
+export const SAVE_USER_SYSTEM_SETTING_VALUE = `${USER_SETTINGS_ENDPOINT}/setting`;
+export const CHANGE_USER_PASSWORD = `${USER_ENDPOINT}/passwords`;
+export const RESET_USER_PASSWORD = `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/resetPassword`;
+export const CREATE_SUBACCOUNT_USER_INVITATION = `${USER_ENDPOINT}/inviteUser`;
+export const UPDATE_SUBACCOUNT_USER_INVITATION = `${USER_ENDPOINT}/inviteUser`;
+export const DELETE_SUBACCOUNT_USER = (subAccountUserId: number) => `${USER_ENDPOINT}/inviteUser/${subAccountUserId}`;
+export const REGISTER_SUBACCOUNT_USER = `${USER_ENDPOINT}/inviteUserRegistration`;
+export const MANAGE_SUBACCOUNT_INVITATION = `${USER_ENDPOINT}/senduserinvite`;
+export const CHECK_DATETIME_IN_USER_TIMEZONE = `${USER_ENDPOINT}/isWithinStandardHours`;
+export const GET_SOCIAL_LINK = `${USER_ENDPOINT}/links`;
+export const GET_LOGIN_TYPE = (userName: string, password: string) =>
+  `${ALLOW_ANONYMOUS}${USER_ENDPOINT}/loginType/${userName}/${password}`;
+export const GET_ACCOUNTS_MANAGED_BY_MANAGERUSERID = (accountManagerUserId: number) => `${USER_ENDPOINT}/usersaccountsmanaged/${accountManagerUserId}`;
+export const GET_USERS_I_MANAGE = `${USER_ENDPOINT}/usersimanage`;
+export const GET_USERS_I_MANAGE_WITH_GROUPS = `${USER_ENDPOINT}/usersimanagewithgroups`;

@@ -1,0 +1,20 @@
+<app-message-list-mobile *ngIf="mobileView; else desktopView"
+                         [showDeleteSelection]="showDeleteSelection"
+                         [messages]="messages"
+                         [numberOfMessages]="numberOfMessages"
+                         [messagesLoaded]="messagesLoaded"
+                         [userTimeZone]="userTimeZone"
+                         (messageSend)="messageSend.emit($event)"
+                         (deleteMessage)="deleteMessage.emit($event)"
+                         (deleteSingleMessage)="deleteSingleMessage.emit($event)"></app-message-list-mobile>
+
+<ng-template #desktopView>
+  <app-message-list-desktop [showDeleteSelection]="showDeleteSelection"
+                            [messages]="messages"
+                            [numberOfMessages]="numberOfMessages"
+                            [messagesLoaded]="messagesLoaded"
+                            [userTimeZone]="userTimeZone"
+                            (messageSend)="messageSend.emit($event)"
+                            (deleteMessage)="deleteMessage.emit($event)"
+                            (deleteSingleMessage)="deleteSingleMessage.emit($event)"></app-message-list-desktop>
+</ng-template>

@@ -1,0 +1,166 @@
+// Import material theming functions
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+@import './abstracts/mixins';
+
+//Mobile screen
+$sm: '959px';
+$lt-lg: '1279px';
+$app-font-color: #3c4858;
+
+$app-primary-palette: (
+  50: #e2ebf3,
+  100: #b7cee1,
+  200: #87adcd,
+  300: #578cb9,
+  400: #3373aa,
+  500: #2f7ae2,
+  600: #0d5293,
+  700: #0b4889,
+  800: #083f7f,
+  900: #042e6d,
+  A100: #9cbdff,
+  A200: #699bff,
+  A400: #3679ff,
+  A700: #1d67ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+$app-accent-palette: mat.$blue-palette;
+
+$app-text: $dark-primary-text;
+$app-font-danger: mat.get-color-from-palette(mat.$red-palette, A700);
+
+// Create your Sass color vars (will be available in all the project)
+$primary: mat.get-color-from-palette($app-primary-palette, 500);
+$accent: mat.get-color-from-palette($app-accent-palette, 500);
+$app-primary: mat.get-color-from-palette($app-primary-palette, 500);
+$app-danger: mat.get-color-from-palette(mat.$red-palette, 50);
+$app-gray: rgba(0, 0, 0, 0.44);
+
+$app-theme: mat.define-light-theme(
+  mat.define-palette($app-primary-palette),
+  mat.define-palette($app-accent-palette),
+  mat.define-palette(mat.$red-palette)
+);
+
+$app-fill-background: mat.get-color-from-palette(
+  map-get($app-theme, foreground),
+  base,
+  0.04
+);
+$app-light-gray: mat.get-color-from-palette(
+  map-get($app-theme, foreground),
+  base,
+  0.12
+);
+
+$app-background: map_merge(
+  mat.$light-theme-background-palette,
+  (
+    unselected-chip: $app-fill-background,
+  )
+);
+
+$app-theme: map_merge(
+  $app-theme,
+  (
+    background: $app-background,
+  )
+);
+
+$app-white: #ffffff;
+
+$app-black: #000;
+
+$app-grey: #999999;
+
+$app-pale-grey: #bbbfc9;
+
+$app-shaded-grey: #686868;
+
+$app-dark-grey: #aaaaaa;
+
+$app-caribbean-green: #05b0c5;
+
+$app-rhino: #3c4858;
+
+$app-light-grey: #d2d2d2;
+
+$app-lighter-grey: #333333;
+
+$app-lime-green: #4caf50;
+
+$app-blue: #2f7ae2;
+
+$app-light-blue: #4084e4;
+
+$app-dark-cerulean: #066091;
+
+$app-white-smoke: #f5f5f5;
+
+$app-platinum: #e7e7e7;
+
+$app-solitude: #f5f6f8;
+
+$app-cinnabar: #e53935;
+
+$app-red: #f41c00;
+
+$app-snow: #fafafa;
+
+$red-orange: #f44336;
+
+$alice-blue: #f6f8f9;
+
+$app-nobel-grey: #9c9c9c;
+
+$app-mat-blue: #2e77e0;
+
+$app-semi-grey: #7e7e7e;
+
+$app-normal-grey: #808080;
+
+$app-fruit-green: #4cb050;
+
+$app-bright-grey: #828282;
+
+$app-alternate-grey: #e4e4e4;
+
+$app-bright-silver: #cccccc;
+
+$app-dark-gray: #a9a9a9;
+
+$app-gray-44: #707070;
+
+$app-light-shaded-green: #acdaae;
+
+$app-whisper-grey: #e9e9e9;
+
+$app-link-water-blue: #d9edf7;
+
+$app-steel-blue: #31708f;
+
+$app-cyan-dark-shade: #1680a4;
+
+$app-cyan-light-shade: #4fb4ef;
+
+$app-denim: #166ebb;
+
+$app-bright-orange: #FF7225;
+
+$app-gray-95: #f2f2f2;

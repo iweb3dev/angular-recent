@@ -1,0 +1,83 @@
+<div class="schedule-reminder" fxLayout="column" fxLayoutGap="40px">
+  <div class="header">
+    <span class="typography-20--bolder">{{ isEdit ? 'Update' : 'Create New' }} Reminder</span>
+  </div>
+  <div class="form" fxLayout="column" fxLayoutGap="50px" [formGroup]="form">
+    <div class="reminder-name max-width-form-control" fxLayout="column">
+      <span class="typography-20--bold">Name of Reminder</span>
+      <mat-form-field floatLabel="never">
+        <input type="text" matInput formControlName="reminderName" placeholder="Click here to add" />
+        <mat-error>Please provide a reminder name</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="reminder-groups max-width-form-control" fxLayout="column">
+      <span class="typography-20--bold">Group you are sending to</span>
+      <mat-form-field floatLabel="never">
+        <mat-label>Click here to add</mat-label>
+        <mat-select formControlName="groupId">
+          <mat-option *ngFor="let group of groups$ | async" [value]="group.id">{{ group.groupName }}</mat-option>
+        </mat-select>
+        <mat-error>Please select a group</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="reminder-number max-width-form-control" fxLayout="column">
+      <span class="typography-20--bold">Reminder phone number</span>
+      <mat-form-field floatLabel="never">
+        <mat-label>Click here to add</mat-label>
+        <mat-select formControlName="phoneNumberToCall">
+          <mat-option *ngFor="let phone of phones$ | async" [value]="phone.phoneNumber">{{ phone.phoneNumber }}</mat-option>
+          <mat-option class="typography-14 add-phone-option" disabled (click)="onAddPhoneNumber()"> Add Phone Number </mat-option>
+        </mat-select>
+        <mat-error>Please select a phone number</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="reminder-caller max-width-form-control" fxLayout="column">
+      <span class="typography-20--bold">Caller ID</span>
+      <mat-form-field floatLabel="never">
+        <mat-label>Click here to add</mat-label>
+        <mat-select formControlName="callerId">
+          <mat-option *ngFor="let callerId of callerIds$ | async" [value]="callerId.callerID">{{ callerId.callerID }}</mat-option>
+          <mat-option class="typography-14 add-phone-option" disabled (click)="onAddPhoneNumber()"> Add Phone Number </mat-option>
+        </mat-select>
+        <mat-error>Please select a caller ID</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="reminder-date max-width-form-control" fxLayout="column">
+      <span class="typography-20--bold">Date/Time</span>
+      <mat-form-field (click)="openDatePicker()" floatLabel="never">
+        <input
+          type="text"
+          matInput
+          formControlName="startDateTime"
+          placeholder="Click here to add"
+          [readonly]="true"
+          [value]="form.get('startDateTime').value | date: 'MM/dd/yyyy h:mm:ss a' | addTimeZoneAbbr"
+        />
+        <mat-error>Please select a Date/Time</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="reminder-repeat max-width-form-control" fxLayout="column">
+      <span class="typography-20--bold">Repeat Options</span>
+      <mat-form-field floatLabel="never">
+        <mat-label>Click here to add</mat-label>
+        <mat-select formControlName="frequency" [compareWith]="compareRepeatOptions">
+          <mat-option [value]="''">Don't repeat</mat-option>
+          <mat-option *ngFor="let option of repeatOptions | keyvalue" [value]="option.key">{{ option.value }}</mat-option>
+        </mat-select>
+        <mat-error>Please select a repeat option</mat-error>
+      </mat-form-field>
+    </div>
+
+    <app-repeat-detail formControlName="frequencyDetails" *ngIf="+repeateOptionsControl.value === 2"></app-repeat-detail>
+
+    <div class="footer max-width-form-control" fxLayout="row" fxLayoutGap="15px" fxLayout.lt-md="column-reverse">
+      <button mat-raised-button color="primary" class="button button-primary-inverted" routerLink="./reminders" fxFlex>CANCEL</button>
+      <button mat-raised-button class="button button--lime-green create" fxFlex (click)="onSave()">NEXT</button>
+    </div>
+  </div>
+</div>

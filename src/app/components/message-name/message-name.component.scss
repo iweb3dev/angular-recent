@@ -1,0 +1,69 @@
+@import '/src/styles/variables';
+
+.message-name {
+  &--disabled {
+    cursor: not-allowed;
+  }
+}
+.format-button {
+  border: 1px solid $app-grey;
+  border-radius: 3px;
+
+  &__label {
+    margin: 0 15px;
+
+    @include respond(tab-port) {
+      margin: 0 5px;
+    }
+  }
+}
+
+.form-field,
+.message-recipients-title {
+  max-width: 60%;
+
+  @include respond(tab-port) {
+    max-width: 60%;
+  }
+
+  @include respond(phone) {
+    max-width: 100%;
+  }
+}
+
+.control {
+  max-width: 350px;
+}
+
+.btn-create-group {
+  width: 200px;
+  text-align: center;
+  border-radius: 25px;
+  background: $app-blue;
+  margin: 0.5rem 0 1rem 0;
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
+    0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+
+  span {
+    font-weight: 400;
+    color: $app-white;
+    margin-left: 10px;
+  }
+}
+
+.button-wrapper {
+  width: 100%;
+
+  button {
+    color: $app-fruit-green;
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $app-grey;
+    }
+  }
+}
+
+.custom-option {
+  width: 100%;
+}

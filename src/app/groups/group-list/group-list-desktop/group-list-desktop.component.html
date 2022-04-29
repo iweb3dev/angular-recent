@@ -1,0 +1,124 @@
+<section class="group-desktop-wrapper" [hidden]="!totalRecords">
+  <cdk-virtual-scroll-viewport
+    #scroller
+    class="group-scroll-view"
+    [style.height.px]="gridHeight"
+  >
+    <table
+      matSort
+      mat-table
+      matSortDisableClear
+      class="virtual-table"
+      [dataSource]="dataSource$"
+      [matSortActive]="sort.active"
+      (matSortChange)="sortOnChange($event)"
+      [matSortDirection]="sort.direction"
+    >
+      <ng-container matColumnDef="groupSelection">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="table-header"
+          [class.hide-section]="!editMode"
+        ></th>
+        <td
+          mat-cell
+          class="table-data"
+          *matCellDef="let element"
+          [class.hide-section]="!editMode"
+          [style.width.px]="virtualTableLimits.Small"
+        >
+          <span class="group-item">
+            <mat-checkbox
+              name="edit"
+              (change)="groupSelectionOnChange(element.id, $event)"
+              [checked]="element.id | selectedGroup: selectedGroups"
+            ></mat-checkbox>
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="groupName">
+        <th
+          disableClear
+          mat-sort-header
+          mat-header-cell
+          *matHeaderCellDef
+          class="table-header"
+          [class.group-item-edit]="!editMode"
+        >
+          Group Name
+        </th>
+        <td
+          mat-cell
+          class="table-data"
+          *matCellDef="let element"
+          [class.group-item-edit]="!editMode"
+          [style.minWidth.px]="virtualTableLimits.Large"
+          [routerLink]="['/groups', 'group', element.id]"
+        >
+          <span class="group-item __title">
+            {{ element.groupName | titlecase }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalMembers">
+        <th
+          disableClear
+          mat-sort-header
+          mat-header-cell
+          *matHeaderCellDef
+          class="table-header"
+        >
+          Total Members
+        </th>
+        <td
+          mat-cell
+          class="table-data"
+          *matCellDef="let element"
+          [routerLink]="['/groups', 'group', element.id]"
+          [style.minWidth.px]="virtualTableLimits.Medium"
+        >
+          <span class="group-item" *ngIf="element.memberCount != undefined">
+            {{ element.memberCount }} Total Members
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="keyword">
+        <th mat-header-cell *matHeaderCellDef class="table-header">Keyword</th>
+        <td
+          mat-cell
+          class="table-data"
+          *matCellDef="let element"
+          [routerLink]="['/groups', 'group', element.id]"
+          [style.minWidth.px]="virtualTableLimits.Medium"
+        >
+          <span
+            class="group-item"
+            [routerLink]="['/groups', 'group', element.id]"
+          >
+            {{ element.keyword }}
+          </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <ng-template
+        let-row
+        matRowDef
+        cdkVirtualFor
+        [cdkVirtualForOf]="dataSource$"
+        [matRowDefColumns]="displayedColumns"
+      >
+        <tr mat-row class="table-row"></tr>
+      </ng-template>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</section>
+
+<div *ngIf="!showNoGroupMessage" class="loading-screen">
+  <span class="dark-grey">Woohoo! Clean Slate!</span>
+  <span class="dark-grey">Go ahead and add new groups!</span>
+</div>

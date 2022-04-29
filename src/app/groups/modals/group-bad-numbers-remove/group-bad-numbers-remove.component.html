@@ -1,0 +1,62 @@
+<section fxLayout="column">
+  <div fxLayout fxLayoutAlign="space-between center" class="main-header">
+    <button
+      type="button"
+      mat-raised-button
+      class="btn __close"
+      style="visibility: hidden"
+    >
+      X
+    </button>
+    <h2 class="header-title">Remove Bad Phone Numbers</h2>
+    <button
+      type="button"
+      mat-raised-button
+      class="btn __close"
+      (click)="closeOnClick()"
+    >
+      X
+    </button>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" class="user-action">
+    <p>
+      Would you like us to remove any phone numbers that are undeliverable from
+      the selected group?
+    </p>
+
+    <div class="action-buttons">
+      <button
+        type="button"
+        mat-raised-button
+        class="btn __confirm"
+        (click)="yesOnClick()"
+      >
+        YES
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="btn __cancel"
+        (click)="closeOnClick()"
+      >
+        CANCEL
+      </button>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" class="caution-section">
+    <p class="caution-note">
+      <span>CAUTION!</span> This action cannot be undone. We suggest downloading
+      your list of bad numbers before moving forward.
+    </p>
+    <button
+      type="button"
+      mat-raised-button
+      (click)="downloadOnClick()"
+      class="btn __download"
+    >
+      DOWNLOAD
+    </button>
+  </div>
+</section>

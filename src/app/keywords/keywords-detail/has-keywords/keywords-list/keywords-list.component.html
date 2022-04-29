@@ -1,0 +1,78 @@
+<section fxLayout class="keyword-title">
+  <div>
+    <span
+      class="sub-item typography-16 typography-16--bold typography-16--scale-mobile"
+    >Keyword</span>
+  </div>
+
+  <div>
+    <span
+      class="sub-item typography-16 typography-16--bold typography-16--scale-mobile"
+    >Group</span>
+  </div>
+
+  <div>
+    <span
+      class="sub-item typography-16 typography-16--bold typography-16--scale-mobile"
+    >Renewal Date</span>
+  </div>
+  <div class="sub-item" style="visibility: hidden;"><span>Extend</span></div>
+</section>
+
+<cdk-virtual-scroll-viewport #scroller itemSize="40" class="keywords-list">
+  <section
+    class="list-item"
+    (click)="$event.stopPropagation()"
+    *cdkVirtualFor="let keyword of keywords"
+  >
+    <section class="list-item-inner">
+      <div class="list-item-selection" *ngIf="showDeleteSelection">
+        <mat-checkbox
+          class="system-settings-checkbox typography-14"
+          (click)="$event.stopPropagation()"
+          [checked]="keyword.flaggedForDelete"
+          (change)="onKeywordDeleteClick(keyword.keyword, $event)"
+        >
+        </mat-checkbox>
+      </div>
+
+      <div class="list-item__content">
+        <div
+          class="
+            list-item__keyword
+            typography-16 typography-16--bold typography-16--scale-mobile
+          "
+          [routerLink]="['/keywords/assign', keyword.keyword]"
+        >
+          <span>{{ keyword.keyword }}</span>
+        </div>
+
+        <div
+          class="list-item__groupName"
+          [routerLink]="['/keywords/assign', keyword.keyword]"
+        >
+          <span>{{ keyword.groupName }}</span>
+        </div>
+
+        <div class="list-item__renewal-date
+          typography-16 typography-16--bold typography-16--scale-mobile"
+        >
+          <span>{{ keyword.endDate | date : 'shortDate' }}</span>
+        </div>
+
+        <div
+          (click)="updateRenewalOnClick(keyword.keyword)"
+          class="
+            list-item__renewal
+            typography-16 typography-16--bold typography-16--scale-mobile
+          ">
+          <a
+            fxLayout
+            fxLayoutGap="0.5rem"
+            fxLayoutAlign="center center"
+          > <mat-icon>add</mat-icon> Extend Renewal</a>
+        </div>
+      </div>
+    </section>
+  </section>
+</cdk-virtual-scroll-viewport>

@@ -1,0 +1,21 @@
+<div class="confirm-dlg" fxLayout="column" fxLayoutGap="40px">
+  <div class="header" fxLayout="row" fxLayoutAlign="space-between start">
+    <span class="typography-20--bold">
+      {{options.header}}
+    </span>
+    <span class="material-icons close" (click)='onCancel()'>
+      close
+    </span>
+  </div>
+  <div *ngIf="options.detail" class="body">
+    <span class="typography-14">{{options.detail}}</span>
+  </div>
+  <div *ngIf="options.secondaryDetail" class="body">
+    <span class="typography-14" [innerHTML]="options.secondaryDetail"></span>
+  </div>
+  <div class="footer" fxLayout fxLayoutGap="15px" fxLayout.lt-md="column-reverse">
+    <button mat-raised-button color="primary" class="button button-primary-inverted" (click)='onCancel()'
+      fxFlex>{{options.cancelBtn ||'CANCEL'}}</button>
+    <button mat-raised-button class="button button--blue" (click)='onConfirm()' fxFlex>{{options.confirmBtn}}</button>
+  </div>
+</div>

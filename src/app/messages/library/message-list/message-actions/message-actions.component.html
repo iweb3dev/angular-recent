@@ -1,0 +1,33 @@
+<div fxLayout="column" fxLayoutGap="30px">
+  <span class="typography-16 typography-16--bold">
+    Recipients: {{ message.groupsLastSentTo }}
+  </span>
+  <div fxLayout fxLayout.lt-sm="column" fxLayoutGap="20px">
+    <button
+      fxFlex.gt-sm="200px"
+      type="button"
+      mat-button
+      class="button button--lime-green"
+      (click)="messageSend.emit(message.id)"
+    >
+      <span class="typography-12">SEND MESSAGE</span>
+    </button>
+    <button
+      fxFlex.gt-sm="180px"
+      type="button"
+      mat-button
+      class="button button-primary-inverted"
+      (click)="onMessageEdit()"
+    >
+      <span class="typography-12">Edit</span>
+    </button>
+    <button
+      type="button"
+      mat-button
+      class="button button--no-border"
+      (click)="onMessageDelete()"
+    >
+      <span class="typography-12 text-danger">Delete Message</span>
+    </button>
+  </div>
+</div>

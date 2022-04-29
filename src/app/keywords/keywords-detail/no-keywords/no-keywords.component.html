@@ -1,0 +1,66 @@
+<div class="no-keywords" fxLayout="column" fxLayoutAlign="start start">
+  <span
+    class="typography-28 typography-28--bolder typography-28--scale-mobile header"
+    >Create A Text Message Keyword</span
+  >
+  <span class="typography-20--bold margin-bottom--20"
+    >Keywords allow people to easily join a group by texting that groups unique
+    keyword to 24251 (this 5 digit code is used in place of a typical phone
+    #)</span
+  >
+  <span class="typography-20--bold margin-bottom--10">For example:</span>
+
+  <div class="example">
+    <p class="typography-16--bold margin-bottom--10">
+      1 - Create a keyword called 'bestgroup' for your group
+    </p>
+    <p class="typography-16--bold margin-bottom--10">
+      2 - People who want to join will text the word 'bestgroup' to '24251'
+    </p>
+    <p class="typography-16--bold margin-bottom--10">
+      3 - People will be asked information like name, phone, email etc and will
+      be added to your group!
+    </p>
+  </div>
+
+  <!-- <span class="typography-16 margin-bottom--20">
+    Text message keywords are an easy way for your members to add themselves to
+    your group. A text keyword is a word or phrase, that mobile phone users can
+    text to a short code. CallingPost's short code is 24251.
+    <button mat-button color="primary" (click)="openDialog()">
+      Learn More
+    </button>
+  </span> -->
+
+  <div class="videoWrapper">
+    <iframe
+      [src]="safeUrl"
+      frameborder="0"
+      allowfullscreen
+      width="100%"
+      height="100%"
+    ></iframe>
+  </div>
+  <div class="footer" fxLayout="row" fxLayoutGap="15px">
+    <button
+      mat-raised-button
+      class="button button-submit create"
+      fxFlex
+      [routerLink]="['./create']"
+      [state]="{ commingFrom: commingFrom }"
+    >
+      Create Keyword
+    </button>
+  </div>
+  <span class="typography-16 margin-bottom--20">
+    Your package has:
+    <span class="typography-16--bold"
+      >{{ (userPackage$ | async)?.keywords }} free keyword(s)</span
+    >. Each additional keyword cost:
+    <span class="typography-16--bold"
+      >{{
+        (userPackage$ | async)?.additionalKeywordCost | currency
+      }}/month</span
+    >.
+  </span>
+</div>

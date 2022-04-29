@@ -1,0 +1,20 @@
+<div class="groups-wrapper">
+  <mat-tab-group class="tabs-groups-members">
+    <mat-tab label="Groups {{ groupsCount ? '(' + groupsCount + ')' : '' }}">
+      <app-group-list-container
+        (groupsCount)="groupsCountOnEmit($event)"
+      ></app-group-list-container>
+    </mat-tab>
+
+    <mat-tab
+      label="All Members {{ membersCount ? '(' + membersCount + ')' : '' }}"
+      *ngIf="!isManager"
+    >
+      <ng-template matTabContent>
+        <app-member-list-container
+          (membersCount)="membersCountOnEmit($event)"
+        ></app-member-list-container>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

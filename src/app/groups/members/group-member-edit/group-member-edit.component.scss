@@ -1,0 +1,133 @@
+.groups-member-wrapper {
+  padding: 50px 100px;
+}
+.groups-member {
+  width: 100%;
+  max-width: 768px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 25px;
+}
+.groups-member-name {
+  width: 100%;
+  display: flex;
+  max-width: 450px;
+  gap: 2em;
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+  padding-bottom: 25px;
+}
+.groups-member-title {
+  padding: 25px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.groups-member-inner {
+  width: 100%;
+  max-width: 609px;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+}
+.example-full-width {
+  width: 100%;
+  max-width: 280px;
+}
+.groups-member-btn-inner {
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.btn-title {
+  margin-right: 15px;
+}
+.btn-title-active-member {
+  margin-right: 15px;
+  font-weight: bold;
+}
+.member-address {
+  max-width: none;
+}
+.member-image {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.groups-member-btn {
+  width: 100%;
+  margin-right: 50px;
+  &._blue {
+    width: 250px;
+    background-color: #2f7ae2;
+    color: #fff;
+  }
+  &._border {
+    width: 250px;
+    border: 1px solid #2f7ae2;
+    color: #2f7ae2;
+  }
+}
+.name {
+  font-weight: normal;
+  margin-bottom: auto;
+}
+.remove-padding-btn {
+  padding: 0px;
+}
+.blocked-member {
+  gap: .25rem;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .groups-member-wrapper {
+    padding: 15px 20px;
+  }
+  .groups-member-btn {
+    width: 100%;
+    margin: 10px;
+    &._blue {
+      width: 100%;
+      background-color: #2f7ae2;
+      color: #fff;
+    }
+    &._border {
+      width: 100%;
+      border: 1px solid #2f7ae2;
+      color: #2f7ae2;
+      margin: 10px;
+    }
+  }
+  .name {
+    font-size: 18px;
+    font-weight: normal;
+  }
+  .groups-member-name {
+    gap: 1em;
+    img {
+      width: 90px;
+      height: 90px;
+    }
+    flex-wrap: wrap;
+    padding-bottom: 25px;
+  }
+  .delete-member {
+    display: flex;
+    justify-content: center;
+  }
+  .groups-member-btn-inner {
+    padding-bottom: 0px;
+    margin: auto;
+  }
+  .change-order-secondary-btn {
+    order: 2;
+  }
+}

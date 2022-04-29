@@ -1,0 +1,41 @@
+@import '/src/styles/variables';
+
+.edit-message-block {
+  padding: 0 30px 50px 80px;
+  @include respond(tab-land-up) {
+    width: 80%;
+  }
+  @include respond(tab-port) {
+    padding: 0 0 30px 0;
+  }
+}
+
+.title-block {
+  padding: 50px 0 0 0;
+  @include respond(tab-port) {
+    padding: 30px 10px 0 10px;
+  }
+}
+
+.footer-actions {
+  @include respond(tab-port) {
+    padding: 0 10px;
+  }
+}
+.cancel-button {
+  width: 250px;
+  @include respond(phone) {
+    width: 100%;
+  }
+}
+
+.format-button {
+  border: 1px solid $app-grey;
+  border-radius: 3px;
+  &__label {
+    margin: 0 15px;
+    @include respond(tab-port) {
+      margin: 0 5px;
+    }
+  }
+}

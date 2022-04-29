@@ -1,0 +1,22 @@
+.organization-name-modal {
+  .header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+
+  }
+
+  .input-full-width {
+    width: 100%;
+  }
+
+  .text-divider {
+    text-align: center;
+    padding-bottom: 15px;
+  }
+}
+@media screen and (max-width:400) {
+  .organization-name-modal {
+    width: 215px;
+  }
+}

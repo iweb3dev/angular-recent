@@ -1,0 +1,46 @@
+@import '/src/styles/variables';
+
+.phone-numbers {
+  &__list {
+    overflow-x: auto;
+    padding: 0 20px 0 80px;
+    @include respond(tab-port) {
+      padding: 0;
+    }
+  }
+}
+
+.mat-table {
+  // background-color: transparent;
+  .delete {
+    color: #f41c00;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  // background-color: white;
+}
+
+.text-align {
+  text-align: center;
+}
+
+.padding-left {
+  &--16 {
+    padding-left: 16px;
+  }
+  &--22 {
+    padding-left: 22px;
+  }
+}
+
+@media (max-width: 959px) {
+  .padding-left {
+    &--22--mobile {
+      padding-left: 22px;
+    }
+  }
+}

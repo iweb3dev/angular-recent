@@ -1,0 +1,86 @@
+@import '/src/styles//variables';
+
+.groups-create-wrapper {
+  padding: 20px 60px;
+}
+.groups-create {
+  &__title {
+    font-style: 28px;
+  }
+}
+.group-create-sub-header {
+  margin: 0;
+}
+
+// Inputs
+.group-name {
+  width: 100%;
+  min-width: 150px;
+  max-width: 500px;
+  margin-top: 50px;
+}
+.name-full-width {
+  width: 100%;
+  margin-top: 25px;
+}
+
+// Buttons
+.groups-create-btn {
+  width: 100%;
+  max-width: 550px;
+  text-align: center;
+}
+.btn {
+  &._create {
+    width: 250px;
+    cursor: pointer;
+    font-weight: 400;
+    color: $app-white;
+    background: $app-blue;
+  }
+  &._add {
+    width: 250px;
+    display: block;
+    cursor: pointer;
+    font-weight: 400;
+    margin-top: 25px;
+    color: $app-white;
+    background: $app-lime-green;
+  }
+  &._cancel {
+    display: none;
+  }
+}
+.mat-icon-add {
+  color: $app-white;
+}
+
+@media screen and (max-width: 960px) {
+  .groups-create-wrapper {
+    padding: 30px 20px;
+  }
+  .groups-create {
+    &__title {
+      font-style: 20px;
+    }
+  }
+  .group-name {
+    margin-top: 20px;
+  }
+  .groups-create-btn {
+    margin-top: 10%;
+  }
+  .btn {
+    &._create {
+      width: 100%;
+    }
+    &._add {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    &._cancel {
+      margin: 7%;
+      display: initial;
+    }
+  }
+}

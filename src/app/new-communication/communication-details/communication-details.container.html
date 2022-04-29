@@ -1,0 +1,121 @@
+<div fxLayout="column" fxLayoutGap="50px" class="container">
+  <div fxLayout="column" fxLayoutGap="5px">
+    <span class="typography-24 typography-24--bold">
+      Create A New Message
+    </span>
+  </div>
+  <app-message-name
+    [dirty]="isDirty"
+    [groupLength]="groupLength"
+    [messageNameData]="messageNameData$ | async"
+    [userInfo]="userInfo$ | async"
+    [messageId]="messageId$ | async"
+    [isPreviousMessage]="isPreviousMessage"
+    (sendMessageValueChange)="onSendMessageFormChange($event)"
+    (proceedToDetails)="onNavigateNext()"
+    [voiceMessagePanelOpen]="voicePanelOpen$ | async"
+    [textMessagePanelOpen]="textPanelOpen$ | async"
+    [emailMessagePanelOpen]="emailPanelOpen$ | async"
+    (emailFormatChange)="onEmailFormatChange()"
+    (voiceFormatChange)="onVoiceFormatChange()"
+    (textFormatChange)="onTextFormatChange()"
+    (messageNameFormValid)="onMessageNameValidate($event)"
+  ></app-message-name>
+
+  <app-message-details
+    *ngIf="groupLength && showMessageDetail"
+    [showLoadPrevMsg]="true"
+    [voiceMessageValid]="prefilledVoiceValid || (voiceValid$ | async)"
+    [emailMessageValid]="emailValid$ | async"
+    [textMessageValid]="prefilledTextValid|| (textValid$ | async)"
+    [communicationsQueue]="communicationsQueue$ | async"
+    [userInfo]="currentUserInfo$ | async"
+    [voiceMessagePanelOpen]="voicePanelOpen$ | async"
+    [textMessagePanelOpen]="textPanelOpen$ | async"
+    [emailMessagePanelOpen]="emailPanelOpen$ | async"
+    (voiceMessageOpen)="onVoiceMessagePanelOpen($event)"
+    (textMessageOpen)="onTextMessagePanelOpen($event)"
+    (emailMessageOpen)="onEmailMessagePanelOpen($event)"
+    (emailMessagePreviewOpen)="onEmailMessagePreviewOpen()"
+    (textMessagePreviewOpen)="onTextMessagePreviewOpen()"
+    (voiceMessagePreviewOpen)="onVoiceMessagePreviewOpen()"
+    (submitNewMessage)="onSubmitNewMessage()"
+    (previousMessageOpen)="onPreviousMessageOpen()"
+  >
+    <app-voice-message-container
+      ngProjectAs="voice-message"
+      [voiceMessageData]="voiceMessageData$ | async"
+      [audioRecordingUrl]="audioRecordingUrl$ | async"
+      [systemSettings]="systemSettings$ | async"
+      [messageValid]="prefilledVoiceValid || (voiceValid$ | async)"
+      (voiceFormChange)="onVoiceFormChange($event)"
+      (voiceFormValid)="onVoiceFormValid($event)"
+      (saveAndContinue)="onSaveAndContinueVoiceMessage()"
+      (saveAudioRecordingUrl)="onSetAudioRecording($event)"
+    >
+    </app-voice-message-container>
+    <app-text-message
+      ngProjectAs="text-message"
+      [textMessageData]="textMessageData$ | async"
+      [userInfo]="currentUserInfo$ | async"
+      [systemSettings]="systemSettings$ | async"
+      [messageValid]="prefilledTextValid || (textValid$ | async)"
+      (textFormChange)="onTextFormChange($event)"
+      (textFormValid)="onTextFormValid($event)"
+      (saveAndContinue)="onSaveAndContinueTextMessage()"
+      (receiveTollFreeTextNumber)="onReceiveTollFreeTextNumber($event)"
+    >
+    </app-text-message>
+    <app-email-message
+      ngProjectAs="email-message"
+      [emailMessageData]="emailMessageData$ | async"
+      [userId]="userId$ | async"
+      [userPackage]="userPackage$ | async"
+      [messageValid]="emailValid$ | async"
+      (emailFormChange)="onEmailFormChange($event)"
+      (emailAttachmentUpload)="onEmailAttachmentUpload($event)"
+      (emailAttachmentRemove)="onEmailAttachmentRemove($event)"
+      (emailFormValid)="onEmailFormValid($event)"
+      (saveAndContinue)="onSaveAndContinueEmailMessage()"
+    >
+    </app-email-message>
+    <app-message-confirm
+      ngProjectAs="message-confirm"
+      [voiceMessageValid]="prefilledVoiceValid || (voiceValid$ | async)"
+      [emailMessageValid]="emailValid$ | async"
+      [textMessageValid]="prefilledTextValid || (textValid$ | async)"
+      [scheduleOptions]="scheduleOptions$ | async"
+      [userInfo]="currentUserInfo$ | async"
+      (scheduleMessage)="onMessageSchedule($event)"
+      (updateCommunicationQueue)="onCommunicationQueueUpdate()"
+    ></app-message-confirm>
+    <app-financials
+      *ngIf="communicationsQueue$ | async as queue"
+      ngProjectAs="message-financials"
+      [communicationsQueue]="queue"
+      [currentUserInfo]="currentUserInfo$ | async"
+      (addCredits)="onCreditsAdd()"
+      (upgradePlan)="onPlanUpgrade()"
+    ></app-financials>
+  </app-message-details>
+</div>
+
+<!-- <ng-template #increasePlanSize>
+  <div class="increase-size" fxLayout="column" fxLayoutGap="40px">
+    <span class="typography-18 text-center">
+      We apologize but based on your current plan size you have reached the
+      monthly send limit based on our reasonable use policy guidelines. These
+      guidelines help protect message recipients from message fatigue. You will
+      need to increase your plan size to increase your limit further. For more
+      information please give us a call at 877-665-5646.
+    </span>
+    <button
+      mat-button
+      fxFlexAlign="center"
+      color="primary"
+      (click)="openPlanDetails()"
+    >
+      INCREASE PLAN SIZE NOW
+    </button>
+  </div>
+</ng-template> -->

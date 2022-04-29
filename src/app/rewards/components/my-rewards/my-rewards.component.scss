@@ -1,0 +1,115 @@
+@import '../../../../styles/dashboard';
+
+::ng-deep {
+  .card-title > p, .card-sub-title > p{
+    margin:0;
+  }
+}
+
+.my-rewards-container {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.available-rewards-container {
+  padding-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.available-rewards-frame {
+  box-shadow: (0, 0, 0, 0.24);
+  -moz-box-shadow: (0, 0, 0, 0.24);
+  -webkit-box-shadow: (0, 0, 0, 0.24);
+  padding: 1rem;
+  margin: 20px;
+  color: $dashboard-font-color;
+  width: 163px;
+  height: 169px;
+  .frame-tile {
+    width: 77px;
+    height: 77px;
+    right: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -1rem;
+    color: white;
+    background: #66bb6a;
+    box-shadow: 0px 2px 6px 3px rgb(0 0 0 / 14%);
+  }
+  .frame-header {
+    background: white;
+    border: none;
+    margin-top: 70px;
+    text-align: center;
+    .frame-title {
+      font-size: 18px;
+      color: #3C4858;
+      font-weight: 500;
+    }
+
+    .frame-sub-title {
+      font-size: 16px;
+      color: #373737;
+      font-weight: 400;
+    }
+  }
+}
+
+.reward-links {
+  font-size: 15px;
+  color: #2F7AE2;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header {
+  padding-bottom: 50px;
+}
+
+.claimed-header {
+  padding-bottom: 20px;
+}
+
+.point-exchange-info {
+  color: #7A7A7A;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.btn-claim {
+  margin: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  width: 220px;
+  height: 37px;
+}
+
+.claimed-details {
+  margin-right: 4px;
+  color: black;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+.claim-btn-container {
+  flex-wrap: wrap;
+  min-width: 152px;
+}
+
+.fb-share-button {
+  display: none;
+}
+
+.fb-share-btn {
+  cursor: pointer;
+}

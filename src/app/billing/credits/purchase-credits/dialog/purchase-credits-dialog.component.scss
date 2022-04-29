@@ -1,0 +1,27 @@
+@import '/src/styles/variables';
+
+.payment-block {
+  @include respond(tab-port-up) {
+    max-height: 350px;
+    overflow: auto;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $app-light-grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $app-dark-grey;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $app-dark-grey;
+}

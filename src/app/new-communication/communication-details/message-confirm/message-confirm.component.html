@@ -1,0 +1,78 @@
+<div
+  *ngIf="hasValidMessage"
+  fxLayout="column"
+  fxLayoutGap="20px"
+  class="message-confirm"
+>
+  <div class="message-confirm__schedule">
+    <div fxLayout fxLayoutGap="20px" fxFlexAlign="center">
+      <mat-slide-toggle
+        class="slide-toggle slide-toggle--green"
+        [formControl]="showScheduleOptions"
+        (change)="toggle($event)"
+      >
+      </mat-slide-toggle>
+      <div fxLayout="column" fxLayoutGap="20px">
+        <span class="typography-16 typography-16--bold"
+          >Schedule this message for later</span
+        >
+        <div
+          *ngIf="showScheduleOptions.value"
+          fxLayout="column"
+          fxLayoutGap="10px"
+        >
+          <span class="typography-16">
+            {{ viewDate | date: 'MM/dd/yy' }}
+            {{ viewDate | date: 'h:mm a' | addTimeZoneAbbr }}
+          </span>
+          <!--<span class="typography-16">{{ repeatOptions }}</span>-->
+          <button
+            mat-button
+            class="button button--no-border reschedule-button"
+            (click)="onShowDatePicker()"
+          >
+            Reschedule
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="!isOnUnlimited">
+    <div
+      fxLayout
+      fxLayout.xs="column"
+      fxLayoutGap="20px"
+      fxLayoutAlign="flex-end"
+      fxLayoutAlign.xs="center center"
+      class="message-confirm__details"
+    >
+      <div fxLayout fxLayoutGap="20px" fxLayoutAlign="start center">
+        <span class="typogaphy-16 current-credits">
+          Current Credits: {{ userInfo.userCredits | number: '1.0':'en-US' }}
+        </span>
+        <span class="typogaphy-16" [class.text-danger]="upgradeRequired">
+          Credits required: {{ communicationsQueue.neededBalance }}
+        </span>
+      </div>
+      <div
+        fxLayout
+        fxLayoutGap="5px"
+        fxLayout.xs="column"
+        fxLayoutGap.xs="10px"
+      >
+        <button
+          mat-button
+          class="button button--no-border"
+          (click)="viewCommunicationDetails()"
+        >
+          View Details
+        </button>
+      </div>
+    </div>
+    <div fxLayout fxLayoutAlign="flex-end" *ngIf="upgradeRequired">
+      <span class="typography-16 text-danger">
+        *Not enough Credits. Please add Credits or upgrade to continue.
+      </span>
+    </div>
+  </ng-container>
+</div>

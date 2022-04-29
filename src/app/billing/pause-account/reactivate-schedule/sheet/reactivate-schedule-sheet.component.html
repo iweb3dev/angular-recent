@@ -1,0 +1,28 @@
+<app-bottom-sheet title="Schedule Message">
+  <ng-container body>
+    <div fxLayout="column" fxLayoutGap="30px">
+      <app-date-time-picker hideTimePicker [formControl]="date">
+      </app-date-time-picker>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <button
+          mat-flat-button
+          class="button button--lime-green"
+          fxFlex
+          (click)="updateSchedule()"
+        >
+          <span class="typography-12">UPDATE SCHEDULE</span>
+        </button>
+        <button
+          mat-button
+          mat-stroked-button
+          color="primary"
+          fxFlex
+          class="button--blue-border"
+          (click)="onClose()"
+        >
+          <span class="typography-12">CANCEL</span>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</app-bottom-sheet>

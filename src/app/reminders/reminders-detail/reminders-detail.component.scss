@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+
+.reminders {
+  padding: 40px 70px;
+}
+
+
+@media screen and (max-width: $sm) {
+  .reminders {
+    padding: 16px 34px;
+  }
+}

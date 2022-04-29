@@ -1,0 +1,89 @@
+@import '/src/styles/variables';
+
+// Upload
+.upload-wrapper {
+  padding: 3% 10% 0% 10%;
+  background: $app-white;
+}
+.upload-inner {
+  padding-top: 5%;
+}
+.file {
+  padding: 30px 0;
+  span {
+    border-bottom: 1px solid $app-light-grey;
+  }
+}
+.text-upload {
+  max-width: 768px;
+  &__btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: $app-blue;
+    background: none;
+  }
+}
+.upload__title {
+  font-weight: 600;
+}
+.upload__sub-title {
+  display: inline;
+  padding-right: 1%;
+  font-weight: normal;
+}
+
+// Buttons
+.btn-actions {
+  padding: 5% 0;
+}
+.btn-upload {
+  padding: 0 10em;
+  cursor: pointer;
+  font-weight: 100;
+  &.__save {
+    color: $app-white;
+    background: $app-blue;
+  }
+  &.__cancel {
+    color: $app-blue;
+    background: $app-white;
+    border: 1px solid $app-blue;
+  }
+}
+.btn-disable {
+  cursor: not-allowed;
+  background: $app-grey !important;
+}
+.btn-upload-file {
+  padding-left: 0;
+  font-size: 1rem;
+}
+
+// Miscellaneous
+.note {
+  margin: 0;
+}
+.text-break-mobile {
+  display: none;
+}
+.icon-check {
+  padding-left: 2%;
+  color: $app-light-shaded-green;
+}
+
+@media screen and (max-width: 960px) {
+  .upload__title {
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+  .btn-actions {
+    margin-top: 10%;
+  }
+  .btn-upload {
+    padding: 0;
+  }
+  .text-break-mobile {
+    display: block;
+  }
+}

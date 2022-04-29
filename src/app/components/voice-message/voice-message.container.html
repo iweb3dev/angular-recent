@@ -1,0 +1,23 @@
+<app-voice-message
+  [hideSaveButton]="hideSaveButton"
+  [audioRecordingUrl]="audioRecordingUrl"
+  [callerIds]="callerIds$ | async"
+  [callMeRecordingStatus]="callMeRecordingStatus$ | async"
+  [ttsMessage]="ttsMessage$ | async"
+  [phoneMessageSourceEdited]="phoneMessageSourceEdited$ | async"
+  [phoneMicrophoneMessage]="phoneMicrophoneMessage$ | async"
+  [phoneUploadedMessage]="phoneUploadedMessage$ | async"
+  [callInFileLocation]="callInFileLocation$ | async"
+  [voiceMessageData]="voiceMessageData"
+  [hideRecordingEdit]="hideRecordingEdit"
+  [selectedFormats]="selectedFormats"
+  [userPackage]="userPackage$ | async"
+  [systemSettings]="systemSettings"
+  [messageValid]="messageValid"
+  (openVoiceDialog)="onOpenVoiceDialog($event)"
+  (verifyPhoneNumber)="onVerifyPhoneNumber()"
+  (voiceFormChange)="voiceFormChange.emit($event)"
+  (voiceFormValid)="voiceFormValid.emit($event)"
+  (saveAndContinue)="saveAndContinue.emit()"
+>
+</app-voice-message>

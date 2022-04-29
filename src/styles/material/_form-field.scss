@@ -1,0 +1,72 @@
+@import '../variables';
+
+mat-form-field {
+  &.form-field {
+    &--no-infix {
+      .mat-form-field-infix {
+        width: auto;
+      }
+    }
+    &--regular {
+      .mat-form-field-underline {
+        background-color: $app-light-grey;
+      }
+      .mat-input-element {
+        font-size: 16px;
+      }
+      .mat-form-field-label {
+        font-size: 14px;
+      }
+    }
+    &--label-grey {
+      .mat-form-field-label {
+        font-size: 16px;
+        color: $app-dark-grey;
+        @include respond(phone) {
+          font-siz: 14px;
+        }
+      }
+      .mat-input-element {
+        font-size: 16px;
+      }
+    }
+    &--green-underline {
+      .mat-form-field-ripple {
+        background-color: $app-lime-green !important;
+      }
+    }
+  }
+
+  &.language-selector {
+    .mat-form-field-underline {
+      display: none;
+    }
+    .mat-select-value,
+    .mat-select-arrow {
+      color: $app-primary;
+    }
+    .mat-form-field-flex {
+      border: 1px solid $app-primary;
+      border-radius: 20.5px;
+    }
+    .mat-form-field-infix {
+      padding: 10px 18px;
+      border-top: none;
+    }
+    .mat-select {
+      font-size: inherit;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+
+  &.communication-duration {
+    .mat-form-field-underline {
+      display: none;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 0px;
+    }
+  }
+}

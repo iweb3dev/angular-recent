@@ -1,0 +1,315 @@
+<form>
+  <section class="group-header">
+    <h2 class="group-name-title"><span>Group:</span> {{ groupName }}</h2>
+    <div
+      class="text-keyword"
+      *ngIf="
+        keywords$ | async | groupKeywordFilter: groupId as keyword;
+        else noKeyword
+      "
+    >
+      <span class="text-keyword-inner">Text Keyword: {{ keyword }}</span>
+      <ng-template
+        [ngTemplateOutlet]="keywordText"
+        [ngTemplateOutletContext]="{ value: 'Edit' }"
+      ></ng-template>
+    </div>
+
+    <ng-template #noKeyword>
+      <div class="text-keyword">
+        <span>Text Keyword:</span>
+        <ng-template
+          [ngTemplateOutlet]="keywordText"
+          [ngTemplateOutletContext]="{ value: 'Add' }"
+        ></ng-template>
+      </div>
+    </ng-template>
+
+    <button
+      matSuffix
+      mat-button
+      type="button"
+      class="btn-send-message"
+      aria-label="send-message"
+      [routerLink]="['/new-communication']"
+      [queryParams]="{groupId}"
+    >
+      Send New Message
+    </button>
+  </section>
+
+  <app-member-stats-header
+    [activeTexts]="groupWithStats.groupStats.textCount"
+    [activeEmails]="groupWithStats.groupStats.emailCount"
+    [activePhones]="groupWithStats.groupStats.phoneCount"
+    [totalMembers]="groupWithStats.groupStats.memberCount"
+    [activeMembers]="groupWithStats.groupStats.activeMemberCount"
+  ></app-member-stats-header>
+
+  <section
+    class="nav-menu"
+    [class.mobile-search]="mobileView && showSearchInput"
+  >
+    <div class="search-inner">
+      <div class="search-input-mobile" *ngIf="showSearchInput && mobileView">
+        <ng-template [ngTemplateOutlet]="searchButton"></ng-template>
+        <ng-template [ngTemplateOutlet]="searchField"></ng-template>
+        <button
+          matSuffix
+          mat-button
+          aria-label="close"
+          *ngIf="mobileView"
+          (click)="searchOnClick()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <ng-container *ngIf="!mobileView || !showSearchInput">
+        <div class="btn-search-field __add-member">
+          <button
+            mat-mini-fab
+            aria-label=""
+            class="btn-create-group"
+            (click)="addNewMemberOnClick()"
+          >
+            <mat-icon class="app-icon-30 app-icon-30--scale-mobile basic-icon"
+              >person_add</mat-icon
+            ><span>Add New Member</span>
+          </button>
+          <span class="field-title __add-member">Add Member</span>
+        </div>
+
+        <div class="btn-search-field __search-member">
+          <ng-template
+            *ngIf="showSearchInput"
+            [ngTemplateOutlet]="searchField"
+          ></ng-template>
+          <ng-template [ngTemplateOutlet]="searchButton"></ng-template>
+          <span class="field-title __search-member">Search</span>
+        </div>
+
+        <div class="btn-search-field">
+          <button
+            mat-mini-fab
+            type="button"
+            mat-icon-button
+            class="btn-white"
+            aria-label="Filters Menu"
+            [matMenuTriggerFor]="filtersMenu"
+            #filterMenuTrigger="matMenuTrigger"
+          >
+            <mat-icon color="primary">tune</mat-icon>
+          </button>
+          <span class="field-title">Filters</span>
+        </div>
+        <mat-menu #filtersMenu="matMenu">
+          <app-group-member-filters
+            [mobileView]="mobileView"
+            [sortFilter]="sortFilter"
+            [filterValue]="sortFilterValue"
+            (closeModal)="filterMenuTrigger.closeMenu()"
+            (sortChanged)="
+              filterMenuTrigger.closeMenu(); sortChangedOnEmit($event)
+            "
+          ></app-group-member-filters>
+        </mat-menu>
+
+        <div class="btn-search-field">
+          <button
+            mat-mini-fab
+            type="button"
+            mat-icon-button
+            class="btn-white"
+            aria-label="More Menu"
+            [matMenuTriggerFor]="moreMenu"
+          >
+            <mat-icon color="primary">more_horiz</mat-icon>
+          </button>
+          <span class="field-title">More</span>
+        </div>
+      </ng-container>
+    </div>
+
+    <mat-menu #moreMenu="matMenu">
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="printOnClick()"
+      >
+        <span>Print</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="exportOnClick()"
+      >
+        <span>Export</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="editGroupNameOnClick()"
+      >
+        <span>Edit Group Name</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="updateAllMembersStatus(true)"
+      >
+        <span>Activate All Members</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="updateAllMembersStatus(false)"
+      >
+        <span>Deactivate All Members</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="sendSMSOptInEmailOnClick()"
+      >
+        <span>Send SMS Opt-In Email</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="sendSMSOptInTextOnClick()"
+      >
+        <span>Send SMS Opt-In Text</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="exportSMSNotOptedOnClick()"
+      >
+        <span>Export SMS Not Opted-In</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="exportBadNumbersOnClick()"
+      >
+        <span>Export Bad Numbers</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-plain"
+        (click)="removeBadNumbersOnClick()"
+      >
+        <span>Remove Bad Numbers</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        class="btn-menu-warn--border"
+        (click)="deleteAllMembersOnClick()"
+      >
+        <span>Delete All Members</span>
+      </button>
+      <button
+        class="btn-menu-warn"
+        type="button"
+        mat-menu-item
+        (click)="deleteGroupOnClick()"
+      >
+        <span>Delete Group</span>
+      </button>
+    </mat-menu>
+  </section>
+</form>
+
+<section>
+  <app-group-member-list-mobile
+    *ngIf="mobileView; else desktopView"
+    [groupId]="groupId"
+    [members]="members"
+    [searchFilter]="searchFilter"
+    [totalRecords]="totalRecords"
+    [searchInput]="searchMember.value"
+    (memberUpdated)="memberUpdatedOnEmit()"
+    [sortExpression]="filterForm.get('sort').value"
+    (membersListUpdate)="membersListUpdateOnEmit($event)"
+  ></app-group-member-list-mobile>
+
+  <ng-template #desktopView>
+    <app-group-member-list-desktop
+      [groupId]="groupId"
+      [members]="members"
+      [searchFilter]="searchFilter"
+      [totalRecords]="totalRecords"
+      [searchInput]="searchMember.value"
+      (memberUpdated)="memberUpdatedOnEmit()"
+      (sortChanged)="sortChangedOnEmit($event)"
+      [sortExpression]="filterForm.get('sort').value"
+      (membersListUpdate)="membersListUpdateOnEmit($event)"
+    ></app-group-member-list-desktop>
+  </ng-template>
+
+  <app-loader *ngIf="listLoading" class="overlay-loader"></app-loader>
+</section>
+
+<ng-container>
+  <ng-template let-value="value" #keywordText>
+    <button
+      matSuffix
+      mat-button
+      type="button"
+      color="primary"
+      class="btn-add-keyword"
+      aria-label="group-keyword"
+      [routerLink]="['/keywords']"
+    >
+      {{ value }}
+    </button>
+  </ng-template>
+
+  <ng-template #searchButton>
+    <button
+      mat-mini-fab
+      type="button"
+      aria-label=""
+      (click)="searchOnClick()"
+      class="btn-search btn-white"
+      [class.btn-search-margin]="mobileView && showSearchInput"
+    >
+      <mat-icon class="mat-icon-search">search</mat-icon>
+    </button>
+  </ng-template>
+
+  <ng-template #searchField>
+    <mat-form-field>
+      <input
+        matInput
+        #searchInput
+        name="Search members"
+        [formControl]="searchMember"
+        placeholder="Search members"
+        onkeydown="return (event.keyCode!=13);"
+      />
+      <button
+        matSuffix
+        mat-button
+        type="button"
+        aria-label="clear"
+        class="btn-search-close"
+        (click)="searchMember.patchValue('')"
+      >
+        X
+      </button>
+    </mat-form-field>
+  </ng-template>
+</ng-container>

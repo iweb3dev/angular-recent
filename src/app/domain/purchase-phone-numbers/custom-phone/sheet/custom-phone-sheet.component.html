@@ -1,0 +1,186 @@
+<div fxLayout="column" fxLayoutGap="26px">
+  <div class="bottom-sheet-prinary__header">
+    <h3 fxFlex="100" class="typography-16 typography-16--bold title">
+      {{data?.existingPhoneNumber ? 'Extend your custom phone number' : 'Add your custom phone number'}}
+    </h3>
+    <div fxLayout>
+      <button mat-icon-button (click)="closeDialog()">
+        <mat-icon class="regular-grey">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="bottom-sheet-prinary__body" fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout fxLayoutAlign="space-between center" (click)="customSearch = !customSearch">
+      <span class="typography-18 typography-18--bold" *ngIf="!data?.existingPhoneNumber">
+        {{
+        selectedPhone
+        ? 'Purchase your custom phone number'
+        : 'Phone number options'
+        }}
+      </span>
+      <span class="typography-18 typography-18--bold" *ngIf="data?.existingPhoneNumber">
+        This will extend custom phone number
+      </span>
+      <button mat-flat-button class="button button--no-border" type="button" *ngIf="!selectedPhone">
+        <span class="typography-14">
+          {{ customSearch ? 'Hide vanity number' : 'Create vanity number' }}
+        </span>
+      </button>
+    </div>
+
+    <ng-container *ngIf="!selectedPhone; else purchasePhone">
+      <div fxLayout="column" fxLayoutGap="10px" *ngIf="customSearch">
+        <form
+          [formGroup]="customSearchForm"
+          fxLayout="column"
+          fxLayoutGap="20px"
+        >
+          <mat-form-field fxFlex="25">
+            <mat-label>
+              <span class="typography-14">Select Area Code</span></mat-label
+            >
+            <mat-select formControlName="areaCode">
+              <mat-option *ngFor="let areaCode of areaCodes" [value]="areaCode">
+                {{ areaCode }}
+              </mat-option>
+            </mat-select>
+            <mat-error>*Area Code not selected</mat-error>
+          </mat-form-field>
+          <div fxLayout fxLayoutGap="10px" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-label>
+                <span class="typography-14">Search numbers</span>
+              </mat-label>
+              <input matInput formControlName="tollFreeSearchText" />
+              <mat-error>*Invalid number</mat-error>
+            </mat-form-field>
+            <button
+              type="button"
+              mat-button
+              class="button button--lime-green"
+              fxFlex="30"
+              [disabled]="customSearchForm.invalid || isFetchingPhones"
+              (click)="onSearchNumbers()"
+            >
+              <span class="typography-12">SEARCH</span>
+            </button>
+          </div>
+        </form>
+        <span class="typography-14 text-grey">
+          (You can type specific numbers or letters desired for toll-free number
+          (ex. POST, 7678, etc.)
+        </span>
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="20px" fxFlex>
+        <span class="typography-16 typography-16--bold">
+          Select your preferred number
+        </span>
+        <div
+          *ngIf="!isFetchingPhones; else spinner"
+          fxLayout="row wrap"
+          fxFlex
+          class="phone-list-wrapper"
+        >
+          <ng-container *ngIf="phoneList.length; else noPhones">
+            <button
+              mat-button
+              class="button button--no-border phone-list__phone"
+              fxFlex="50"
+              type="button"
+              *ngFor="let phone of phoneList"
+              (click)="onPhoneSelect(phone)"
+            >
+              <span class="typography-16 typography-16--bold">
+                {{ phone.friendlyName }}
+              </span>
+            </button>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div
+    class="bottom-sheet-prinary__actions"
+    fxLayout="column"
+    fxLayoutGap="10px"
+    *ngIf="!selectedPhone"
+  >
+    <div fxLayoutGap="10px" fxLayout="column">
+      <button
+        type="button"
+        mat-stroked-button
+        color="primary"
+        class="button button--blue-border"
+        [disabled]="isFetchingPhones"
+        (click)="fetchMorePhones()"
+      >
+        View more options
+      </button>
+    </div>
+  </div>
+
+  <div class="payment-renewal-note" *ngIf="data?.endDate">
+    <span>
+      <b>Note: Your next payment will be due on {{ selectedTermDate | date : 'fullDate' }}</b>
+    </span>
+  </div>
+
+  <div
+    fxFlex
+    fxLayout="column"
+    fxLayoutGap="10px"
+    *ngIf="selectedPhone"
+    class="bottom-sheet-prinary__actions"
+  >
+    <button
+      fxFlex
+      mat-flat-button
+      class="purchase-submit"
+      (click)="completePurchase()"
+      [disabled]="shouldDisabledSubmit"
+    >
+      <span class="typography-12">{{data?.existingPhoneNumber ? 'Submit' : 'COMPLETE PURCHASE'}}</span>
+    </button>
+    <button
+      type="button"
+      mat-stroked-button
+      color="primary"
+      class="button button--blue-border"
+      fxFlex
+      (click)="closeDialog()"
+    >
+      <span class="typography-12">CANCEL</span>
+    </button>
+  </div>
+</div>
+
+<ng-template #purchasePhone>
+  <app-purchase-phone
+    [phone]="selectedPhone.friendlyName"
+    [existedPhoneNumber]="data.existingPhoneNumber"
+    [prepayOptions]="prepayOptions$ | async"
+    [paymentProfiles]="data.paymentProfiles"
+    (prepayId)="onUpdatePrepayId($event)"
+    (selectedTerm)="onTermSelection($event)"
+    (paymentProfileSelect)="selectedPaymentProfile = $event"
+    fxLayout="column"
+    fxLayoutGap="30px"
+  >
+    <app-payment
+      [creditCardForm]="creditCardForm"
+      [bankAccountForm]="bankAccountForm"
+      (activeTab)="selectedPaymentProgram = $event"
+    ></app-payment>
+  </app-purchase-phone>
+</ng-template>
+<ng-template #spinner>
+  <div class="phone-list-spinner" fxLayout fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+<ng-template #noPhones>
+  <div fxLayout fxLayoutAlign="center center" fxFlex>
+    <span class="typography-16 typography-16--bold">No Phones Found</span>
+  </div>
+</ng-template>

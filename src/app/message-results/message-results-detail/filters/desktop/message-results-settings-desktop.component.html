@@ -1,0 +1,10 @@
+<div fxLayout="column" fxLayoutGap="30px">
+  <div fxLayout fxLayoutAlign="space-between center">
+    <span class="typography-24--bold">Filters</span>
+    <span class="material-icons" (click)='onClose()'>
+      close
+      </span>
+  </div>
+
+  <app-message-results-settings [data]='data'></app-message-results-settings>
+</div>

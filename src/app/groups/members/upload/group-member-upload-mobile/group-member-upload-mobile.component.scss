@@ -1,0 +1,51 @@
+@import '/src/styles/variables';
+
+.preview-members-wrapper {
+  padding: 3% 5% 3% 5%;
+  background-clip: content-box;
+}
+.column-header {
+  margin-bottom: 0;
+  font-size: 1.15rem;
+}
+.member-details-preview {
+  background-color: $app-white;
+  box-shadow: -25px 0px 0px 0px $app-white, 25px 0px 0px 0px $app-white;
+}
+.first-row-header {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+// List
+.member-preview-list {
+  list-style-type: none;
+  padding: 0;
+}
+.member-preview-header-select {
+  width: 100%;
+}
+.member-preview-details-top {
+  font-weight: 500;
+  color: $app-normal-grey;
+}
+.member-preview-details-inner {
+  font-weight: 500;
+}
+
+// Buttons
+.btn {
+  font-weight: 100;
+  &.__import {
+    color: $app-white;
+    background: $app-blue;
+  }
+  &.__cancel {
+    color: $app-blue;
+    background: $app-white;
+    border: 1px solid $app-blue;
+  }
+}
+.mobile-btn-user-actions {
+  margin: 5% 0 5% 0;
+}

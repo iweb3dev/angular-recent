@@ -1,0 +1,77 @@
+@import '/src/styles/variables';
+
+.message-list-header {
+  padding: 25px 15px;
+  height: min-content;
+  align-items: center;
+  @include respond(phone) {
+    align-items: end;
+    padding: 10px 15px;
+  }
+}
+
+.hide-section {
+  display: none;
+}
+
+.checkbox-item {
+  margin: 0 15px;
+  padding-right: 15px;
+}
+
+//Table
+
+.virtual-table {
+  width: 100%;
+  overflow: auto;
+  max-width: 100%;
+  background-color: $app-white;
+  padding-left: 15px;
+}
+
+.table-header {
+  font-weight: 600;
+  color: $app-black;
+  font-size: 0.9rem;
+}
+
+.table-data {
+  color: $app-black;
+
+  &.pr-2 {
+    padding-right: 2rem;
+  }
+}
+
+.table-detail-row {
+  height: 0;
+}
+
+.table-row:not(.table-expanded-row):hover {
+  background: $app-white-smoke;
+}
+
+.table-row:not(.table-expanded-row):active {
+  background: $app-white;
+}
+
+.table-row {
+  height: 4rem;
+  &:hover {
+    cursor: pointer;
+    background-color: $app-white-smoke;
+  }
+}
+
+.table-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.table-actions-extends {
+  min-width: 80px;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}

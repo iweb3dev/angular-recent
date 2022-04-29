@@ -1,0 +1,10 @@
+@import '/src/styles/variables';
+
+.promocode-actions {
+  &__change {
+    position: relative;
+    &:after {
+      @include pipe(15px);
+    }
+  }
+}

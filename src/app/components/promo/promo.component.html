@@ -1,0 +1,42 @@
+<div fxLayout fxLayoutAlign="space-between center">
+  <button
+    *ngIf="!promoCodeControl.value"
+    mat-button
+    class="button button--no-border promo-button"
+    fxLayoutAlign="start"
+    (click)="onPromoCodeAdd()"
+  >
+    <span class="typography-16">{{ title }}</span>
+  </button>
+
+  <ng-container *ngIf="promoCodeControl.value">
+    <div *ngIf="promoCodeControl.value?.id" fxLayout fxLayoutGap="10px">
+      <span class="typography-16 typography-16--bold">Promo Code Added</span>
+      <mat-icon class="done-icon app-icon-20">done</mat-icon>
+    </div>
+    <div fxLayout fxLayoutGap="10px" *ngIf="!promoCodeControl.value?.id">
+      <span class="typography-16 typography-16--bold">
+        Invalid Promo Code
+      </span>
+      <mat-icon class="app-icon-20">clear</mat-icon>
+    </div>
+    <div fxLayout class="promocode-actions">
+      <button
+        mat-button
+        class="button button--no-border promocode-actions__change"
+        fxLayoutAlign="start"
+        (click)="onPromoCodeAdd()"
+      >
+        <span class="typography-16">Change</span>
+      </button>
+      <button
+        mat-button
+        class="button button--no-border"
+        fxLayoutAlign="start"
+        (click)="onPromoCodeDelete()"
+      >
+        <span class="typography-16">Delete</span>
+      </button>
+    </div>
+  </ng-container>
+</div>

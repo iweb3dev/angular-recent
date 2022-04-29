@@ -1,0 +1,4 @@
+<app-message-recipients body *ngIf='showRecipients$ | async; else details'></app-message-recipients>
+<ng-template #details>
+  <app-message-details body></app-message-details>
+</ng-template>

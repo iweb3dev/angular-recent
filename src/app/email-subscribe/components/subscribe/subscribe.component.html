@@ -1,0 +1,31 @@
+<div fxLayout="column" fxLayoutAlign="space-evenly center" fxFill class="subscribe-container">
+  <div fxLayout="column" fxLayoutAlign="center center" class="question-container" *ngIf="!isSubmitted">
+    <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 60px;">
+      <a href="http://www.callingpost.com"><img class="logo" src="/assets/img/CallingPostLogo.png"></a>
+    </div>
+    <span>Would you like to subscribe to CallingPost emails?</span>
+    <form fxLayout="column" fxFill [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="column" fxLayoutAlign="center center" style="width: 100%;">
+        <mat-form-field class="form-field form-field--regular" appearance="fill">
+          <mat-label>Please enter your email address</mat-label>
+          <input type="text" matInput placeholder="example@callingpost.com" formControlName="email">
+          <mat-error>Please enter email</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-flat-button class="btn-submit" [disabled]="!emailForm.valid">Yes, subscribe to emails</button>
+      </div>
+    </form>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="question-container success" *ngIf="isSuccess">
+    <div fxLayout="column" fxLayoutAlign="center center" class="success-message">
+      <span class="material-icons-outlined icon-white">check_circle</span>
+      <span class="typography-20 success-text">success</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 20px;">
+      <a href="http://www.callingpost.com"><img class="logo" src="/assets/img/CallingPostLogo.png"></a>
+    </div>
+    <span class="typography-17" class="text-thank">Thank you!</span>
+    <span class="typography-16">Please check your email to confirm your subscription.</span>
+  </div>
+</div>

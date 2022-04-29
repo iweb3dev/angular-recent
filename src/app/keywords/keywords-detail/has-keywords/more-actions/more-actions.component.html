@@ -1,0 +1,53 @@
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <button
+    mat-mini-fab
+    class="button button--grey-rounded fab-50 fab-50--scale-mobile"
+    color="primary"
+    (click)="isOpen = true"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+  >
+    <mat-icon>more_horiz</mat-icon>
+  </button>
+  <span class="typography-12 text-grey" fxHide fxShow.lt-sm>More</span>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayMinWidth="250px"
+  cdkConnectedOverlayPanelClass="white-overlay"
+  cdkConnectedOverlayBackdropClass="transparent"
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayPositions]="positions"
+  (backdropClick)="isOpen = false"
+>
+  <div fxLayout="column" class="more-actions-overlay">
+    <button
+      mat-button
+      color="warn"
+      class="more-actions-overlay__action"
+      (click)="onSelectDeleteKeywords()"
+    >
+      <span class="typoraphy-14">Select Keyword to Delete</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button
+      mat-button
+      color="warn"
+      class="more-actions-overlay__action"
+      (click)="onDeleteAllKeywords()"
+    >
+      <span class="typoraphy-14">Delete All Keywords</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button
+      mat-button
+      (click)="isOpen = false"
+      class="more-actions-overlay__action"
+    >
+      <span class="typoraphy-14">Cancel</span>
+    </button>
+  </div>
+</ng-template>

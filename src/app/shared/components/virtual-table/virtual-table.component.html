@@ -1,0 +1,26 @@
+<cdk-virtual-scroll-viewport [style.height.px]="gridHeight">
+  <table
+    class="virtual-table"
+    mat-table
+    matSort
+    (matSortChange)="sortChanged.emit($event)"
+    [dataSource]="dataSource$"
+    [multiTemplateDataRows]="true"
+  >
+    <ng-container
+      *ngFor="let def of columnDefinitions"
+      [matColumnDef]="def.displayedColumn"
+    >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="typography-14 text-grey">{{ def.columnName }}</span>
+      </th>
+      <td mat-cell [style.minWidth.px]="def.width" *matCellDef="let element">
+        <span class="typography-16">{{ element[def.displayedColumn] }}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</cdk-virtual-scroll-viewport>

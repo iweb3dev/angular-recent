@@ -1,0 +1,64 @@
+.notifications {
+  padding: 50px 35px;
+}
+
+.notification-table {
+  thead {
+    display: none;
+  }
+}
+
+.mat-column-notification {
+  font-size: 16px;
+  padding-left: 0px !important;
+}
+
+.mat-column-insertedDateTime {
+  font-size: 16px;
+  padding-left: 0px !important;
+}
+
+table {
+  padding-top: 20px;
+  width: 100%;
+  background: transparent;
+}
+
+.mat-header-cell {
+  display: none !important;
+}
+
+.command-link {
+  cursor: pointer;
+  color: #2f7ae2;
+  text-decoration: none;
+}
+
+.mat-column-notificationLookupID {
+  text-align: end;
+}
+
+@media screen and (max-width: 425px) {
+  table {
+    padding-top: 0px;
+  }
+
+  .notifications {
+    padding: 20px;
+  }
+
+  .mat-column-notification {
+    font-size: 12px;
+    padding-left: 0px !important;
+  }
+  
+  .mat-column-insertedDateTime {
+    font-size: 12px;
+    padding-left: 5px !important;
+  }
+
+  .mat-column-notificationLookupID {
+    font-size: 12px;
+    padding-right: 0px !important;
+  }
+}

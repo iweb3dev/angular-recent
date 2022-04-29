@@ -1,0 +1,85 @@
+<div fxLayout="column" fxFlex>
+  <div class="details-header" fxLayout="column" fxFlex fxLayoutGap="15px">
+    <span
+      class="typography-28 typography-28--bold plans-title"
+      fxFlexAlign="center"
+      fxFlexAlign.lt-sm="flex-start"
+    >
+      Flexible plans that grow with you
+    </span>
+    <span
+      *ngIf="userInfo$ | async as userData"
+      class="text-grey typography-16"
+      fxFlexAlign="center"
+    >
+      Unique Contacts:
+      <span class="typography-16--bold text-black">
+        {{ userData.userMemberPhoneCount }}
+      </span>
+      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Current Plan:
+      <span class="typography-16--bold text-black">
+        {{ userData.package.packageName }}
+      </span>
+    </span>
+    <div fxLayout="column" fxLayoutAlign.gt-xs="center center">
+      <div
+        fxLayout
+        fxLayout.lt-sm="column"
+        fxLayoutAlign.gt-xs="center center"
+        fxLayoutGap.gt-xs="10px"
+      >
+        <span class="text-black typography-16 typography-16--scale-mobile">
+          Select number of contacts to see price:
+        </span>
+        <mat-form-field fxFlex.lt-sm>
+          <mat-select
+            [formControl]="contactListControl"
+            (selectionChange)="selectContract($event.value)"
+          >
+            <mat-option
+              *ngFor="let contact of contactsList$ | async"
+              [value]="contact"
+            >
+              <span
+                class="text-black typography-16 typography-16--scale-mobile"
+              >
+                Up to {{ contact }} Contacts
+              </span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <app-plan-details-table
+    [userInfo]="userInfo$ | async"
+    [essentialPlan]="essentialPlan"
+    [standardPlan]="standardPlan"
+    [premiumPlan]="premiumPlan"
+    [contract]="contactListControl.value"
+  ></app-plan-details-table>
+
+  <div class="credits-pricing" fxLayout="column" fxLayoutGap="10px">
+    <span class="typography-18 typography-18--bold" fxFlexAlign.gt-xs="center">
+      Sending large or infrequent messages?
+    </span>
+    <div
+      class="typography-15 text-black credits-pricing__description-block"
+      fxFlexAlign.gt-xs="center"
+    >
+      Credits are generally much more expensive per message than our unlimited
+      offerings, but can be a good option for single or infrequent messages sent
+      to larger lists.
+    </div>
+    <button
+      mat-flat-button
+      color="primary"
+      class="credits-pricing__action-button"
+      fxFlexAlign.gt-xs="center"
+      type="button"
+      (click)="showCreditsColumn()"
+    >
+      <span class="typography-15">See Credit Pricing</span>
+    </button>
+  </div>
+</div>

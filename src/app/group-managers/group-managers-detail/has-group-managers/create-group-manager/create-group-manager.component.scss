@@ -1,0 +1,37 @@
+@import '/src/styles/variables';
+
+.create-group-managers {
+  padding: 40px 50px;
+  max-width: 70%;
+  @include respond(tab-port) {
+    max-width: 70%;
+  }
+  @include respond(phone) {
+    max-width: 100%;
+    padding: 16px 34px;
+  }
+}
+.header {
+  margin-bottom: 30px;
+}
+
+.create {
+  margin-bottom: 25px;
+  width: 14rem;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.mat-button.mat-primary {
+  padding: 2px;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+@import './variables';
+
+.blacklisted-contact {
+  color: $app-red !important;
+  font-style: italic !important;
+}
+
+.inactive-contact {
+  font-style: italic;
+  color: $app-bright-orange;
+}

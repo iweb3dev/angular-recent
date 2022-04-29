@@ -1,0 +1,131 @@
+<div fxLayout="column" fxLayoutGap="26px">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 fxHide.xs class="typography-20">
+      <span class="typography-20--bold">Message Details</span> -
+      <span>
+        {{ message.notificationName }}
+      </span>
+    </h3>
+    <div fxHide.gt-xs fxLayout="column" fxLayoutGap="15px">
+      <h3 class="typography-16 typography-16--bold">Message Details</h3>
+      <span class="typography-16">
+        {{ message.notificationName }}
+      </span>
+      <span class="typography-14 text-grey">
+        Creation date: {{ message.creationDate }}
+      </span>
+    </div>
+    <button mat-icon-button (click)="onClose()" class="app-icon-button-20">
+      <mat-icon class="regular-grey app-icon-20 app-icon-20--scale-mobile">
+        close
+      </mat-icon>
+    </button>
+  </div>
+
+  <div class="body">
+    <div
+      fxLayout
+      fxLayout.lt-md="column"
+      fxLayoutGap="50px"
+      fxLayoutGap.lt-md="15px"
+    >
+      <div fxLayout fxLayoutGap="15px">
+        <mat-icon
+          fontSet="material-icons-outlined"
+          color="primary"
+          class="app-icon-30 app-icon-30--scale-mobile"
+        >
+          mail_outline
+        </mat-icon>
+        <span
+          class="typography-18 typography-18--bold typography-18--scale-mobile"
+        >
+          Email Message
+        </span>
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="20px" fxFlex>
+        <div fxLayout fxLayoutGap="5px">
+          <span class="
+              typography-16 typography-16--scale-mobile typography-16--bold
+            ">
+            From:
+          </span>
+          <span class="typography-16 typography-16--scale-mobile">
+            {{ message.from }}
+          </span>
+        </div>
+        <div fxLayout fxLayoutGap="5px">
+          <span class="
+              typography-16 typography-16--scale-mobile typography-16--bold
+            ">
+            Subject:
+          </span>
+          <span class="typography-16 typography-16--scale-mobile">
+            {{ message.subject }}
+          </span>
+        </div>
+        <div fxLayout fxLayoutGap="5px">
+          <span class="
+              typography-16 typography-16--scale-mobile typography-16--bold
+            ">
+            Reply To:
+          </span>
+          <span class="typography-16 typography-16--scale-mobile">
+            {{ message.replyTo }}
+          </span>
+        </div>
+        <div *ngIf="!!message?.attachments?.length" fxLayout fxLayoutGap="5px">
+          <span class="
+              typography-16 typography-16--scale-mobile typography-16--bold
+            ">
+            Attachments:
+          </span>
+          <span *ngFor="let attachment of message.attachments" class="typography-16 typography-16--scale-mobile">
+            {{ attachment.fileName }}
+          </span>
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px" fxHide.lt-md>
+          <span class="typography-14 typography-14--bold">Body:</span>
+          <div [innerHTML]="message.emailBody | safeHtml"
+               class="email-template"></div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px" fxHide.gt-sm>
+          <span class="typography-14 typography-14--bold">Body:</span>
+          <div class="email-template email-template--mobile">
+            {{
+              message.emailJson
+                ? 'Please, use desktop to preview email templates.'
+                : message.emailBody
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="voice-actions-dialog__actions"
+    fxLayout
+    fxLayout.xs="column"
+    fxLayoutGap="10px"
+    *ngIf="message.showActions"
+  >
+    <button mat-flat-button color="primary" fxFlex (click)="onMessageSelect()">
+      <span class="typography-14 typography-14--scale-mobile">
+        USE THIS MESSAGE
+      </span>
+    </button>
+    <button
+      mat-button
+      mat-stroked-button
+      color="primary"
+      color="primary"
+      class="typography-14"
+      fxFlex
+      (click)="onClose()"
+    >
+      <span class="typography-14"> Choose A Different Message </span>
+    </button>
+  </div>
+</div>

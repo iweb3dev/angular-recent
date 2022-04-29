@@ -1,0 +1,93 @@
+<form
+  fxLayout="column"
+  class="preview-members-wrapper"
+  [formGroup]="membersPreviewForm"
+>
+  <section class="main-heading" fxLayout="column">
+    <div fxLayout fxLayoutAlign="space-between baseline">
+      <h2 class="column-header">Select Column Headers</h2>
+      <button
+        fxHide.lt-md
+        type="button"
+        mat-raised-button
+        class="btn __import-main"
+        (click)="importOnClick()"
+      >
+        Import
+      </button>
+    </div>
+    <div>
+      <p>
+        Before importing please ensure the column headers below correctly match
+        your data. If not, please click on the drop down to select the correct
+        header title.
+      </p>
+      <p>
+        Imports can take up to an hour. You will receive an email notice once
+        complete.
+      </p>
+    </div>
+    <div>
+      <mat-checkbox
+        name="firstRowHeader"
+        formControlName="firstRowHeader"
+        class="first-row-header typography-14"
+        (change)="firstRowHeaderOnSelect($event)"
+        >My first row is header information</mat-checkbox
+      >
+    </div>
+  </section>
+
+  <section fxLayout="column wrap" class="member-details-preview">
+    <cdk-virtual-scroll-viewport itemSize="50" class="cdk-viewport">
+      <table class="member-preview-table">
+        <thead>
+          <tr class="members-preview-header-row">
+            <th
+              class="members-preview-header"
+              formArrayName="memberHeaders"
+              *ngFor="
+                let header of membersPreviewForm.get('memberHeaders')[
+                  'controls'
+                ];
+                let i = index
+              "
+            >
+              <ng-container [formGroupName]="i">
+                <mat-form-field>
+                  <mat-select
+                    formControlName="fieldId"
+                    (selectionChange)="headerOptionOnChange(i)"
+                  >
+                    <mat-option
+                      *ngFor="let field of importMappingFields"
+                      [value]="field.fieldId"
+                      >{{ field.fieldName | titlecase }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            class="member-preview-body-row"
+            *cdkVirtualFor="
+              let rowItem of membersPreviewDetails;
+              let rowIndex = index
+            "
+          >
+            <td
+              class="member-preview-body-data"
+              *ngFor="let colItem of rowItem; let colIndex = index"
+            >
+              {{ colItem }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </cdk-virtual-scroll-viewport>
+  </section>
+</form>

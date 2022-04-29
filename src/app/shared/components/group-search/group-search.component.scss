@@ -1,0 +1,43 @@
+@import '/src/styles//variables';
+
+.btn-search-wrapper {
+  margin-left: 1rem;
+}
+.btn-search-margin {
+  margin-right: 0.5rem;
+}
+.btn-white {
+  background-color: $app-white;
+}
+.btn-search-close {
+  min-width: 0;
+  margin: 0 0.5rem;
+  padding: 0 0.5rem;
+  color: $app-normal-grey;
+}
+
+.mat-icon-search {
+  color: $app-blue;
+}
+
+.field-title {
+  display: block;
+  margin-top: 10px;
+  color: $app-semi-grey;
+}
+
+@media screen and (max-width: 768px) {
+  .field-title {
+    margin-top: 20px;
+  }
+
+  .btn-search-wrapper {
+    margin: auto;
+    margin-left: 0;
+  }
+
+  .btn-close-search {
+    height: 36px;
+    align-self: center;
+  }
+}

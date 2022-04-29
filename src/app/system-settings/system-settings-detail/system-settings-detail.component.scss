@@ -1,0 +1,22 @@
+@import '../../../styles/variables';
+
+.system-settings {
+  padding: 5rem;
+  max-width: 65rem;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.system-title {
+  font-size: 28px;
+  font-weight: 500;  
+}
+
+@media screen and (max-width: $sm) {
+  .system-settings {
+    padding: 1rem;
+    max-width: unset;
+  }
+}

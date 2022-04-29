@@ -1,0 +1,75 @@
+<div *ngIf="!showDesktopChild; else desktopView">
+  <div
+    class="message-results"
+    *ngIf="
+      communicationResults$
+        | async
+        | messageResultsFilter: filterSettings as filteredSet
+    "
+  >
+    <div class="header" fxLayout="column">
+      <div fxLayout.xs="column">
+        <span fxLayout class="typography-24 typography-24--bold"
+          >All Messages ({{ filteredSet.length }})</span
+        >
+      </div>
+      <div
+        class="actions"
+        fxLayout
+        fxLayout.lt-sm="column-reverse"
+        fxLayoutAlign="end"
+        fxLayoutAlign.lt-sm="center center"
+        fxLayoutGap="20px"
+      >
+        <mat-form-field class="example-full-width" *ngIf="showSearch">
+          <mat-label>Search messages</mat-label>
+          <input
+            type="text"
+            [ngModel]="filterSettings.searchText"
+            (ngModelChange)="changeSearchText($event)"
+            matInput
+          />
+        </mat-form-field>
+
+        <div
+          fxLayout
+          fxLayoutGap="20px"
+          fxLayoutAlign="end center"
+          fxLayoutAlign.lt-sm="space-around center"
+        >
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-card class="action" (click)="onToggleSearch()">
+              <span class="material-icons mat-icon-search"> search </span>
+            </mat-card>
+            <span class="btn-title">Search</span>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-card class="action" (click)="onOpenFilters()">
+              <span class="material-icons mat-icon-search"> tune </span>
+            </mat-card>
+            <span class="btn-title">Filters</span>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-card class="action" (click)="refresh()">
+              <span class="material-icons mat-icon-search"> refresh </span>
+            </mat-card>
+            <span class="btn-title">Refresh</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <cdk-virtual-scroll-viewport itemSize="25" class="cdk-viewport">
+        <app-message-result-frame
+          *ngFor="let communication of filteredSet; let idx = index"
+          [frameNumber]="idx"
+          [desktopView]="desktopViewRef"
+          [communication]="communication"
+        ></app-message-result-frame>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>
+<div class="desktop-child-padding">
+  <ng-template #desktopView></ng-template>
+</div>

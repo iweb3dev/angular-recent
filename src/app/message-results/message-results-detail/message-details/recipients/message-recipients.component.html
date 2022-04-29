@@ -1,0 +1,135 @@
+<div fxLayout="column" fxLayoutGap="30px" *ngIf="showDesktop; else mobile">
+  <div
+    (click)="onNavigateBack()"
+    class="back"
+    fxLayout
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <span class="material-icons"> chevron_left </span>
+    <span>Back to communication results</span>
+  </div>
+  <div class="header-desktop" fxLayout fxLayoutAlign="space-between center">
+    <div fxLayout fxLayoutGap="15px">
+      <span class="typography-18 typography-18--bold">
+        {{ (messageResult$ | async).notificationName }}</span
+      >
+      <div *ngIf="messages">
+        <app-message-preview
+          [message]="messages"
+          hideMessageActions
+        ></app-message-preview>
+      </div>
+    </div>
+    <div fxLayout fxLayoutGap="10px">
+      <span class="back" (click)="onExport()">Export</span>
+      <span>|</span>
+      <span class="back" (click)="printExport()">Print</span>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="messageRecipients$ | async">
+    <ng-container matColumnDef="endpointAddress">
+      <th mat-header-cell *matHeaderCellDef>
+        MEMBER {{ memberEndpointAddressName }}
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        class="typography-18 typography-18--bold"
+      >
+        {{ element.endpointAddress }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="recipient">
+      <th mat-header-cell *matHeaderCellDef>NAME</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.recipient }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="deliveryDate">
+      <th mat-header-cell *matHeaderCellDef>DELIVERY</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.deliveryDate | date: 'MM/dd/yy' }},
+        {{ element.deliveryDate | date: 'h:mm a' | addTimeZoneAbbr }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="attempts">
+      <th mat-header-cell *matHeaderCellDef>ATTEMPTS</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.attempts }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="results">
+      <th mat-header-cell *matHeaderCellDef>RESULTS</th>
+      <td mat-cell *matCellDef="let element" class="typography-14--bold">
+        <div fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
+          <span>{{ element.results }}</span>
+          <span class="material-icons {{ element.icon?.extraClass }}">
+            {{ element.icon?.name }}
+          </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<ng-template #mobile>
+  <div>
+    <div class="header" fxLayout fxLayoutAlign="space-between start">
+      <div fxLayout="column" fxLayoutGap="15px">
+        <span class="typography-18 typography-18--bold">
+          {{ (messageResult$ | async).notificationName }}</span
+        >
+        <div *ngIf="messages">
+          <app-message-preview
+            [message]="messages"
+            hideMessageActions
+          ></app-message-preview>
+        </div>
+      </div>
+      <span class="typography-14 print" (click)="printExport()">Print</span>
+    </div>
+  </div>
+  <div>
+    <div
+      *ngFor="let recipient of messageRecipients$ | async"
+      class="recipient"
+      fxLayout="column"
+      fxLayoutGap="20px"
+    >
+      <div fxLayout="column" fxLayoutGap="10px">
+        <span class="typography-18 typography-18--bold">{{
+          recipient.endpointAddress
+        }}</span>
+        <span class="typography-14 sub-title">{{ recipient.recipient }}</span>
+        <span class="typography-14 sub-title"
+          >Delivery: {{ recipient.deliveryDate | date: 'MM/dd/yy' }},
+          {{ recipient.deliveryDate | date: 'h:mm a' }}
+          {{ userTimeZone$ | async }}</span
+        >
+      </div>
+      <div fxLayout fxLayoutAlign="space-between center">
+        <span class="typography-14--bold"
+          >Attempts: {{ recipient.attempts }}</span
+        >
+        <span
+          fxLayout
+          fxLayoutAlign="center center"
+          fxLayoutGap="4px"
+          class="typography-14--bold"
+        >
+          <span class="typography-14--bolder"
+            >Results: {{ recipient.results }}</span
+          >
+          <span class="material-icons" [ngClass]="recipient.icon.extraClass">
+            {{ recipient.icon.name }}
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</ng-template>

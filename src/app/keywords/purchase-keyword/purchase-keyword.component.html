@@ -1,0 +1,182 @@
+<ng-container *ngIf="loadingProfiles$ | async; else loader">
+  <div class="purchase-keyword" fxLayout="column" fxLayoutAlign="start start">
+    <span
+      class="typography-28 typography-28--bold typography-28--bolder header"
+    >
+      {{
+        commingFrom === 'leftNav'
+          ? 'Add Text Keyword'
+          : 'Add Via Text Message Keyword'
+      }}
+    </span>
+    <div
+      class="form form-purchase-keyword"
+      fxLayout="column"
+      fxLayoutGap="30px"
+      [formGroup]="form"
+    >
+      <div class="max-width-form-control" fxLayout="column">
+        <div class="max-width-form-control" fxLayout="column" fxLayoutGap="15px">
+          <span class="typography-20 typography-20--bold">Create Keyword</span>
+          <mat-form-field appearance="outline" class="control">
+            <input
+              type="text"
+              matInput
+              placeholder="Enter keyword here."
+              formControlName="keywordName"
+            />
+            <mat-error *ngIf="!form.get('keywordName').value"
+              >Please provide a keyword name</mat-error
+            >
+            <mat-error
+              *ngIf="
+                form.get('keywordName').touched &&
+                form.get('keywordName').value &&
+                (form.get('keywordName').errors?.minlength ||
+                  form.get('keywordName').errors?.maxlength)
+              "
+            >
+              Keywords must be between 4 and 32 characters
+            </mat-error>
+            <mat-error
+              *ngIf="
+                form.get('keywordName').touched &&
+                form.get('keywordName').value &&
+                form.get('keywordName').errors?.pattern
+              "
+            >
+              No special characters such as #, &, < or @ may be used.
+            </mat-error>
+          </mat-form-field>
+          <mat-hint class="typography-16" style="margin-bottom: 20px">
+            Keywords must be between 4 and 32 characters, using only letters and
+            numbers. No special characters such as #, &, < or @ may be used. No
+            one else will be able to use this keyword.
+          </mat-hint>
+        </div>
+        <mat-error *ngIf="!isKeywordValid"
+          >That keyword is already in use. Please try again.</mat-error
+        >
+      </div>
+
+      <div class="max-width-form-control" fxLayout="column" fxLayoutGap="40px">
+        <div class="typography-16--bold"
+             *ngIf="!isKeywordFree; else freeKeywordTemplate">
+          Cost:&nbsp;{{costPerKeyword | currency:'USD'}}/month
+        </div>
+        <ng-template #freeKeywordTemplate>
+          <div class="typography-16--bold">
+            Cost:
+            <span class="typography-16--bold text-strikethrough">{{costPerKeyword | currency:'USD'}}/month</span>
+            &nbsp;
+            <span class="typography-16--bold text-lime-green">FREE with your current subscription plan</span>
+          </div>
+          <div>
+            <span class="typography-16 typography-16--bold text-grey">You have {{freeKeywordsRemaining}} of {{totalFreeKeyWords}} free keywords remaining.</span>
+          </div>
+          <div>
+            <span class="typography-16--bold">Total Due - $0.00/month</span>
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-container *ngIf="!isKeywordFree">
+        <div fxLayout="column">
+          <div fxLayout fxLayoutAlign="space-between center">
+            <h1 class="typography-20--bold">Payment method</h1>
+
+            <button mat-button
+                    color="primary"
+                    type="button"
+                    appAddNewPayment
+                    (paymentProfileData)="onNewPaymentAdd($event)">
+              <div fxLayout
+                   fxLayoutGap="5px"
+                   fxLayoutAlign="start center"
+                   type="button">
+                <span class="typography-12">Add payment method</span>
+              </div>
+            </button>
+          </div>
+          <mat-hint class="typography-16" style="margin-bottom: 20px">
+            <div>
+              <span class="typography-16 typography-16--bold text-grey">
+                *({{totalFreeKeyWords}}) Keywords are covered by your
+                {{userPackageName}} Plan and will not be billed.
+                Any keyword over ({{totalFreeKeyWords}}) will be billed {{costPerKeyword | currency:'USD'}}/month.
+              </span>
+            </div>
+            <div>
+              <span class="typography-16 typography-16--bold text-grey">You have {{freeKeywordsRemaining}} of {{totalFreeKeyWords}} free keywords remaining.</span>
+            </div>
+          </mat-hint>
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Select payment method</mat-label>
+          <mat-select formControlName="paymentProfileID">
+            <mat-option *ngFor="let paymentProfile of paymentProfiles$ | async"
+                        [value]="paymentProfile.paymentProfileID">
+              {{
+                paymentProfile?.creditCardNumber
+                  ? paymentProfile?.creditCardNumber
+                  : paymentProfile?.accountNumber
+              }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!form.get('paymentProfileID').value">Please select any payment method.</mat-error>
+        </mat-form-field>
+
+        <span class="typography-20--bold margin-bottom--20">Keyword Payment Options</span>
+        <mat-form-field appearance="fill">
+          <mat-label>Select keyword payment options</mat-label>
+          <mat-select formControlName="prepayOptionId"
+                      
+                      >
+            <mat-option *ngFor="let op of prepayOptions$ | async"
+                        [value]="op.id"
+                        (click)="onKeywordPaymentOptionChanged(op)"
+                        >
+              {{ op.prepayOption }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!form.get('prepayOptionId').value">Please select any payment plan.</mat-error>
+        </mat-form-field>
+        <div>
+          <span class="typography-16--bold" *ngIf="form.get('prepayOptionId').value">
+            Total Due - {{totalKeywordOptionCost | currency:'USD'}} / {{monthOrMonths}}
+          </span>
+        </div>
+        
+      </ng-container>
+
+      
+
+      <div
+        class="footer max-width-form-control"
+        fxLayout="row"
+        fxLayoutGap="15px"
+      >
+        <button
+          mat-raised-button
+          class="button button-submit create"
+          fxFlex
+          (click)="onConfirmKeyword()"
+        >
+          Confirm Keyword
+        </button>
+        <button
+          mat-raised-button
+          class="button button-primary-inverted create"
+          fxFlex
+          [routerLink]="['./keywords']"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

@@ -1,0 +1,103 @@
+<app-mobile-header
+  (closed)="cancelOnClick()"
+  [headerTitle]="'Add Members to a Group'"
+></app-mobile-header>
+
+<div class="upload-wrapper">
+  <ng-container>
+    <h2 class="upload__title">
+      {{ mobileView ? 'Upload a File' : 'Upload File With Members Names' }}
+    </h2>
+    <div class="upload-inner">
+      <h3 class="upload__sub-title">Add members to:</h3>
+      <span
+        ><b>{{ group?.groupDetails?.group?.groupName }}</b></span
+      >
+    </div>
+  </ng-container>
+
+  <ng-container>
+    <div fxLayout="row wrap" fxLayoutAlign="flex-start baseline" class="file">
+      <input
+        hidden
+        #memberFile
+        type="file"
+        accept=".xlsx"
+        (change)="uploadFileOnChange($event)"
+      />
+      <button
+        mat-button
+        type="button"
+        color="primary"
+        class="btn-upload-file"
+        (click)="memberFile.click()"
+      >
+        <mat-icon color="primary">library_books</mat-icon>
+        Upload new file
+      </button>
+
+      <section
+        *ngIf="fileName"
+        fxLayout="row wrap"
+        fxLayoutAlign="flex-start center"
+      >
+        <span>{{ fileName }}</span>
+        <mat-icon class="icon-check">check</mat-icon>
+        <button
+          mat-button
+          color="warn"
+          type="button"
+          (click)="removeFileOnClick()"
+        >
+          Remove
+        </button>
+      </section>
+    </div>
+
+    <div fxLayout class="text-upload">
+      <p class="note">
+        <span
+          ><b>Note:</b> Importing new unique contacts can affect your monthly
+          unique member limit when you send a message.</span
+        >
+        <span class="text-break-mobile"><br /></span>
+        <span>
+          If you exceed your plan limit, you may need to upgrade. For example, a
+          25 member plan can only communicate to 25 unique contacts each month.
+          <button
+            type="button"
+            class="text-upload__btn"
+            (click)="learnMoreOnClick()"
+          >
+            Learn More
+          </button>
+        </span>
+      </p>
+    </div>
+
+    <div
+      fxLayout="row"
+      fxLayoutGap="1rem"
+      class="btn-actions"
+      fxLayout.lt-md="column"
+    >
+      <button
+        type="button"
+        mat-raised-button
+        (click)="nextOnClick()"
+        class="btn-upload __save"
+        [ngClass]="!isImported ? 'btn-disable' : ''"
+      >
+        Next
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        class="btn-upload __cancel"
+        (click)="cancelOnClick()"
+      >
+        Cancel
+      </button>
+    </div>
+  </ng-container>
+</div>

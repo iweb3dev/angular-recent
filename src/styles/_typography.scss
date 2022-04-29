@@ -1,0 +1,202 @@
+@import './variables';
+
+.typography-12 {
+  font-size: 12px;
+  letter-spacing: 0;
+  font-weight: 300;
+  margin: 0;
+  &--bold {
+    font-weight: 500;
+  }
+}
+
+.typography-14 {
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 16px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  &--light-bold {
+    font-weight: 400;
+  }
+  &--bold {
+    font-weight: 500;
+  }
+  &--scale-mobile {
+    @include respond(phone) {
+      font-size: 12px;
+    }
+  }
+  &--color-primary {
+    color: $app-primary;
+  }
+}
+
+.typography-16 {
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  &--light-bold {
+    font-weight: 400;
+  }
+  &--bold {
+    font-weight: 500;
+  }
+  &--accent {
+    color: $app-blue;
+  }
+  &--scale-mobile {
+    @include respond(phone) {
+      font-size: 14px;
+    }
+  }
+}
+
+.typography-15 {
+  font-size: 15px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  &--light-bold {
+    font-weight: 400;
+  }
+  &--bold {
+    font-weight: 500;
+  }
+}
+
+.typography-18 {
+  font-size: 18px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  &--bold {
+    font-weight: 500;
+  }
+  &--bolder {
+    font-weight: 600;
+  }
+  &--accent {
+    color: $app-blue;
+  }
+  &--scale-mobile {
+    @include respond(phone) {
+      font-size: 16px;
+    }
+  }
+}
+
+.typography-20 {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  &--light-bold {
+    font-weight: 400;
+    font-size: 20px;
+  }
+  &--bold {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  &--scale-mobile {
+    @include respond(phone) {
+      font-size: 18px;
+    }
+  }
+  &--bolder {
+    font-weight: 600;
+  }
+}
+
+.typography-24 {
+  font-size: 24px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  &--light-bold {
+    font-weight: 400;
+    font-size: 24px;
+  }
+  &--bold {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  &--scale-mobile {
+    @include respond(phone) {
+      font-size: 18px;
+    }
+  }
+  &--bolder {
+    font-weight: 600;
+  }
+}
+
+.typography-28 {
+  font-size: 28px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+
+  &--light-bold {
+    font-weight: 400;
+  }
+
+  &--bold {
+    font-weight: 500;
+  }
+  &--scale-mobile {
+    @include respond(phone) {
+      font-size: 18px;
+    }
+  }
+  &--bolder {
+    font-weight: 600;
+  }
+}
+
+.text-grey {
+  color: $app-grey;
+}
+
+.text-lighter-grey {
+  color: $app-lighter-grey;
+}
+
+.text-lime-green {
+  color: $app-lime-green;
+}
+
+.text-danger {
+  color: $app-cinnabar;
+}
+
+.text-black {
+  color: $app-black;
+}
+
+.text-rhino {
+  color: $app-rhino;
+}
+
+.text-white {
+  color: $app-white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-decoration-none {
+  text-decoration-line: none;
+}
+
+.text-strikethrough {
+  text-decoration: line-through;
+}
+
+.text-italic {
+  font-style: italic;
+}

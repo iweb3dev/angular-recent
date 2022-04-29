@@ -1,0 +1,14 @@
+<section fxLayout="column" class="group-member-filters" (click)="$event.stopPropagation()">
+  <div class="mobile-filter-top">
+    <h3 class="typography-29 other-filters">Filters</h3>
+    <mat-divider *ngIf="mobileView"></mat-divider>
+    <button type="button" class="btn-mobile-close" (click)="closeFilterModal()">X</button>
+  </div>
+
+  <span class="typography-30"><b>Sort</b></span>
+  <mat-form-field>
+    <mat-select name="sort" id="sortFilter" [(value)]="filterValue" (selectionChange)="sortFiltersOnChange($event)">
+      <mat-option *ngFor="let item of sortFilter" [value]="item.value">{{ item.key }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</section>

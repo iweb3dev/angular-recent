@@ -1,0 +1,52 @@
+@import '/src/styles/variables';
+
+.view-keyword {
+  max-width: 60%;
+  padding: 60px 50px;
+  @include respond(tab-port) {
+    max-width: 60%;
+  }
+  @include respond(phone) {
+    max-width: 100%;
+  }
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.form-view-keyword {
+  max-width: 500px;
+  width: 100%;
+}
+
+.max-width-form-control {
+  width: 100%;
+}
+
+.done-color {
+  color: $app-lime-green;
+}
+
+.keyword {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid $app-lime-green;
+}
+
+.view-all-keywords {
+  color: $app-primary;
+  cursor: pointer;
+}
+
+@media screen and (max-width: $sm) {
+  .mobile-center {
+    text-align: center;
+  }
+  .view-keyword {
+    padding: 16px 34px;
+  }
+}
+
+

@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutGap="30px"
+     fxLayout.lt-md="row wrap">
+  <span
+  fxFlex.lt-md="calc(33% - 15px)"
+  *ngFor="let value of values">
+    <mat-checkbox
+    [disabled]="value === selectedValue"
+    [ngModel]="value === selectedValue"
+    (change)="onSelectValue(value)">{{ value }}</mat-checkbox>
+  </span>
+
+</div>

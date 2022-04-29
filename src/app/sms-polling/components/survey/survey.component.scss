@@ -1,0 +1,57 @@
+.response-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.response-radio-button {
+  margin: 5px;
+}
+
+.question-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.left-container {
+  background-image: url("/assets/img/HomePageBannerMobile.png?format=2500w");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.right-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.survey-title {
+  font-size: 38px;
+}
+
+.logo {
+  position: absolute;
+  top: 2.5em;
+  left: 2.5em;
+  max-width: 250px;
+}
+
+.btn-submit {
+  color: #FFF;
+  background-color: #1BBC9B;
+  border-color: #1BBC9B;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 24px;
+  line-height: 1.44;
+  margin-top: 20px;
+}

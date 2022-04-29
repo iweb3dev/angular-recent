@@ -1,0 +1,110 @@
+<div>
+<div class="pick-plan-form">
+  <div class="container" fxLayout="column" fxLayoutAlign="center center">
+    <div class="title-container img-container">
+      <img mat-card-image src="../../../assets/img/CallingPostLogo.png" width="265" />
+    </div>
+    <div class="title-container typography-24--light-bold">
+      <p>Pick the best plan for you</p>
+    </div>
+    <div class="title-container typography-15 typography-15--light-bold">
+      <p>
+        Unlimited Monthly plans include unlimited phone, text & email
+        messaging*!
+      </p>
+    </div>
+    <div
+      class="two-board"
+      fxLayout="row"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="space-around space-between"
+    >
+      <div
+        class="left-board"
+        fxLayout="column"
+        fxLayoutAlign="space-between center"
+        fxFlexAlign.lt-md="center"
+      >
+        <div class="left-board-title typography-18 typography-18--bold">
+          <p>PREMIUM UNLIMITED</p>
+        </div>
+        <div class="left-board-price">
+          <p>starting at</p>
+          <p><span class="board-price-size">$8</span><span>/mo</span></p>
+        </div>
+        <div class="left-board-list">
+          <ul
+            class="typography-15 typography-15--light-bold"
+            fxLayout="column"
+            fxLayoutAlign="space-between center"
+          >
+            <li class="list--style">Grow from 15 to unlimited contacts</li>
+            <hr class="list--hr list--hr--white" />
+            <li class="list--style">Unlimited calls</li>
+            <hr class="list--hr list--hr--white" />
+            <li class="list--style">Unlimited text messages</li>
+            <hr class="list--hr list--hr--white" />
+            <li class="list--style">Unlimited emails</li>
+            <hr class="list--hr list--hr--white" />
+            <li class="list--style">ALL CallingPost Features!</li>
+          </ul>
+        </div>
+        <div class="left-board-button">
+          <button
+            class="auth-button auth-button--white"
+            fxLayout
+            fxFlexAlign="center"
+            routerLink="/entry-plan/submit-plan"
+          >
+            <span>GET STARTED</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="right-board"
+        fxLayout="column"
+        fxLayoutAlign="space-between center"
+        fxLayoutAlign.lt-md="center center"
+        fxFlexAlign.lt-md="center"
+      >
+        <div class="right-board-title typography-18 typography-18--bold">
+          <p>PREMIUM FREE</p>
+        </div>
+        <div class="right-board-price">
+          <p><span class="board-price-size">$0</span><span>/mo</span></p>
+        </div>
+        <div class="right-board-list">
+          <ul fxLayout="column" fxLayoutAlign="space-between center">
+            <li class="list--style">10 Contact Maximum</li>
+            <hr class="list--hr list--hr--grey" />
+            <li class="list--style">Try it out!</li>
+            <li class="list--style">Call, text & email on us!</li>
+          </ul>
+        </div>
+        <div class="right-board-button">
+          <button
+            class="auth-button right-board-button--style"
+            fxLayout
+            fxFlexAlign="center"
+            routerLink="/dashboard"
+          >
+            <span>TRY IT FREE</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="left-board-hint" fxFlexAlign="start" fxHide.lt-md>
+      <p>
+        Starts at 15 members plans will auto upgrade based on member count.
+        <!--<span>
+          <a href="https://www.callingpost.com/TermsAndConditions.pdf"
+            >Click here to learn more</a
+          >
+        </span>-->
+      </p>
+    </div>
+  </div>
+</div>
+<app-auth-footer></app-auth-footer>
+</div>

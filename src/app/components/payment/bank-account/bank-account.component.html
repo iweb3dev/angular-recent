@@ -1,0 +1,68 @@
+<form
+  fxLayout="column"
+  fxLayoutGap="15px"
+  class="payment-form"
+  [formGroup]="bankAccountForm"
+>
+  <mat-form-field>
+    <mat-label>
+      <span class="typography-16 text-grey typography-16--scale-mobile">
+        Name on account
+      </span>
+    </mat-label>
+    <input matInput type="text" formControlName="nameOnAccount" />
+    <mat-error>*Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      <span class="typography-16 text-grey typography-16--scale-mobile">
+        Bank name
+      </span>
+    </mat-label>
+    <input matInput type="text" formControlName="bankName" />
+    <mat-error>*Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      <span class="typography-16 text-grey typography-16--scale-mobile">
+        Routing number
+      </span>
+    </mat-label>
+    <input matInput formControlName="routingNumber" />
+    <mat-error>*Invalid value</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      <span class="typography-16 text-grey typography-16--scale-mobile">
+        Bank Account Number
+      </span>
+    </mat-label>
+    <input matInput type="text" formControlName="accountNumber" />
+    <mat-error>*Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      <span class="typography-16 text-grey typography-16--scale-mobile">
+        Checking account
+      </span>
+    </mat-label>
+    <mat-select formControlName="accountType">
+      <mat-option
+        *ngFor="let option of AccountTypeOptions"
+        [value]="option.accountType"
+      >
+        {{ option.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <ng-container *ngIf="bankAccountForm.get('isPrimary')">
+    <mat-checkbox formControlName="isPrimary">
+      Set as default payment method
+    </mat-checkbox>
+  </ng-container>
+</form>

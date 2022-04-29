@@ -1,0 +1,36 @@
+<div class="my-rewards-container" fxLayout="column" fxLayoutGap="75px">
+  <div (click)="onNavigateBack()" class="print" fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
+    <span class="material-icons">
+      chevron_left
+    </span>
+    <span>Back to rewards</span>
+  </div>
+  <div class="header" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <span class="typography-28 typography-28--bold text-black">Rate & Review</span>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start start" >
+    <div fxLayout="column" fxLayoutAlign="start start" class="email-body-container">
+      <span class="typography-18--bold text-subtitle">How would you rate our service?</span>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="book-rating" data-jest="stars">
+          <span *ngFor="let fullStar of fullStars; index as i" (click)="onUncheckRate(i)" class="material-icons-outlined star-icon-checked">star_purple500</span>
+          <span *ngFor="let emptyStar of emptyStars; index as i" (click)="onCheckRate(i)" class="material-icons-outlined star-icon-unchecked">star_outline</span>
+        </div>
+      </div>
+      <span class="typography-18--bold text-subtitle">Write a review</span>
+      <div fxLayout="column" fxFlex [formGroup]="emailMessageForm">
+        <textarea rows="7" cols="100" formControlName="emailBody" class="email-body">
+        </textarea>
+      </div>
+      <div class="btn-container">
+        <span></span>
+        <button mat-button class="button button--lime-green" type="button" fxFlex (click)="onSubmitReview()">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="isLoading"></app-loader>

@@ -1,0 +1,210 @@
+@import '/src/styles/variables';
+
+// Menu Navigation
+.nav-menu {
+  position: relative;
+}
+.search-inner {
+  gap: 2rem;
+  display: flex;
+  margin: 2rem 2rem 0 2rem;
+  justify-content: space-evenly;
+}
+.group-header {
+  position: relative;
+  margin: 30px 15px 0px 30px;
+}
+.group-name-title {
+  margin: 0;
+  span {
+    font-weight: 300;
+  }
+}
+.field-title {
+  display: block;
+  margin-top: 0.5rem;
+  color: $app-semi-grey;
+  &.__add-member {
+    display: none;
+  }
+  &.__search-member {
+    top: 40px;
+    right: 3px;
+    position: absolute;
+  }
+}
+
+// Buttons
+.btn-create-group {
+  width: 200px;
+  text-align: center;
+  border-radius: 25px;
+  background: $app-blue;
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
+    0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+  span {
+    color: $app-white;
+    margin-left: 10px;
+  }
+}
+.btn-white {
+  background-color: $app-white;
+}
+.btn-select-all {
+  margin-right: auto;
+}
+.system-settings-checkbox {
+  padding-left: 15px;
+}
+.btn-menu-warn {
+  color: $app-red;
+  text-align: center;
+}
+.btn-menu-warn--border {
+  color: $app-red;
+  text-align: center;
+  border-bottom-style: inset;
+}
+.btn-menu-plain {
+  text-align: center;
+  border-bottom-style: inset;
+}
+.search-input-mobile {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+}
+.btn-search-close {
+  min-width: 0;
+  margin: 0 0.5rem;
+  padding: 0 0.5rem;
+  color: $app-normal-grey;
+}
+.btn-send-message {
+  top: 0;
+  right: 0;
+  color: $app-white;
+  position: absolute;
+  background-color: $app-fruit-green;
+}
+.btn-search-field {
+  &.__add-member {
+    margin-right: auto;
+    padding-bottom: 2rem;
+  }
+  &.__search-member {
+    padding: 0 0.5rem;
+    position: relative;
+    display: inline-flex;
+  }
+}
+.btn-search {
+  margin-left: 1rem;
+}
+.btn-add-keyword {
+  min-width: 0;
+  padding: 0 0.5rem;
+}
+
+// Icons
+.mat-icon-search {
+  color: $app-blue;
+}
+
+// Miscellaneous
+.loading-screen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 390px);
+  span {
+    color: $app-normal-grey;
+  }
+}
+.text-keyword {
+  display: flex;
+  align-items: baseline;
+}
+.text-keyword-inner {
+  max-width: 75%;
+  word-break: break-all;
+}
+
+.area-title {
+  margin-top: 15px;
+}
+
+// Mobile
+@media screen and (max-width: 768px) {
+  // Menu Navigation
+  .search-inner {
+    margin: 1.5rem 1rem 1rem 1rem;
+  }
+  .group-header {
+    margin: 15px 15px 0px 15px;
+  }
+  .group-name-title {
+    font-size: 1.17em;
+  }
+  .field-title {
+    margin-top: 1rem;
+    &.__add-member {
+      display: initial;
+    }
+    &.__search-member {
+      position: initial;
+    }
+  }
+
+  // Buttons
+  .btn-create-group {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      display: none;
+    }
+  }
+  .btn-send-message {
+    width: 100%;
+    margin-top: 1rem;
+    position: initial;
+  }
+  .btn-search-field {
+    width: 6rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &.__add-member {
+      padding-bottom: 0;
+      text-align: center;
+      margin-right: initial;
+    }
+    &.__search-member {
+      padding: 0;
+    }
+  }
+  .btn-search-margin {
+    margin-right: 0.5rem;
+  }
+  .btn-search {
+    margin-left: 0;
+  }
+
+  // Filters
+  .full-width {
+    width: 100%;
+  }
+  .area-title {
+    margin-top: 15px;
+    font-weight: 600px;
+  }
+
+  // Actions
+  .mobile-search {
+    display: flex;
+    justify-content: center;
+  }
+}

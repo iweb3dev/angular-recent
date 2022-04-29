@@ -1,0 +1,160 @@
+<ng-container *ngIf="!isManager">
+  <div
+    class="nav-btn"
+    *ngIf="!isEditMode; else editGroups"
+    [ngClass]="mobileView && showSearchInput ? 'mobile-search' : ''"
+  >
+    <div *ngIf="!mobileView || !showSearchInput" class="mobile-inner">
+      <button
+        type="type"
+        mat-mini-fab
+        aria-label=""
+        class="btn-create-group"
+        [routerLink]="['/groups', 'create']"
+      >
+        <mat-icon class="app-icon-30 app-icon-30--scale-mobile basic-icon"
+          >add</mat-icon
+        ><span>Create New Group</span>
+      </button>
+      <span class="btn-new-group">New Group</span>
+    </div>
+
+    <div class="nav-btn__left-inner _groups">
+      <app-group-search
+        [mobileView]="mobileView"
+        [inputPlaceHolder]="'Search Groups'"
+        (searchShown)="searchShownOnEmit($event)"
+        (searchChange)="searchInputOnEmit($event)"
+      ></app-group-search>
+      <div class="mobile-inner" *ngIf="!mobileView || !showSearchInput">
+        <button
+          mat-mini-fab
+          type="button"
+          mat-icon-button
+          class="btn-tune"
+          aria-label="Filters Menu"
+          [matMenuTriggerFor]="filtersMenu"
+          #filterMenuTrigger="matMenuTrigger"
+        >
+          <mat-icon color="primary">tune</mat-icon>
+        </button>
+        <span class="btn-title">Filters</span>
+      </div>
+      <mat-menu #filtersMenu="matMenu">
+        <app-group-member-filters
+          [mobileView]="mobileView"
+          [sortFilter]="sortFilter"
+          [filterValue]="sortFilterValue"
+          (closeModal)="closeFilterModalOnEmit()"
+          (sortChanged)="sortChangedOnEmit($event)"
+        ></app-group-member-filters>
+      </mat-menu>
+
+      <div *ngIf="!mobileView || !showSearchInput" class="mobile-inner">
+        <button
+          type="button"
+          mat-mini-fab
+          class="btn-more"
+          cdkOverlayOrigin
+          aria-label="More Menu"
+          [matMenuTriggerFor]="moreMenu"
+        >
+          <mat-icon color="primary">more_horiz</mat-icon>
+        </button>
+        <span class="btn-title">More</span>
+        <mat-menu #moreMenu="matMenu">
+          <button
+            type="button"
+            mat-menu-item
+            class="btn-menu-plain"
+            (click)="isEditMode = !isEditMode"
+          >
+            <span>Select Groups to Delete</span>
+          </button>
+
+          <button
+            type="button"
+            mat-menu-item
+            class="btn-menu"
+            (click)="deleteAllOnClick()"
+          >
+            <span>Delete All Groups</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #editGroups>
+    <div class="btn-edit-group">
+      <div
+        class="edit-group-sub-inner btn-select-all"
+        [ngClass]="mobileView ? 'mobile-field-order' : ''"
+      >
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="selectAllOnClick()"
+          [ngClass]="mobileView ? 'mobile-select-edit' : ''"
+        >
+          {{ isSelected ? 'Deselect All' : 'Select All' }}
+        </button>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          mat-raised-button
+          (click)="deleteOnClick()"
+          class="btn-delete _border"
+        >
+          Delete
+        </button>
+      </div>
+      <mat-divider class="divider" *ngIf="mobileView"></mat-divider>
+
+      <div class="edit-group-sub-inner">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="cancelOnClick()"
+          [ngClass]="mobileView ? 'mobile-cancel-edit' : ''"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>
+
+<section>
+  <app-group-list-mobile
+    *ngIf="mobileView; else desktopView"
+    [groups]="groups"
+    [editMode]="isEditMode"
+    [totalRecords]="totalRecords"
+    [searchInput]="searchGroupValue"
+    [selectedGroups]="selectedGroups"
+    (groupsUpdate)="groupsUpdateOnEmit($event)"
+    (groupSelection)="groupSelectOnEmit($event)"
+    [sortExpression]="filterForm.get('sort').value"
+  ></app-group-list-mobile>
+
+  <ng-template #desktopView>
+    <app-group-list-desktop
+      [groups]="groups"
+      [editMode]="isEditMode"
+      [totalRecords]="totalRecords"
+      [searchInput]="searchGroupValue"
+      [selectedGroups]="selectedGroups"
+      (sortChanged)="sortChangedOnEmit($event)"
+      (groupsUpdate)="groupsUpdateOnEmit($event)"
+      (groupSelection)="groupSelectOnEmit($event)"
+      [sortExpression]="filterForm.get('sort').value"
+    ></app-group-list-desktop>
+  </ng-template>
+
+  <app-loader *ngIf="listLoading" class="overlay-loader"></app-loader>
+</section>

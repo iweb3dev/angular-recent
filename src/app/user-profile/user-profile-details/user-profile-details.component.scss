@@ -1,0 +1,27 @@
+@import '../../../styles/variables';
+
+.profile-details {
+  top: -1rem;
+  padding: 0 5rem;
+  position: relative;
+}
+
+.buttons {
+  width: 50%;
+  button {
+    font-weight: 300;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .profile-details {
+    padding: 0 1rem;
+  }
+  .buttons {
+    width: unset;
+    margin: 1rem;
+  }
+  .profile-name {
+    text-align: center;
+  }
+}

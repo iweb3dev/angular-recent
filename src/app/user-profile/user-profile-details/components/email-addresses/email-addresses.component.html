@@ -1,0 +1,20 @@
+  <mat-expansion-panel class="user-detail-section" fxLayout="column" [formGroup]="emailAddressesForm">
+    <mat-expansion-panel-header collapsedHeight="59px">
+      <span class="typography-20--bold text-rhino">Email(s)</span>
+    </mat-expansion-panel-header>
+  <div>
+    <app-email-frame *ngFor="let emailAddress of emailAddresses"
+    [formControl]="takeFormControlFromGroup(emailAddress.key)" (delete)="onDeleteEmailAddress(emailAddress)" (isValid)="getChildValidity($event)"></app-email-frame>
+    <div fxLayout="column" fxLayoutGap="6px">
+      <mat-error *ngIf='!hasPrimarySelected'>Please select a primary email address.</mat-error>
+      <mat-error *ngIf='hasNoEmailError'>Please provide at least one email address.</mat-error>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="14px" class="link" fxLayoutAlign="start center" (click)="onAddEmailAddress()">
+    <span class="material-icons">
+      add
+    </span>
+    <span class="typography-16">Add Email</span>
+  </div>
+  </mat-expansion-panel>

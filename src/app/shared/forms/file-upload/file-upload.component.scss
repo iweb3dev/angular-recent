@@ -1,0 +1,21 @@
+@import '/src/styles/variables';
+
+.file-upload-control {
+  .file-upload {
+    cursor: pointer;
+    &--disabled {
+      pointer-events: none;
+    }
+  }
+  input[type='file'] {
+    display: none;
+  }
+}
+
+.file-attachment {
+  color: $app-primary;
+}
+
+.file-upload-block {
+  min-height: 36px;
+}

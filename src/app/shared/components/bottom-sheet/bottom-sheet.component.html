@@ -1,0 +1,14 @@
+<div>
+  <div class="sticky-header">
+    <div class="header" fxLayoutAlign="center center">
+      <span class="material-icons left" (click)="showAnotherComponent ? closeAnotherComponent.emit() : onClose()"> chevron_left </span>
+      <span class="typography-16--bold">{{ title }}</span>
+      <span class="material-icons" (click)="onClose()"> close </span>
+    </div>
+    <ng-content select="[sticky]"></ng-content>
+  </div>
+  <ng-content select="[header]"></ng-content>
+  <div class="bottom-sheet-body">
+    <ng-content select="[body]"></ng-content>
+  </div>
+</div>

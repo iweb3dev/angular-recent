@@ -1,0 +1,9 @@
+<div class="step-list" fxLayout="row" fxLayoutGap='40px' fxLayout.lt-md="column">
+  <div class="step" *ngFor='let step of steps; let i = index'
+       fxLayout="row" fxLayoutGap='15px' fxLayout.lt-md="column"  fxLayoutAlign="start center" fxLayoutAlign.lt-md="center center">
+      <span>
+        <span class="step-index" fxLayoutAlign='center center'>{{i + 1}}</span>
+      </span>
+      <span class="typography-16 mobile-center text-lighter-grey">{{step}}</span>
+  </div>
+</div>

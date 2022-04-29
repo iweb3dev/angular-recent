@@ -1,0 +1,78 @@
+<div class="has-reminders" fxLayout="column" fxLayoutGap="30px">
+  <div class="header" fxLayout="column">
+    <div fxLayout fxLayoutAlign="space-between center" fxFill>
+      <span class="typography-20 typography-20--bold header text-black">My Reminders</span>
+      <button mat-raised-button class="typography-12 button button--lime-green create" [routerLink]="['./schedule', '-1']">
+        <span class="material-icons"> add </span>
+        CREATE NEW REMINDER
+      </button>
+    </div>
+    <div class="sort">
+      <label class="mat-select-sort-label">Sort: </label>
+      <mat-form-field fxFill>
+        <mat-select [ngModel]="sortConfig" (valueChange)="onSelectSort($event)">
+          <mat-option *ngFor="let option of sortOptions | keyvalue" [value]="+option.key">{{ option.value }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="user-reminders" fxLayout="row wrap" fxLayout.lt-md="column">
+    <mat-card
+      class="user-reminder"
+      *ngFor="let reminder of allReminders$ | async | communicationSortPipe: sortConfig"
+      fxFlex="calc(50% - 10px)"
+      fxFlex.lt-md="100%"
+      fxLayout="row"
+      fxLayoutGap="20px"
+      fxLayoutGap.lt-md="10px"
+    >
+      <div class="left-padding">
+        <span class="material-icons"> schedule </span>
+      </div>
+      <div class="content" fxLayout="column" fxLayoutGap="30px">
+        <div fxLayout="column" fxLayoutGap="20px">
+          <div>
+            <span class="typography-20--bold text-black">
+              {{ reminder.reminderName }}
+            </span>
+          </div>
+          <div fxLayout="column" fxLayoutGap="10px">
+            <div fxLayout="row wrap" fxLayoutGap="5px">
+              <span class="typography-16--bold text-black">Group to create message for: </span>
+              <span class="typography-16 text-black">{{ reminder.groupName }}</span>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="5px">
+              <span class="typography-16--bold text-black">Reminder phone numer: </span>
+              <span class="typography-16 text-black">{{ reminder.phoneNumberToCall }}</span>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="5px">
+              <span class="typography-16--bold text-black">Date/Time: </span>
+              <span class="typography-16 text-black">{{ reminder.startDateTime | date: 'MM/dd/yyyy h:mm:ss a' | addTimeZoneAbbr }}</span>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="5px">
+              <span class="typography-16--bold text-black">Caller-ID: </span>
+              <span class="typography-16 text-black">{{ reminder.callerId }}</span>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="5px">
+              <span class="typography-16--bold text-black">Repeat: </span>
+              <span class="typography-16 text-black"
+                >{{ repeatOptions[reminder.frequency] }}{{ reminder.frequencyDetails ? ', every ' + reminder.frequencyDetails : '' }}</span
+              >
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="5px">
+              <span class="typography-16--bold text-black">Status: </span>
+              <span class="typography-16 text-black">{{ reminder.isActive ? 'Active' : 'Inactive' }}</span>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="40px">
+          <span class="update" [routerLink]="['./schedule', reminder.reminderId]">Update</span>
+          <span class="delete" (click)="onDelete(reminder)">Delete</span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <span class="delete" (click)="onDeleteAll()" fxFill fxLayout fxLayoutAlign.lt-md="center center">Delete All Reminders</span>
+</div>

@@ -1,0 +1,41 @@
+<div fxLayout="column" fxLayoutAlign="space-evenly center" fxFill class="survey-container">
+  <div fxLayout="column" fxLayoutAlign="center center" class="question-container" *ngIf="!isSubmitted">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <a href="http://www.callingpost.com"><img class="logo" src="/assets/img/CallingPostLogo.png"></a>
+      <span class="typography-20--bold">Survey</span>
+    </div>
+    <span></span>
+    <div fxLayout="column" fxLayoutAlign="center center" style="padding: 20px;">
+      <span>{{ question?.response }}</span>
+      <mat-radio-group
+        aria-labelledby="response-radio-group-label"
+        class="response-radio-group"
+        [(ngModel)]="selectedResponse">
+        <mat-radio-button class="response-radio-button" *ngFor="let response of responses" [value]="response">
+          {{response.response}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-flat-button class="btn-submit" (click)="submitResponse()">Submit Answer</button>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="question-container success" *ngIf="isSuccess">
+    <div fxLayout="column" fxLayoutAlign="center center" class="success-message">
+      <span class="material-icons-outlined icon-white">check_circle</span>
+      <span class="typography-20 success-text">success</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 20px;">
+      <a href="http://www.callingpost.com"><img class="logo" src="/assets/img/CallingPostLogo.png"></a>
+      <span class="typography-20--bold">Survey</span>
+    </div>
+    <span class="typography-16" style="text-transform: uppercase; font-weight: 500; padding-bottom: 16px;">Thank you!</span>
+    <span class="typography-16">Your response has been recived</span>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="bottom-container">
+    <span class="info-text">You too can send text surveys like this! Create your own account now!</span>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-flat-button class="btn-start" (click)="submitResponse()">Get Sarted</button>
+    </div>
+  </div>
+</div>

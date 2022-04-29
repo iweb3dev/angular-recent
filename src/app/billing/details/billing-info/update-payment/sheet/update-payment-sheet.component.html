@@ -1,0 +1,37 @@
+<app-bottom-sheet title="Payment Method">
+  <ng-container body>
+    <div fxLayout="column" fxLayoutGap="30px">
+      <h2 class="typography-18 typography-18--bold">Update Payment</h2>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <app-payment
+          [paymentType]="profile.paymentType"
+          [creditCardForm]="creditCardForm"
+          [bankAccountForm]="bankAccountForm"
+        ></app-payment>
+        <button
+          mat-flat-button
+          color="primary"
+          fxFlex
+          class="button button--lime-green"
+          [disabled]="
+            paymentForm.get('creditCard').invalid &&
+            paymentForm.get('bankAccount').invalid
+          "
+          (click)="onSaveUpdate()"
+        >
+          <span class="typography-12"> UPDATE PAYMENT </span>
+        </button>
+        <button
+          mat-button
+          mat-stroked-button
+          color="primary"
+          fxFlex
+          class="button--blue-border"
+          (click)="onCancel()"
+        >
+          <span class="typography-12">CANCEL</span>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</app-bottom-sheet>

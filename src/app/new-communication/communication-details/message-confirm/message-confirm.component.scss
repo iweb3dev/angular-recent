@@ -1,0 +1,21 @@
+@import '/src/styles/variables';
+
+.message-confirm {
+  &__schedule {
+    padding: 18px 24px;
+    background-color: $app-white;
+  }
+}
+
+.reschedule-button {
+  width: min-content;
+  padding: 0;
+}
+
+.current-credits {
+  position: relative;
+  padding-right: 18px;
+  &:after {
+    @include pipe(18px, 0);
+  }
+}

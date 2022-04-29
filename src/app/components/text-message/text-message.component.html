@@ -1,0 +1,187 @@
+<form
+  [formGroup]="textForm"
+  fxLayout="column"
+  fxLayoutGap="40px"
+  fxFlex
+  class="text-message--size"
+>
+  <div fxLayout="row" fxLayoutGap="40px">
+    <div fxLayout="column" fxLayoutGap="40px" fxFlex="50%">
+      <div fxLayout="column" fxLayoutGap="20px" class="max-width">
+        <span class="typography-16 typography-16--bold">From name</span>
+        <mat-form-field appearance="outline">
+          <input
+            class="typography-16 typography-16--scale-mobile"
+            matInput
+            placeholder="Enter your name or organizations name here"
+            formControlName="sMSFromText"
+          />
+          <mat-error>*Required</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutGap="15px">
+        <mat-form-field appearance="outline">
+          <textarea
+            class="message--non-resizable"
+            cols="10"
+            rows="10"
+            matInput
+            placeholder="Type your message here..."
+            formControlName="sMSMessage"
+          ></textarea>
+          <mat-error>*Required</mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field class="language-selector" fxFlex="115px">
+            <mat-select
+              [formControl]="languageControl"
+              (selectionChange)="onMessageTranslate($event)"
+            >
+              <mat-option
+                *ngFor="let option of languages"
+                [value]="option.value"
+              >
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span class="typography-16 typography-16--scale-mobile">
+            Character count: {{ messageLength }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="50%" fxShow.gt-xs>
+      <div id="CellPhoneDiv">
+        <div class="CellPhoneDivText">
+          <div>
+            <div>
+              <p *ngIf="sampleText" class="message-sample">{{ sampleText }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="20px">
+    <mat-radio-group
+      fxLayout="column"
+      fxLayoutGap="20px"
+      [formControl]="useCustomNumber"
+    >
+      <div fxLayout>
+        <mat-radio-button [value]="false"></mat-radio-button>
+        <span class="typography-14">
+          <span class="typography-14--bold"> Use Default Number (24251) </span>
+          - Your members will receive texts from our CallingPost 24251 number.
+          This option is less personal, but the messages will be sent the
+          fastest.
+        </span>
+      </div>
+      <div fxLayout>
+        <mat-radio-button [value]="true"> </mat-radio-button>
+        <span class="typography-14">
+          <span class="typography-14--bold">Use Custom Number</span> - Your
+          members will receive texts from your custom number. This option is
+          more personal, but delivery is not quite as fast as the default
+          number.
+        </span>
+      </div>
+    </mat-radio-group>
+    <div *ngIf="useCustomNumber.value" fxLayout fxLayout.lt-sm="column">
+      <mat-form-field fxFlex.gt-xs="45" fxFlex.lt-sm>
+        <mat-label class="typography-16 typography-16--scale-mobile">
+          Select Custom Phone Number Below
+        </mat-label>
+        <mat-select formControlName="textNumber">
+          <mat-option
+            *ngFor="let number of customPhoneNumbers"
+            [value]="number"
+          >
+            {{ number }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-button
+        disableRipple
+        type="button"
+        class="button button--no-border"
+        appPurchasePhoneNumbers
+        [userInfo]="userInfo"
+        (purchasedNumber)="onReceivePurchasedNumber($event)"
+      >
+        <span
+          class="typography-16 typography-16--accent typography-16--scale-mobile"
+        >
+          Add Custom Phone Number
+        </span>
+      </button>
+    </div>
+    <div
+      *ngIf="isOnPlan"
+      fxLayout="row"
+      fxLayoutGap="20px"
+      fxLayoutAlign.lt-sm="space-between"
+    >
+      <mat-slide-toggle
+        slide-toggle
+        class="slide-toggle slide-toggle--green"
+        formControlName="smSTwoWayText"
+        (change)="onEnablePollingChange($event)"
+      ></mat-slide-toggle>
+      <span class="typography-16 typography-16--bold">
+        Enable text polling
+      </span>
+    </div>
+    <div
+      *ngIf="textForm.get('smSTwoWayText').value"
+      fxLayout="column"
+      fxLayoutGap="20px"
+    >
+      <span
+        class="typography-16 typography-16--bold typography-16--scale-mobile"
+      >
+        Make sure to place your question in your text message content above.
+        Click the options below that you would like available to your
+        recipients.
+      </span>
+      <div fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-checkbox
+            formControlName="smsAllowedResponseYes"
+            (change)="onYesChange($event)"
+          >
+            Yes
+          </mat-checkbox>
+          <mat-checkbox
+            formControlName="smsAllowedResponseNo"
+            (change)="onNoChange($event)"
+            >No</mat-checkbox
+          >
+          <mat-checkbox
+            formControlName="smsAllowedResponseMaybe"
+            (change)="onMaybeChange($event)"
+          >
+            Maybe
+          </mat-checkbox>
+        </div>
+        <span class="typography-14">
+          Your members can respond with options you include, and results of your
+          poll will show up in communication results.
+        </span>
+      </div>
+    </div>
+  </div>
+  <button
+    *ngIf="!hideSaveButton"
+    mat-flat-button
+    color="primary"
+    fxFlexAlign.gt-sm="self-start"
+    [disabled]="!messageValid"
+    (click)="saveAndContinue.emit()"
+  >
+    Save & Continue
+  </button>
+</form>

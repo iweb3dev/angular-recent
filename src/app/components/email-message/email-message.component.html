@@ -1,0 +1,71 @@
+<form [formGroup]="emailMessageForm" fxLayout="column" fxLayoutGap="20px" class="expansion-panel--valid--box-shadow">
+  <div class="email-header" fxLayout fxLayout.lt-sm="column" fxLayoutGap.lt-sm="30px" fxLayoutGap="20px">
+    <div fxLayout="column" fxFlex fxLayoutGap="20px">
+      <span class="typography-16 typography-16--bold">Subject</span>
+      <mat-form-field class="form-field form-field--label-grey" appearance="outline">
+        <input matInput placeholder="What is your email about?" type="text" formControlName="emailSubject" />
+        <mat-error>*Required</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex fxLayoutGap="20px">
+      <span class="typography-16 typography-16--bold">From</span>
+      <mat-form-field class="form-field form-field--label-grey" appearance="outline">
+        <input matInput placeholder="Enter your name or orgs name" type="text" formControlName="emailFromName" />
+        <mat-error>*Required</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex fxLayoutGap="20px">
+      <span class="typography-16 typography-16--bold">Reply to</span>
+      <mat-form-field class="form-field form-field--label-grey" appearance="outline">
+        <input matInput placeholder="Enter email that reply's will be sent to" type="email" formControlName="replyTo" />
+        <mat-error>*Invalid value</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="email-template" fxLayout="column" fxLayoutGap="20px">
+    <span class="typography-16 typography-16--bold" fxHide.lt-md> Email Template </span>
+    <div class="template-predefines" fxLayout="row wrap" fxLayoutGap="25px" fxHide.lt-md>
+      <div
+        class="template-predefines__predifine"
+        *ngFor="let template of emailTemplatePredefines"
+        (click)="onUpdateEmailTemplate(template.name)"
+      >
+        <img [src]="template.img" loading="lazy" width="140" height="160" />
+      </div>
+    </div>
+    <email-editor fxHide.lt-md (loaded)="editorLoaded()" [options]="unLayerOptions" class="email-editor-wrapper"></email-editor>
+    <app-file-upload
+      *ngIf="!attachmentsHidden"
+      [formControl]="fileUpload"
+      [multi]="true"
+      [maxSize]="2000"
+      (fileUpload)="onFileUpload($event)"
+      (fileRemove)="onFileRemove($event)"
+      (fileTooLargeError)="handleTooLargeError($event)"
+      name="email-message-file-input"
+    ></app-file-upload>
+    <div fxLayout="column" fxFlex fxHide.gt-sm>
+      <mat-form-field appearance="outline" fxFlex>
+        <textarea
+          cols="10"
+          rows="7"
+          matInput
+          placeholder="Type your email content here..."
+          [matTextareaAutosize]="true"
+          formControlName="emailBody"
+        ></textarea>
+      </mat-form-field>
+      <span class="typography-14">Use desktop view for email templates</span>
+    </div>
+  </div>
+  <button
+    *ngIf="!hideSaveButton"
+    mat-flat-button
+    color="primary"
+    fxFlexAlign.gt-sm="self-start"
+    [disabled]="!emailMessageForm.valid"
+    (click)="saveContinue()"
+  >
+    Save & Continue
+  </button>
+</form>

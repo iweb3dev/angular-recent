@@ -1,0 +1,173 @@
+<div class="plan-downgrade" fxLayout="column">
+  <div class="plan-downgrade__header" fxLayout="column" fxLayoutGap="20px">
+    <h1 class="typography-28 typography-28--bold">Downgrade Your Plan</h1>
+    <span class="typography-20 typography-20--scale-mobile">
+      This will downgrade you from
+      <span class="typography-20--bold">
+        {{ userPackageName$ | async }} Member plan
+      </span>
+      to
+      <span class="typography-20--bold">
+        {{ downgradePackage.packageName }} Member plan
+      </span>
+    </span>
+  </div>
+
+  <ng-container *ngIf="downgradeDataLoaded; else loader">
+    <ng-container *ngIf="paymentProfiles$ | async as profiles">
+      <ng-container *ngIf="profiles.length; else noProfiles">
+        <div class="form-container" fxLayout="column" fxLayoutGap="60px">
+          <ng-container *ngIf="downgradeData.canDowngrade; else noDowngrade">
+            <span
+              class="
+                typography-20 typography-20--bold typography-20--scale-mobile
+              "
+            >
+              The Downgrade change will take place on your next billing date
+              {{ downgradeData.nextBillDate | date: 'shortDate' }}
+            </span>
+
+            <div fxLayout="column" fxLayoutGap="30px">
+              <span
+                class="
+                  typography-20 typography-20--bold typography-20--scale-mobile
+                "
+              >
+                Cost of this downgrade: ${{
+                  downgradeData.amountDueNow | number: '1.2-2'
+                }}
+              </span>
+              <span
+                class="
+                  typography-20 typography-20--bold typography-20--scale-mobile
+                "
+              >
+                Amount Due: ${{
+                  downgradeData.amountDueNextCycle | number: '1.2-2'
+                }}
+                on
+                {{ downgradeData.nextBillDate | date: 'shortDate' }}
+              </span>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngTemplateOutlet="profileSelector; context: { profiles: profiles }"
+          ></ng-container>
+
+          <div
+            fxLayout
+            fxLayout.lt-sm="column-reverse"
+            fxLayoutGap="20px"
+            class="actions"
+          >
+            <button
+              fxFlex
+              type="button"
+              mat-flat-button
+              color="warn"
+              (click)="onPackageDowngrade()"
+              [disabled]="!paymentControl.valid || !downgradeData.canDowngrade"
+            >
+              Downgrade
+            </button>
+            <button
+              fxFlex
+              type="button"
+              mat-flat-button
+              class="button button-primary-inverted"
+              (click)="cancelDowngrade()"
+            >
+              {{ !downgradeData.canDowngrade ? 'Back' : 'Cancel Downgrade' }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #noDowngrade>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <span class="typography-18 typography-18--scale-mobile text-danger">
+      Unfortunately, downgrade is not possible. Please, contact our client
+      success team
+    </span>
+    <span class="typography-18 typography-18--scale-mobile">
+      <a href="tel:1-877-665-5646">@ 1-877-665-5646</a>
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #profileSelector let-profiles="profiles">
+  <div fxLayout="column">
+    <div fxLayout fxLayoutGap="35px">
+      <span
+        class="typography-20 typography-20--bold typography-20--scale-mobile"
+        fxFlexAlign="center"
+      >
+        Payment Method
+      </span>
+      <button
+        mat-flat-button
+        type="button"
+        fxLayoutGap="20px"
+        class="button button--no-border button--transparent"
+        appAddNewPayment
+        (paymentProfileData)="addNewPayment($event)"
+      >
+        Add payment method
+      </button>
+    </div>
+    <mat-form-field class="downgrade-control">
+      <mat-select [formControl]="paymentControl">
+        <mat-option *ngFor="let profile of profiles" [value]="profile">
+          {{
+            profile.creditCardNumber
+              ? profile.creditCardNumber
+              : profile.accountNumber
+          }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</ng-template>
+
+<ng-template #noProfiles>
+  <div class="form-container" fxLayout="column" fxLayoutGap="60px">
+    <span
+      class="
+        text-danger
+        typography-18 typography-18--bold typography-18--scale-mobile
+      "
+    >
+      Please, add payment method.
+    </span>
+    <ng-container
+      *ngTemplateOutlet="profileSelector; context: { profiles: [] }"
+    ></ng-container>
+    <div
+      fxLayout
+      fxLayout.lt-sm="column-reverse"
+      fxLayoutGap="20px"
+      class="actions"
+    >
+      <button fxFlex type="button" mat-flat-button color="warn" disabled>
+        Downgrade
+      </button>
+      <button
+        fxFlex
+        type="button"
+        mat-flat-button
+        class="button button-primary-inverted"
+        (click)="cancelDowngrade()"
+      >
+        Cancel downgrade
+      </button>
+    </div>
+  </div>
+</ng-template>

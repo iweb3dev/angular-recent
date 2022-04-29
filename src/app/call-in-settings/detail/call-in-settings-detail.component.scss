@@ -1,0 +1,37 @@
+
+@import '../../../styles/variables';
+
+.call-in-settings {
+  .sub-header {
+    width: 30%;
+    min-width: 32rem;
+  }
+  .header {
+    border-bottom: 1px solid rgba(205,205,205,0.5);
+    padding: 40px 50px 32px 50px;
+    background: $app-white-smoke;
+    box-shadow: 0 2px 4px 0 rgba(205,205,205,0.5);
+  }
+  .body {
+    max-width: 35rem;
+    padding: 40px 50px 32px 50px;
+    button.button {
+      font-weight: 300;
+    }
+  }
+  .link {
+    color: $app-primary;
+    text-decoration: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: $sm) {
+  .sub-header {
+    text-align: center;
+    width: unset !important;
+    min-width: unset !important;
+  }
+}

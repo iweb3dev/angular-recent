@@ -1,0 +1,138 @@
+<div class="message-name" fxLayout="column" fxLayoutGap="20px">
+  <ng-content></ng-content>
+  <form
+    fxLayout="column"
+    fxLayoutGap="15px"
+    fxLayoutGap.lt-sm="30px"
+    [formGroup]="sendMessageForm"
+  >
+    <span *ngIf="!hideMessageTitle" class="typography-20 typography-20--bold">
+      1) Message Recipients & Name
+    </span>
+
+    <div fxLayout="column" fxLayoutGap="16px">
+      <ng-container *ngIf="!messageRecipientsDisabled">
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayoutGap.lt-sm="15px"
+          *ngIf="{ recipients: recipientGroups$ | async } as data"
+        >
+          <mat-form-field
+            *ngIf="!isMobileView && hasGroups"
+            appearance="outline"
+            fxFlex
+            class="control recipients"
+            (click)="(groupSelect.onContainerClick)"
+          >
+            <mat-label>Select message recipient(s)</mat-label>
+            <app-chips-autocomplete
+              #groupSelect
+              formControlName="messageRecipients"
+              placeholder="Click here to add"
+              customOption="-- Create A New Group --"
+              (customOptionClick)="onNavigateToGroups()"
+              [autocompleteOptions]="data.recipients"
+              (blur)="onGroupsBlur()"
+            ></app-chips-autocomplete>
+            <mat-error>*Required</mat-error>
+          </mat-form-field>
+
+          <button
+            *ngIf="!hasGroups"
+            type="type"
+            mat-mini-fab
+            aria-label=""
+            class="btn-create-group"
+            [routerLink]="['/groups', 'create']"
+            [queryParams]="{ from: 'new-communication' }"
+          >
+            <mat-icon class="app-icon-30 app-icon-30--scale-mobile basic-icon"
+              >add</mat-icon
+            ><span>Create New Group</span>
+          </button>
+
+          <div class="button-wrapper" *ngIf="!isMobileView">
+            <button
+              *ngIf="
+                hasGroups && sendMessageForm?.value?.messageRecipients?.length > 0
+              "
+              mat-button
+              type="button"
+              matAutocompleteOrigin
+              [disabled]="!hasGroups"
+              (click)="onAddOtherGroup()"
+              #origin="matAutocompleteOrigin"
+            >
+              + Add Another
+              <input
+                hidden
+                #autocompleteInput
+                matInput
+                type="text"
+                class="chip-input"
+                (blur)="onGroupsBlur()"
+                [matAutocomplete]="auto"
+                #trigger="matAutocompleteTrigger"
+                [matAutocompleteConnectedTo]="origin"
+              />
+            </button>
+
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              panelWidth="400px"
+              (optionSelected)="onSelectAddOtherGroup($event)"
+            >
+              <mat-option
+                *ngFor="let option of data.recipients"
+                [value]="option.value"
+              >
+                {{ option.value }}
+              </mat-option>
+              <mat-divider></mat-divider>
+              <button
+                mat-button
+                (click)="onNavigateToGroups()"
+                class="button button--no-border custom-option"
+                fxFlex
+                type="button"
+              >
+                -- Create A New Group --
+              </button>
+            </mat-autocomplete>
+          </div>
+
+          <mat-form-field
+            *ngIf="isMobileView"
+            appearance="outline"
+            class="control"
+            fxFlex
+          >
+            <mat-label>Select message recipient(s)</mat-label>
+            <app-mobile-chips-selector
+              id="messageRecipients"
+              formControlName="messageRecipients"
+              placeholder="Click here to add"
+              customOption="-- Create A New Group --"
+              (customOptionClick)="onNavigateToGroups()"
+              [options]="data.recipients"
+              (valueChange)="onMobileGroupsValidate($event)"
+            ></app-mobile-chips-selector>
+            <mat-error>*Required</mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+
+      <mat-form-field appearance="outline" class="control">
+        <mat-label>Message name</mat-label>
+        <input
+          matInput
+          type="text"
+          (blur)="onBlur()"
+          formControlName="messageName"
+        />
+        <mat-error>*Required</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,43 @@
+<div class="review-reminder" fxLayout="column" fxLayoutGap="30px">
+  <div class="header" fxLayout fxLayoutAlign="space-between center">
+    <span class="typography-20--bold">Review Reminder</span>
+    <span class="material-icons close" (click)="onClose()"> close </span>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <span class="typography-16--bold">Name of Reminder: </span>
+      <span class="typography-16">{{ data?.reminder.reminderName }}</span>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <span class="typography-16--bold">Group to create message for: </span>
+      <span class="typography-16">{{ data?.reminder.groupName }}</span>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <span class="typography-16--bold">Reminder phone numer: </span>
+      <span class="typography-16">{{ data?.reminder.phoneNumberToCall }}</span>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <span class="typography-16--bold">Date/Time: </span>
+      <span class="typography-16">{{ data?.reminder.startDateTime | date: 'MM/dd/yyyy h:mm:ss a' | addTimeZoneAbbr }}</span>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <span class="typography-16--bold">Caller-ID: </span>
+      <span class="typography-16">{{ data?.reminder.callerId }}</span>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <span class="typography-16--bold">Repeat: </span>
+      <span class="typography-16"
+        >{{ repeatOptions[data?.reminder.frequency]
+        }}{{ data?.reminder.frequencyDetails ? ', every ' + data?.reminder.frequencyDetails : '' }}</span
+      >
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <span class="typography-16--bold">Status: </span>
+      <span class="typography-16">{{ data?.reminder.isActive ? 'Active' : 'Inactive' }}</span>
+    </div>
+  </div>
+  <div class="footer" fxLayout fxLayoutGap="15px" fxLayout.lt-md="column-reverse">
+    <button mat-raised-button color="primary" class="button button-primary-inverted" (click)="onClose()" fxFlex>CANCEL</button>
+    <button mat-raised-button class="button button--lime-green" fxFlex (click)="onConfirm()">SAVE REMINDER</button>
+  </div>
+</div>

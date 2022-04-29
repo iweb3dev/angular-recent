@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+
+.managers {
+  padding: 40px 50px;
+}
+
+
+@media screen and (max-width: $sm) {
+  .managers {
+    padding: 16px 34px;
+  }
+}

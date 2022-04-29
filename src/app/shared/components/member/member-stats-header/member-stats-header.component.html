@@ -1,0 +1,48 @@
+<section class="member-header">
+  <mat-divider></mat-divider>
+  <div
+    fxLayout
+    class="member-header-inner"
+    fxLayoutAlign="space-between center"
+  >
+    <ng-container *ngIf="totalMembers > -1">
+      <h3>
+        <p>Total members</p>
+        <span>{{ totalMembers }}</span>
+      </h3>
+      <mat-divider vertical class="mat-divider-vertical"></mat-divider>
+    </ng-container>
+
+    <ng-container *ngIf="activeMembers > -1">
+      <h3>
+        <p>Active members</p>
+        <span>{{ activeMembers }}</span>
+      </h3>
+      <mat-divider vertical class="mat-divider-vertical"></mat-divider>
+    </ng-container>
+
+    <ng-container *ngIf="activePhones > -1">
+      <h3>
+        <p>Active phones</p>
+        <span>{{ activePhones }}</span>
+      </h3>
+      <mat-divider vertical class="mat-divider-vertical"></mat-divider>
+    </ng-container>
+
+    <ng-container *ngIf="activeTexts > -1">
+      <h3>
+        <p>Active texts</p>
+        <span>{{ activeTexts }}</span>
+      </h3>
+      <mat-divider vertical class="mat-divider-vertical"></mat-divider>
+    </ng-container>
+
+    <ng-container *ngIf="activeEmails > -1">
+      <h3>
+        <p>Active emails</p>
+        <span>{{ activeEmails }}</span>
+      </h3>
+    </ng-container>
+  </div>
+  <mat-divider></mat-divider>
+</section>

@@ -1,0 +1,22 @@
+<div class="submit-success" fxLayout="column" fxLayoutGap="20px">
+  <div
+    fxLayout
+    fxLayout.xs="column"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <span class="typography-24 typography-24--bold success-text">
+      Congrats! Your messages have successfully been sent or scheduled.
+    </span>
+    <mat-icon class="done-icon app-icon-60"> done </mat-icon>
+  </div>
+  <button
+    fxFlexAlign="flex-start"
+    fxFlexAlign.xs="center"
+    mat-stroked-button
+    color="primary"
+    (click)="createNewMessage()"
+  >
+    Send a new message
+  </button>
+</div>

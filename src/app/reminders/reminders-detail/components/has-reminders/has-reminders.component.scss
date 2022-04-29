@@ -1,0 +1,60 @@
+@import '../../../../../styles/variables';
+
+mat-card {
+  &.user-reminder {
+    padding: 24px;
+    margin-bottom: 20px;
+    max-width: calc(50% - 10px);
+    &:nth-child(odd) {
+      margin-right: 20px;
+    }
+  }
+
+  .material-icons {
+    color: $app-grey
+  }
+
+  .update {
+    color: $app-light-blue;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+
+.delete {
+  color: $app-red;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.sort {
+  max-width: 15rem;
+  position: relative;
+  .mat-select-sort-label {
+    position: absolute;
+    bottom: 40%;
+  }
+}
+
+@media screen and (max-width: $sm) {
+  mat-card {
+    &.user-reminder {
+      padding: 24px 14px;
+      &:nth-child(odd) {
+        margin-right: unset;
+      }
+      max-width: unset;
+    }
+  }
+
+  .header{
+    width: 100%;
+  }
+
+  .sort {
+    max-width: unset;
+  }
+}

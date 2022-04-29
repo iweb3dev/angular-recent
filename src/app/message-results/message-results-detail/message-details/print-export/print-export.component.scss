@@ -1,0 +1,11 @@
+.stat {
+  :first-child {
+    width: 8rem;
+  }
+}
+
+.close {
+  &:hover {
+    cursor: pointer;
+  }
+}

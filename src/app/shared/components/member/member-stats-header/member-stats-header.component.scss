@@ -1,0 +1,42 @@
+.member-header {
+  margin-top: 1rem;
+}
+.member-header-inner {
+  padding: 0 2rem;
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0 0.5rem;
+  }
+  h3 span {
+    font-weight: 700;
+  }
+  h3 p {
+    display: inline;
+    &::after {
+      content: ': ';
+    }
+  }
+}
+
+.mat-divider-vertical {
+  height: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .member-header-inner {
+    padding: 1rem 0.5rem;
+    h3 {
+      font-size: 0.9rem;
+    }
+    h3 span {
+      display: table;
+    }
+    h3 p {
+      &::after {
+        content: ' ';
+      }
+    }
+  }
+}

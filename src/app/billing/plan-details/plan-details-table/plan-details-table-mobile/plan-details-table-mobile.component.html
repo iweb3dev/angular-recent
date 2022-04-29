@@ -1,0 +1,991 @@
+<div
+  class="plans-row"
+  fxLayout
+  fxLayoutAlign="space-between"
+  fxLayoutGap="15px"
+>
+  <div
+    fxFlex
+    fxLayout="column"
+    class="plans-block"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <span class="typography-18 typography-18--bold">Premium</span>
+    <span class="typography-15">${{ premiumPlan.cost }}</span>
+    <button
+      mat-flat-button
+      class="button plan-action"
+      type="button"
+      [class.button--lime-green]="
+        premiumButtonLabel !== PlanDetailsActionLabels.Downgrade
+      "
+      [class.button--warn]="
+        premiumButtonLabel === PlanDetailsActionLabels.Downgrade
+      "
+      (click)="onPremiumChange()"
+    >
+      <span class="typography-12">{{ premiumButtonLabel }}</span>
+    </button>
+  </div>
+  <div
+    fxFlex
+    fxLayout="column"
+    class="plans-block"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <span class="typography-18 typography-18--bold">Standard</span>
+    <span class="typography-15">${{ standardPlan.cost }}</span>
+    <button
+      mat-flat-button
+      class="button plan-action"
+      type="button"
+      [class.button--lime-green]="
+        standardButtonLabel !== PlanDetailsActionLabels.Downgrade
+      "
+      [class.button--warn]="
+        standardButtonLabel === PlanDetailsActionLabels.Downgrade
+      "
+      (click)="onStandardChange()"
+    >
+      <span class="typography-12">{{ standardButtonLabel }}</span>
+    </button>
+  </div>
+  <div
+    fxFlex
+    fxLayout="column"
+    class="plans-block"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <span class="typography-18 typography-18--bold">Essentials</span>
+    <span class="typography-15">${{ essentialPlan.cost }}</span>
+    <button
+      mat-flat-button
+      class="button plan-action"
+      type="button"
+      [class.button--lime-green]="
+        essentialsButtonLabel !== PlanDetailsActionLabels.Downgrade
+      "
+      [class.button--warn]="
+        essentialsButtonLabel === PlanDetailsActionLabels.Downgrade
+      "
+      (click)="onEssentialChange()"
+    >
+      <span class="typography-12">{{ essentialsButtonLabel }}</span>
+    </button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div class="feature-block" fxLayout="column" fxLayoutGap="10px">
+  <span class="typography-16 typography-16--bold">Top Features</span>
+  <table class="feature-table">
+    <tr class="header-row">
+      <th class="cell first-column"></th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Premium</span>
+      </th>
+      <th class="cell">
+        <span class="typography-14 typography-14--bold">Standard</span>
+      </th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Essentials</span>
+      </th>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Unlimited Phone Calls</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Unlimited Text Messages</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Unlimited Emails</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Record Time</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          {{ premiumPlan.voiceMessageLength }} seconds
+        </span>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          {{ standardPlan.voiceMessageLength }} second
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          {{ essentialPlan.voiceMessageLength }} seconds
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Text Message Length</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          {{ premiumPlan.smsLength }} Characters
+        </span>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          {{ standardPlan.smsLength }} Characters
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          {{ essentialPlan.smsLength }} Characters
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Email Messaging</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="premiumPlan.emailMessage"
+          [class.warn-icon]="!premiumPlan.emailMessage"
+        >
+          {{ premiumPlan.emailMessage ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="standardPlan.emailMessage"
+          [class.warn-icon]="!standardPlan.emailMessage"
+        >
+          {{ standardPlan.emailMessage ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="essentialPlan.emailMessage"
+          [class.warn-icon]="!essentialPlan.emailMessage"
+        >
+          {{ essentialPlan.emailMessage ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Detailed Communication Results</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="feature-block" fxLayout="column" fxLayoutGap="10px">
+  <span class="typography-16 typography-16--bold">Messaging Features</span>
+  <table class="feature-table">
+    <tr class="header-row">
+      <th class="cell first-column"></th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Premium</span>
+      </th>
+      <th class="cell">
+        <span class="typography-14 typography-14--bold">Standard</span>
+      </th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Essentials</span>
+      </th>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Extended Hour Messaging</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.afterHourMessaging"
+          [class.warn-icon]="!premiumPlan.afterHourMessaging"
+        >
+          {{ premiumPlan.afterHourMessaging ? 'done' : 'close' }}</mat-icon
+        >
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.afterHourMessaging"
+          [class.warn-icon]="!standardPlan.afterHourMessaging"
+        >
+          {{ standardPlan.afterHourMessaging ? 'done' : 'close' }}</mat-icon
+        >
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.afterHourMessaging"
+          [class.warn-icon]="!essentialPlan.afterHourMessaging"
+        >
+          {{ essentialPlan.afterHourMessaging ? 'done' : 'close' }}</mat-icon
+        >
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">24/7 Messaging</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.twentyFourSevenMessaging"
+          [class.warn-icon]="!premiumPlan.twentyFourSevenMessaging"
+        >
+          {{ premiumPlan.twentyFourSevenMessaging ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.twentyFourSevenMessaging"
+          [class.warn-icon]="!standardPlan.twentyFourSevenMessaging"
+        >
+          {{ standardPlan.twentyFourSevenMessaging ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.twentyFourSevenMessaging"
+          [class.warn-icon]="!essentialPlan.twentyFourSevenMessaging"
+        >
+          {{ essentialPlan.twentyFourSevenMessaging ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Send Messages By Mobile App</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Send Messages By Telephone</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon class="done-icon app-icon-20">done</mat-icon>
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon class="done-icon app-icon-20">done</mat-icon>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Send messages to multiple groups</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon class="done-icon app-icon-20">done</mat-icon>
+        </span>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon class="done-icon app-icon-20">done</mat-icon>
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon class="done-icon app-icon-20">done</mat-icon>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Send phone/text/emails in one message</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="premiumPlan.emailMessage"
+          [class.warn-icon]="!premiumPlan.emailMessage"
+        >
+          {{ premiumPlan.emailMessage ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="standardPlan.emailMessage"
+          [class.warn-icon]="!standardPlan.emailMessage"
+        >
+          {{ standardPlan.emailMessage ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="essentialPlan.emailMessage"
+          [class.warn-icon]="!essentialPlan.emailMessage"
+        >
+          {{ essentialPlan.emailMessage ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-columns">
+        <span class="typography-12">Reminder Messages</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.reminders"
+          [class.warn-icon]="!premiumPlan.reminders"
+        >
+          {{ premiumPlan.reminders ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.reminders"
+          [class.warn-icon]="!standardPlan.reminders"
+        >
+          {{ standardPlan.reminders ? 'done' : 'close' }}</mat-icon
+        >
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.reminders"
+          [class.warn-icon]="!essentialPlan.reminders"
+        >
+          {{ essentialPlan.reminders ? 'done' : 'close' }}</mat-icon
+        >
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="feature-block" fxLayout="column" fxLayoutGap="10px">
+  <span class="typography-16 typography-16--bold">Phone Features</span>
+  <table class="feature-table">
+    <tr class="header-row">
+      <th class="cell first-column"></th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Premium</span>
+      </th>
+      <th class="cell">
+        <span class="typography-14 typography-14--bold">Standard</span>
+      </th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Essentials</span>
+      </th>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Use Your Caller Id</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.callerID"
+          [class.warn-icon]="!premiumPlan.callerID"
+        >
+          {{ premiumPlan.callerID ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.callerID"
+          [class.warn-icon]="!standardPlan.callerID"
+        >
+          {{ standardPlan.callerID ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.callerID"
+          [class.warn-icon]="!essentialPlan.callerID"
+        >
+          {{ essentialPlan.callerID ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Missed Phone Message Playback</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">
+          Text-To-Speech Phone Messaging (Multi-lingual Support)
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.multiLanguageMessages"
+          [class.warn-icon]="!premiumPlan.multiLanguageMessages"
+        >
+          {{ premiumPlan.multiLanguageMessages ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.multiLanguageMessages"
+          [class.warn-icon]="!standardPlan.multiLanguageMessages"
+        >
+          {{ standardPlan.multiLanguageMessages ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.multiLanguageMessages"
+          [class.warn-icon]="!essentialPlan.multiLanguageMessages"
+        >
+          {{ essentialPlan.multiLanguageMessages ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Straight to Voicemail</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.straightToVoicemail"
+          [class.warn-icon]="!premiumPlan.straightToVoicemail"
+        >
+          {{ premiumPlan.straightToVoicemail ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon
+            class="done-icon app-icon-20"
+            [class.done-icon]="standardPlan.straightToVoicemail"
+            [class.warn-icon]="!standardPlan.straightToVoicemail"
+          >
+            {{ standardPlan.straightToVoicemail ? 'done' : 'close' }}
+          </mat-icon>
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon
+            class="done-icon app-icon-20"
+            [class.done-icon]="essentialPlan.straightToVoicemail"
+            [class.warn-icon]="!essentialPlan.straightToVoicemail"
+          >
+            {{ essentialPlan.straightToVoicemail ? 'done' : 'close' }}
+          </mat-icon>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Reduced Trailer</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon
+            class="done-icon app-icon-20"
+            [class.done-icon]="premiumPlan.reducedTrailer"
+            [class.warn-icon]="!premiumPlan.reducedTrailer"
+          >
+            {{ premiumPlan.reducedTrailer ? 'done' : 'close' }}
+          </mat-icon>
+        </span>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon
+            class="done-icon app-icon-20"
+            [class.done-icon]="standardPlan.reducedTrailer"
+            [class.warn-icon]="!standardPlan.reducedTrailer"
+          >
+            {{ standardPlan.reducedTrailer ? 'done' : 'close' }}
+          </mat-icon>
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          <mat-icon
+            class="done-icon app-icon-20"
+            [class.done-icon]="essentialPlan.reducedTrailer"
+            [class.warn-icon]="!essentialPlan.reducedTrailer"
+          >
+            {{ essentialPlan.reducedTrailer ? 'done' : 'close' }}
+          </mat-icon>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Remove Branding on Trailer</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="premiumPlan.noTrailer"
+          [class.warn-icon]="!premiumPlan.noTrailer"
+        >
+          {{ premiumPlan.noTrailer ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="standardPlan.noTrailer"
+          [class.warn-icon]="!standardPlan.noTrailer"
+        >
+          {{ standardPlan.noTrailer ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="essentialPlan.noTrailer"
+          [class.warn-icon]="!essentialPlan.noTrailer"
+        >
+          {{ essentialPlan.noTrailer ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-columns">
+        <span class="typography-12">Live Answer Transfer</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.liveAnswerTransfer"
+          [class.warn-icon]="!premiumPlan.liveAnswerTransfer"
+        >
+          {{ premiumPlan.liveAnswerTransfer ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.liveAnswerTransfer"
+          [class.warn-icon]="!standardPlan.liveAnswerTransfer"
+        >
+          {{ standardPlan.liveAnswerTransfer ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.liveAnswerTransfer"
+          [class.warn-icon]="!essentialPlan.liveAnswerTransfer"
+        >
+          {{ essentialPlan.liveAnswerTransfer ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-columns">
+        <span class="typography-12">Voice Delivery to Text & Email</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.sendRecordingAsTextEmail"
+          [class.warn-icon]="!premiumPlan.sendRecordingAsTextEmail"
+        >
+          {{ premiumPlan.sendRecordingAsTextEmail ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.sendRecordingAsTextEmail"
+          [class.warn-icon]="!standardPlan.sendRecordingAsTextEmail"
+        >
+          {{ standardPlan.sendRecordingAsTextEmail ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.sendRecordingAsTextEmail"
+          [class.warn-icon]="!essentialPlan.sendRecordingAsTextEmail"
+        >
+          {{ essentialPlan.sendRecordingAsTextEmail ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="feature-block" fxLayout="column" fxLayoutGap="10px">
+  <span class="typography-16 typography-16--bold">Texting Features</span>
+  <table class="feature-table">
+    <tr class="header-row">
+      <th class="cell first-column"></th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Premium</span>
+      </th>
+      <th class="cell">
+        <span class="typography-14 typography-14--bold">Standard</span>
+      </th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Essentials</span>
+      </th>
+    </tr>
+
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">FREE Keyword(s)</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          {{ premiumPlan.keywords }}
+        </span>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          {{ standardPlan.keywords }}
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          {{ essentialPlan.keywords }}
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Additional Keyword Cost</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          ${{ premiumPlan.additionalKeywordCost }}
+        </span>
+      </td>
+      <td class="text-center cell">
+        <span class="typography-12 typography-12--bold">
+          ${{ standardPlan.additionalKeywordCost }}
+        </span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <span class="typography-12 typography-12--bold">
+          ${{ essentialPlan.additionalKeywordCost }}
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">SMS Surveys</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="premiumPlan.twoWayTextSurveys"
+          [class.warn-icon]="!premiumPlan.twoWayTextSurveys"
+        >
+          {{ premiumPlan.twoWayTextSurveys ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="standardPlan.twoWayTextSurveys"
+          [class.warn-icon]="!standardPlan.twoWayTextSurveys"
+        >
+          {{ standardPlan.twoWayTextSurveys ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="essentialPlan.twoWayTextSurveys"
+          [class.warn-icon]="!essentialPlan.twoWayTextSurveys"
+        >
+          {{ essentialPlan.twoWayTextSurveys ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="feature-block" fxLayout="column" fxLayoutGap="10px">
+  <span class="typography-16 typography-16--bold">Email Features</span>
+  <table class="feature-table">
+    <tr class="header-row">
+      <th class="cell first-column"></th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Premium</span>
+      </th>
+      <th class="cell">
+        <span class="typography-14 typography-14--bold">Standard</span>
+      </th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Essentials</span>
+      </th>
+    </tr>
+
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Custom Email Template Builder</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="premiumPlan.emailTemplates"
+          [class.warn-icon]="!premiumPlan.emailTemplates"
+        >
+          {{ premiumPlan.emailTemplates ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="standardPlan.emailTemplates"
+          [class.warn-icon]="!standardPlan.emailTemplates"
+        >
+          {{ standardPlan.emailTemplates ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="done-icon app-icon-20"
+          [class.done-icon]="essentialPlan.emailTemplates"
+          [class.warn-icon]="!essentialPlan.emailTemplates"
+        >
+          {{ essentialPlan.emailTemplates ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Pre-built Email Templates</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon app-icon-20">done</mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Merge Tags</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="premiumPlan.emailMergeTags"
+          [class.warn-icon]="!premiumPlan.emailMergeTags"
+        >
+          {{ premiumPlan.emailMergeTags ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="standardPlan.emailMergeTags"
+          [class.warn-icon]="!standardPlan.emailMergeTags"
+        >
+          {{ standardPlan.emailMergeTags ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="essentialPlan.emailMergeTags"
+          [class.warn-icon]="!essentialPlan.emailMergeTags"
+        >
+          {{ essentialPlan.emailMergeTags ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Remove Email Branding</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="app-icon-20 done-icon"> done </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="app-icon-20 warn-icon"> close </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="app-icon-20 warn-icon"> close </mat-icon>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="feature-block" fxLayout="column" fxLayoutGap="10px">
+  <span class="typography-16 typography-16--bold">Additional Features</span>
+  <table class="feature-table">
+    <tr class="header-row">
+      <th class="cell first-column"></th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Premium</span>
+      </th>
+      <th class="cell">
+        <span class="typography-14 typography-14--bold">Standard</span>
+      </th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Essentials</span>
+      </th>
+    </tr>
+
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Rewards Program Access</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="premiumPlan.rewardProgramAccess"
+          [class.warn-icon]="!premiumPlan.rewardProgramAccess"
+        >
+          {{ premiumPlan.rewardProgramAccess ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="standardPlan.rewardProgramAccess"
+          [class.warn-icon]="!standardPlan.rewardProgramAccess"
+        >
+          {{ standardPlan.rewardProgramAccess ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon
+          class="app-icon-20"
+          [class.done-icon]="essentialPlan.rewardProgramAccess"
+          [class.warn-icon]="!essentialPlan.rewardProgramAccess"
+        >
+          {{ essentialPlan.rewardProgramAccess ? 'done' : 'close' }}
+        </mat-icon>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="feature-block" fxLayout="column" fxLayoutGap="10px">
+  <span class="typography-16 typography-16--bold">Support</span>
+  <table class="feature-table">
+    <tr class="header-row">
+      <th class="cell first-column"></th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Premium</span>
+      </th>
+      <th class="cell">
+        <span class="typography-14 typography-14--bold">Standard</span>
+      </th>
+      <th class="cell cell--highlighted">
+        <span class="typography-14 typography-14--bold">Essentials</span>
+      </th>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">Live Phone/Chat/Email/Text Support</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon">done</mat-icon>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell first-column">
+        <span class="typography-12">24/7 Online Support</span>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon">done</mat-icon>
+      </td>
+      <td class="text-center cell">
+        <mat-icon class="done-icon">done</mat-icon>
+      </td>
+      <td class="text-center cell cell--highlighted">
+        <mat-icon class="done-icon">done</mat-icon>
+      </td>
+    </tr>
+  </table>
+</div>
+<mat-divider></mat-divider>

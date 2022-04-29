@@ -1,0 +1,47 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="column" fxLayoutGap="15px">
+    <span class="typography-18 typography-18--bold">Sort</span>
+    <mat-form-field>
+      <mat-select [(ngModel)]="filters.sort">
+        <mat-option
+          *ngFor="let option of sortOptions | keyvalue"
+          [value]="+option.key"
+          >{{ option.value }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="15px">
+    <span class="typography-18 typography-18--bold">Message Type</span>
+
+    <mat-checkbox
+      class="message-results-filter-checkbox typography-14"
+      *ngFor="let option of messageTypeOptions | keyvalue"
+      [checked]="this.filters.messageType.includes(+option.key)"
+      (change)="onToggleMessageType(option.key, $event)"
+      >{{ option.value }} Message</mat-checkbox
+    >
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="15px">
+    <span class="typography-18 typography-18--bold">Status</span>
+    <mat-radio-group
+      aria-labelledby="status-radio-group-label"
+      class="status-radio-group"
+      [(ngModel)]="filters.history"
+    >
+      <mat-radio-button
+        class="capitilize typography-14 status-radio-button"
+        *ngFor="let option of historyType"
+        (change)="onToggleMessageStatus(option.value)"
+        [value]="option.value"
+        >{{ option.name }}</mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+
+  <button (click)="onConfirm()" mat-raised-button color="primary">
+    APPLY FILTER
+  </button>
+</div>

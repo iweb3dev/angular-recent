@@ -1,0 +1,44 @@
+<app-bottom-sheet [title]="'Select A Previously Created Message'">
+  <div
+    sticky
+    class="search-container"
+    fxLayoutAlign="start center"
+    fxLayoutGap="9px"
+  >
+    <mat-icon> search </mat-icon>
+    <input type="text" placeholder="Search messages" [(ngModel)]="filterText" />
+  </div>
+
+  <ng-container
+    body
+    *ngFor="let message of messages | filter: filterText:'notificationName'"
+  >
+    <div fxLayout fxLayoutAlign="space-between" class="message-container">
+      <div fxLayout="column" fxLayoutGap="10px">
+        <span class="typography-14 typography-14--bold">
+          {{ message.notificationName }}
+        </span>
+        <div fxLayout fxLayoutGap="5px">
+          <span class="typography-14 text-grey">Creation date:</span>
+          <span class="typography-14 typography-14--bold">
+            {{ message.modifiedByDateTime | date: 'MM/dd/yyyy' }}
+          </span>
+        </div>
+        <app-message-preview
+          [message]="message"
+          (selectMessage)="onAdd(message)"
+        ></app-message-preview>
+      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        fxFlexAlign="flex-start"
+        fxFlex="120px"
+        (click)="onAdd(message)"
+      >
+        Add
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+  </ng-container>
+</app-bottom-sheet>

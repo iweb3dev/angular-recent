@@ -1,0 +1,18 @@
+@import '/src/styles/variables';
+
+.phone-list {
+  min-height: calc(min-content + 20px);
+  &__phone {
+    margin-bottom: 10px;
+  }
+}
+
+.phone-list-spinner,
+.phone-list-wrapper {
+  min-height: 235px;
+}
+
+.purchase-submit {
+  color: $app-white;
+  background-color: $app-lime-green;
+}

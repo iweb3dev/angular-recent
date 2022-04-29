@@ -1,0 +1,387 @@
+<app-mobile-header
+  (closed)="cancelOnClick()"
+  [headerTitle]="'Edit Profile'"
+></app-mobile-header>
+
+<form class="groups-member-wrapper" [formGroup]="memberForm">
+  <div class="groups-member-image">
+    <label>
+      <img
+        loading="lazy"
+        class="member-image"
+        [src]="(memberPicture | sanitizeImage) || defaultPicture"
+        alt=""
+      />
+    </label>
+    <div>
+      <h2 class="member-name">
+        {{ memberForm.get('firstName')?.value }}
+        {{ memberForm.get('lastName')?.value }}
+      </h2>
+      <input #file type="file" hidden (change)="onImageChange($event)" />
+      <button
+        mat-button
+        type="button"
+        color="primary"
+        (click)="file.click()"
+        class="btn-remove-padding"
+      >
+        Edit photo
+      </button>
+    </div>
+  </div>
+  <section>
+    <span class="btn-title-active-member">Active Member</span>
+    <mat-slide-toggle
+      formControlName="isActive"
+      (change)="memberActiveOnChange()"
+      class="slide-toggle slide-toggle--green"
+    ></mat-slide-toggle>
+  </section>
+
+  <section>
+    <div class="groups-member-title">Profile Details</div>
+    <div class="groups-member-inner">
+      <mat-form-field class="example-full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" formControlName="firstName" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastName" />
+      </mat-form-field>
+    </div>
+  </section>
+
+  <section>
+    <div class="groups-member-title">Phone Number(s)</div>
+    <div
+      class="groups-member"
+      formArrayName="phoneNumbers"
+      *ngFor="
+        let phone of memberForm.get('phoneNumbers')['controls'];
+        let i = index
+      "
+    >
+      <ng-container [formGroupName]="i">
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            type="text"
+            maxlength="10"
+            appNumbersOnly
+            placeholder="Phone Number"
+            formControlName="phoneNumber"
+            [class]="phone | pipeFunction : blockedPhoneNumber"
+          />
+          <button
+            matSuffix
+            mat-button
+            type="button"
+            color="primary"
+            aria-label="delete"
+            (click)="deletePhoneOnClick(i)"
+          >
+            Delete
+          </button>
+          <mat-error
+            *ngIf="
+              memberForm.hasError('required', [
+                'phoneNumbers',
+                i,
+                'phoneNumber'
+              ])
+            "
+            >*Required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              memberForm.hasError('minlength', [
+                'phoneNumbers',
+                i,
+                'phoneNumber'
+              ])
+            "
+            >Invalid phone number</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone Type</mat-label>
+          <mat-select
+            (selectionChange)="phoneOnChange(i)"
+            formControlName="phoneNumberLocation"
+          >
+            <mat-option *ngFor="let type of phoneTypes" [value]="type.value">{{
+              type.key | titlecase
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <span class="btn-title">ACTIVE</span>
+          <mat-slide-toggle
+            formControlName="isActive"
+            (change)="phoneOnChange(i)"
+            class="slide-toggle slide-toggle--green"
+          ></mat-slide-toggle>
+        </div>
+      </ng-container>
+
+      <span
+        class="blocked-member blacklisted-contact"
+        *ngIf="phone | pipeFunction : blockedPhoneNumber"
+      >
+        {{ memberContactsAvailabilityStatus.BlackListedPhone }}
+        <mat-icon
+          color="primary"
+          matTooltipPosition="above"
+          [matTooltip]="memberContactsAvailabilityStatus.BlackListedPhoneHelp"
+        >
+          help
+        </mat-icon>
+      </span>
+    </div>
+    <button
+      mat-button
+      type="button"
+      color="primary"
+      class="remove-padding-btn"
+      (click)="addPhoneGroup(member.id)"
+    >
+      <mat-icon color="primary" class="app-icon-30 app-icon-30--scale-mobile"
+        >add</mat-icon
+      >
+      Add Phone
+    </button>
+  </section>
+
+  <section>
+    <div class="groups-member-title">Email(s)</div>
+    <div
+      class="groups-member"
+      formArrayName="emailAddresses"
+      *ngFor="
+        let email of memberForm.get('emailAddresses')['controls'];
+        let i = index
+      "
+    >
+      <ng-container [formGroupName]="i">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email Address</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="Email Address"
+            [class]="email | pipeFunction : blockedEmailAddress"
+          />
+          <button
+            matSuffix
+            mat-button
+            type="button"
+            color="primary"
+            aria-label="delete"
+            (click)="deleteEmailOnClick(i)"
+          >
+            Delete
+          </button>
+          <mat-error
+            *ngIf="
+              memberForm.hasError('required', ['emailAddresses', i, 'email'])
+            "
+            >*Required</mat-error
+          >
+          <mat-error
+            *ngIf="memberForm.hasError('email', ['emailAddresses', i, 'email'])"
+            >Invalid email</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email Type</mat-label>
+          <mat-select
+            (selectionChange)="emailOnChange(i)"
+            formControlName="emailLocation"
+          >
+            <mat-option *ngFor="let type of emailTypes" [value]="type.value">{{
+              type.key | titlecase
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <span class="btn-title">ACTIVE</span>
+          <mat-slide-toggle
+            formControlName="isActive"
+            (change)="emailOnChange(i)"
+            class="slide-toggle slide-toggle--green"
+          ></mat-slide-toggle>
+        </div>
+      </ng-container>
+
+      <span class="blocked-member blacklisted-contact"
+        *ngIf="email | pipeFunction : blockedEmailAddress"
+      >
+        {{ memberContactsAvailabilityStatus.BlacklistedEmail }}
+        <mat-icon
+          color="primary"
+          matTooltipPosition="above"
+          [matTooltip]="memberContactsAvailabilityStatus.BlackListedEmailHelp
+            + emailSubscribeLink"
+        >
+          help
+        </mat-icon>
+      </span>
+    </div>
+    <button
+      mat-button
+      type="button"
+      color="primary"
+      class="remove-padding-btn"
+      (click)="addEmailGroup(member.id)"
+    >
+      <mat-icon color="primary" class="app-icon-30 app-icon-30--scale-mobile"
+        >add</mat-icon
+      >
+      Add Email
+    </button>
+  </section>
+
+  <section>
+    <div class="groups-member-title">Address(es)</div>
+    <div
+      class="groups-member"
+      formArrayName="addresses"
+      *ngFor="
+        let address of memberForm.get('addresses')['controls'];
+        let i = index
+      "
+    >
+      <ng-container [formGroupName]="i">
+        <mat-form-field class="example-full-width">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="addressLine1" />
+          <button
+            matSuffix
+            mat-button
+            type="button"
+            color="primary"
+            aria-label="delete"
+            (click)="deleteAddressOnClick(i)"
+          >
+            Delete
+          </button>
+          <mat-error
+            *ngIf="
+              memberForm.hasError('required', ['addresses', i, 'addressLine1'])
+            "
+            >*Required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Zip</mat-label>
+          <input appNumbersOnly maxlength="5" matInput formControlName="zip" />
+          <mat-error
+            *ngIf="memberForm.hasError('required', ['addresses', i, 'zip'])"
+            >*Required</mat-error
+          >
+          <mat-error
+            *ngIf="memberForm.hasError('minlength', ['addresses', i, 'zip'])"
+            >Invalid zip code</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Address Type</mat-label>
+          <mat-select
+            (selectionChange)="addressOnChange(i)"
+            formControlName="addressLocation"
+          >
+            <mat-option
+              *ngFor="let type of addressTypes"
+              [value]="type.value"
+              >{{ type.key | titlecase }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <span class="btn-title">ACTIVE</span>
+          <mat-slide-toggle
+            formControlName="isActive"
+            (change)="addressOnChange(i)"
+            class="slide-toggle slide-toggle--green"
+          ></mat-slide-toggle>
+        </div>
+      </ng-container>
+    </div>
+    <button
+      mat-button
+      type="button"
+      color="primary"
+      class="remove-padding-btn"
+      (click)="addAddressGroup(member.id)"
+    >
+      <mat-icon color="primary" class="app-icon-30 app-icon-30--scale-mobile"
+        >add</mat-icon
+      >
+      Add Address
+    </button>
+  </section>
+
+  <section>
+    <div class="groups-member-title">Member Group(s)</div>
+    <div
+      class="member-groups-wrapper"
+      *ngFor="let memberGroup of member.memberStaticGroups"
+    >
+      <h3 class="member-group-name">{{ memberGroup.groupName }}</h3>
+      <mat-slide-toggle
+        [checked]="memberGroup.isActive"
+        class="slide-toggle slide-toggle--green"
+        (change)="memberGroupOnStatusChange(memberGroup, $event)"
+      ></mat-slide-toggle>
+      <button
+        mat-button
+        color="warn"
+        type="button"
+        class="btn-remove-padding"
+        (click)="deleteMemberGroupOnClick(memberGroup)"
+      >
+        <mat-icon class="warn-icon action-focus">delete_forever</mat-icon>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="groups-member-btn-inner">
+      <button
+        type="button"
+        mat-raised-button
+        (click)="cancelOnClick()"
+        class="groups-member-btn _border change-order-secondary-btn"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        (click)="saveOnClick()"
+        class="groups-member-btn _blue"
+      >
+        Save
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="delete-member">
+      <button
+        mat-button
+        color="warn"
+        type="button"
+        (click)="deleteOnClick()"
+        class="remove-padding-btn"
+      >
+        Delete Member
+      </button>
+    </div>
+  </section>
+</form>

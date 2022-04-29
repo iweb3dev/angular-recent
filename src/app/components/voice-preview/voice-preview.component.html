@@ -1,0 +1,149 @@
+<div fxLayout="column" fxLayoutGap="26px">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 fxHide.xs class="typography-20">
+      <span class="typography-20--bold">Message Details</span> -
+      <span>
+        {{ message.notificationName }}
+      </span>
+    </h3>
+    <div fxHide.gt-xs fxLayout="column" fxLayoutGap="15px">
+      <h3 class="typography-16 typography-16--bold">Message Details</h3>
+      <span class="typography-16">
+        {{ message.notificationName }}
+      </span>
+      <span class="typography-14 text-grey">
+        Creation date: {{ message.creationDate }}
+      </span>
+    </div>
+    <button mat-icon-button (click)="onClose()" class="app-icon-button-20">
+      <mat-icon class="regular-grey app-icon-20 app-icon-20--scale-mobile">
+        close
+      </mat-icon>
+    </button>
+  </div>
+
+  <div class="body">
+    <div
+      fxLayout
+      fxLayout.lt-md="column"
+      fxLayoutGap="50px"
+      fxLayoutGap.lt-md="15px"
+    >
+      <div fxLayout fxLayoutGap="15px">
+        <mat-icon
+          fontSet="material-icons-outlined"
+          color="primary"
+          class="app-icon-30 app-icon-30--scale-mobile"
+        >
+          phone_in_talk
+        </mat-icon>
+        <span
+          class="typography-18 typography-18--bold typography-18--scale-mobile"
+        >
+          Voice Message
+        </span>
+      </div>
+      <div fxLayout="column" fxLayoutGap="20px" fxFlex>
+        <app-audio-player
+          label="Your Voice Message"
+          [source]="message.filename"
+        >
+          <span
+            *ngIf="!message.filename"
+            class="typography-12 text-danger"
+            fxFlexAlign="center"
+          >
+            Audio playback not available for this message.
+          </span>
+        </app-audio-player>
+
+        <span class="typography-14 typography-14--bold">
+          Caller ID {{ message.callerId }}
+        </span>
+
+        <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+          <mat-icon class="done-icon app-icon-20" *ngIf="message.svm">
+            done
+          </mat-icon>
+          <mat-icon class="regular-grey app-icon-20" *ngIf="!message.svm">
+            close
+          </mat-icon>
+
+          <span class="typography-14 typography-14--bold">
+            SVM - Deliver Calls Straight to Voicemail.
+          </span>
+        </div>
+
+        <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+          <mat-icon
+            class="done-icon app-icon-20"
+            *ngIf="message.textAlternateFormatSend"
+          >
+            done
+          </mat-icon>
+          <mat-icon
+            class="regular-grey app-icon-20"
+            *ngIf="!message.textAlternateFormatSend"
+          >
+            close
+          </mat-icon>
+          <span class="typography-14 typography-14--bold">
+            Deliver this voice message as a phone call and a text
+          </span>
+        </div>
+        <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+          <mat-icon
+            class="done-icon app-icon-20"
+            *ngIf="message.emailAlternateFormatSend"
+          >
+            done
+          </mat-icon>
+          <mat-icon
+            class="regular-grey app-icon-20"
+            *ngIf="!message.emailAlternateFormatSend"
+          >
+            close
+          </mat-icon>
+          <span class="typography-14 typography-14--bold">
+            Deliver this message as a phone call and an email.
+          </span>
+        </div>
+        <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+          <mat-icon class="done-icon app-icon-20" *ngIf="message.lat">
+            done
+          </mat-icon>
+          <mat-icon class="regular-grey app-icon-20" *ngIf="!message.lat">
+            close
+          </mat-icon>
+          <span class="typography-14 typography-14--bold">
+            Add live answer transfer (LAT) trailer option.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    fxLayout
+    fxLayout.xs="column"
+    fxLayoutGap="10px"
+    *ngIf="message.showActions"
+  >
+    <button mat-flat-button color="primary" fxFlex (click)="onMessageSelect()">
+      <span class="typography-14 typography-14--scale-mobile">
+        USE THIS MESSAGE
+      </span>
+    </button>
+    <button
+      mat-button
+      mat-stroked-button
+      color="primary"
+      color="primary"
+      class="typography-14"
+      fxFlex
+      (click)="onClose()"
+    >
+      <span class="typography-14"> Choose A Different Message </span>
+    </button>
+  </div>
+</div>

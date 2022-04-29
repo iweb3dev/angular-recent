@@ -1,0 +1,16 @@
+@import '/src/styles/variables';
+
+.player {
+  border-radius: 2px;
+  background-color: $app-white-smoke;
+  box-shadow: unset;
+}
+
+.voice-control-bar {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    width: auto;
+  }
+}

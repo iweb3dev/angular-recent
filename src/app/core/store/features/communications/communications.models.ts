@@ -1,0 +1,43 @@
+import { NotificationStatusTypes } from 'src/app/api/shared/shared.enums';
+
+export interface CommunicationResult {
+  id: number;
+  notificationId: number;
+  notificationName: string;
+  lat: string;
+  cid: string;
+  startDateTime: Date;
+  endDateTime: Date;
+  isEmergency: boolean;
+  communicationCompletionValue: number;
+  notificationStatus: NotificationStatusTypes;
+  earliestStartHour: number;
+  latestStartHour: number;
+  sendInMembersTimeZone: boolean;
+  sendInMembersPreferredTime: boolean;
+  isInitialOptIn: boolean;
+  callsCanceled: number;
+  callsDeliverd: number;
+  callsToMake: number;
+  callsUnDelivered: number;
+  emailsCanceled: number;
+  emailsDeliverd: number;
+  emailsToMake: number;
+  emailsUnDelivered: number;
+  faxsCanceled: number;
+  faxsDeliverd: number;
+  faxsToMake: number;
+  faxsUnDelivered: number;
+  smSsCharged: number;
+  smSsCanceled: number;
+  smSsDeliverd: number;
+  smSsToMake: number;
+  smSsUnDelivered: number;
+  statusDateTime: Date;
+  notificationFormatValue: number;
+  acceptResponses: boolean;
+  sendNow: boolean;
+  textAlternateFormatSend: boolean;
+  emailAlternateFormatSend: boolean;
+  groupNames: string[];
+}

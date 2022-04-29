@@ -1,0 +1,46 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">
+      Create Voice Message w/ Keyboard
+    </h3>
+    <button mat-icon-button (click)="onCloseDialog()" class="app-icon-button-20">
+      <mat-icon class="blue-icon">close</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="20px">
+    <p class="typography-16 typography-16--bold">
+      Enter your message here. Your text will be automatically converted to a
+      voice message and delivered via phone call. (TTS)
+    </p>
+
+    <form fxLayout="column" fxLayoutGap="10px" [formGroup]="keyboardForm">
+      <mat-form-field appearance="outline">
+        <textarea cols="10" rows="7" matInput placeholder="Type your message here..." formControlName="message"
+          [matTextareaAutosize]="true" cdkFocusInitial></textarea>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="typography-12">
+        <mat-form-field class="language-selector" fxFlex="140px">
+          <mat-select formControlName="language" (selectionChange)="onChangeLanguage($event)">
+            <mat-option *ngFor="let option of languages" [value]="option.value">
+              <span class="typography-12">{{ option.label }}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="typography-14">
+          Character count: {{ messageLength }}
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout fxLayoutGap="10px">
+      <button mat-flat-button color="primary" fxFlex="70%" [disabled]="keyboardForm.invalid" (click)="onSaveMessage()">
+        Continue
+      </button>
+      <button mat-button color="primary" fxFlex class="button--blue-border" (click)="onCloseDialog()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

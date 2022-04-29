@@ -1,0 +1,54 @@
+@import '/src/styles//variables';
+
+$app-blue-light: #166ebb;
+$app-blue-dark: #0a519b;
+$app-teal-dark: #1580a2;
+$app-purple-cold: #7a5afa;
+$app-pink-cold: #cc3399;
+
+.menu-item {
+  width: 100%;
+  margin: 10px 0;
+
+  &__icon {
+    padding: 10px;
+    margin: 0 15px;
+  }
+
+  &__title {
+    font-weight: 400;
+  }
+}
+
+.menu-item {
+  .menu-item__icon {
+    color: $app-pale-grey;
+  }
+  .menu-item__title {
+    color: $app-gray-44;
+  }
+}
+
+.menu-item.active {
+  .menu-item__icon {
+    &--general {
+      color: $app-blue-light;
+    }
+    &--newCommunication {
+      color: $app-blue-dark;
+    }
+    &--groupMembers {
+      color: $app-teal-dark;
+    }
+    &--communicationResult {
+      color: $app-purple-cold;
+    }
+    &--messageLibrary {
+      color: $app-pink-cold;
+    }
+  }
+  .menu-item__title {
+    color: $app-black;
+    font-weight: 500;
+  }
+}

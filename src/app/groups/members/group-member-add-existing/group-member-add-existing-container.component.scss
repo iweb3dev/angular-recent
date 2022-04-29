@@ -1,0 +1,152 @@
+@import '/src/styles//variables';
+
+// Menu Navigation
+.btn-nav {
+  position: relative;
+  align-items: center;
+  padding: 30px 40px 0;
+  justify-content: space-between;
+  &__left-inner {
+    gap: 2em;
+    display: flex;
+  }
+}
+.mobile-inner {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.btn-title {
+  display: none;
+}
+.search-inner {
+  position: relative;
+}
+.search {
+  right: 40px;
+  position: absolute;
+}
+
+// Buttons
+.btn--white {
+  background-color: $app-white;
+}
+.btn-select-all {
+  margin-right: auto;
+}
+.btn-close {
+  right: 7px;
+  top: 22px;
+  padding: 0px;
+  min-width: 0px;
+  position: absolute;
+  color: $app-dark-gray;
+}
+.btn-search-close {
+  min-width: 0;
+  margin: 0 0.5rem;
+  padding: 0 0.5rem;
+  color: $app-normal-grey;
+}
+
+.btn-filter {
+  gap: 2em;
+  display: flex;
+}
+.mobile-actions {
+  display: none;
+}
+.btn-disable {
+  cursor: not-allowed;
+  background: $app-grey !important;
+}
+
+// Icons
+.mat-icon-search {
+  color: $app-blue;
+}
+
+//Filter Popup
+.btn-mobile {
+  display: block;
+  &._add-selected {
+    color: $app-white;
+    margin-top: 20px;
+    text-align: center;
+    background: $app-blue;
+  }
+}
+
+// Header
+.add-existing-header {
+  display: flex;
+  align-items: baseline;
+  padding: 30px 40px 0px 40px;
+  justify-content: space-between;
+}
+
+// Mobile
+@media screen and (max-width: 768px) {
+  .edit-group-sub-inner {
+    width: 100%;
+    display: flex;
+    margin-top: 3%;
+    justify-content: space-between;
+  }
+
+  // Buttons
+  .btn-nav {
+    padding: 20px 20px 10px 20px;
+    position: relative;
+    align-items: baseline;
+    &__left-inner {
+      gap: 0;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+  .btn-title {
+    display: block;
+    margin-top: 20px;
+    color: $app-semi-grey;
+  }
+  .btn-filter {
+    order: -1;
+    padding-bottom: 2%;
+    justify-content: space-evenly;
+    border-bottom: 1px solid $app-alternate-grey;
+  }
+  .full-width {
+    width: 100%;
+  }
+
+  // Edit Members
+  .mobile-search {
+    padding: 0 15% 5% 0;
+    justify-content: flex-end;
+  }
+  .btn-mobile {
+    &._add-selected {
+      width: 100%;
+    }
+  }
+  .mobile-actions {
+    gap: 0.5em;
+    display: flex;
+    padding: 5% 5%;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  // Header
+  .add-existing-header {
+    display: flex;
+    align-items: baseline;
+    padding: 30px 40px 0px 20px;
+    justify-content: space-between;
+  }
+  .add-existing-sub-header {
+    margin: 0;
+    font-size: 1.15em;
+  }
+}

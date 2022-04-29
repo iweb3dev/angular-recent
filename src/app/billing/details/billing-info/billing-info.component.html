@@ -1,0 +1,163 @@
+<div class="billing-info" fxLayout="column" fxLayoutGap="25px">
+  <div fxLayout fxLayoutAlign="space-between center">
+    <h1 class="typography-28 typography-28--bold typography-28--scale-mobile">
+      Current Payment Methods
+    </h1>
+    <button
+      *ngIf="viewProfiles.length"
+      mat-flat-button
+      class="button button--lime-green"
+      fxHide.lt-md
+      type="button"
+      appAddNewPayment
+      (paymentProfileData)="createNewPaymentProfile.emit($event)"
+    >
+      <div
+        fxLayout
+        fxLayoutGap="5px"
+        fxLayoutAlign="start center"
+        type="button"
+      >
+        <mat-icon>add</mat-icon>
+        <span class="typography-12">ADD NEW PAYMENT METHOD</span>
+      </div>
+    </button>
+  </div>
+  <div class="billing-cards" *ngIf="viewProfiles.length; else noPayment">
+    <mat-card
+      class="billing-cards__card"
+      *ngFor="let profile of viewProfiles; let i = index"
+    >
+      <div fxLayout fxLayoutAlign="space-between center">
+        <div
+          fxLayout="row wrap"
+          fxFlex="60"
+          fxLayoutAlign="space-between center"
+        >
+          <div
+            class="
+              typography-16 typography-16--scale-mobile typography-16--bold
+              card-details
+            "
+          >
+            {{ profile.cardAccountNumberInfo }}
+            <span
+              class="typography-14 margin-left--10 text-grey"
+              *ngIf="profile.isPrimary"
+            >
+              DEFAULT
+            </span>
+          </div>
+          <span
+            class="typography-14 typography-16--bold"
+            fxFlexAlign="flex-start"
+          >
+            {{ profile.profileDetails }}
+          </span>
+        </div>
+        <div fxLayout fxLayout.lt-md="column" fxLayoutAlign.lt-md="end">
+          <button
+            mat-flat-button
+            class="button button--no-border button-update"
+            fxFlexAlign.lt-md="center"
+            (click)="onPaymentUpdate(i)"
+          >
+            <span class="typography-16 typography-16--scale-mobile">
+              Update
+            </span>
+          </button>
+          <button
+            mat-flat-button
+            class="button button--no-border"
+            fxFlexAlign.lt-md="center"
+            (click)="onPaymentDelete(i)"
+          >
+            <span class="typography-16 typography-16--scale-mobile text-danger">
+              Delete
+            </span>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxLayout="column" fxLayoutGap="15px">
+    <button
+      mat-flat-button
+      fxHide.gt-sm
+      class="button button--lime-green billing-info__action-button"
+      type="button"
+      appAddNewPayment
+      (paymentProfileData)="createNewPaymentProfile.emit($event)"
+    >
+      <span class="typography-12">ADD NEW PAYMENT METHOD</span>
+    </button>
+    <div
+      fxLayout
+      fxLayoutGap="15px"
+      fxLayout.lt-md="column"
+      fxLayoutGap.lt-md="10px"
+    >
+      <button
+        *ngIf="!viewProfiles.length"
+        mat-flat-button
+        class="button button--lime-green"
+        fxHide.lt-md
+        type="button"
+        appAddNewPayment
+        (paymentProfileData)="createNewPaymentProfile.emit($event)"
+      >
+        <div fxLayout fxLayoutGap="5px" fxLayoutAlign="start center">
+          <mat-icon>add</mat-icon>
+          <span class="typography-12">ADD NEW PAYMENT METHOD</span>
+        </div>
+      </button>
+      <button
+        mat-flat-button
+        class="
+          button button--no-border button--no-side-padding button--transparent
+          billing-info__action-button
+        "
+        (click)="viewHistory()"
+      >
+        <span class="typography-16">View History</span>
+      </button>
+      <ng-container *ngIf="isOnPlan">
+        <mat-divider vertical class="divider" fxHide.lt-md></mat-divider>
+        <button
+          *ngIf="!isDueForSuspension; else unsuspend"
+          mat-flat-button
+          class="
+            button button--no-border button--no-side-padding button--transparent
+            billing-info__action-button
+          "
+          (click)="onAccountPause()"
+        >
+          <span class="typography-16 text-danger">Pause My Account</span>
+        </button>
+        <ng-template #unsuspend>
+          <button
+            mat-flat-button
+            class="
+              button
+              button--no-border
+              button--no-side-padding
+              button--transparent
+              billing-info__action-button
+            "
+            (click)="unpauseMonthlyBilling()"
+          >
+            <span class="typography-16 text-danger">
+              Unpause Monthly Billing
+            </span>
+          </button>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPayment>
+  <span class="typography-20 typography-20--scale-mobile text-grey">
+    <i>No Payment Method</i>
+  </span>
+</ng-template>

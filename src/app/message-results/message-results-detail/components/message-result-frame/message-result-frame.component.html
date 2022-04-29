@@ -1,0 +1,168 @@
+<mat-card
+  class="message-result-frame"
+  [class.background-grey]="getFrameNumber"
+  fxLayout="column"
+  fxLayoutGap="30px"
+  (click)="onViewResults()"
+>
+  <div class="header" fxLayout="column" fxLayoutGap="15px">
+    <div class="main-header" fxLayout fxLayoutGap="35px">
+      <div
+        class="main-header-content"
+        fxFlex
+        fxLayout
+        fxLayoutAlign="space-between center"
+        fxLayoutAlign="space-between start"
+        fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="start start"
+        fxLayoutGap.lt-sm="15px"
+      >
+        <span class="typography-20--bold communication-name">{{
+          communication.notificationName
+        }}</span>
+        <div *ngIf="messages">
+          <app-message-preview
+            [message]="messages"
+            hideMessageActions
+          ></app-message-preview>
+        </div>
+
+        <div
+          class="message-results-status"
+          [ngClass]="communicationClass"
+          fxLayout
+          fxLayoutAlign="center center"
+          fxLayoutGap="16px"
+        >
+          <span class="typography-16--bold status-text">
+            {{ communicationStatus }}
+          </span>
+          <span class="material-icons">
+            {{ statusIcon }}
+          </span>
+        </div>
+        <div
+          *ngIf="
+            (communication?.notificationStatus === 2 ||
+              communication?.notificationStatus === 1) &&
+            isMobileView
+          "
+        >
+          <button
+            mat-flat-button
+            class="btn-submit"
+            (click)="
+              onCommunicationCancel(communication.id); $event.stopPropagation()
+            "
+          >
+            <span class="material-icons">close</span>
+            <span class="btn-cancel-text">Cancel</span>
+          </button>
+        </div>
+      </div>
+      <div
+        *ngIf="
+          (communication?.notificationStatus === 2 ||
+            communication?.notificationStatus === 1) &&
+          !isMobileView
+        "
+      >
+        <button
+          mat-flat-button
+          class="btn-submit"
+          (click)="
+            onCommunicationCancel(communication.id); $event.stopPropagation()
+          "
+        >
+          <span class="material-icons">close</span>
+          <span class="btn-cancel-text">Cancel</span>
+        </button>
+      </div>
+      <span class="material-icons"> chevron_right </span>
+    </div>
+    <div
+      class="message-results-sub-header typography-16"
+      fxLayout.lt-md="column"
+      fxLayoutGap.lt-md="0px"
+      fxLayout="row wrap"
+      fxLayoutGap="65px"
+    >
+      <span>
+        {{ communication.startDateTime | date: 'MM/dd/yy' }} at
+        {{ communication.startDateTime | date: 'h:mm a' | addTimeZoneAbbr }}
+      </span>
+      <!-- | addTimeZoneAbbr -->
+      <div>
+        <span class="group-name" *ngFor="let group of communication.groupNames">
+          {{ group }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="content"
+    fxLayout="row"
+    fxLayoutGap="70px"
+    fxLayoutGap.lt-md="40px"
+  >
+    <div fxLayout="column" fxFlex fxLayoutGap="10px">
+      <div fxLayout fxLayoutAlign="space-between center">
+        <span class="material-icons-outlined delivery-icon" color="primary">
+          phone_in_talk
+        </span>
+        <span>
+          {{ communication.callsDeliverd }}/{{ communication.callsToMake }}
+        </span>
+      </div>
+
+      <mat-progress-bar
+        mode="determinate"
+        [value]="
+          (communication.callsDeliverd / communication.callsToMake) * 100
+        "
+      ></mat-progress-bar>
+    </div>
+
+    <div fxLayout="column" fxLayout="column" fxFlex fxLayoutGap="10px">
+      <div fxLayout fxLayoutAlign="space-between center">
+        <div *ngIf="!communication.acceptResponses" fxLayout fxLayoutGap="10px">
+          <span class="material-icons-outlined delivery-icon" color="primary">
+            sms
+          </span>
+        </div>
+        <div *ngIf="communication.acceptResponses" fxLayout fxLayoutGap="10px">
+          <span class="material-icons-outlined delivery-icon" color="primary">
+            poll
+          </span>
+        </div>
+        <span>
+          {{ communication.smSsDeliverd }}/{{ communication.smSsToMake }}
+        </span>
+      </div>
+
+      <mat-progress-bar
+        mode="determinate"
+        [value]="(communication.smSsDeliverd / communication.smSsToMake) * 100"
+      ></mat-progress-bar>
+    </div>
+
+    <div fxLayout="column" fxLayout="column" fxFlex fxLayoutGap="10px">
+      <div fxLayout fxLayoutAlign="space-between center">
+        <span class="material-icons delivery-icon" color="primary">
+          mail_outline
+        </span>
+        <span>
+          {{ communication.emailsDeliverd }}/{{ communication.emailsToMake }}
+        </span>
+      </div>
+
+      <mat-progress-bar
+        mode="determinate"
+        [value]="
+          (communication.emailsDeliverd / communication.emailsToMake) * 100
+        "
+      ></mat-progress-bar>
+    </div>
+  </div>
+</mat-card>

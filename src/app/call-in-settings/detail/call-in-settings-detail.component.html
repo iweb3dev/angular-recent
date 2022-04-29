@@ -1,0 +1,86 @@
+<div class="call-in-settings">
+  <div class="header" fxLayout="column" fxLayoutGap="40px">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <span class="typography-28--bold">Call-In Settings</span>
+      <span class="typography-16--bold sub-header"
+        >The Call-In System is used to record, send and check the status of your
+        communications using any Land-line or mobile phone.
+        <a
+          class="link"
+          href="https://www.callingpost.com/how-to-use-the-call-in-system.html"
+          target="_blank"
+          >Learn more</a
+        ></span
+      >
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <span class="typography-20--bold">Call Call-In Setting Works?</span>
+      <app-step-list [steps]="steps"></app-step-list>
+    </div>
+  </div>
+  <div class="body" fxLayout="column" fxLayoutGap="38px">
+    <div fxLayout="column" fxFlex="1 1 30%">
+      <label class="typography-16 user-detail-label text-grey"
+        >Call-In Number</label
+      >
+      <mat-form-field
+        fxLayout="row"
+        fxLayoutGap="42px"
+        class="user-detail-field"
+        appearance="standard"
+      >
+        <input
+          type="text"
+          class="typography-16--bold"
+          matInput
+          [value]="callInNumber | async"
+          disabled
+          style="font-weight: 400; color: #333333"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="1 1 30%">
+      <label class="typography-16 user-detail-label text-grey"
+        >User ID Number</label
+      >
+      <mat-form-field
+        fxLayout="row"
+        fxLayoutGap="42px"
+        class="user-detail-field"
+      >
+        <input
+          type="text"
+          matInput
+          [ngModel]="(user$ | async)?.telUserName"
+          (ngModelChange)="formValue = $event"
+          style="font-weight: 400; color: #333333"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="1 1 30%">
+      <label class="typography-16 user-detail-label text-grey">Pin</label>
+      <mat-form-field
+        fxLayout="row"
+        fxLayoutGap="42px"
+        class="user-detail-field"
+        appearance="standard"
+      >
+        <input
+          type="text"
+          class="typography-16--bold"
+          matInput
+          [value]="'(Same as web)'"
+          disabled
+          style="font-weight: 400; color: #333333"
+        />
+      </mat-form-field>
+    </div>
+    <button
+      mat-raised-button
+      class="typography-14 button button--lime-green"
+      (click)="onSave()"
+    >
+      SAVE NUMBER
+    </button>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+@import '../../../../../styles/variables';
+
+.link {
+  color: $primary;
+  font-weight: 400;
+  &:hover {
+    cursor: pointer;
+  }
+}

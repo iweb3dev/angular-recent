@@ -1,0 +1,12 @@
+<mat-form-field appearance="fill">
+  <span>{{ label }}</span>
+  <mat-select multiple [placeholder]="placeholder">
+    <mat-option
+      *ngFor="let i of options1"
+      [value]="i.value"
+      [ngSwitch]="onClick('dcdc')"
+    >
+      {{ i.label }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

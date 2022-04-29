@@ -1,0 +1,13 @@
+<app-section-widget
+  *ngIf="!isMobileView"
+  [items]="accountOverview"
+  [title]="'Member Overview'"
+  (buttonClicked)="btnClickedOnEmit($event)"
+></app-section-widget>
+
+<app-section-widget-mobile
+  *ngIf="isMobileView"
+  [items]="accountOverview"
+  [title]="'Account Overview'"
+  (buttonClicked)="btnClickedOnEmit($event)"
+></app-section-widget-mobile>

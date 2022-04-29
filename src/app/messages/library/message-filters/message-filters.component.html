@@ -1,0 +1,31 @@
+<div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start center">
+  <button
+    [disabled]="!numberOfMessages"
+    mat-mini-fab
+    class="button button--grey-rounded fab-50 fab-50--scale-mobile"
+    (click)="showFilters()"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+  >
+    <mat-icon>tune</mat-icon>
+  </button>
+  <span class="typography-12 text-grey" fxHide.gt-xs>Filter</span>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayMinWidth="320px"
+  cdkConnectedOverlayPanelClass="white-overlay"
+  cdkConnectedOverlayBackdropClass="transparent"
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayPositions]="positions"
+  (backdropClick)="isOpen = false"
+>
+  <app-filters-desktop
+    [filters]="filters"
+    (dateFilterChange)="dateFilterChange.emit($event)"
+    (messageTypeFilter)="messageTypeFilter.emit($event)"
+  ></app-filters-desktop>
+</ng-template>

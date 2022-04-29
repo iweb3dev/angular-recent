@@ -1,0 +1,168 @@
+@import '/src/styles//variables';
+
+// Menu Navigation
+.mobile-inner {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.search-inner {
+  display: flex;
+}
+.search {
+  padding-right: 1rem;
+  padding-left: 0.5rem;
+}
+.mobile-search-input {
+  margin: auto;
+}
+
+// Buttons
+.btn-nav {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 35px 40px 35px 40px;
+  justify-content: space-between;
+  &__left-inner {
+    gap: 2em;
+    height: 2rem;
+    display: flex;
+    margin-left: auto;
+    justify-content: space-between;
+  }
+}
+.btn-title {
+  display: block;
+  margin-top: 10px;
+  color: $app-semi-grey;
+}
+.btn-edit-group {
+  gap: 1em;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  padding: 20px 40px 16px 40px;
+}
+.btn-delete {
+  width: 100px;
+  text-align: center;
+  color: $app-blue;
+  &._border {
+    border: 1px solid $app-blue;
+  }
+}
+.btn--white {
+  background-color: $app-white;
+}
+.btn-select-all {
+  margin-right: auto;
+}
+.btn-menu {
+  text-align: center;
+  &.__plain {
+    color: $app-black;
+    border-bottom-style: inset;
+  }
+  &.__warn {
+    color: $app-red;
+  }
+}
+.btn-cancel {
+  text-align: center;
+}
+.btn-search-close {
+  min-width: 0;
+  margin: 0 0.5rem;
+  padding: 0 0.5rem;
+  color: $app-normal-grey;
+}
+
+//Filter
+.mat-icon-search {
+  color: $app-blue;
+}
+
+// Mobile
+@media screen and (max-width: 768px) {
+  // Buttons
+  .btn-edit-group {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+  }
+  .btn-delete {
+    text-align: center;
+    color: $app-blue;
+  }
+  .btn-nav {
+    display: block;
+    padding: 20px 20px;
+    position: relative;
+    align-items: baseline;
+    &__left-inner {
+      height: auto;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .btn-title {
+    margin-top: 20px;
+  }
+  .btn-delete {
+    width: 100%;
+    color: $app-blue;
+    text-align: center;
+  }
+  .btn-edit {
+    color: $app-blue;
+    margin-top: 50px;
+    margin-left: 0px;
+    text-align: center;
+
+    top: auto;
+    align-self: auto;
+    padding: initial;
+    position: relative;
+  }
+  .btn-close-search {
+    height: 36px;
+    align-self: center;
+  }
+
+  // Menu Navigation
+  .mobile__inner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  // Search
+  .mobile-search {
+    display: flex;
+  }
+
+  // Edit
+  .edit-group-sub-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mobile-field-order {
+    order: 1;
+  }
+  .mobile-cancel-edit {
+    top: 80px;
+    right: 40px;
+    position: absolute;
+  }
+  .mobile-select-edit {
+    top: 80px;
+    left: 40px;
+    position: absolute;
+  }
+
+  .search {
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,77 @@
+<div
+  fxLayout="column"
+  fxLayoutGap="26px"
+  class="dialog"
+  [appCloseDialogOnEmit]="microphoneDialogClosed$ | async"
+>
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">Record using a microphone</h3>
+    <button mat-icon-button (click)="closeDialog()" class="app-icon-button-20">
+      <mat-icon class="blue-icon">close</mat-icon>
+    </button>
+  </div>
+  <div fxFlex fxLayout="column" fxLayoutAlign="space-between">
+    <p class="typography-16 typography-16--bold">
+      Start recording your voice using your microphone.
+    </p>
+    <span class="typography-20 typography-20--bold element-center">
+      <ng-container *ngIf="{ timer: timer$ | async } as timer">
+        {{ timer.timer ? timer.timer : '00:00' }}
+      </ng-container>
+    </span>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+    <ng-container *ngIf="recordingState$ | async as recordingState">
+      <button
+        mat-button
+        mat-stroked-button
+        color="primary"
+        *ngIf="!recordingState.isPaused && recordingState.isMicrophoneRecording"
+        (click)="onRecordingPause()"
+      >
+        PAUSE
+      </button>
+      <button
+        mat-button
+        mat-stroked-button
+        color="primary"
+        *ngIf="recordingState.isPaused && recordingState.isMicrophoneRecording"
+        (click)="onRecordingResume()"
+      >
+        RESUME
+      </button>
+
+      <div fxLayout fxLayoutGap="10px" fxLayout.lt-md="column">
+        <button
+          mat-flat-button
+          color="primary"
+          fxFlex="70%"
+          (click)="onRecordingStart()"
+          *ngIf="!recordingState.isMicrophoneRecording"
+        >
+          Start Recording
+        </button>
+        <button
+          mat-button
+          mat-stroked-button
+          color="primary"
+          fxFlex
+          class="button--blue-border"
+          (click)="closeDialog()"
+        >
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          fxFlex
+          (click)="onRecordingStop()"
+          *ngIf="recordingState.isMicrophoneRecording"
+        >
+          Stop Recording
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

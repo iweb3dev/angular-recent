@@ -1,0 +1,334 @@
+<form [formGroup]="voiceForm" fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout fxLayout="column" fxLayoutGap="20px">
+    <div class="recorder" fxLayout="column" fxLayoutGap="15px">
+      <ng-container *ngIf="callInFileLocation">
+        <ng-container [ngSwitch]="callMeRecordingStatus">
+          <ng-container
+            *ngSwitchCase="CallMeRecordingStatuses.RecordingComplete"
+          >
+            <div
+              fxLayout="column"
+              fxLayoutGap="10px"
+              fxLayoutAlign="start center"
+              class="call-in-response"
+            >
+              <span class="typography-20 typography-20--scale-mobile">
+                Success!
+              </span>
+              <span class="typography-16 typography-16--scale-mobile">
+                Your phone message has been recorded. To Re-Record click the
+                button below.
+              </span>
+              <button
+                mat-flat-button
+                color="primary"
+                type="button"
+                type="button"
+                (click)="rerecordCallIn()"
+              >
+                RE-RECORD
+              </button>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngSwitchCase="CallMeRecordingStatuses.FinishedNoRecording"
+          >
+            <div
+              fxLayout="column"
+              fxLayoutGap="10px"
+              fxLayoutAlign="start center"
+              class="call-in-response"
+            >
+              <span class="typography-16 typography-16--scale-mobile">
+                Finished with no recording. To Re-Record click the button below.
+              </span>
+              <button
+                mat-flat-button
+                color="primary"
+                type="button"
+                type="button"
+                (click)="rerecordCallIn()"
+              >
+                RE-RECORD
+              </button>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="!(isTtsComplete$ | async) && !isEditMode">
+        <p>We are currently creating your message. This may take a moment.</p>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+
+      <ng-container *ngIf="canShowPlayer && !isEditMode">
+        <div class="voice-message-width">
+          <app-audio-player
+            label="Your Voice Message"
+            [source]="audioRecordingUrl"
+            (playNoSource)="showNoSourceNotification()"
+          >
+            <button
+              *ngIf="!hideRecordingEdit"
+              mat-icon-button
+              color="warn"
+              type="button"
+              (click)="rerecord()"
+            >
+              <mat-icon>refresh</mat-icon>
+              <span>Re-Record</span>
+            </button>
+
+            <button
+              *ngIf="!hideRecordingEdit"
+              mat-icon-button
+              color="warn"
+              type="button"
+              (click)="reloadFile()"
+            >
+              <mat-icon>delete_forever</mat-icon>
+              <span>Delete</span>
+            </button>
+          </app-audio-player>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="canShowSelection || isEditMode">
+        <div>
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label class="typography-16 typography-16--scale-mobile">
+              Select Voice Creation Option
+            </mat-label>
+            <mat-select formControlName="phoneMessageSource">
+              <mat-option
+                *ngFor="let source of phoneMessageSources"
+                [value]="source"
+                (click)="onSelectVoiceSource(source)"
+              >
+                {{ phoneMessageSourceLabels[source] }}
+              </mat-option>
+            </mat-select>
+            <mat-error>*Required</mat-error>
+          </mat-form-field>
+
+          <!-- <button
+            *ngIf="isEditMode"
+            mat-button
+            disableRipple
+            type="button"
+            class="button button--no-border caller-id-action"
+            (click)="onRestoreEditVoice()"
+          >
+            <span
+              class="typography-16 typography-16--accent typography-16--scale-mobile"
+            >
+              Restore
+            </span>
+          </button> -->
+        </div>
+      </ng-container>
+    </div>
+    <div
+      fxLayout
+      fxLayoutGap="20px"
+      fxLayoutGap.xs="0"
+      fxLayoutAlign="start center"
+    >
+      <div fxLayout="column" fxLayoutAlign="" fxLayoutGap="15px" fxFlex.xs>
+        <mat-form-field appearance="outline">
+          <mat-label class="typography-16 typography-16--scale-mobile">
+            Select Caller ID
+          </mat-label>
+          <mat-select formControlName="callerId">
+            <mat-option
+              *ngFor="let callerId of callerIds"
+              [value]="callerId.callerID"
+            >
+              {{ callerId?.callerID }}
+            </mat-option>
+          </mat-select>
+          <mat-error>*Required</mat-error>
+        </mat-form-field>
+      </div>
+      <button
+        mat-button
+        disableRipple
+        type="button"
+        class="button button--no-border caller-id-action"
+        (click)="onVerifyPhoneNumber()"
+      >
+        <span
+          class="typography-16 typography-16--accent typography-16--scale-mobile"
+        >
+          Add New Caller ID
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+    <span
+      *ngIf="!shouldEnableSVM"
+      class="text-danger typography-14 typography-14--scale-mobile"
+    >
+      (Please upgrade your plan to enable this option)
+    </span>
+    <div fxLayout fxLayoutGap="10px">
+      <mat-checkbox
+        formControlName="svm"
+        [appDisableControl]="!shouldEnableSVM"
+        (change)="onSvmChange()"
+      >
+      </mat-checkbox>
+      <div fxLayout fxLayoutGap="10px" fxLayoutAlign="end">
+        <span class="typography-16 typography-16--scale-mobile">
+          SVM - Deliver Calls Straight to Voicemail.
+        </span>
+        <mat-icon
+          [matTooltip]="TOOLTIP_MESSAGES.SVM"
+          matTooltipClass="custom-tooltip"
+          matTooltipPosition="above"
+          color="primary"
+        >
+          help
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <span
+      *ngIf="!shouldEnableTextEmailDelivery"
+      class="text-danger typography-14 typography-14--scale-mobile"
+    >
+      (Please upgrade your plan to enable this option)
+    </span>
+    <div fxLayout fxLayoutGap="10px">
+      <mat-checkbox
+        formControlName="textAlternateFormatSend"
+        [appDisableControl]="!shouldEnableTextEmailDelivery"
+      >
+      </mat-checkbox>
+      <div fxLayout fxLayoutGap="10px" fxLayoutAlign="end">
+        <span class="typography-16 typography-16--scale-mobile">
+          Deliver this voice message as a phone call and a text
+        </span>
+        <mat-icon
+          [matTooltip]="TOOLTIP_MESSAGES.DeliverAsText"
+          matTooltipPosition="above"
+          color="primary"
+        >
+          help
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <span
+      *ngIf="!shouldEnableTextEmailDelivery"
+      class="text-danger typography-14 typography-14--scale-mobile"
+    >
+      (Please upgrade your plan to enable this option)
+    </span>
+    <div fxLayout fxLayoutGap="10px">
+      <mat-checkbox
+        class="example-margin"
+        formControlName="emailAlternateFormatSend"
+        [appDisableControl]="!shouldEnableTextEmailDelivery"
+      >
+      </mat-checkbox>
+      <div fxLayout fxLayoutGap="10px" fxLayoutAlign="end">
+        <span class="typography-16 typography-16--scale-mobile">
+          Deliver this message as a phone call and an email.
+        </span>
+        <mat-icon
+          [matTooltip]="TOOLTIP_MESSAGES.DeliverAsEmail"
+          matTooltipPosition="above"
+          color="primary"
+        >
+          help
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <span
+      *ngIf="!shouldEnableLAT"
+      class="text-danger typography-14 typography-14--scale-mobile"
+    >
+      (Please upgrade your plan to enable this option)
+    </span>
+    <div fxLayout fxLayoutGap="10px">
+      <mat-checkbox
+        [formControl]="latToggleControl"
+        [appDisableControl]="!shouldEnableLAT"
+        (change)="onLatChange($event)"
+      >
+      </mat-checkbox>
+      <div fxLayout fxLayoutGap="10px" fxLayoutAlign="end">
+        <span class="typography-16 typography-16--scale-mobile">
+          Add live answer transfer (LAT) trailer option.
+        </span>
+        <mat-icon
+          [matTooltip]="TOOLTIP_MESSAGES.LAT"
+          matTooltipPosition="above"
+          color="primary"
+        >
+          help
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="latToggleControl.value"
+    fxLayout
+    fxLayoutGap="20px"
+    fxLayoutGap.xs="0"
+    fxLayoutAlign="start flex-end"
+  >
+    <div fxLayout="column" fxLayoutGap="15px" fxFlex.xs>
+      <span class="typography-18 typography-18--scale-mobile">
+        Select your transfer number:
+      </span>
+      <mat-form-field>
+        <mat-label class="typography-16 typography-16--scale-mobile">
+          Select your transfer number:
+        </mat-label>
+        <mat-select formControlName="lat">
+          <mat-option
+            *ngFor="let callerId of latCallerIds"
+            [value]="callerId.callerID"
+          >
+            {{ callerId.phoneDisplayName }}
+          </mat-option>
+        </mat-select>
+        <mat-error>*Required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      mat-button
+      type="button"
+      class="button button--no-border caller-id-action"
+      (click)="onVerifyPhoneNumber()"
+    >
+      <span
+        class="typography-16 typography-16--accent typography-16--scale-mobile"
+      >
+        Add LAT Number
+      </span>
+    </button>
+  </div>
+
+  <button
+    *ngIf="!hideSaveButton"
+    mat-flat-button
+    color="primary"
+    fxFlexAlign.gt-sm="self-start"
+    [disabled]="!messageValid || !(isTtsComplete$ | async)"
+    (click)="onSaveAndContinue()"
+  >
+    Save & Continue
+  </button>
+</form>

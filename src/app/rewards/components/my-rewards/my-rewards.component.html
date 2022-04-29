@@ -1,0 +1,49 @@
+<div class="my-rewards-container" fxLayout="column" fxLayoutGap="30px">
+  <div class="header" fxLayout="column">
+    <div fxLayout fxLayoutAlign="space-between center" fxFill fxLayout.lt-sm="column" fxLayoutGap.lt-sm="20px">
+      <span class="typography-28 typography-28--bold text-black">Rewards Center</span>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <a class="reward-links" [routerLink]="['history']" routerLinkActive="router-link-active" >View earned points</a>
+        <span>|</span>
+        <a class="reward-links" (click)="learnMoreClicked()">Learn more about rewards</a>
+      </div>
+    </div>
+  </div>
+  <div class="available-rewards-container" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-card class="available-rewards-frame primary-text--shaded" *ngFor="let reward of rewardsData">
+      <ng-container *ngIf="reward.rewardName === 'Facebook Share'; else notFb">
+        <div class="frame-tile background-color fb-share-btn" [ngClass]="{'cursor': reward.newLink}" (click)="onFbShare()">
+          <span class="material-icons">{{reward.icon}}</span>
+        </div>
+      </ng-container>
+      <ng-template #notFb>
+        <div class="frame-tile background-color" [ngClass]="{'cursor': reward.newLink}" (click)="navigateTo(reward.newLink)">
+          <span class="material-icons">{{reward.icon}}</span>
+        </div>
+      </ng-template>
+      <div class="frame-header">
+        <div class="frame-title">
+          <p select="[title]">{{ reward?.rewardDescription }}</p>
+        </div>
+        <div class="frame-sub-title" select="[subtitle]">
+          <p>{{ reward?.rewardValue }} Points</p>
+        </div>
+      </div>
+    </mat-card><div class="fb-share-button" data-href="http://www.callingpost.com/" data-layout="button_count" data-size="small"><a id="fbAnchor" #fbAnchor target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.callingpost.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start start" *ngIf="rewardsBalance">
+    <span class="typography-20--bold claimed-header">Get Rewarded</span>
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <span class="typography-16 claimed-details">Rewards claimed:</span>
+      <span class="typography-16 claimed-details">{{ rewardsBalance.claimedMoneyBalance | currency }}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <span class="typography-16 claimed-details">Points balance:</span>
+      <span class="typography-16 claimed-details">{{ rewardsBalance.remainingRewardBalance | number}}</span>
+    </div>
+    <span class="typography-15 point-exchange-info">Exchange your points for a reward below! Selected Rewards are automatically applied to your next purchase.</span>
+    <div fxLayout fxLayoutAlign="start start" class="claim-btn-container" *ngIf="rewardsClaimable.length > 0">
+      <button mat-raised-button color="primary"  class="btn-claim" *ngFor="let claim of rewardsClaimable" (click)="onClaimReward(claim.id)">{{ claim.rewardName }} = {{ claim.rewardDescription }}</button>
+    </div>
+  </div>
+</div>

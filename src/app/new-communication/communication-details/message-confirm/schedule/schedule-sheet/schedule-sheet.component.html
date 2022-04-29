@@ -1,0 +1,63 @@
+<app-bottom-sheet title="Schedule Message">
+  <ng-container body>
+    <div fxLayout="column" fxLayoutGap="30px" class="sheet">
+      <form [formGroup]="dateForm">
+        <app-date-time-picker
+          formControlName="date"
+          (valueChange)="onDateChange($event)"
+        >
+          <div fxLayout="column">
+            <span
+              class="tpography-18 typography-18--bold"
+              fxLayoutAlign="center center"
+            >
+              Repeat options
+            </span>
+            <div fxLayoutAlign="center center">
+              <mat-form-field appearance="legacy" fxFlex>
+                <mat-select formControlName="repeatOptions" disableRipple>
+                  <mat-option
+                    *ngFor="let option of RepeatOptions"
+                    [value]="option"
+                  >
+                    <span class="typogaphy-12">{{ option }}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </app-date-time-picker>
+      </form>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <button
+          mat-button
+          mat-stroked-button
+          color="primary"
+          fxFlex
+          class="button--blue-border"
+          (click)="onClose()"
+        >
+          CANCEL
+        </button>
+        <div
+          fxFlex
+          fxLayout
+          #tooltip="matTooltip"
+          matTooltip="Start date should not be before current date"
+          matTooltipPosition="above"
+          [matTooltipDisabled]="!selectedDateInvalid"
+        >
+          <button
+            mat-flat-button
+            color="primary"
+            fxFlex
+            [disabled]="selectedDateInvalid"
+            (click)="updateSchedule()"
+          >
+            UPDATE SCHEDULE
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</app-bottom-sheet>

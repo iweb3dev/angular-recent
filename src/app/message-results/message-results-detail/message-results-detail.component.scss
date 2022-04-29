@@ -1,0 +1,70 @@
+@import '../../../styles/variables';
+
+.message-results {
+  padding: 50px 25px 50px 35px;
+}
+
+.actions {
+  height: 6rem;
+}
+
+.action {
+  border-radius: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  color: #495057;
+  :hover {
+    cursor: pointer;
+  }
+}
+
+.cdk-viewport {
+  height: calc(100vh - 235px);
+}
+
+.material-icons {
+  color: #999999;
+}
+
+.desktop-child-padding {
+  padding: 50px;
+}
+
+.communication-header {
+  color: #595959;
+}
+
+.delivery-icon {
+  color: $app-primary;
+}
+
+.btn-title {
+  display: block;
+  margin-top: 10px;
+  color: $app-semi-grey;
+}
+
+.mat-icon-search {
+  color: $app-blue;
+}
+
+@media screen and (max-width: $sm) {
+  .actions {
+    padding: 1rem 0;
+    height: unset;
+    > * {
+      width: 100%;
+    }
+  }
+  .message-results {
+    padding: 0;
+  }
+  .header {
+    padding: 22px;
+    padding-bottom: 0;
+  }
+}

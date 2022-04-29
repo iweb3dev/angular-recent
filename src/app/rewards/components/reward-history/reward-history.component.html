@@ -1,0 +1,57 @@
+<div class="has-reminders" fxLayout="column" fxLayoutGap="30px">
+  <div
+    (click)="onNavigateBack()"
+    class="print"
+    fxLayout
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px"
+  >
+    <span class="material-icons"> chevron_left </span>
+    <span>Back to rewards</span>
+  </div>
+  <div class="header" fxLayout="column">
+    <div fxLayout fxLayoutAlign="space-between center" fxFill>
+      <span class="typography-28 typography-28--bold text-black">
+        Rewards History
+      </span>
+    </div>
+  </div>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    *ngIf="rewardsBalance$ | async as rewardsBalance"
+  >
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <span class="typography-16 claimed-details">Rewards claimed:</span>
+      <span class="typography-16 claimed-details--bold">{{
+        rewardsBalance.claimedMoneyBalance | currency
+      }}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <span class="typography-16 claimed-details">Points balance:</span>
+      <span class="typography-16 claimed-details--bold">
+        {{ rewardsBalance.remainingRewardBalance | number }}
+      </span>
+    </div>
+  </div>
+  <div class="table-container">
+    <ng-container *ngIf="dataSource$ | async as dataSource; else loading">
+      <app-virtual-table
+        *ngIf="!isMobileView; else mobileList"
+        [dataSource]="dataSource"
+        [columnDefinitions]="COLUMN_DEFINITIONS"
+      ></app-virtual-table>
+
+      <ng-template #mobileList>
+        <app-virtual-list
+          [dataSource]="dataSource"
+          [columnDefinitions]="COLUMN_DEFINITIONS"
+        ></app-virtual-list>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #loading>
+      <app-loader class="loader"></app-loader>
+    </ng-template>
+  </div>
+</div>

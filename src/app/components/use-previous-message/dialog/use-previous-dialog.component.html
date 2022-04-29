@@ -1,0 +1,66 @@
+<div fxLayout="column" fxLayoutGap="15px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">
+      Select A Previously Created Message
+    </h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="regular-grey">close</mat-icon>
+    </button>
+  </div>
+  <mat-form-field fxLayoutAlign="start center" fxLayoutGap="9px">
+    <mat-icon matSuffix> search </mat-icon>
+    <input
+      cdkFocusInitial
+      type="text"
+      matInput
+      [(ngModel)]="filterText"
+      autocomplete="off"
+    />
+  </mat-form-field>
+  <div class="message-container">
+    <ng-container
+      *ngFor="let message of messages | filter: filterText:'notificationName'"
+    >
+      <div fxLayout fxLayoutAlign="space-between" class="message">
+        <div fxLayout="column" fxLayoutGap="10px">
+          <span class="typography-14 typography-14--bold">
+            {{ message.notificationName }}
+          </span>
+          <div fxLayout fxLayoutGap="5px">
+            <span class="typography-14 text-grey">Creation date:</span>
+            <span class="typography-14 typography-14--bold">
+              {{ message.modifiedByDateTime | date: 'MM/dd/yyyy' }}
+            </span>
+          </div>
+          <app-message-preview
+            [message]="message"
+            (selectMessage)="onAdd(message)"
+          ></app-message-preview>
+        </div>
+        <button
+          mat-flat-button
+          color="primary"
+          fxFlexAlign="flex-start"
+          fxFlex="120px"
+          (click)="onAdd(message)"
+        >
+          Select
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </div>
+  <button
+    mat-button
+    mat-stroked-button
+    color="primary"
+    class="button--blue-border"
+    (click)="onCloseDialog()"
+  >
+    CANCEL
+  </button>
+</div>

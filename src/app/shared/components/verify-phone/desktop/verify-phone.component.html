@@ -1,0 +1,8 @@
+<div class="verify-phone">
+  <div *ngIf="!numberChosen; else verifyNumber">
+    <app-choose-number (numberChosen)="onNumberChosen()" (close)="onClose()"></app-choose-number>
+  </div>
+  <ng-template #verifyNumber>
+    <app-verify-number (close)="onClose()"></app-verify-number>
+  </ng-template>
+</div>

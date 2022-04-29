@@ -1,0 +1,32 @@
+@import '/src/styles/variables';
+
+.custom-phone-numbers {
+  padding: 50px 0;
+  @include respond(tab-port) {
+    padding: 30px 0;
+  }
+  &__header,
+  &__actions {
+    padding: 0 0 0 80px;
+    @include respond(tab-port) {
+      padding: 0 15px;
+    }
+  }
+  &__actions {
+    padding: 0 20px 0 80px;
+    min-height: 50px;
+    @include respond(tab-port) {
+      padding: 0 15px;
+    }
+  }
+}
+
+a {
+  color: #2f7ae2;
+  text-decoration: none;
+}
+
+.mobile-actions-block {
+  padding: 10px 0;
+  background-color: darken($app-white, 3%);
+}

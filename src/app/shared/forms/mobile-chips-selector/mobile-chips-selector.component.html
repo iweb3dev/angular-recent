@@ -1,0 +1,8 @@
+<div class="chips" aaaaa>
+  <mat-chip-list #chipList >
+    <mat-chip *ngFor="let item of value" (removed)="onRemove(item.id)">
+      {{ item.value }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</div>

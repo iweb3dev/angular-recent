@@ -1,0 +1,52 @@
+@import '../variables';
+
+body {
+
+  .tabs {
+    .mat-tab-label {
+      padding: 0 20px;
+    }
+  }
+
+  .tabs-billing {
+    .mat-tab-header {
+      padding: 0 80px;
+      box-shadow: 0 2px 4px 0 rgba(205, 205, 205, 0.5);
+
+      @include respond(phone) {
+        padding: 0 15px;
+      }
+    }
+
+    .mat-tab-label {
+      height: 70px;
+
+      @include respond(phone) {
+        height: 50px;
+      }
+    }
+  }
+
+  .tabs-groups-members {
+    .mat-tab-header {
+      background-color: $app-white;
+      box-shadow: inset 0 5px 9px -6px;
+    }
+
+    .mat-tab-label-container {
+      padding-left: 24px;
+    }
+
+    .mat-tab-label-content {
+      font-size: 1.1rem;
+    }
+
+    .mat-ripple.mat-tab-label.mat-focus-indicator {
+      margin: 10px 10px 5px 10px;
+    }
+
+    .mat-tab-label-active {
+      color: $app-black;
+    }
+  }
+}

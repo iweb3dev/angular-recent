@@ -1,0 +1,77 @@
+@import '../../../../../styles/variables';
+
+.print,
+.view-recipients {
+  color: $app-primary;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.message-detail-header {
+  border-bottom: 1px solid #d2d2d2;
+  padding-bottom: 8px;
+}
+
+.result-frame {
+  border-bottom: 1px solid #d2d2d2;
+  padding-bottom: 25px;
+  width: 75%;
+  &:last-of-type {
+    border: none;
+    padding: 0;
+  }
+}
+
+.delivery-icon {
+  color: $app-primary;
+}
+
+.delivery-statistics {
+  border-bottom: 1px solid #d2d2d2;
+  padding-bottom: 25px;
+}
+
+.message-results-overview-bar {
+  max-width: 75%;
+}
+
+.fixed-width-dekstop {
+  width: 12rem;
+}
+
+mat-progress-bar {
+  width: 50%;
+}
+
+.relative-container {
+  position: relative;
+}
+
+.polling {
+  margin-top: 40px;
+}
+
+@media screen and (max-width: $sm) {
+  mat-progress-bar {
+    width: 100%;
+  }
+  .result-frame {
+    width: unset;
+  }
+  .delivery-statistics {
+    border-bottom: none;
+    padding-bottom: 0px;
+  }
+  .message-results-overview-bar {
+    max-width: unset;
+  }
+  .fixed-width-dekstop {
+    width: unset;
+  }
+  .pos-absolute-mobile {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

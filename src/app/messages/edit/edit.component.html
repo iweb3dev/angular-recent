@@ -1,0 +1,288 @@
+<div
+  fxLayout="column"
+  fxLayoutGap="30px"
+  fxLayoutGap.xs="15px"
+  class="edit-message-block"
+>
+  <div fxLayout="column" fxLayoutGap="20px" class="title-block">
+    <p class="typography-20 typography-20--bolder typography-20--scale-mobile">
+      Edit Message
+    </p>
+    <div fxLayout fxLayoutGap="10px">
+      <app-message-name
+        editMode
+        hideMessageDetailsTitle
+        disableMessageRecipients
+        [messageNameData]="messageNameEditData"
+        (messageNameFormValid)="onMessageNameValidate($event)"
+        (sendMessageValueChange)="onMessageValueChange($event)"
+      ></app-message-name>
+    </div>
+  </div>
+
+  <mat-button-toggle-group
+    multiple
+    class="message-formats"
+    fxLayout
+    fxLayout.lt-sm="column"
+    fxLayoutGap="20px"
+    fxLayoutGap.lt-sm="15px"
+  >
+    <mat-button-toggle
+      fxFlex.gt-sm="215px"
+      fxFlex.lt-md="30"
+      fxFlex
+      disableRipple
+      class="format-button"
+      [checked]="hasVoiceFormat"
+      (change)="onVoiceMessageToggle($event)"
+    >
+      <mat-icon
+        fontSet="material-icons-outlined"
+        class="app-icon-20"
+        color="primary"
+      >
+        phone_in_talk
+      </mat-icon>
+      <span class="format-button__label typography-14 typography-14--bold">
+        Voice Message
+      </span>
+      <mat-icon
+        class="done-icon app-icon-20"
+        [class.done-icon--transparent]="!hasVoiceFormat"
+      >
+        done
+      </mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle
+      fxFlex.gt-sm="215px"
+      fxFlex.lt-md="30"
+      fxFlex
+      disableRipple
+      class="format-button"
+      [checked]="hasTextFormat"
+      (change)="onTextMessageToggle($event)"
+    >
+      <mat-icon
+        fontSet="material-icons-outlined"
+        class="app-icon-20"
+        color="primary"
+        >sms</mat-icon
+      >
+      <span class="format-button__label typography-14 typography-14--bold">
+        Text Message
+      </span>
+      <mat-icon
+        class="done-icon app-icon-20"
+        [class.done-icon--transparent]="!hasTextFormat"
+      >
+        done
+      </mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle
+      fxFlex.gt-sm="215px"
+      fxFlex.lt-md="30"
+      fxFlex
+      class="format-button"
+      [checked]="hasEmailFormat"
+      (change)="onEmailMessageToggle($event)"
+    >
+      <mat-icon
+        fontSet="material-icons-outlined"
+        class="app-icon-20"
+        color="primary"
+      >
+        mail_outline
+      </mat-icon>
+      <span class="format-button__label typography-14 typography-14--bold">
+        Email Message
+      </span>
+      <mat-icon
+        class="done-icon app-icon-20"
+        [class.done-icon--transparent]="!hasEmailFormat"
+      >
+        done
+      </mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div fxLayout="column" fxLayoutGap="30px">
+    <mat-accordion>
+      <mat-expansion-panel
+        *ngIf="hasVoiceFormat"
+        class="expansion-panel"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            fxLayout
+            fxLayoutGap="20px"
+            fxLayoutGap.xs="10px"
+            fxFlex="225px"
+            fxFlex.xs="200px"
+            fxLayoutAlign="start center"
+          >
+            <mat-icon
+              fontSet="material-icons-outlined"
+              class="app-icon-30"
+              color="primary"
+            >
+              phone_in_talk
+            </mat-icon>
+            <span
+              class="typography-20 typography-20--bold typography-20--scale-mobile"
+              fxFlex="150px"
+              fxFlex.xs="130px"
+            >
+              Voice Message
+            </span>
+          </mat-panel-title>
+          <mat-panel-description fxLayout fxLayoutAlign="flex-end center">
+            <button mat-button class="button button--no-border">
+              <span
+                class="typography-16 typography-16--scale-mobile typography-16--accent"
+              >
+                Edit
+              </span>
+            </button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-voice-message-container
+          [selectedFormats]="selectedFormats"
+          [voiceMessageData]="voiceMessageData"
+          [audioRecordingUrl]="audioRecordingUrl$ | async"
+          [hideRecordingEdit]="false"
+          [messageValid]="voiceMessageValid"
+          (voiceFormChange)="voiceMessageData = $event"
+          (saveAndContinue)="saveChanges()"
+          (voiceFormValid)="voiceMessageValidChange($event)"
+          (saveAudioRecordingUrl)="onSetAudioRecording($event)"
+        ></app-voice-message-container>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+        *ngIf="hasTextFormat"
+        class="expansion-panel"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            fxLayout
+            fxLayoutGap="20px"
+            fxLayoutGap.xs="10px"
+            fxFlex="225px"
+            fxFlex.xs="200px"
+            fxLayoutAlign="start center"
+          >
+            <mat-icon
+              fontSet="material-icons-outlined"
+              class="app-icon-30"
+              color="primary"
+              >sms</mat-icon
+            >
+            <span
+              class="typography-20 typography-20--bold typography-20--scale-mobile"
+              fxFlex="150px"
+              fxFlex.xs="130px"
+            >
+              Text Message
+            </span>
+          </mat-panel-title>
+          <mat-panel-description fxLayout fxLayoutAlign="flex-end center">
+            <button mat-button class="button button--no-border">
+              <span
+                class="typography-16 typography-16--accent typography-16--scale-mobile"
+              >
+                Edit
+              </span>
+            </button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-text-message
+          [userInfo]="currentUserInfo$ | async"
+          [textMessageData]="textMessageData"
+          [messageValid]="textMessageValid"
+          (saveAndContinue)="saveChanges()"
+          (textFormChange)="textMessageData = $event"
+          (textFormValid)="textMessageValidChange($event)"
+          (setTollFreeTextNumber)="setTollFreeTextNumber($event)"
+        ></app-text-message>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+        *ngIf="hasEmailFormat"
+        class="expansion-panel"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            fxLayout
+            fxLayoutGap="20px"
+            fxLayoutGap.xs="10px"
+            fxFlex="225px"
+            fxFlex.xs="200px"
+            fxLayoutAlign="start center"
+          >
+            <mat-icon
+              fontSet="material-icons-outlined"
+              class="app-icon-30"
+              color="primary"
+            >
+              mail
+            </mat-icon>
+            <span
+              class="typography-20 typography-20--bold typography-20--scale-mobile"
+              fxFlex="150px"
+              fxFlex.xs="130px"
+            >
+              Email Message
+            </span>
+          </mat-panel-title>
+          <mat-panel-description fxLayout fxLayoutAlign="flex-end center">
+            <button mat-button class="button button--no-border">
+              <span
+                class="typography-16 typography-16--accent typography-16--scale-mobile"
+              >
+                Edit
+              </span>
+            </button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-email-message
+          hideAttachments
+          [messageValid]="emailMessageValid"
+          [userPackage]="userPackage$ | async"
+          [emailMessageData]="emailMessageData"
+          [exportAndPatchEditorValue]="exportAndPatchEditorValue"
+          (saveAll)="saveChanges()"
+          (saveAndContinue)="onSaveAndContinueMessage()"
+          (emailFormChange)="emailMessageData = $event"
+          (emailFormValid)="emailMessageValidChange($event)"
+        ></app-email-message>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div
+    class="footer-actions"
+    fxLayout
+    fxLayout.lt-sm="column"
+    fxLayoutGap="20px"
+  >
+    <button
+      mat-stroked-button
+      color="primary"
+      class="button button--blue-border cancel-button"
+      type="button"
+      (click)="backToMessageLibrary()"
+    >
+      Back
+    </button>
+    <button
+      mat-button
+      type="button"
+      fxFlex.gt-sm="200px"
+      (click)="onSaveAndContinueMessage(true)"
+      class="button button--lime-green"
+    >
+      <span class="typography-12">SAVE</span>
+    </button>
+  </div>
+</div>

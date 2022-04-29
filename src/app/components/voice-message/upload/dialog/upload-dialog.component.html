@@ -1,0 +1,56 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">
+      Upload WAV file for voice message
+    </h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="blue-icon">close</mat-icon>
+    </button>
+  </div>
+  <div fxFlex fxLayout="column" fxLayoutAlign="space-between">
+    <p class="typography-16 typography-16--bold">
+      Upload a pre-recorded message file (WAV only). Please select a file with a
+      recording time that does not exceed your current plan limit of 120
+      seconds.
+    </p>
+    <div
+      *ngIf="fileUploadControl.hasError('invalidExtension')"
+      fxLayout
+      fxLayoutGap="10px"
+      fxLayoutAlign="start center"
+    >
+      <mat-icon color="warn"> error </mat-icon>
+      <span class="typography-16">Wav files only.</span>
+    </div>
+    <app-file-upload
+      [formControl]="fileUploadControl"
+      name="dialog-input"
+    ></app-file-upload>
+  </div>
+
+  <div fxLayout fxLayoutGap="10px">
+    <button
+      mat-flat-button
+      color="primary"
+      fxFlex="70%"
+      [disabled]="fileUploadControl.invalid"
+      (click)="onFileUpload()"
+    >
+      Continue
+    </button>
+
+    <button
+      mat-button
+      color="primary"
+      fxFlex
+      class="button--blue-border"
+      (click)="onCloseDialog()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>

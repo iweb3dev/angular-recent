@@ -1,0 +1,11 @@
+<button fxLayout
+        mat-icon-button
+        disableRipple
+        class="menu-item">
+  <div fxLayout fxFlex="100" fxLayoutAlign="start center">
+    <mat-icon class="app-icon-24 menu-item__icon">{{ icon }}</mat-icon>
+    <div class="menu-item__title typography-14" *ngIf="showTitle">
+      {{ title }}
+    </div>
+  </div>
+</button>

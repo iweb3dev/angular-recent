@@ -1,0 +1,206 @@
+<mat-divider></mat-divider>
+<section class="section-main" [hidden]="!totalRecords">
+  <cdk-virtual-scroll-viewport
+    #scroller
+    itemSize="50"
+    class="member-list-mobile-scroll"
+  >
+    <ng-container *cdkVirtualFor="let member of members">
+      <section
+        [class.edit-main-wrapper]="editMode"
+        (click)="memberSectionOnClick(member.id, $event)"
+      >
+        <section fxLayout>
+          <div *ngIf="editMode" class="member-edit-wrapper">
+            <mat-checkbox
+              name="edit"
+              (change)="memberSelectionOnChange(member.id, $event)"
+              [checked]="member.id | selectedMember: selectedMembers"
+            ></mat-checkbox>
+          </div>
+
+          <div>
+            <section
+              fxLayout
+              class="member-primary-info"
+              fxLayoutAlign="space-between"
+            >
+              <div
+                fxLayout
+                fxLayoutAlign="center center"
+                [class.inactive-member]="!member.isActive"
+              >
+                <img
+                  loading="lazy"
+                  class="member-image"
+                  alt="member profile picture"
+                  *ngIf="
+                    member?.memberPicture?.imageContents;
+                    else defaultAvatar
+                  "
+                  [src]="
+                    member.memberPicture.imageContents
+                      | sanitizeImageWithProperties
+                        : member.memberPicture?.fileName
+                  "
+                />
+
+                <span
+                  class="member-name"
+                  [class.disable-element]="editMode"
+                  (click)="memberNameOnClick(member.id)"
+                >
+                  {{
+                    !member.firstName && !member.lastName
+                      ? 'No name'
+                      : member.firstName + ' ' + member.lastName
+                  }}
+                </span>
+              </div>
+
+              <div
+                fxLayout
+                fxLayoutGap="1rem"
+                fxLayoutAlign="center center"
+                [class.hide-section]="hideUserActions"
+              >
+                <span [class.inactive-member]="!member.isActive">
+                  <mat-slide-toggle
+                    name="member-active"
+                    [(ngModel)]="member.isActive"
+                    (click)="$event.stopPropagation()"
+                    (change)="memberStatusOnChange(member)"
+                    class="slide-toggle slide-toggle--green"
+                  ></mat-slide-toggle>
+                </span>
+
+                <button
+                  matSuffix
+                  mat-button
+                  type="button"
+                  color="warn"
+                  class="btn __delete"
+                  aria-label="member-delete"
+                  (click)="deleteMemberOnClick(member.id)"
+                >
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+              </div>
+            </section>
+
+            <section
+              fxLayout
+              fxLayoutAlign="space-between"
+              class="member-secondary-info"
+              [class.inactive-member]="!member.isActive"
+            >
+              <div fxLayout="column" class="member-contact-info">
+                <span class="member-phone"
+                  [class]="member | memberPhoneAvailabilityStyle"
+                  >{{
+                    member.phoneNumber.length != memberLimits.PhoneNumberLimit
+                      ? 'No number'
+                      : (member.phoneNumber | phoneNumberFormat)
+                  }}
+                  {{
+                    member.totalMemberPhoneNumbers | memberContactsCount
+                  }}</span
+                >
+                <span
+                  [class]="member | memberEmailAvailabilityStyle"
+                  >{{
+                    !member.emailAddress ? 'No email' : member.emailAddress
+                  }}
+                  {{
+                    member.totalMemberEmailAddresses | memberContactsCount
+                  }}</span
+                >
+              </div>
+
+              <div fxLayout="row-reverse wrap">
+                <span
+                  fxLayout
+                  class="availability-status"
+                  fxLayoutAlign="center center"
+                  >Callable
+                  <ng-template
+                    *ngIf="member | callable as memberPhone; else notAvailable"
+                    [ngTemplateOutlet]="
+                      memberPhone === memberContact.Available
+                        ? available
+                        : memberPhone === memberContact.BlackListed
+                          ? optedOut
+                          : memberPhone === memberContact.Inactive
+                            ? inactive
+                            : notAvailable
+                    "
+                  ></ng-template>
+                </span>
+                <span
+                  fxLayout
+                  class="availability-status"
+                  fxLayoutAlign="center center"
+                  >Textable
+                  <ng-template
+                    *ngIf="member | textable as memberText; else notAvailable"
+                    [ngTemplateOutlet]="
+                      memberText === memberTextStatus.optedIn
+                        ? available
+                        : memberText === memberTextStatus.optedOut ||
+                          memberText === memberContact.BlackListed
+                        ? optedOut
+                        : memberText === memberTextStatus.optinRequestSent
+                        ? pending
+                        : notAvailable
+                    "
+                  ></ng-template>
+                </span>
+                <span
+                  fxLayout
+                  class="availability-status"
+                  fxLayoutAlign="center center"
+                  >Emailable
+                  <ng-template
+                    *ngIf="member | emailable as memberEmail; else notAvailable"
+                    [ngTemplateOutlet]="
+                      memberEmail === memberContact.Available
+                        ? available
+                        : memberEmail === memberContact.BlackListed
+                          ? optedOut
+                          : memberEmail === memberContact.Inactive
+                            ? inactive
+                            : notAvailable
+                    "
+                  ></ng-template>
+                </span>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+
+  <ng-container>
+    <ng-template #available
+    ><mat-icon class="done-icon">check</mat-icon></ng-template
+    >
+    <ng-template #notAvailable
+    ><mat-icon class="warn-icon">close</mat-icon></ng-template
+    >
+    <ng-template #defaultAvatar
+      ><mat-icon class="nobel-grey">person</mat-icon></ng-template
+    >
+    <ng-template #pending
+      ><mat-icon class="warn-icon">hourglass_full</mat-icon></ng-template
+    >
+    <ng-template #optedOut
+      ><mat-icon class="warn-icon">not_interested</mat-icon></ng-template
+    >
+    <ng-template #inactive
+    ><mat-icon class="important-icon">priority_high</mat-icon></ng-template
+  >
+    <app-loader *ngIf="scrollLoading" class="overlay-loader"></app-loader>
+  </ng-container>
+</section>

@@ -1,0 +1,14 @@
+<section *ngIf="isMobileView" class="mobile-header-wrapper">
+  <div fxLayout>
+    <button
+      class="btn-mobile-back"
+      (click)="goBackOnClick()"
+      [ngClass]="showBackButton ? 'btn-visible' : ''"
+    ></button>
+    <h5 class="name-header">{{ headerTitle }}</h5>
+    <button type="button" class="btn-mobile-close" (click)="cancelOnClick()">
+      X
+    </button>
+  </div>
+  <mat-divider *ngIf="isMobileView"></mat-divider>
+</section>

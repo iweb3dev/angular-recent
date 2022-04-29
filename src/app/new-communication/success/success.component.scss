@@ -1,0 +1,14 @@
+@import '/src/styles/variables';
+
+.submit-success {
+  padding: 50px 0 50px 80px;
+  @include respond(tab-port) {
+    padding: 30px 45px;
+  }
+}
+
+.success-text {
+  @include respond(phone) {
+    text-align: center;
+  }
+}

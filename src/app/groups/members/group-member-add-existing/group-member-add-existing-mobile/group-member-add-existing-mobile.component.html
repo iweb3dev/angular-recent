@@ -1,0 +1,13 @@
+<app-member-virtual-list-mobile
+  [members]="members"
+  [editMode]="editMode"
+  [hideUserActions]="true"
+  [scrollFilter]="searchFilter"
+  [totalRecords]="totalRecords"
+  [selectedMembers]="selectedMembers"
+  (nextMembers)="nextMembersOnEmit($event)"
+  (memberSelection)="memberSelectOnEmit($event)"
+></app-member-virtual-list-mobile>
+
+<app-no-member [hidden]="showNoMemberMessage"></app-no-member>
+<app-loader *ngIf="scrollLoading" class="overlay-loader"></app-loader>

@@ -1,0 +1,14 @@
+.add-phone-option {
+  color: #2f7ae2;
+  cursor: pointer !important;
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+mat-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

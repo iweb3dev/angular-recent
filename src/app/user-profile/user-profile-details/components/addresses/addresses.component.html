@@ -1,0 +1,23 @@
+<mat-expansion-panel class="user-detail-section" fxLayout="column">
+  <mat-expansion-panel-header collapsedHeight="59px">
+    <div fxLayout="row" fxLayoutGap="15px">
+      <span class="typography-20--bold text-rhino">Address</span>
+    </div>
+  </mat-expansion-panel-header>
+  <div class="user-detail-frame" fxLayout="column" [formGroup]="addressesForm">
+    <div>
+      <app-address-frame *ngFor="let address of allUserAddresses"
+      formControlName="{{address.key}}" (delete)="onDeleteAddress(address)" (isValid)='getChildValidity($event)'></app-address-frame>
+      <div fxLayout="column" fxLayoutGap="6px">
+        <mat-error *ngIf='!hasPrimarySelected'>Please select a primary address.</mat-error>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="14px" class="link" fxLayoutAlign="start center" (click)="onAddAddress()">
+      <span class="material-icons">
+        add
+      </span>
+      <span class="typography-16">Add Address</span>
+    </div>
+  </div>
+  </mat-expansion-panel>

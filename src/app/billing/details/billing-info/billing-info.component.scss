@@ -1,0 +1,63 @@
+@import '/src/styles/variables';
+
+.billing-info {
+  padding: 50px 20px 0 80px;
+  @include respond(tab-port) {
+    padding: 30px 15px;
+  }
+  &__action-button {
+    width: min-content;
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
+}
+
+.card-details {
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.billing-cards {
+  max-height: 12rem;
+  overflow-y: auto;
+
+  @include respond(phone) {
+    max-height: inherit;
+    overflow-y: inherit;
+  }
+
+
+  &__card {
+    border-radius: 0;
+    padding: 8px 16px;
+
+
+    @include respond(phone) {
+      padding: 5px 16px;
+    }
+
+    &:first-child {
+      border-top-right-radius: 6px;
+      border-top-left-radius: 6px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+  }
+}
+
+.button-update {
+  @include respond(tab-port-up) {
+    &:after {
+      @include pipe(15px);
+    }
+  }
+}
+
+.divider {
+  height: 20px;
+  margin-top: 8px;
+}

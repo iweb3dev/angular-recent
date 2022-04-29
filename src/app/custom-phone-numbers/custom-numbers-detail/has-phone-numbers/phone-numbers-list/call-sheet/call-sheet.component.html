@@ -1,0 +1,72 @@
+<div fxLayout="column" fxLayoutGap="30px" [formGroup]="form">
+  <div class="bottom-sheet-prinary__header">
+    <h3 fxFlex="100" class="typography-16 typography-16--bold title">
+        Call Forwarding Number
+    </h3>
+    <div fxLayout>
+      <button mat-icon-button (click)="close()">
+        <mat-icon class="regular-grey">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom-sheet-prinary__body" fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout fxLayoutAlign="space-between center">
+      <span class="typography-20 typography-20--bolder typography-20--scale-mobile">
+        Call forwarding for {{ data?.phoneNumber | phoneNumberFormat}}
+      </span>
+    </div>
+
+    <span class="typography-18 typography-18--bold typography-16--scale-mobile margin-top--20">
+      What number would you like to forward to?
+    </span>
+
+    <div fxLayout="column" >
+    <mat-form-field>
+      <mat-select
+      formControlName="forwardPhoneNumberTo"
+      >
+          <mat-option *ngFor="let p of (phoneNumbers$ | async)" [value]="p.phoneNumber">
+            {{ p?.phoneNumber}}
+          </mat-option>
+          <mat-option value="no">
+            {{ 'Remove Call Forwarding' }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="
+        form.get('forwardPhoneNumberTo')?.touched &&
+        form.get('forwardPhoneNumberTo')?.errors?.required">Please select a value.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <span>
+    <span class="typography-16 typography-16--bold typography-14--scale-mobile">Note:</span>
+      <span class="typography-16 typography-16--scale-mobile">
+        only verified phone numbers can be used for call
+        forwarding. Verified phone number can be added from <span style="color: #2f7ae2; cursor: pointer;">My Profile</span>.
+      </span>
+    </span>
+
+  </div>
+
+  <div
+    class="bottom-sheet-prinary__actions"
+    fxLayout="column"
+    fxLayoutGap="20px"
+    class="margin-top--30"
+  >
+    <button
+     mat-raised-button
+     class="button button-submit create"
+     fxFlex
+     (click)="onSave()"
+     [disabled]="!form.valid"
+    >Save</button>
+    <button
+    mat-raised-button
+    class="button button-primary-inverted create"
+    (click)="close()"
+    fxFlex
+    >Cancel</button>
+  </div>
+</div>

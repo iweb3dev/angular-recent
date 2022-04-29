@@ -1,0 +1,44 @@
+@import '/src/styles//variables';
+
+.dashboard {
+  &.__wrapper {
+    padding: 3rem 2.5rem 4rem 2.5rem;
+  }
+  &.__spacing {
+    margin-bottom: 3rem;
+  }
+  &.__box-spacing {
+    margin-right: auto;
+    margin-bottom: unset;
+  }
+  &.__overlay {
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    overflow: auto;
+    position: fixed;
+    background: rgba($app-white, 0.8);
+  }
+  &.__vertical-spacing {
+    margin-top: auto;
+  }
+}
+
+.toolbar-wrapper {
+  overflow-y: auto;
+}
+
+@media screen and (max-width: $lt-lg) {
+  .dashboard {
+    &.__wrapper {
+      padding: 2rem 1rem;
+    }
+    &.__box-spacing {
+      margin-right: unset;
+      margin-bottom: 3rem;
+    }
+    &.__vertical-spacing {
+      margin-top: 3rem;
+    }
+  }
+}

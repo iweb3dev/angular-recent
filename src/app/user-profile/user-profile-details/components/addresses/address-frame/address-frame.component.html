@@ -1,0 +1,50 @@
+<div fxLayout="column" [formGroup]="addressForm" fxLayoutGap="25px">
+  <div class="relative" fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column" fxLayoutAlign="center center"
+  fxLayoutAlign.lt-md="unset unset">
+    <div fxLayout="column" fxFlex="1 1 100%">
+      <label class="typography-16 user-detail-label text-grey">Address</label>
+      <mat-form-field  fxLayout="row" fxLayoutGap="42px" class="user-detail-field" fxFlex>
+        <input type="email" matInput formControlName='addressLine1'>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="50px">
+      <div fxLayout="row" fxLayoutGap="50px">
+        <mat-slide-toggle
+        formControlName='isActive'
+        [labelPosition]="'before'"
+        class="user-detail-toggle">
+          ACTIVE
+        </mat-slide-toggle>
+        <!-- <mat-checkbox class="user-detail-checkbox typography-14" formControlName='isPrimary'>Primary Address</mat-checkbox> -->
+      </div>
+
+      <span class="link delete typography-16" (click)="onDelete()">Delete</span>
+    </div>
+  </div>
+
+  <div class="half" fxLayout="row"  fxLayoutGap="36px"  fxLayout.lt-md="column">
+    <div fxLayout="column" fxFlex="1 1 50%">
+      <label class="typography-16 text-grey">Zip Code</label>
+      <mat-form-field  fxLayout="row" fxLayoutGap="42px" class="user-detail-field" fxFlex>
+        <input type="text" matInput formControlName='zip'>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="column" fxFlex="1 1 50%">
+      <label class="typography-16 text-grey">Address Type</label>
+      <mat-form-field  fxLayout="row" fxLayoutGap="42px" class="user-detail-field" fxFlex>
+        <mat-select formControlName='addressLocation'>
+          <mat-option  class="typography-16" *ngFor="let addressType of ADDRESS_TYPE_OPTIONS"
+          [value]="addressType.id"  title="{{addressType.value}}">
+            {{addressType.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="6px">
+    <mat-error *ngIf='hasRequiredError'>Please provide a value for: {{ requiredErrorFields }}.</mat-error>
+    <mat-error *ngIf='hasPatternError'>Please provide a correct value for: {{ patternErrorFields }}.</mat-error>
+  </div>
+</div>

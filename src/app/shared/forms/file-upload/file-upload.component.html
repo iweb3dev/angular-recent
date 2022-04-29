@@ -1,0 +1,84 @@
+<div fxLayout fxLayoutAlign="space-between center" class="file-upload-block">
+  <div class="file-upload-control">
+    <ng-container *ngIf="!multi">
+      <label
+        [class.file-upload--disabled]="!!fileUploadControl.value.length"
+        [for]="name"
+        class="file-upload"
+        fxLayout
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+      >
+        <mat-icon color="primary" class="app-icon-20">attach_file</mat-icon>
+        <span class="typography-16 file-attachment">
+          {{
+            fileUploadControl.value.length
+              ? (fileNames | stringify)
+              : 'Attach A File'
+          }}
+        </span>
+        <mat-icon
+          class="done-icon app-icon-20"
+          *ngIf="fileUploadControl.value.length && !fileUploadError"
+        >
+          done
+        </mat-icon>
+      </label>
+    </ng-container>
+
+    <ng-container *ngIf="multi">
+      <label
+        [for]="name"
+        class="file-upload"
+        fxLayout
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+        *ngIf="!fileUploadControl.value.length"
+      >
+        <mat-icon color="primary" class="app-icon-20">attach_file</mat-icon>
+        <span class="typography-16--bold file-attachment"> Attach A File </span>
+      </label>
+
+      <label
+        [for]="name"
+        class="file-upload"
+        fxLayout
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+        *ngFor="let file of fileUploadControl.value; let i = index"
+      >
+        <mat-icon color="primary" class="app-icon-20">attach_file</mat-icon>
+        <span class="typography-16 file-attachment">
+          {{ file.name }}
+        </span>
+        <mat-button
+          mat-icon-button
+          color="primary"
+          class="app-icon-20"
+          fxLayout
+          (click)="onFileRemove($event, i)"
+        >
+          <mat-icon class="done-icon app-icon-20">
+            highlight_off
+          </mat-icon></mat-button
+        >
+      </label>
+    </ng-container>
+
+    <input
+      type="file"
+      [id]="name"
+      [name]="name"
+      (change)="onFileUpload($event)"
+    />
+  </div>
+  <button
+    mat-button
+    color="primary"
+    type="button"
+    (click)="onChangeFiles()"
+    *ngIf="fileUploadControl.value.length && !multi"
+  >
+    Change
+  </button>
+</div>

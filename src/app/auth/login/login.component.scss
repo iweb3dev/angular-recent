@@ -1,0 +1,204 @@
+@import '/src/styles/variables';
+
+.dashboard-row {
+  display:flex;
+
+  & > * {
+    width: 100%;
+  }
+
+  .small {
+    width: 60%;
+  }
+}
+
+.auth-button {
+    width: min-content;
+  }
+
+  .loader {
+    width: 20px;
+}
+
+.mat-card {
+  height: 920px;
+  width: 500px;
+  margin-top: 50px;
+}
+
+mat-card.invalid-credential {
+  height: 1000px;
+}
+
+.mat-card-social {
+  height: 1100px !important;
+}
+
+.login-container {
+  display: block;
+  padding: 45px;
+}
+
+.title-container {
+  text-align: center;
+}
+
+.mat-card-image {
+  width: 265px;
+}
+
+.auth-title {
+  margin-bottom: 70px;
+}
+
+.user-form-container {
+  margin-bottom: 30px;
+}
+
+.recover-link {
+  color: #2F7AE2;
+  text-decoration: none;
+}
+
+.no-account-yet {
+  padding-top: 30px;
+}
+
+.divider {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.recovery-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #D2D2D2;
+  .line {
+    width: 44%;
+    height: 0;
+    border: 1px solid #D2D2D2;
+    margin: 3px;
+    display:inline-block;
+  }
+}
+
+.login-button {
+  &-border-radius {
+    border-radius: 25px;
+  }
+}
+
+.login-button-container {
+  width: 100%;
+  button {
+    height: 41px;
+    width: 100%;
+    box-shadow: none;
+    background: none;
+    border-radius: 25px;
+  }
+
+  .btn-google {
+    border: 1px $app-red solid;
+    color: $app-red;
+    margin-bottom: 15px;
+    mat-icon {
+      padding-right: 15px;
+    }
+  }
+
+  .btn-facebook {
+    border: 1px $app-blue solid;
+    color: $app-blue;
+    mat-icon {
+      padding-right: 15px;
+    }
+  }
+}
+
+.help-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: #797979;
+  padding-left: 5px;
+}
+
+.social-login-card-wrapper {
+  margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .mat-card {
+    height: 845px;
+    width: 400px;
+    margin-top: 50px;
+  }
+  .login-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .recovery-container {
+    .line {
+      width: 44%;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .mat-card {
+    padding: 0px;
+    margin: 0px;
+    width: 100vw;
+  }
+  .auth-title {
+    font-size: 18px;
+  }
+  .user-form-container {
+    font-size: 16px !important;
+  }
+  .login-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .no-account-yet {
+    font-size: 14px;
+  }
+  .recovery-container {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .login-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .auth-title {
+    font-size: 18px;
+  }
+  .recovery-container {
+    .line {
+      width: 43%;
+    }
+  }
+  .no-account-yet {
+    font-size: 13px;
+  }
+  .recovery-container {
+    font-size: 14px;
+  }
+  .login-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .auth-title {
+    font-size: 18px;
+  }
+  .no-account-yet {
+    font-size: 12px;
+  }
+  .recovery-container {
+    font-size: 14px;
+  }
+}

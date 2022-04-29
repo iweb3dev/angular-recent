@@ -1,0 +1,43 @@
+<div class="print-export" fxLayout="column" fxLayoutGap="40px">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" *ngIf="messageResult">
+    <div fxLayout="column" id="print-template" fxLayoutGap="10px">
+      <div class="stat" fxLayout>
+        <span class="typography-16--bold">Message Name:</span>
+        <span>
+          {{ messageResult.notificationName }}
+        </span>
+      </div>
+      <div class="stat" fxLayout>
+        <span class="typography-16--bold">Group(s):</span>
+        <span *ngFor='let group of messageResult.groupNames'>{{ group }}</span>
+      </div>
+      <div class="stat" fxLayout>
+        <span class="typography-16--bold">Overall Status</span>
+        <span class="typography-16--bold message-results-print-status {{ messageResult.status?.class }}">
+          {{ messageResult.status?.label }}
+        </span>
+      </div>
+      <div class="stat" fxLayout>
+        <span class="typography-16--bold">Phone:</span>
+        <span>
+          {{ messageResult.callsDeliverd }} / {{ messageResult.callsToMake }}
+        </span>
+      </div>
+      <div class="stat" fxLayout>
+        <span class="typography-16--bold">Text:</span>
+        <span>
+          {{ messageResult.smSsDeliverd }} / {{ messageResult.smSsToMake }}
+        </span>
+      </div>
+      <div class="stat" fxLayout>
+        <span class="typography-16--bold">Email:</span>
+        <span>
+          {{ messageResult.emailsDeliverd }} / {{ messageResult.emailsToMake }}
+        </span>
+      </div>
+    </div>
+    <button #printBtn id="printBtn" printSectionId="print-template" ngxPrint [useExistingCss]="true">
+      PRINT
+    </button>
+  </div>
+</div>

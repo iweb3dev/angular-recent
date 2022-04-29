@@ -1,0 +1,5 @@
+<app-login
+  [formValidity]="formValidity$ | async"
+  [isLoggingIn]="isLoggingIn$ | async"
+  (logIn)="onLogin($event)"
+></app-login>

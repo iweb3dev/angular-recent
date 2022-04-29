@@ -1,0 +1,217 @@
+<section class="member-desktop-wrapper" [hidden]="!totalRecords" (scroll)="onTableScroll($event)">
+  <cdk-virtual-scroll-viewport #scroller [style.height.px]="gridHeight" class="group-member-scroll-view">
+    <table matSort
+           mat-table
+           matSortDisableClear
+           class="virtual-table"
+           [dataSource]="dataSource$"
+           [matSortActive]="sort.active"
+           (matSortChange)="sortOnChange($event)"
+           [matSortDirection]="$any(sort.direction | lowercase)">
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+      <ng-template let-row matRowDef cdkVirtualFor [cdkVirtualForOf]="dataSource$" [matRowDefColumns]="displayedColumns">
+        <tr mat-row class="table-row"></tr>
+      </ng-template>
+
+      <ng-container matColumnDef="memberSelection">
+        <th mat-header-cell *matHeaderCellDef class="table-header" [class.hide-section]="!editMode"></th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            [class.hide-section]="!editMode"
+            [style.width.px]="virtualTableLimits.ExtraSmall">
+          <mat-checkbox name="edit"
+                        (change)="memberSelectionOnChange(element.id, $event)"
+                        [checked]="element.id | selectedMember: selectedMembers"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="profilePicture">
+        <th mat-header-cell *matHeaderCellDef class="table-header" [class.member-item-edit]="!editMode"></th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            [class.member-item-edit]="!editMode"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.ExtraSmall">
+          <span class="member-image-wrapper">
+            <img loading="lazy"
+                 class="member-image"
+                 alt="member profile picture"
+                 *ngIf="element?.memberPicture?.imageContents; else defaultAvatar"
+                 [src]="element.memberPicture.imageContents | sanitizeImageWithProperties: element.memberPicture?.fileName" />
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="FirstName">
+        <th disableClear mat-sort-header mat-header-cell *matHeaderCellDef class="table-header">First Name</th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Medium">
+          <span class="member-name">
+            {{ !element.firstName ? 'No first name' : element.firstName }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="LastName">
+        <th disableClear mat-sort-header="LastName" mat-header-cell *matHeaderCellDef class="table-header">Last Name</th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Medium">
+          <span class="member-name">
+            {{ !element.lastName ? 'No last name' : element.lastName }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="PhoneNumber">
+        <th disableClear mat-header-cell mat-sort-header *matHeaderCellDef class="table-header">Phone Number</th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Medium">
+          <span #tooltip="matTooltip"
+                [matTooltip]="element | memberPhoneStatus"
+                [matTooltipDisabled]="(element | memberPhoneStatus).length ? false : true"
+                [class]="element | memberPhoneAvailabilityStyle">
+            {{ element.phoneNumber.length != memberLimits.PhoneNumberLimit ? 'No number' : (element.phoneNumber | phoneNumberFormat) }}
+            {{ element.totalMemberPhoneNumbers | memberContactsCount }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ShortCodeSMSStatus">
+        <th disableClear mat-header-cell *matHeaderCellDef class="table-header">Callable</th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Small">
+          <ng-template *ngIf="element | callable as memberPhone; else notAvailable"
+                       [ngTemplateOutlet]="
+              memberPhone === memberContact.Available
+                ? available
+                : memberPhone === memberContact.BlackListed
+                ? optedOut
+                : memberPhone === memberContact.Inactive
+                ? inactive
+                : notAvailable
+            "></ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="TollFreeSMSStatus">
+        <th disableClear mat-header-cell *matHeaderCellDef class="table-header">Textable</th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Small">
+          <ng-template *ngIf="element | textable as memberText; else notAvailable"
+                       [ngTemplateOutlet]="
+              memberText === memberContact.BlackListed ||
+              memberText === memberTextStatus.optedOut ||
+              memberText === memberTextStatus.optedIn
+                ? available
+                : memberText === memberTextStatus.optinRequestSent
+                ? pending
+                : notAvailable
+            "></ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstEmailAddress">
+        <th disableClear mat-header-cell mat-sort-header *matHeaderCellDef class="table-header">Email Address</th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Medium">
+          <span #tooltip="matTooltip"
+                [matTooltip]="element | memberEmailStatus"
+                [matTooltipDisabled]="(element | memberEmailStatus).length ? false : true"
+                [class]="element | memberEmailAvailabilityStyle">
+            {{ !element.emailAddress ? 'No email' : element.emailAddress }}
+            {{ element.totalMemberEmailAddresses | memberContactsCount }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="emailable">
+        <th disableClear mat-header-cell *matHeaderCellDef class="table-header">Emailable</th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            (click)="memberCellOnClick(element.id)"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Small">
+          <ng-template *ngIf="element | emailable as memberEmail; else notAvailable"
+                       [ngTemplateOutlet]="
+              memberEmail === memberContact.Available
+                ? available
+                : memberEmail === memberContact.BlackListed
+                ? optedOut
+                : memberEmail === memberContact.Inactive
+                ? inactive
+                : notAvailable
+            "></ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="IsActive">
+        <th disableClear mat-header-cell mat-sort-header *matHeaderCellDef class="table-header" [class.hide-section]="hideUserActions">
+          Active
+        </th>
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            [class.hide-section]="hideUserActions"
+            [class.inactive-member]="!element.isActive"
+            [style.minWidth.px]="virtualTableLimits.Small">
+          <mat-slide-toggle name="member-active"
+                            [(ngModel)]="element.isActive"
+                            (change)="memberStatusOnChange(element)"
+                            class="slide-toggle slide-toggle--green"></mat-slide-toggle>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef class="table-header" [class.hide-section]="hideUserActions"></th>
+
+        <td mat-cell
+            class="table-data"
+            *matCellDef="let element"
+            [class.hide-section]="hideUserActions"
+            [style.minWidth.px]="virtualTableLimits.Small">
+          <span class="delete-member" (click)="deleteMemberOnClick(element.id)">
+            <mat-icon class="warn-icon action-focus">delete_forever</mat-icon>
+          </span>
+        </td>
+      </ng-container>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</section>
+
+<ng-container>
+  <ng-template #available><mat-icon class="done-icon">check</mat-icon></ng-template>
+  <ng-template #notAvailable><mat-icon class="warn-icon">close</mat-icon></ng-template>
+  <ng-template #defaultAvatar><mat-icon class="nobel-grey">person</mat-icon></ng-template>
+  <ng-template #pending><mat-icon class="warn-icon">hourglass_full</mat-icon></ng-template>
+  <ng-template #optedOut><mat-icon class="warn-icon">not_interested</mat-icon></ng-template>
+  <ng-template #inactive><mat-icon class="important-icon">priority_high</mat-icon></ng-template>
+</ng-container>

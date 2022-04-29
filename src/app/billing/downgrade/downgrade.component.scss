@@ -1,0 +1,30 @@
+@import '/src/styles/variables';
+
+.plan-downgrade {
+  &__header {
+    background-color: $app-solitude;
+    padding: 50px 20px 40px 80px;
+    @include respond(tab-port) {
+      padding: 30px 15px;
+    }
+  }
+}
+
+.form-container {
+  padding: 50px 20px 100px 80px;
+  @include respond(tab-port) {
+    padding: 30px 15px;
+  }
+}
+
+.actions {
+  @include respond(tab-port-up) {
+    max-width: 60%;
+  }
+}
+
+.downgrade-control {
+  @include respond(tab-port-up) {
+    max-width: 45%;
+  }
+}

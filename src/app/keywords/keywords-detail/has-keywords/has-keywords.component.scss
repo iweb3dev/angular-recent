@@ -1,0 +1,38 @@
+@import '/src/styles/variables';
+
+.haskeywordsbutton {
+  color: white;
+  background-color: #2f7ae2;
+}
+
+.keywords {
+  .mat-card {
+    z-index: -999999;
+    padding: 40px 30px 20px 50px;
+    box-shadow: none;
+  }
+
+  &__header,
+  &__actions {
+    padding: 0 0 0 80px;
+    margin-bottom:0;
+
+    @include respond(tab-port) {
+      padding: 0 15px;
+    }
+  }
+
+  &__actions {
+    padding: 0 20px 0 50px;
+    min-height: 50px;
+
+    @include respond(tab-port) {
+      padding: 10px 15px;
+    }
+  }
+}
+
+.mobile-actions-block {
+  padding: 10px 0;
+  background-color: darken($app-white, 3%);
+}

@@ -1,0 +1,149 @@
+<div fxLayout="column" fxLayoutGap="26px" class="dialog">
+  <div fxLayout fxLayoutAlign="space-between baseline">
+    <h3 class="typography-20 typography-20--bold">
+      Add Credits To Continue Sending
+    </h3>
+    <button
+      mat-icon-button
+      (click)="onCloseDialog()"
+      class="app-icon-button-20"
+    >
+      <mat-icon class="regular-grey">close</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column">
+    <span class="typography-18 typography-18--bold margin-bottom--20">
+      Current Credits: {{ data.userInfo.userCredits | number: '1.0':'en-US' }}
+    </span>
+    <div fxLayout="column" *ngIf="!creditsControl.value.id">
+      <span class="typography-16 typography-16--bold margin-bottom--10">
+        How many Credits do you like to add?
+      </span>
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="Start typing to select credits amount"
+          matInput
+          cdkFocusInitial
+          [matAutocomplete]="auto"
+          [formControl]="creditsControl"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="getDisplayValue"
+        >
+          <mat-option
+            *ngFor="let option of creditOptions$ | async"
+            [value]="option"
+          >
+            {{ option.displayValue }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="creditsControl.value.id" fxLayout="column">
+      <div
+        *ngIf="data.rewardBalance.claimedMoneyBalance"
+        class="margin-bottom--10"
+      >
+        <span class="typography-18--bold">
+          {{ creditsControl.value.creditCount }}
+        </span>
+        Credits
+        <span class="typography-18--bold text-strikethrough text-danger">
+          ${{ creditsControl.value.cost | number: '2.2-2' }}
+        </span>
+        <span class="typography-18--bold">
+          ${{ actualPrice | number: '2.2-2' }} -
+        </span>
+        <span class="typography-18--bold text-lime-green">
+          (${{ data.rewardBalance.claimedMoneyBalance | number: '2.2-2' }}
+          Reward Applied)
+        </span>
+      </div>
+      <span
+        *ngIf="!data.paymentProfiles.length"
+        class="typography-18--bold text-danger text-center margin-bottom--10"
+      >
+        Please, specify payment credentials.
+      </span>
+
+      <div fxLayout="column">
+        <span class="typography-16 typography-16--bold"> Payment Method </span>
+        <mat-form-field>
+          <mat-select [formControl]="paymentControl">
+            <mat-option *ngIf="!data.paymentProfiles.length" disabled>
+              No payment profiles.
+            </mat-option>
+            <ng-container *ngIf="data.paymentProfiles.length">
+              <mat-option
+                *ngFor="let profile of data.paymentProfiles"
+                [value]="profile"
+              >
+                {{
+                  profile.creditCardNumber
+                    ? profile.creditCardNumber
+                    : profile.accountNumber
+                }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-accordion>
+        <mat-expansion-panel
+          hideToggle
+          class="panel panel--no-padding"
+          [expanded]="!data.paymentProfiles.length"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="typography-18 typography-18--bold">
+                Payment info
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-payment
+            enablePaypal
+            [creditCardForm]="creditCardForm"
+            [bankAccountForm]="bankAccountForm"
+            [cost]="actualPrice"
+            (activeTab)="selectedPaymentProgram = $event"
+            (transactionComplete)="onPayPalTransactionComplete($event)"
+          ></app-payment>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <app-promo
+    *ngIf="creditsControl.value.id"
+    class="margin-bottom--10"
+    [formControl]="promoCodeControl"
+  ></app-promo>
+
+  <div fxLayout fxLayoutGap="10px">
+    <button
+      mat-button
+      mat-stroked-button
+      color="primary"
+      fxFlex
+      class="button--blue-border"
+      (click)="onCloseDialog()"
+    >
+      <span class="typography-12">CANCEL</span>
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      fxFlex
+      (click)="onCreditsPurchase()"
+      [disabled]="shouldDisabledSubmit || !creditsControl.value.id"
+    >
+      <span class="typography-12"> ADD CREDITS & CONTINUE </span>
+    </button>
+  </div>
+</div>

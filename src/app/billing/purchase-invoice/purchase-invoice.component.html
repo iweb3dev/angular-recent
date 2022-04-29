@@ -1,0 +1,122 @@
+<ng-container *ngIf="invoiceDataStream$ | async as invoiceData; else loader">
+  <div class="invoice" fxLayout="column" fxLayoutGap="15px">
+    <div fxLayout fxLayoutAlign="space-between center">
+      <span class="typography-18 typography-18--bold">INVOICE</span>
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
+        <button
+          mat-flat-button
+          class="button button--no-border button--transparent"
+          (click)="downloadInvoice(invoiceData)"
+        >
+          Download
+        </button>
+        <button
+          mat-flat-button
+          class="button button--no-border button--transparent"
+          printSectionId="print-template"
+          ngxPrint
+          [useExistingCss]="true"
+        >
+          Print
+        </button>
+      </div>
+    </div>
+    <button
+      class="button button--no-border button--no-side-padding"
+      color="primary"
+      type="button"
+      mat-button
+      fxFlexAlign="baseline"
+      (click)="showAllPurchases()"
+    >
+      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="5px">
+        <mat-icon class="app-icon-20">arrow_back</mat-icon>
+        <span class="typography-14">All Purchases</span>
+      </div>
+    </button>
+    <mat-card fxLayout="column" fxLayoutGap="20px" id="print-template">
+      <span class="typography-20">Thank you for your order!</span>
+      <div fxLayout="column" fxLayoutGap="15px">
+        <span class="typography-18 typography-18--bold">Order Information</span>
+
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Merchant
+          </span>
+          <span class="typography-16" fxFlex>{{ invoiceData.merchant }}</span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Description
+          </span>
+          <span class="typography-16" fxFlex>
+            {{ invoiceData.description }}
+          </span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Invoice Number
+          </span>
+          <span class="typography-16" fxFlex>
+            {{ invoiceData.invoiceNumber }}
+          </span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Customer ID
+          </span>
+          <span class="typography-16" fxFlex>{{ invoiceData.customerId }}</span>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="15px">
+        <span class="typography-18 typography-18--bold">
+          Billing Information
+        </span>
+
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Name
+          </span>
+          <span class="typography-16" fxFlex>{{ invoiceData.name }}</span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Email
+          </span>
+          <span class="typography-16" fxFlex>{{ invoiceData.email }}</span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Phone
+          </span>
+          <span class="typography-16" fxFlex>{{ invoiceData.phone }}</span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            DateTime
+          </span>
+          <span class="typography-16" fxFlex>
+            {{ invoiceData.dateTime | date: 'M/d/yy, h:mm a z' : userTimeZone }}
+          </span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30">
+            Transaction ID
+          </span>
+          <span class="typography-16" fxFlex>
+            {{ invoiceData.transactionId }}
+          </span>
+        </div>
+        <div fxLayout>
+          <span class="typography-16 typography-16--bold" fxFlex="30"
+            >Total</span
+          >
+          <span class="typography-16" fxFlex>
+            US ${{ invoiceData.total }}
+          </span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</ng-container>
+<ng-template #loader><app-loader></app-loader></ng-template>

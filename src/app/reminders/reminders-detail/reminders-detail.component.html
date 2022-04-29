@@ -1,0 +1,6 @@
+<div class="reminders">
+  <app-has-reminders *ngIf="hasReminders$ | async; else noReminders"></app-has-reminders>
+  <ng-template #noReminders>
+    <app-no-reminders></app-no-reminders>
+  </ng-template>
+</div>

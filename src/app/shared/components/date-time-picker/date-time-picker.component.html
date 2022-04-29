@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="column" class="calendar">
+    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+      <span class="tpography-18 typography-18--bold">Date</span>
+      <span class="tpography-16">{{ selectedDate ? (selectedDate | addTimeZoneAbbr) : '_' }}</span>
+    </div>
+    <app-date-picker [minDate]="minDate" (valueChange)="onDateChange($event)"></app-date-picker>
+  </div>
+  <div fxLayout="column" *ngIf="!timePickerHidden">
+    <span class="tpography-18 typography-18--bold" fxLayoutAlign="center center"> Time </span>
+    <div fxLayoutAlign="center center">
+      <app-time-picker [formControl]="timeControl" (valueChange)="onTimeChange($event)"></app-time-picker>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</div>

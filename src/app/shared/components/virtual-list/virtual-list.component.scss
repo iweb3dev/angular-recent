@@ -1,0 +1,17 @@
+@import '/src/styles/variables';
+
+.scroll-viewport {
+  height: 800px;
+  width: 100%;
+}
+
+.scroll-element {
+  height: min-content;
+  padding: 20px 15px;
+  border-bottom: 1px solid $app-light-grey;
+}
+
+.list-row {
+  display: flex;
+  justify-content: space-between;
+}

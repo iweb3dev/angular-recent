@@ -1,0 +1,30 @@
+<ng-container *ngIf="importMembersFile; else uploadGroupMembers">
+  <app-group-member-import
+    (uploadMembersFile)="fileOnImport($event)"
+  ></app-group-member-import>
+</ng-container>
+
+<ng-template #uploadGroupMembers>
+  <section>
+    <app-group-member-upload-mobile
+      *ngIf="mobileView; else desktopView"
+      [groupId]="groupId"
+      (goBack)="goBackOnEmit()"
+      [headers]="worksheetHeaders"
+      [membersPreviewFile]="membersFile"
+      [importMappingFields]="importMappingFields"
+      [membersPreviewDetails]="membersPreviewDetails"
+    ></app-group-member-upload-mobile>
+
+    <ng-template #desktopView>
+      <app-group-member-upload-desktop
+        [groupId]="groupId"
+        (goBack)="goBackOnEmit()"
+        [headers]="worksheetHeaders"
+        [membersPreviewFile]="membersFile"
+        [importMappingFields]="importMappingFields"
+        [membersPreviewDetails]="membersPreviewDetails"
+      ></app-group-member-upload-desktop>
+    </ng-template>
+  </section>
+</ng-template>

@@ -1,0 +1,16 @@
+<ng-container
+  *ngTemplateOutlet="
+    currentRouteName === RouteNames.Dashboard ? welcomeMessage : currentRoute;
+    context: { userInfo: userInfo, routeName: currentRouteName }
+  "
+></ng-container>
+
+<ng-template #welcomeMessage let-userInfo="userInfo">
+  <span class="typography-16 typography-16--bold">
+    Hi, {{ userInfo.firstName ? userInfo.firstName : '' }} 👋
+  </span>
+</ng-template>
+
+<ng-template #currentRoute let-routeName="routeName">
+  <span class="typography-16"> {{ routeName }}</span>
+</ng-template>
